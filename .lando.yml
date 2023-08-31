@@ -1,0 +1,51 @@
+name: rf
+recipe: drupal10
+config:
+  php: '8.2'
+  webroot: web
+  composer_version: '2.5.8'
+  xdebug: 'coverage, debug'
+  config:
+    php: .lando/php.ini
+
+services:
+  appserver:
+    run:
+      - phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
+
+tooling:
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for nginx.
+    cmd: docker-php-ext-enable xdebug && pkill -o -USR2 php-fpm
+    user: root
+  xdebug-off:
+    service: appserver
+    description: Disable xdebug for nginx.
+    cmd: rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && pkill -o -USR2 php-fpm
+    user: root
+  phpcs:
+    service: appserver
+    cmd: "/app/bin/phpcs --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,js,css,info,txt --ignore=png,jpg,jpeg --colors"
+    description: Run phpcs for given folder or file.
+  phpcbf:
+    service: appserver
+    cmd: "/app/bin/phpcbf --standard=Drupal,DrupalPractice --extensions=php,module,inc,install,test,profile,theme,js,css,info,txt --ignore=png,jpg,jpeg --colors"
+    description: Run phpcbf for given folder or file.
+  run-unit-tests:
+    service: appserver
+    description: "Execute all unit tests on 'all' testsuite"
+    cmd: ./bin/phpunit -v --testsuite all
+  run-unit-tests-from:
+    service: appserver
+    cmd: ./bin/phpunit -v --testsuite
+    options:
+      testsuite:
+        passthrough: true
+        alias:
+          -t
+    describe: "Execute all unit tests from provided testsuite"
+  phpcs-install:
+    service: appserver
+    cmd: "$LANDO_MOUNT/vendor/squizlabs/php_codesniffer/bin/phpcs --config-set installed_paths $LANDO_MOUNT/vendor/drupal/coder/coder_sniffer && cd $LANDO_MOUNT && composer require --dev slevomat/coding-standard"
+    description: install the codesniffer on project and Drupal standard.

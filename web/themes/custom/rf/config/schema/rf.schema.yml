@@ -1,0 +1,5 @@
+# Schema for the configuration files of the rf theme.
+
+rf.settings:
+  type: theme_settings
+  label: 'rf settings'
