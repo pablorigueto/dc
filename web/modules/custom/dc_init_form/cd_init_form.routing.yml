@@ -1,0 +1,20 @@
+dc_init_form.init_form:
+  path: '/init'
+  defaults:
+    _form: '\Drupal\dc_init_form\Form\InitialForm'
+    _title: 'Initial Form'
+  requirements:
+    _permission: 'access content'
+
+# # Panel to retrieve all offers.
+# dc_init_form.retrieve_offers_form:
+#   path: '/roffers'
+#   defaults:
+#     _form: '\Drupal\dc_init_form\Form\RofferForm'
+#     _title: 'Propostas recebidas'
+#   requirements:
+#     _permission: 'access content'
+#     _role: 'authenticated' #'administrator' #'editor'
+#   # options:
+#   #   _admin_route: TRUE
+

@@ -1,8 +1,0 @@
-<?php
-
-/**
- * Implements hook_page_attachments_alter().
- */
-function rf_page_attachments_alter(array &$attachments) {
-  $attachments['#attached']['library'][$index] = 'rf/react_app_main';
-}

@@ -1,0 +1,9 @@
+dc_init_form.menu_name:
+  title: 'Init Form'
+  description: 'A simple form'
+  route_name: 'dc_init_form.init_form'
+  # parent: system.admin_config_content
+  menu_name: 'admin'
+  parent: system.admin_people
+  # weight: 99
+  weight: 0

@@ -1,0 +1,45 @@
+field.field_settings.dc_init_form:
+
+clt_init_form:
+  description: 'Initial form'
+  fields:
+    id:
+      type: integer
+      not null: true
+      description: 'Primary key for client init form'
+      unsigned: true
+      auto_increment: true
+    nodeId:
+      type: integer
+      length: 20
+      description: 'Node ID'
+    datetime:
+      type: varchar
+      length: 25
+      description: 'Date and Time'
+    name_:
+      type: varchar
+      length: 50
+      description: 'Name'
+    email_:
+      type: varchar
+      length: 50
+      description: 'Email'
+    phone_:
+      type: varchar
+      length: 20
+      description: 'Phone'
+    bday_:
+      type: varchar
+      length: 20
+      description: 'Bday'
+    clt_id:    
+      type: varchar
+      length: 14
+      description: 'ID of client'
+    clt_car_id_:
+      type: integer
+      length: 20
+      description: 'Car ID'
+  primary key:
+    - nodeId

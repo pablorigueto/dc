@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Module file for dc_init_form.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function dc_init_form_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'dc_init_form/dc-bundle';
+}

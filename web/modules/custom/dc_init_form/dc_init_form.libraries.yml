@@ -1,0 +1,12 @@
+dc-bundle:
+  css:
+    theme:
+      css/custom.css: {}
+  js:
+    js/custom.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupal.ajax
+    - core/drupalSettings
+    - core/jquery
+    - core/once
