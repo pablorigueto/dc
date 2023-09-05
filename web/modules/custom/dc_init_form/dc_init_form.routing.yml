@@ -1,5 +1,5 @@
-dc_init_form.init_form:
-  path: '/init'
+dc_init_form.initial_form:
+  path: '/initForm'
   defaults:
     _form: '\Drupal\dc_init_form\Form\InitialForm'
     _title: 'Initial Form'
