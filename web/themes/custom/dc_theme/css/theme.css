@@ -1,3 +1,24 @@
-body {
-    margin: 0;
+@font-face {
+  font-family: Inter-Regular;
+  src:
+    url("../fonts/inter/Inter-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
+
+:root {
+  scroll-behavior: smooth;
+  --dark-blue: #0a121b;
+}
+
+body {
+  background-color: var(--dark-blue);
+  margin: 0;
+  font-family: Inter-Regular;
+  color: #fff;
+}
+
+h1 {
+  margin-block-start: unset;
+}
+

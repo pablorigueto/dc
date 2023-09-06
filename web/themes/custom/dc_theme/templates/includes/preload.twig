@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Preload the non-bold & non-italic fonts for the headings and the body copy.
+ *
+ * Available variables:
+ * - dc_theme_path: Returns the path to the dc_theme theme.
+ */
+#}
+
+{% set dc_theme_path = url('<front>') %}
+<link rel="preload" href="{{ dc_theme_path }}themes/custom/dc_theme/fonts/inter/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="{{ dc_theme_path }}themes/custom/dc_theme/js/dist_dev/main.min.js" as="script">
+
+<link rel="preload" href="{{ dc_theme_path }}themes/custom/dc_theme/fonts/inter/Inter-SemiBold.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="{{ dc_theme_path }}themes/custom/dc_theme/fonts/inter/Inter-Light.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="{{ dc_theme_path }}themes/custom/dc_theme/fonts/inter/Inter-Bold.ttf" as="font" type="font/ttf" crossorigin>
