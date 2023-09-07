@@ -60,15 +60,15 @@
     }
   }
   
-  Drupal.behaviors.MyModule = {
+  Drupal.behaviors.closeSearchClickingOutsideOfit = {
     attach: function attach(context) {
-      once('myModuleClick', '.search-block-form', context).forEach(element => {
+      once('closeSearchClickingOutsideOfit', '.search-block-form', context).forEach(element => {
       	element.addEventListener('click', e => {
           const INPUT = $('input.form-search', context);
           const SEARCH = $('.search-block-form');
           if (!INPUT.is(e.target)) {
             // If clicked outside, hide the search block form.
-            SEARCH.hide();
+            SEARCH.slideUp();
           }
         });
       });
@@ -77,27 +77,32 @@
 
 
 
+  Drupal.behaviors.storageLangCodeOnBrowser = {
+    attach: function (context, settings) {
+      once('storageLangCodeOnBrowser', '#block-dc-theme-language .menu__item--link', context).forEach(element => {
+        element.addEventListener('click', function (e) {
+          const languageToStorageOnBrowser = $(this).find(".menu__link--link").prop('title');
+
+          localStorage.setItem('selectedLanguage', languageToStorageOnBrowser + '__language');
+ 
+        });
+      });
+    }
+  };
+  
+
 
 })(jQuery, Drupal, once);
 
-// Drupal.behaviors.toggleMenu = {
-//   attach(context) {
-//     if (!drupalSettings.toggleMenu) {
-//       $(document).ready(function () {
-//         // Hide all language options initially.
-//         //Commented because set the default state hide on theme of css.
-//         //$(".menu.menu--level-1").hide();
+// Drupal.behaviors.customLanguageMenu = {
+//   attach: function (context, settings) {
+//     // Add a click event handler to the Menu heading.
+//     $("#block-dc-theme-language .menu__item--link").click(function () {
+//       // Find the related menu element within the same parent.
+//       const languageToStorageOnBrowser = $(this).find(".menu__link--link").prop('title');
 
-//         // Add a click event handler to the Menu heading.
-//         $("h2.block__title").click(function () {
-//           // Find the related menu element within the same parent.
-//           const MENU = $(this).siblings(".menu.menu--level-1");
+//       console.log(languageToStorageOnBrowser);
 
-//           // Toggle the visibility of the menu associated with the clicked heading.
-//           MENU.slideToggle();
-//         });
-//       });
-//       drupalSettings.toggleMenu = true;
-//     }
+//     });
 //   }
-// }
+// };
