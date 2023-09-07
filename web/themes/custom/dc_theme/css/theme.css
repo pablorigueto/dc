@@ -22,3 +22,20 @@ h1 {
   margin-block-start: unset;
 }
 
+.menu--level-1 {
+  display: none;
+}
+
+.site-header__inner__container, .site-branding__inner, .header-nav {
+  display: flex;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+ 

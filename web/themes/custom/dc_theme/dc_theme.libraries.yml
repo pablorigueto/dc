@@ -6,6 +6,7 @@ react_app_main:
   js:
     js/dist_dev/main.min.js: {minified: true}
     js/dist_dev/page.min.js: {minified: true}
+    js/theme/theme.js: {}
   dependencies:
     - core/jquery
     - core/drupal
