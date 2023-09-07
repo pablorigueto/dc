@@ -117,3 +117,86 @@ a.site-branding__logo img {
 .search-block-form, #search-block-form #edit-actions {
   display: none;
 }
+
+#block-dc-theme-search-form-narrow {
+  position: absolute;
+  /* box-shadow: 0px 0px 20px 20px #000; */
+  background-color: #00000091;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+}
+
+form#search-block-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10%;
+}
+
+form#search-block-form .form-item {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.search-form #edit-submit {
+  display: none;
+}
+
+input.form-search {
+  width: 30%;
+  height: 50px;
+  border-radius: 0;
+  background: #0a121b;
+  color: #fff;
+  font-size: 16px;
+  border: 1px solid #ffffff70;
+  padding-left: 8px;
+}
+
+input.form-search:focus {
+  border: 1px solid #fff;
+}
+
+/* remove the border outline when focus */
+input.form-search:focus-visible {
+  outline: none;
+}
+
+/* clears the ‘X’ from Internet Explorer */
+input[type=search]::-ms-clear {
+  display: none; width : 0; height: 0;
+}
+input[type=search]::-ms-reveal {
+  display: none; width : 0; height: 0;
+}
+/* clears the ‘X’ from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+/* Change the white to any color */
+/* Text suggestion on input */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+  -webkit-box-shadow: 0 0 0 30px #0a121b inset !important;
+}
+
+/* Change text in autofill textbox */
+input:-webkit-autofill{
+  -webkit-text-fill-color: #fff !important;
+}
+
+.block-system-main-block input.form-search {
+  width: 100%;
+}
