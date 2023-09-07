@@ -1,9 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './homeStructure'; // Import your App component from the appropriate path
+import App from './searchAnimation'; // Import your App component from the appropriate path
 
 document.addEventListener("DOMContentLoaded", function () {
-    const root = document.getElementById('homepage-id');
+    const root = document.getElementById('block-dc-theme-searchbtn');
   
     if (root) {
         const rootElement = createRoot(root);
@@ -11,5 +11,4 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
         console.error("The target container 'home-content' does not exist in the DOM.");
     }
-  });
-
+});
