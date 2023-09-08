@@ -11,7 +11,7 @@ function dc_theme_preprocess_menu(&$variables) {
 
   // On main menu add country image to current langs,
   // and add a lang code as href to redirect on links.
-  if ($variables['menu_name'] == 'language') {
+  if ($variables['menu_name'] == 'language-menu') {
 
     foreach ($variables['items'] as &$item) {
 

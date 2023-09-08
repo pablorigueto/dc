@@ -1,0 +1,5 @@
+services:
+  dc_init_form.event_subscriber:
+    class: Drupal\dc_init_form\EventSubscriber\RedirectSubscriber
+    tags:
+      - { name: event_subscriber }
