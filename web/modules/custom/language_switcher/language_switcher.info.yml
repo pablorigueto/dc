@@ -1,6 +1,6 @@
 name: Language Switcher
 type: module
-description: Provide language switcher based on menu link
+description: Provide language switcher based on menu link and redirect to correct language.
 package: Custom
 core_version_requirement: ^8 || ^9 || ^10
 

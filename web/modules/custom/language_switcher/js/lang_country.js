@@ -2,15 +2,28 @@
 
   Drupal.behaviors.langMenuCustomBehavior = {
     attach: function (context, settings) {
+      let currentUrl = window.location.href;
+      // Create a URL object
+      let url = new URL(currentUrl);
+      let parts = url.pathname.split('/');
+      let urlLangCode = parts[1];
+      
       // Check if localStorage supports the selectedLanguage key.
       if (typeof localStorage !== 'undefined' && localStorage.getItem('selectedLanguage')) {
         // Retrieve the selectedLanguage value from localStorage.
         let language = localStorage.getItem('selectedLanguage');
 
-        // Set the value as a class for the nav#block-dc-theme-language-menu element.
-        $('#block-dc-theme-language-menu', context).addClass(language + '__ls');
-        $("h2#block-dc-theme-language-menu").text(language.toUpperCase());
-
+        if (urlLangCode !== language) {
+          setLangIcon(urlLangCode, context);
+        }
+        else {
+          setLangIcon(language, context);
+        }
+      }
+      else {
+        $('#block-dc-theme-language-menu').each(function() {
+          setLangIcon(urlLangCode, context);
+        });
       }
 
       $(document).ready(function() {
@@ -25,6 +38,11 @@
 
     }
   };
+
+  function setLangIcon(langCode, context) {
+    $('#block-dc-theme-language-menu', context).addClass(langCode + '__ls');
+    $("h2#block-dc-theme-language-menu").text(langCode.toUpperCase());
+  }
 
   Drupal.behaviors.storageLangCodeOnBrowser = {
     attach: function (context, settings) {
@@ -42,7 +60,7 @@
           deleteCookie("selectedLanguage");
   
           // Set the new value in both localStorage and as a new cookie
-          //localStorage.setItem('selectedLanguage', LANGUAGE);
+          localStorage.setItem('selectedLanguage', LANGUAGE);
           setCookie("selectedLanguage", '/' + LANGUAGE, 365);
 
         });
