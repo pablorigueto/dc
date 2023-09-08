@@ -84,9 +84,6 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
   public function getDefaultLanguage() {
     // Get the default language object.
-    //$this->languageManager->getCurrentLanguage();
-    //$defaultLanguage = \Drupal::languageManager()->getDefaultLanguage();
-
     $defaultLanguage = $this->languageManager->getDefaultLanguage();
     // Get the language code of the default language.
     return '/' . $defaultLanguage->getId();
