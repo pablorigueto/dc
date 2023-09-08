@@ -1,0 +1,52 @@
+#block-dc-theme-language li a, h2#block-dc-theme-language-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #block-dc-theme-language ul {
+    min-width: 100px;
+  }
+  
+  .en-us__language a::before, #block-dc-theme-language-menu.en-us__ls::before {
+    content: url('../assets/en-us.svg');
+    margin-right: 5px;
+    margin-top: 4px;
+  }
+  
+  .pt-br__language a::before, #block-dc-theme-language-menu.pt-br__ls::before {
+    content: url('../assets/pt-br.svg');
+    margin-right: 5px;
+    margin-top: 4px;
+  }
+  
+  .cn-cn__language a::before, #block-dc-theme-language-menu.cn-cn__ls::before {
+    content: url('../assets/cn-cn.svg');
+    margin-right: 5px;
+    margin-top: 4px;
+  }
+
+  .en-uk__language a::before, #block-dc-theme-language-menu.en-uk__ls::before {
+    content: url('../assets/en-uk.svg');
+    margin-right: 5px;
+    margin-top: 4px;
+  }
+
+  .jp-jp__language a::before, #block-dc-theme-language-menu.jp-jp__ls::before {
+    content: url('../assets/jp-jp.svg');
+    margin-right: 5px;
+    margin-top: 4px;
+  }
+
+  .en-au__language a::before, #block-dc-theme-language-menu.en-au__ls::before {
+    content: url('../assets/en-au.svg');
+    margin-right: 5px;
+    margin-top: 4px;
+  }
+
+  .pt-pt__language a::before, #block-dc-theme-language-menu.pt-pt__ls::before {
+    content: url('../assets/pt-pt.svg');
+    margin-right: 5px;
+    margin-top: 4px;
+  }
+  

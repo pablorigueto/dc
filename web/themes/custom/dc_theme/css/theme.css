@@ -200,7 +200,7 @@ input:-webkit-autofill{
   width: 100%;
 }
 
-#block-dc-theme-language li a, h2#block-dc-theme-language-menu {
+/* #block-dc-theme-language li a, h2#block-dc-theme-language-menu {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -220,4 +220,4 @@ input:-webkit-autofill{
   content: url('../assets/pt-br.svg');
   margin-right: 5px;
   margin-top: 4px;
-}
+} */

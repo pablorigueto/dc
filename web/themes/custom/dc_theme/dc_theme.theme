@@ -7,17 +7,17 @@ function dc_theme_page_attachments_alter(array &$attachments) {
   $attachments['#attached']['library'][$index] = 'dc_theme/react_app_main';
 }
 
-function dc_theme_preprocess_menu(&$variables) {
+// function dc_theme_preprocess_menu(&$variables) {
 
-  // On main menu add country image to current langs,
-  // and add a lang code as href to redirect on links.
-  if ($variables['menu_name'] == 'language-menu') {
+//   // On main menu add country image to current langs,
+//   // and add a lang code as href to redirect on links.
+//   if ($variables['menu_name'] == 'language-menu') {
 
-    foreach ($variables['items'] as &$item) {
+//     foreach ($variables['items'] as &$item) {
 
-      $langClass = strtolower($item['title'] . '__language');
+//       $langClass = strtolower($item['title'] . '__language');
 
-      $item['attributes']->addClass($langClass);
-    }
-  }
-}
+//       $item['attributes']->addClass($langClass);
+//     }
+//   }
+// }

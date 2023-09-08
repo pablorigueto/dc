@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Module file for language_switcher.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function language_switcher_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'language_switcher/ls-bundle';
+}
+
+function language_switcher_preprocess_menu(&$variables) {
+
+  // On main menu add country image to current langs,
+  // and add a lang code as href to redirect on links.
+  if ($variables['menu_name'] == 'language-menu') {
+
+    foreach ($variables['items'] as &$item) {
+
+      $langClass = strtolower($item['title'] . '__language');
+
+      $item['attributes']->addClass($langClass);
+    }
+  }
+}
