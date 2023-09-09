@@ -78,9 +78,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
     $response->getCacheableMetadata()->setCacheMaxAge(0);
     $event->setResponse($response);
     $event->stopPropagation();
-
   }
-
 
   public function getDefaultLanguage() {
     // Get the default language object.
