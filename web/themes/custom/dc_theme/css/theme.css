@@ -200,24 +200,10 @@ input:-webkit-autofill{
   width: 100%;
 }
 
-/* #block-dc-theme-language li a, h2#block-dc-theme-language-menu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#block-dc-theme-searchbtn:not(:has(.search-ico)) {
+  content: url('../assets/init.png');
+  width: 54px;
+  padding-left: 3px;
+  padding-right: 3px;
+  padding-top: 9px;
 }
-
-#block-dc-theme-language ul {
-  min-width: 100px;
-}
-
-.en-us__language a::before, #block-dc-theme-language-menu.en-us__ls::before {
-  content: url('../assets/en-us.svg');
-  margin-right: 5px;
-  margin-top: 4px;
-}
-
-.pt-br__language a::before, #block-dc-theme-language-menu.pt-br__ls::before {
-  content: url('../assets/pt-br.svg');
-  margin-right: 5px;
-  margin-top: 4px;
-} */

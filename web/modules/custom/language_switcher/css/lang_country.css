@@ -8,6 +8,12 @@
     min-width: 100px;
 }
 
+#block-dc-theme-language-menu.block__title:not(.block__title[class*=" "])::before {
+    content: url('../assets/loading-bar.png');
+    margin-right: 5px;
+    margin-top: 4px;
+}
+
 .en-us__language a::before, #block-dc-theme-language-menu.en-us__ls::before {
     content: url('../assets/en-us.svg');
     margin-right: 5px;
