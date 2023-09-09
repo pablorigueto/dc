@@ -4,8 +4,8 @@
     justify-content: center;
 }
 
-#block-dc-theme-language ul {
-    min-width: 100px;
+#block-dc-theme-language .menu--level-1 {
+    margin-left: -18px;
 }
 
 #block-dc-theme-language-menu.block__title:not(.block__title[class*=" "])::before {
@@ -54,4 +54,23 @@
     content: url('../assets/pt-pt.svg');
     margin-right: 5px;
     margin-top: 4px;
+}
+
+#block-dc-theme-language {
+    position: absolute;
+    right: 0;
+    padding-right: 5%;
+}
+
+/* Hidden the text */
+#block-dc-theme-language .block__title::before,
+#block-dc-theme-language a::before {
+    display: inline-block;
+    visibility: visible;
+}
+
+#block-dc-theme-language .block__title,
+#block-dc-theme-language a {
+    font-size: 0;
+    visibility: hidden;
 }
