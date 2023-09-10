@@ -8,5 +8,11 @@
  */
 #}
 
-{% set dc_theme_path = base_path %}
-<link rel="preload" href="{{ dc_theme_path }}themes/custom/dc_theme/css/fonts/inter/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+{# {% set dc_theme_path = base_path %}
+<link rel="preload" href="{{ dc_theme_path }}themes/custom/dc_theme/css/fonts/Inter/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="{{ dc_theme_path }}themes/custom/dc_theme/css/fonts/Switzer/Switzer-Bold.ttf" as="font" type="font/ttf" crossorigin> #}
+
+{% set dc_theme_path = file_url('themes/custom/dc_theme/css/fonts/Inter/Inter-Regular.ttf') %}
+<link rel="preload" href="{{ dc_theme_path }}" as="font" type="font/ttf" crossorigin>
+{% set dc_theme_path_bold = file_url('themes/custom/dc_theme/css/fonts/Switzer/Switzer-Bold.ttf') %}
+<link rel="preload" href="{{ dc_theme_path_bold }}" as="font" type="font/ttf" crossorigin>

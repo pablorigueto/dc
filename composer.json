@@ -20,6 +20,7 @@
         "drupal/core-composer-scaffold": "^10.0",
         "drupal/core-project-message": "^10.0",
         "drupal/core-recommended": "^10.0",
+        "drupal/field_group": "^3.4",
         "drupal/pathauto": "^1.11",
         "drupal/redirect": "^1.9",
         "drush/drush": "^12.1"

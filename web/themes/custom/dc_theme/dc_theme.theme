@@ -6,3 +6,14 @@
 function dc_theme_page_attachments_alter(array &$attachments) {
   $attachments['#attached']['library'][] = 'dc_theme/react_app_main';
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+function dc_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Add placeholder to search form.
+  if ($form_id === 'search_block_form') {
+    // Add a placeholder to the search input field.
+    $form['keys']['#attributes']['placeholder'] = t('Enter the terms you wish to search for.');
+  }
+}
