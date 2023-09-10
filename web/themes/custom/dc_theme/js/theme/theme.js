@@ -74,6 +74,24 @@
       });
     }
   };
-
+  
+  Drupal.behaviors.copyCode = {
+    attach: function attach(context) {
+      once('copyCode', '.page-node-type-page pre', context).forEach(element => {
+        element.addEventListener('click', async e => {
+          // Assuming you want to copy the content of the <pre> element
+          let copyText = element.textContent;
+  
+          try {
+            // Use the Clipboard API to copy the text
+            await navigator.clipboard.writeText(copyText);
+            console.log('Text copied to clipboard successfully');
+          } catch (err) {
+            console.error('Failed to copy text: ', err);
+          }
+        });
+      });
+    }
+  };
 
 })(jQuery, Drupal, once);
