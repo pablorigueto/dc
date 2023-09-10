@@ -3,3 +3,16 @@ web/themes/custom/dc_theme/node_modules
 web/core
 web/modules/contrib
 web/sites
+/.csslintrc
+/.eslintignore
+/.eslintrc.json
+/.ht.router.php
+/.htaccess
+/INSTALL.txt
+/README.md
+/autoload.php
+/example.gitignore
+/index.php
+/robots.txt
+/update.php
+/web.config

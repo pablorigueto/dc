@@ -4,5 +4,5 @@
  * Implements hook_page_attachments_alter().
  */
 function dc_theme_page_attachments_alter(array &$attachments) {
-  $attachments['#attached']['library'][$index] = 'dc_theme/react_app_main';
+  $attachments['#attached']['library'][] = 'dc_theme/react_app_main';
 }
