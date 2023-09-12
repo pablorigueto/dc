@@ -75,18 +75,27 @@
     }
   };
   
+  /* Modal to copy text and show modal quickly */
   Drupal.behaviors.copyCode = {
     attach: function attach(context) {
       once('copyCode', '.page-node-type-page pre', context).forEach(element => {
         element.addEventListener('click', async e => {
           // Assuming you want to copy the content of the <pre> element
           let copyText = element.textContent;
-  
           try {
             // Use the Clipboard API to copy the text
             await navigator.clipboard.writeText(copyText);
-            console.log('Text copied to clipboard successfully');
-          } catch (err) {
+
+            $("#block-dc-theme-copycode").fadeIn();
+ 
+            // Re-add the 'none' display style after a 1-second delay
+            setTimeout(function() {
+              // $("#block-dc-theme-copycode").slideDown();
+              $("#block-dc-theme-copycode").fadeOut();
+            }, 1000); // 1000 milliseconds = 1 second
+            
+          }
+          catch (err) {
             console.error('Failed to copy text: ', err);
           }
         });
@@ -94,4 +103,33 @@
     }
   };
 
+
 })(jQuery, Drupal, once);
+
+
+// Drupal.behaviors.copyCode = {
+//   attach: function attach(context) {
+//     once('copyCode', '.page-node-type-page pre', context).forEach(element => {
+//       element.addEventListener('click', async e => {
+//         // Assuming you want to copy the content of the <pre> element
+//         let copyText = element.textContent;
+//         try {
+//           // Use the Clipboard API to copy the text
+//           await navigator.clipboard.writeText(copyText);
+
+//           $("#block-dc-theme-copycode").fadeIn();
+
+//           // Re-add the 'none' display style after a 1-second delay
+//           setTimeout(function() {
+//             // $("#block-dc-theme-copycode").slideDown();
+//             $("#block-dc-theme-copycode").fadeOut();
+//           }, 1000); // 1000 milliseconds = 1 second
+          
+//         }
+//         catch (err) {
+//           console.error('Failed to copy text: ', err);
+//         }
+//       });
+//     });
+//   }
+// };
