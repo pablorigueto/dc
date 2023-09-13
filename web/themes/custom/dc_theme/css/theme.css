@@ -359,11 +359,13 @@ input:-webkit-autofill{
   padding-right: 5%;
   padding-top: 50px;
   padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
 }
 
 .page-node-type-page .field--name-field-content-body pre {
   background-color: #141414;
-  width: 70%;
+  width: 100%;
   padding: 20px;
   position: relative;
 }
@@ -396,16 +398,20 @@ input:-webkit-autofill{
 }
 
 .popFromJs {
-  bottom: 0;
-  position: absolute;
+  bottom: 25px;
   z-index: 3;
-  right: 50%;
-  background: #fff;
-  /* transition: display 225ms ease; */
   color: #181818;
   padding: 15px;
   font-family: Switzer-Light;
   font-size: 15px;
+  position: absolute;
+  right: calc(50% + 51px);
+}
+
+.popFromJs span {
+  background: #fff;
+  padding: 10px;
+  position: absolute;
 }
 
 .btnFromJs {

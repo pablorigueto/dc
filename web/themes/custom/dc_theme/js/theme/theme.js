@@ -118,7 +118,10 @@
   
           // Append the 'popFromJs' div to the parent <pre> element
           let preElement = element.closest('pre');
-          $(preElement).append("<div class='popFromJs'><span>copied text!</span></div>");
+
+          if ($(preElement).find('.popFromJs').length === 0) {
+            $(preElement).append("<div class='popFromJs'><span>copied text!</span></div>");
+          }
   
           // Get the newly appended 'popFromJs' div.
           let copyCodeDiv = $(preElement).find('.popFromJs');
@@ -141,7 +144,8 @@
             // Re-add the 'none' display style after a 1-second delay
             setTimeout(function() {
               copyCodeDiv.fadeOut();
-            }, 800); // 700 milliseconds = 0.7 seconds
+
+            }, 800); // 800 milliseconds = 0.8 seconds
   
           }
           catch (err) {
