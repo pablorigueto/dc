@@ -76,24 +76,73 @@
   };
   
   /* Modal to copy text and show modal quickly */
+  // Drupal.behaviors.copyCode = {
+  //   attach: function attach(context) {
+  //     once('copyCode', '.page-node-type-page pre', context).forEach(element => {
+  //       element.addEventListener('click', async e => {
+  //         // Assuming you want to copy the content of the <pre> element
+  //         let copyText = element.textContent;
+  //         try {
+  //           // Use the Clipboard API to copy the text
+  //           await navigator.clipboard.writeText(copyText);
+
+  //           $("#block-dc-theme-copycode").fadeIn();
+ 
+  //           // Re-add the 'none' display style after a 1-second delay
+  //           setTimeout(function() {
+  //             // $("#block-dc-theme-copycode").slideDown();
+  //             $("#block-dc-theme-copycode").fadeOut();
+  //           }, 1000); // 1000 milliseconds = 1 second
+            
+  //         }
+  //         catch (err) {
+  //           console.error('Failed to copy text: ', err);
+  //         }
+  //       });
+  //     });
+  //   }
+  // };
+ 
+  Drupal.behaviors.addCopyCodeBtn = {
+    attach: function attach(context) {
+      once('addCopyCodeBtn', '.page-node-type-page pre', context).forEach(element => {
+        $(element).append("<div class='btnFromJs'><span>copy</span></div>");
+      });
+    }
+  };
+
   Drupal.behaviors.copyCode = {
     attach: function attach(context) {
-      once('copyCode', '.page-node-type-page pre', context).forEach(element => {
+      once('copyCode', '.page-node-type-page pre .btnFromJs', context).forEach(element => {
         element.addEventListener('click', async e => {
-          // Assuming you want to copy the content of the <pre> element
-          let copyText = element.textContent;
+  
+          // Append the 'popFromJs' div to the parent <pre> element
+          let preElement = element.closest('pre');
+          $(preElement).append("<div class='popFromJs'><span>copied text!</span></div>");
+  
+          // Get the newly appended 'popFromJs' div.
+          let copyCodeDiv = $(preElement).find('.popFromJs');
+  
+          // Exclude both '.btnFromJs' and '.popFromJs' elements when copying text.
+          let copyText = $(preElement)
+            .clone()
+            .find('.btnFromJs, .popFromJs')
+            .remove()
+            .end()
+            .text();
+  
           try {
             // Use the Clipboard API to copy the text
             await navigator.clipboard.writeText(copyText);
-
-            $("#block-dc-theme-copycode").fadeIn();
- 
+  
+            // Fade in the cloned copyCodeDiv
+            copyCodeDiv.fadeIn();
+  
             // Re-add the 'none' display style after a 1-second delay
             setTimeout(function() {
-              // $("#block-dc-theme-copycode").slideDown();
-              $("#block-dc-theme-copycode").fadeOut();
-            }, 1000); // 1000 milliseconds = 1 second
-            
+              copyCodeDiv.fadeOut();
+            }, 800); // 700 milliseconds = 0.7 seconds
+  
           }
           catch (err) {
             console.error('Failed to copy text: ', err);
@@ -102,8 +151,10 @@
       });
     }
   };
+  
 
 
+  
 })(jQuery, Drupal, once);
 
 

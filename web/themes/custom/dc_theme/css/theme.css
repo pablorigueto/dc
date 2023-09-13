@@ -368,18 +368,6 @@ input:-webkit-autofill{
   position: relative;
 }
 
-.page-node-type-page .field--name-field-content-body pre::before {
-  content: "Copy";
-  height: 20px;
-  background: #fff;
-  color: #000;
-  padding: 5px;
-  position: absolute;
-  right: 20px;
-  padding-top: 8px;
-  cursor: pointer;
-}
-
 .page-node-type-page .layout-main-wrapper {
   padding-left: 0;
   padding-right: 0;
@@ -407,9 +395,9 @@ input:-webkit-autofill{
   margin-top: -30px;
 }
 
-#block-dc-theme-copycode {
-  display: none;
-  position: fixed;
+.popFromJs {
+  bottom: 0;
+  position: absolute;
   z-index: 3;
   right: 50%;
   background: #fff;
@@ -417,11 +405,31 @@ input:-webkit-autofill{
   color: #181818;
   padding: 15px;
   font-family: Switzer-Light;
+  font-size: 15px;
 }
 
-#block-dc-theme-copycode .block__title {
-  display: none;
+.btnFromJs {
+  background: #fff;
+  color: #000;
+  padding: 5px;
+  top: 10px;
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
 }
+
+/* .page-node-type-page .field--name-field-content-body pre::before {
+  content: "Copy";
+  height: 20px;
+  background: #fff;
+  color: #000;
+  padding: 5px;
+  position: absolute;
+  right: 20px;
+  padding-top: 8px;
+  cursor: pointer;
+} */
+
 
 .field--name-field-content-body .field__label {
   display: none;
@@ -429,4 +437,4 @@ input:-webkit-autofill{
 
 .field--name-field-content-body .field__item p {
   font-size: 15px;
-}
+} 
