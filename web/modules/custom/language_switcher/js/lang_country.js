@@ -2,11 +2,8 @@
 
   Drupal.behaviors.langMenuCustomBehavior = {
     attach: function (context, settings) {
-      let currentUrl = window.location.href;
-      // Create a URL object
-      let url = new URL(currentUrl);
-      let parts = url.pathname.split('/');
-      let urlLangCode = parts[1];
+
+      let urlLangCode = getLangCodeFromUrl();
       
       // Check if localStorage supports the selectedLanguage key.
       if (typeof localStorage !== 'undefined' && localStorage.getItem('selectedLanguage')) {
@@ -44,29 +41,55 @@
     $("h2#block-dc-theme-language-menu").text(langCode.toUpperCase());
   }
 
+  // Change the langcode on cookie when the user choose on menu.
   Drupal.behaviors.storageLangCodeOnBrowser = {
     attach: function (context, settings) {
       once('storageLangCodeOnBrowser', '#block-dc-theme-language .menu__item--link', context).forEach(element => {
         element.addEventListener('click', function (e) {
           const LANGUAGE = $(this).find(".menu__link--link").prop('title');
-          let selectedLanguageCookie = getCookie("selectedLanguage");
 
-          // Remove the existing selectedLanguage cookie (if it exists)
-          // and if they are the same, we don't need to change it.
-          if (selectedLanguageCookie === '/' + LANGUAGE) {
-            return;
-          }
-
-          deleteCookie("selectedLanguage");
-  
-          // Set the new value in both localStorage and as a new cookie
-          localStorage.setItem('selectedLanguage', LANGUAGE);
-          setCookie("selectedLanguage", '/' + LANGUAGE, 365);
+          manageCookie(LANGUAGE);
 
         });
       });
     }
   };
+
+  // Set langCode base on GeoIP or Default lang site.
+  Drupal.behaviors.setDefaultLangOnCookie = {
+    attach: function (context, settings) {
+      $(document).ready(function() {
+
+        manageCookie(getLangCodeFromUrl());
+
+      });
+    }
+  };
+
+  function getLangCodeFromUrl() {
+    let currentUrl = window.location.href;
+    // Create a URL object
+    let url = new URL(currentUrl);
+    let parts = url.pathname.split('/');
+    return parts[1];
+  }
+
+  function manageCookie(LANGUAGE) {
+
+    let selectedLanguageCookie = getCookie("selectedLanguage");
+
+    // Remove the existing selectedLanguage cookie (if it exists)
+    // and if they are the same, we don't need to change it.
+    if (selectedLanguageCookie === '/' + LANGUAGE) {
+      return;
+    }
+
+    deleteCookie("selectedLanguage");
+
+    // Set the new value in both localStorage and as a new cookie
+    localStorage.setItem('selectedLanguage', LANGUAGE);
+    setCookie("selectedLanguage", '/' + LANGUAGE, 365);
+  }
 
   function setCookie(name, value, daysToExpire) {
     const expirationDate = new Date();

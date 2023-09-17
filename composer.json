@@ -23,7 +23,8 @@
         "drupal/field_group": "^3.4",
         "drupal/pathauto": "^1.11",
         "drupal/redirect": "^1.9",
-        "drush/drush": "^12.1"
+        "drush/drush": "^12.1",
+        "everapi/ipbase-php": "^1.0"
     },
     "require-dev": {
         "drupal/core-dev": "^10.0"

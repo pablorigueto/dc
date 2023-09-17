@@ -50,6 +50,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
    * Limit this solution only to homepage.
    */
   public function onRequest(RequestEvent $event) {
+
     $path = $event->getRequest()->getPathInfo();
     $cookie = $event->getRequest()->cookies->get('selectedLanguage');
 
@@ -57,7 +58,12 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
     // If path is default language on the first access.
     if ($path === $defaultLanguage && empty($cookie)) {
-      return;
+      if ($this->getCountryByGeolocationAPI() !== 'Portuguese') {
+        $cookie = 'en-us';
+      }
+      else {
+        $cookie = 'pt-br';
+      }
     }
 
     if (empty($cookie)) {
@@ -87,4 +93,11 @@ class RedirectSubscriber implements EventSubscriberInterface {
     return '/' . $defaultLanguage->getId();
   }
 
+  public function getCountryByGeolocationAPI() {
+    // It's a free key to test, you can get one here: https://app.ipbase.com/
+    $ipBase = new \Ipbase\Ipbase\IpbaseClient('ipb_live_bv4Kl7uf7BCrCMrylyWgPFZnbFVsPGPokjWKXOAi');
+
+    return $ipBase->info()['data']['location']['country']['languages'][0]['name'] ?? NULL;
+
+  }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8c631b8655e9cdf0d976a795a89cabe5",
+    "content-hash": "50dadc8d7c4ab4891b3dc61ee8864de1",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2110,6 +2110,62 @@
                 }
             ],
             "time": "2023-01-14T14:17:03+00:00"
+        },
+        {
+            "name": "everapi/ipbase-php",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/everapihq/ipbase-php.git",
+                "reference": "e6d60c350fd0a20f36ebb5337907958cd806dd8b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/everapihq/ipbase-php/zipball/e6d60c350fd0a20f36ebb5337907958cd806dd8b",
+                "reference": "e6d60c350fd0a20f36ebb5337907958cd806dd8b",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.4",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.0",
+                "pestphp/pest": "^1.20",
+                "spatie/ray": "^1.28"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ipbase\\Ipbase\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lukas Struber",
+                    "email": "lukas.struber@everapi.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP wrapper for the ipbase.com API",
+            "homepage": "https://github.com/everapihq/ipbase-php",
+            "keywords": [
+                "IP",
+                "api",
+                "geolocation",
+                "ipbase",
+                "ipbase-php",
+                "ipbase.com"
+            ],
+            "support": {
+                "issues": "https://github.com/everapihq/ipbase-php/issues",
+                "source": "https://github.com/everapihq/ipbase-php/tree/v1.0.1"
+            },
+            "time": "2023-06-09T14:50:46+00:00"
         },
         {
             "name": "grasmash/expander",
