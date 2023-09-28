@@ -96,7 +96,7 @@ class Test extends ControllerBase {
                     token: $('#pagseguro_cartao_token').val()
                 };
                 
-                $.post('https://concerto.lndo.site/resp', data, function(response) {
+                $.post('https://dc.lndo.site/resp', data, function(response) {
                     alert(response);
                 });
             }
