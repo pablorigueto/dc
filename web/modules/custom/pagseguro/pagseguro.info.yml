@@ -1,0 +1,8 @@
+name: PagSeguro Payments
+type: module
+description: Payments options
+package: Custom
+core_version_requirement: ^8 || ^9 || ^10
+
+version: '10.0.0'
+project: 'pagseguro'

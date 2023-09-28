@@ -74,7 +74,7 @@
       });
     }
   };
-  
+
   /* Modal to copy text and show modal quickly */
   // Drupal.behaviors.copyCode = {
   //   attach: function attach(context) {
@@ -102,7 +102,7 @@
   //     });
   //   }
   // };
- 
+
   Drupal.behaviors.addCopyCodeBtn = {
     attach: function attach(context) {
       once('addCopyCodeBtn', '.page-node-type-page pre', context).forEach(element => {
@@ -155,10 +155,10 @@
       });
     }
   };
-  
 
 
-  
+
+
 })(jQuery, Drupal, once);
 
 

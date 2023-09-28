@@ -1,0 +1,21 @@
+pagseguro.subscribe:
+  path: '/assinar'
+  defaults:
+    _form: '\Drupal\pagseguro\Form\SubscriberForm'
+    _title: 'Subscriber'
+  requirements:
+    _role: 'authenticated'
+
+pagseguro.create_plan_to_subscribe:
+  path: '/assinar/pagamento-recorrente'
+  defaults:
+    _controller: '\Drupal\pagseguro\Controller\PaymentSubscribe::createPlan'
+  requirements:
+    _role: 'authenticated'
+
+pagseguro.payment_subscribe:
+  path: '/assinar/pagamento-assinatura'
+  defaults:
+    _controller: '\Drupal\pagseguro\Controller\PaymentSubscribe::payThePlan'
+  requirements:
+    _role: 'authenticated'

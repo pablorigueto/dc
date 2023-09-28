@@ -1,0 +1,107 @@
+<?php
+
+/**
+ * @file
+ * Module file for PagSeguro payments.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function pagseguro_schema() {
+  $schema['pagseguro_users_data'] = [
+    'description' => 'Stores the user data like address, country, and etc.',
+    'fields' => [
+      'user_id' => [
+        'description' => 'The user ID.',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ],
+      'full_name' => [
+        'description' => 'The full name.',
+        'type' => 'varchar_ascii',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'birthday' => [
+        'description' => "The user's birthday.",
+        'type' => 'varchar_ascii',
+        'length' => 10,
+        'not null' => TRUE,
+      ],
+      'phone' => [
+        'description' => "The user's phone number.",
+        'type' => 'varchar_ascii',
+        'length' => 20,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'id_personal' => [
+        'description' => "The user's personal ID.",
+        'type' => 'varchar_ascii',
+        'length' => 20,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'email' => [
+        'description' => "The user's email address.",
+        'type' => 'varchar_ascii',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'address' => [
+        'description' => 'The full address.',
+        'type' => 'varchar_ascii',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'number_address' => [
+        'description' => "The user's house or apartment number.",
+        'type' => 'varchar_ascii',
+        'length' => 10,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'zip_code' => [
+        'description' => "The user's ZIP code.",
+        'type' => 'varchar_ascii',
+        'length' => 15,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'district' => [
+        'description' => 'The district or neighborhood.',
+        'type' => 'varchar_ascii',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'city' => [
+        'description' => 'The city.',
+        'type' => 'varchar_ascii',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'region' => [
+        'description' => 'The region or state.',
+        'type' => 'varchar_ascii',
+        'length' => 50,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'country' => [
+        'description' => 'The country.',
+        'type' => 'varchar_ascii',
+        'length' => 50,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+    ],
+    'primary key' => ['user_id'],
+  ];
+  return $schema;
+}

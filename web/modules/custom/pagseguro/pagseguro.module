@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Module file for PagSeguro payments.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function pagseguro_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'pagseguro/pagseguro-bundle';
+}
+
+/**
+ * Implements hook_update_N().
+ */
+// function pagseguro_update_10000() {
+//   // Get the database connection service.
+//   $database = \Drupal::database();
+
+//   // Define the table name.
+//   // Don't use the prefix, because didn't to create the fields or update.
+//   $table_name = 'users_data';
+
+//   // Define the new field specification.
+//   $field_spec = [
+//     'description' => 'The new field.',
+//     'type' => 'varchar_ascii',
+//     'length' => 255,
+//     'not null' => FALSE,
+//     'default' => '',
+//   ];
+
+//   // Check if the field doesn't already exist before attempting to add it.
+//   if (!$database->schema()->fieldExists($table_name, 'address_type_db_field')) {
+//     // Get the schema driver for the database connection.
+//     $schema = $database->schema();
+
+//     // Add the new field to the existing table.
+//     $schema->addField($table_name, 'address_type_db_field', $field_spec);
+//   }
+// }
+
