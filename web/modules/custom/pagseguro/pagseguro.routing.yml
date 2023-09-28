@@ -19,3 +19,10 @@ pagseguro.payment_subscribe:
     _controller: '\Drupal\pagseguro\Controller\PaymentSubscribe::payThePlan'
   requirements:
     _role: 'authenticated'
+
+pagseguro.test:
+  path: '/test'
+  defaults:
+    _controller: '\Drupal\pagseguro\Controller\Test::pagSeguro'
+  requirements:
+    _role: 'authenticated'

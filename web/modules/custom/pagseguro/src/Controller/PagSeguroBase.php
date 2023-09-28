@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\concerto_assinatura\Controller;
+namespace Drupal\pagseguro\Controller;
 
 /**
 * @package Library

@@ -1,8 +1,8 @@
 <?php
 
-namespace Drupal\concerto_assinatura\Controller;
+namespace Drupal\pagseguro\Controller;
 
-use Drupal\concerto_assinatura\Controller\PagSeguroBase;
+use Drupal\pagseguro\Controller\PagSeguroBase;
 
 /**
 * @package Library

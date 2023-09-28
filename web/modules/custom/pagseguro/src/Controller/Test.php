@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\concerto_assinatura\Controller;
+namespace Drupal\pagseguro\Controller;
 
 use PDO;
 use DateInterval;
@@ -14,9 +14,7 @@ use Drupal\taxonomy\Entity\Term;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Drupal\concerto_cadastro\CurlRequestTrait;
-use Drupal\concerto_assinatura\Controller\PagSeguroAssinaturas;
-
+use Drupal\pagseguro\CurlRequestTrait;
 
 
 class Test extends ControllerBase {
