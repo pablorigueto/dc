@@ -23,6 +23,6 @@ pagseguro.payment_subscribe:
 pagseguro.test:
   path: '/test'
   defaults:
-    _controller: '\Drupal\pagseguro\Controller\Test::pagSeguro'
+    _controller: '\Drupal\pagseguro\Controller\Test::callPagSeguro'
   requirements:
     _role: 'authenticated'

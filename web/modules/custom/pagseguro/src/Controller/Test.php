@@ -22,9 +22,9 @@ class Test extends ControllerBase {
      * Trait to avoid a lot of repeated code.
      * To'do.
      */
-    use CurlRequestTrait;
+    //use CurlRequestTrait;
 
-    function pagSeguro(Request $request) {
+    public function callPagSeguro(Request $request) {
         // $email = "pabloedurigueto@outlook.com";
         // $token = "50A402506BD14FC39C424C203A68E7B4"; //sandbox
         // $token = "40ca886d-5757-4730-9e77-a968bb3bfb0707a9e4b64e19915a03944348f96be2485826-e7a9-49d3-803c-4144cb48f886"; //prod

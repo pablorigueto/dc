@@ -5,6 +5,7 @@ namespace Drupal\pagseguro\Form;
 use Drupal\Component\Utility\EmailValidatorInterface as UtilityEmailValidatorInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\HtmlCommand;
+use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
@@ -133,16 +134,52 @@ class SubscriberForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state): array {
 
-		$user = User::load(\Drupal::currentUser()->id());
-		$uid = $user->get('uid')->value;
-		$email = $user->get('mail')->value;
-
-    $currentRequest = $this->requestStack->getCurrentRequest();
-    $nodeId = $currentRequest->query->get('nid');
-    $currentLanguage = $this->currentLanguage()->getId();
+    // $currentRequest = $this->requestStack->getCurrentRequest();
+    // $nodeId = $currentRequest->query->get('nid');
+    // $currentLanguage = $this->currentLanguage()->getId();
 
     $userData = $this->getUserInfos();
 
+    $form['offer_to_car_wrapper'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['selected-car-wrapper-inside']],
+      'offer_to_car' => [
+        '#type' => 'textfield',
+        '#title' => $this->t('Proposta para o carro'),
+        '#prefix' => '<div class="car-details-to-offer">',
+        '#suffix' => '</div>',
+        '#ajax' => [
+          'callback' => [$this, 'updateAddressField'],
+          'event' => 'change',
+          'wrapper' => 'offer_to_car_image', // Use the ID of the textfield as the wrapper
+          'progress' => [
+            'type' => 'throbber',
+            'message' => NULL,
+          ],
+        ],
+      ],
+      'offer_to_car_image' => [
+        '#type' => 'textfield',
+        '#title' => $this->t('Offer to car image'),
+        '#prefix' => '<div class="new-offer-image">',
+        '#suffix' => '</div>',
+        '#attributes' => [
+          'id' => 'offer_to_car_image',
+        ],
+      ],
+      'offer_to_car_image2' => [
+        '#type' => 'textfield',
+        '#title' => $this->t('Offer to car image'),
+        '#prefix' => '<div class="new-offer-image">',
+        '#suffix' => '</div>',
+        '#attributes' => [
+          'id' => 'offer_to_car_image2',
+        ],
+      ],  
+      '#prefix' => '<div class="selected-car-wrapper">',
+      '#suffix' => '</div>',
+    ];
+  
     $form['contact_info_wrapper_parent'] = [
       '#type' => 'container',
       '#attributes' => ['class' => ['contact-info-wrapper-inside']],
@@ -162,16 +199,20 @@ class SubscriberForm extends FormBase {
           '#default_value' => !empty($userData['full_name']) ? $userData['full_name'] : '',
         ],
         'email' => [
-          '#type' => 'email',
+          '#type' => 'hidden',
+          // '#type' => 'email',
           '#id' => 'email',
           '#title' => 'E-mail',
-          '#required' => 'true',
+          '#required' => TRUE,
           '#prefix' => '<div class="email">',
           '#suffix' => '</div>',
-          '#attributes' => ['class' => ['input-cadastro']],
-          '#default_value' => $email
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'readonly' => 'readonly', // Set the readonly attribute
+          ],
+          '#default_value' => !empty($userData['email']) ? $userData['email'] : ''
         ],
-    
+
         // Add the new fields here
         'birthday' => [
           '#type' => 'textfield',
@@ -200,6 +241,29 @@ class SubscriberForm extends FormBase {
           '#attributes' => ['class' => ['input-cadastro']],
           '#default_value' => !empty($userData['id_personal']) ? $userData['id_personal'] : '',
         ],
+        'zip_code' => [
+          '#type' => 'textfield',
+          '#title' => $this->t('Zip code'),
+          '#required' => TRUE,
+          '#prefix' => '<div class="zip-code">',
+          '#suffix' => '</div>',
+          '#attributes' => ['class' => ['input-cadastro']],
+          '#default_value' => !empty($userData['zip_code']) ? $userData['zip_code'] : '',
+        ],
+        'postcode_btn' => [
+          '#type' => 'button',
+          '#value' => $this->t('Find your address through postcode'),
+          '#prefix' => '<div class="postcode-btn">',
+          '#suffix' => '</div>',
+          '#ajax' => [
+            'callback' => [$this, 'updateAddressField'],
+            'event' => 'click', //'change',
+            'progress' => [
+              'type' => 'throbber',
+              'message' => NULL
+            ],
+          ],
+        ],
         'address' => [
           '#type' => 'textfield',
           '#title' => $this->t('Address'),
@@ -208,6 +272,9 @@ class SubscriberForm extends FormBase {
           '#suffix' => '</div>',
           '#attributes' => ['class' => ['input-cadastro']],
           '#default_value' => !empty($userData['address']) ? $userData['address'] : '',
+          '#attributes' => [
+            'id' => 'address',
+          ],
         ],
         'number_address' => [
           '#type' => 'textfield',
@@ -217,15 +284,6 @@ class SubscriberForm extends FormBase {
           '#suffix' => '</div>',
           '#attributes' => ['class' => ['input-cadastro']],
           '#default_value' => !empty($userData['number_address']) ? $userData['number_address'] : '',
-        ],
-        'zip_code' => [
-          '#type' => 'textfield',
-          '#title' => $this->t('Zip code'),
-          '#required' => TRUE,
-          '#prefix' => '<div class="zip-code">',
-          '#suffix' => '</div>',
-          '#attributes' => ['class' => ['input-cadastro']],
-          '#default_value' => !empty($userData['zip_code']) ? $userData['zip_code'] : '',
         ],
         'district' => [
           '#type' => 'textfield',
@@ -285,41 +343,80 @@ class SubscriberForm extends FormBase {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    */
-  public function updateOfferToCarImageField(array $form, FormStateInterface $form_state): AjaxResponse {
+  public function updateAddressField(array $form, FormStateInterface $form_state): AjaxResponse|bool {
 
- 
+    //$response->addCommand(new HtmlCommand('#updatedField', 'removeEntireStructure'));
 
+    $post_code = $form_state->getValue('zip_code');
+
+    // if (empty($post_code)) {
+    //   return FALSE;
+    //   //$form_state->setErrorByName('zip_code', $this->t('Please, fill with a valid postcode.'));
+    // }
     $response = new AjaxResponse();
-    $response->addCommand(new HtmlCommand('#offer-image-wrapper', $car_uri));
+    $url = 'https://viacep.com.br/ws/'.$post_code.'/json';
+    $response_data = file_get_contents($url);
+    // Parse the JSON response
+    $data = json_decode($response_data);
+
+    // "cep": "13825-000",
+    // "logradouro": "",
+    // "complemento": "",
+    // "bairro": "",
+    // "localidade": "Holambra",
+    // "uf": "SP",
+    // "ibge": "3519055",
+    // "gia": "7470",
+    // "ddd": "19",
+    // "siafi": "2953"
+
+    $response->addCommand(new InvokeCommand('#address', 'val', [$data->localidade]));
+
+    $response->addCommand(new InvokeCommand('#offer_to_car_image', 'val', [$data->cep]));
+
+  
     return $response;
   }
 
+  
   /**
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state): void {
-    // $email = $form_state->getValue('email_offer');
 
-    // // Check if the email address is valid.
-    // if (!$this->emailValidator->isValid($email)) {
-    //   $form_state->setErrorByName('email', $this->t('Please enter a valid email address.'));
-    // }
+    $post_code = $form_state->getValue('zip_code');
 
-    // // Check if the email address is from a banned domain.
-    // $banned_domains = ['example.com', 'test.com'];
-    // $domain = substr(strrchr($email, "@"), 1);
-    // if (in_array($domain, $banned_domains)) {
-    //   $form_state->setErrorByName('email', $this->t('Email inválido, ex: example@example.com.'));
-    // }
+    if (empty($post_code)) {
+      $form_state->setErrorByName('zip_code', $this->t('Please, fill with a valid postcode.'));
+    }
 
-    // $telephone = $form_state->getValue('phone_offer');
+    // $currentLanguage = $this->currentLanguage();
+    // // // Check if the email address is valid.
+    // // if (!$this->emailValidator->isValid($email)) {
+    // //   $form_state->setErrorByName('email', $this->t('Please enter a valid email address.'));
+    // // }
 
+    // // // Check if the email address is from a banned domain.
+    // // $banned_domains = ['example.com', 'test.com'];
+    // // $domain = substr(strrchr($email, "@"), 1);
+    // // if (in_array($domain, $banned_domains)) {
+    // //   $form_state->setErrorByName('email', $this->t('Email inválido, ex: example@example.com.'));
+    // // }
+
+    // $telephone = $form_state->getValue('phone');
     // // Remove all non-numeric characters from the telephone number.
     // $telephone = preg_replace('/\D/', '', $telephone);
 
-    // // Check if the telephone number is valid.
-    // if (strlen($telephone) <= 7 || strlen($telephone) >= 12 || !preg_match('/^([0-9]{2})([0-9]{8,9})$/', $telephone)) {
-    //   $form_state->setErrorByName('telephone', $this->t('Nro de telefone inválido, ex: (19) 99999-9999.'));
+    // if ($currentLanguage === 'pt-br') {
+    //   // Check if the telephone number is valid.
+    //   if (strlen($telephone) <= 7 || strlen($telephone) >= 12 || !preg_match('/^([0-9]{2})([0-9]{8,9})$/', $telephone)) {
+    //     $form_state->setErrorByName('telephone', $this->t('Nro de telefone inválido, ex: (19) 99999-9999.'));
+    //   }
+    // }
+    // else {
+    //   if (strlen($telephone) <= 7 || strlen($telephone) >= 20) {
+    //     $form_state->setErrorByName('telephone', $this->t('Please fill using at least 8 numbers.'));
+    //   }
     // }
 
     // $birthdate = $form_state->getValue('bday_offer');
@@ -343,7 +440,7 @@ class SubscriberForm extends FormBase {
 
     $updateAcc = $this->updateFieldsOnDB($form_state);
 
-    // // Get the current time in the default timezone.
+    // Get the current time in the default timezone.
     // $current_time = new DrupalDateTime();
     // $formattedDate = $current_time->format('d-m-Y H:i:s');
 
@@ -451,13 +548,6 @@ class SubscriberForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  protected function currentLanguage(): mixed {
-    return $this->languageManager->getCurrentLanguage();
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   protected function getUserInfos(): mixed {
     // Assuming you have a $user object for the current user.
     $user = \Drupal::currentUser();
@@ -465,12 +555,74 @@ class SubscriberForm extends FormBase {
     // Create a database connection.
     $connection = $this->database;
 
+    $pagSeguroTable = $this->getUserInfoFromPagSeguroTable($connection, $user->id());
+
+    if (isset($pagSeguroTable['email'])) {
+
+      $resultUserMail = $this->getUserEmailFromUsersTable($connection, $user->id());
+
+      if ($pagSeguroTable['email'] !== $resultUserMail) {
+
+        // Update the email from pagseguro table if the user change it on users data table.
+        $query = $connection->update('pagseguro_users_data');
+        $query->fields([
+          'email' => $resultUserMail,
+        ]);
+        $query->condition('user_id', $user->id());
+        $query->execute();
+
+        return $this->getUserInfoFromPagSeguroTable($connection, $user->id());
+
+      }
+
+      return $pagSeguroTable;
+
+    }
+  
+    $resultUserMail = $this->getUserEmailFromUsersTable($connection, $user->id());
+
+    // Insert a new record using the email from initial subscriber.
+    $query = $connection->insert('pagseguro_users_data');
+    $query->fields([
+      'user_id' => $user->id(),
+      'email' => $resultUserMail,
+    ]);
+    $query->execute();
+
+    return $this->getUserInfoFromPagSeguroTable($connection, $user->id());
+  
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getUserInfoFromPagSeguroTable($connection, $userId): mixed {
     // Fetch the user's data from the database.
     $query = $connection->select('pagseguro_users_data', 'p')
-      ->fields('p')
-      ->condition('p.user_id', $user->id());
+    ->fields('p')
+    ->condition('p.user_id', $userId);
     $result = $query->execute();
     return $result->fetchAssoc();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function getUserEmailFromUsersTable($connection, $userId): mixed {
+    // Fetch the user's email from the database.
+    $query = $connection->select('users_field_data', 'ud')
+      ->fields('ud')
+      ->condition('ud.uid', $userId);
+    $resultUserTable = $query->execute();
+    $resultUserMail = $resultUserTable->fetchAssoc();
+    return $resultUserMail['mail'];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function currentLanguage(): string {
+    return $this->languageManager->getCurrentLanguage()->getId();
   }
 
 }
