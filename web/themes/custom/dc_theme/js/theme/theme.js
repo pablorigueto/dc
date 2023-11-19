@@ -10,6 +10,7 @@
   
           // Add a click event handler to the Menu heading.
           $("h2.block__title").click(function () {
+            console.log('teste');
             // Find the related menu element within the same parent.
             const MENU = $(this).siblings(".menu.menu--level-1");
   
@@ -29,7 +30,24 @@
       }
     }
   }
-  
+
+  Drupal.behaviors.contentRedirect = {
+    attach(context) {
+      if (!drupalSettings.contentRedirect) {
+        $(document).ready(function () {
+          // Add a click event handler to the Menu heading.
+          $(".path-frontpage .text_and_image").on('click', function () {
+          // Get the href attribute from the anchor within the clicked element.
+          var link = $(this).find('a').attr('href');
+            // Redirect to the specified URL
+            window.location.href = link;
+          });
+        });
+        drupalSettings.contentRedirect = true;
+      }
+    }
+  }
+
   Drupal.behaviors.toggleSearch = {
     attach(context) {
       if (!drupalSettings.toggleSearch) {
@@ -40,6 +58,7 @@
   
           // Add a click event handler to the Menu heading.
           $(".menu--search-btn").click(function () {
+
             // Find the related menu element within the same parent.
             const MENU = $(this).siblings(".search-block-form");
   
@@ -51,6 +70,7 @@
   
             // If the menu was not open, then open it.
             if (!isMenuOpen) {
+              console.log('clicado');
               MENU.slideDown();
             }
           });
@@ -65,12 +85,23 @@
       once('closeSearchClickingOutsideOfit', '.search-block-form', context).forEach(element => {
       	element.addEventListener('click', e => {
           const INPUT = $('input.form-search', context);
-          const SEARCH = $('.search-block-form');
+          //const NODE_SEARCH = $('.path-node .search-block-form');
+          const SEARCH = $('body:not(:has(.path-frontpage)) .search-block-form');
           if (!INPUT.is(e.target)) {
             // If clicked outside, hide the search block form.
             SEARCH.slideUp();
+            //NODE_SEARCH.slideUp();
           }
         });
+
+        // Add a keydown event handler to close the menu when pressing ESC.
+        $(document).on('keydown', function (event) {
+          if (event.key === 'Escape' || event.keyCode === 27) {
+            //$(".path-node .search-block-form").slideUp();
+            $("body:not(:has(.path-frontpage)) .search-block-form").slideUp();
+          }
+        });
+
       });
     }
   };
@@ -103,6 +134,44 @@
   //   }
   // };
 
+  // Drupal.behaviors.slickCarousel = {
+  //   attach: function attach(context) {
+  //     $(".homepage-highlight-container").slick({
+  //       dots: false,
+  //       infinite: true,
+  //       speed: 600,
+  //       slidesToShow: 1,
+  //       autoplay: true,
+  //       autoplaySpeed: 4000,
+  //       fade: true,
+  //       cssEase: 'linear'
+  //     });
+  //   }
+  // };
+
+  Drupal.behaviors.smoothPosition = {
+    attach: function attach(context) {
+
+      // Check if the behavior has already been applied
+      if (context !== document) {
+        return;
+      }
+    
+      const SEARCH_BLOCK = document.querySelector('.search-block-form');
+    
+      if (SEARCH_BLOCK && !SEARCH_BLOCK.classList.contains('show')) {
+        SEARCH_BLOCK.classList.add('show');
+      }
+  
+      const HIGHTLIGHT_CONTAINER = document.querySelector('.homepage-highlight-container');
+      
+      if (HIGHTLIGHT_CONTAINER && !HIGHTLIGHT_CONTAINER.classList.contains('show')) {
+        HIGHTLIGHT_CONTAINER.classList.add('show');
+      }
+
+    }
+  };
+
   Drupal.behaviors.addCopyCodeBtn = {
     attach: function attach(context) {
       once('addCopyCodeBtn', '.page-node-type-page pre', context).forEach(element => {
@@ -120,7 +189,7 @@
           let preElement = element.closest('pre');
 
           if ($(preElement).find('.popFromJs').length === 0) {
-            $(preElement).append("<div class='popFromJs'><span>copied text!</span></div>");
+            $(preElement).append("<div class='popFromJs'><span>copied!</span></div>");
           }
   
           // Get the newly appended 'popFromJs' div.

@@ -1,5 +1,10 @@
 <?php
 
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
+use Drupal\user\Entity\User;
+
 /**
  * Implements hook_page_attachments_alter().
  */
@@ -10,10 +15,92 @@ function dc_theme_page_attachments_alter(array &$attachments) {
 /**
  * Implements hook_form_alter().
  */
-function dc_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function dc_theme_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Add placeholder to search form.
   if ($form_id === 'search_block_form') {
     // Add a placeholder to the search input field.
     $form['keys']['#attributes']['placeholder'] = t('Enter the terms you wish to search for.');
   }
+}
+
+/**
+ * Implements template_preprocess_node().
+ */
+function dc_theme_preprocess_node(&$variables) {
+  // Check if it's a teaser view mode and the node type is "page".
+  if ($variables['view_mode'] == 'teaser' &&
+    ($variables['node']->getType() == 'page' || $variables['node']->getType() == 'article')
+  ) {
+    $node = $variables['node'];
+    setInfosToTeasersAndResults($node, $variables);
+  }
+}
+
+// Get the image uri to render on search results.
+function dc_theme_preprocess_search_result(&$variables) {
+  $result = $variables['result'];
+  $node = $result['node'];
+  // Check if the node has an image attached
+  if ($node->bundle() === 'article' || $node->bundle() === 'page') {
+    setInfosToTeasersAndResults($node, $variables);
+  }
+}
+
+function setInfosToTeasersAndResults($node, &$variables): void {
+  $thumbnail_uri = $node->get('field_image')->entity->getFileUri();
+
+  $variables['thumbnail'] = [
+    '#theme' => 'image',
+    '#uri' => $thumbnail_uri,
+    '#alt' => $node->get('field_image')->entity->alt,
+  ];
+
+  $variables['title_display'] = $node->get('field_title_to_display')->getValue()[0]['value'];
+
+  $timestamp = $node->get('changed')->getValue()[0]['value'] ?? $node->get('created')->getValue()[0]['value'];
+  $datetime = DrupalDateTime::createFromTimestamp($timestamp);
+  $formatted_date = $datetime->format('d M y');
+  $variables['create_or_changed'] = $formatted_date;
+
+  $variables['node_type'] = $node->bundle(); //ucfirst($node->bundle());
+  $variables['node_owner_or_changed'] = getLastChangedByFromNode($node) ?? getOwnerFromNode($node);
+  $variables['image_profile'] = getUserProfileImage($node->getOwner()->id());
+}
+
+function getOwnerFromNode($node) {
+  $uid = $node->getOwner()->id();
+  $owner = User::load($uid);
+  return $owner->getAccountName();
+}
+
+function getLastChangedByFromNode(NodeInterface $node) {
+  // Get the latest revision ID.
+  $latest_revision_id = $node->getRevisionId();
+
+  // Load the latest revision.
+  $latest_revision = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->loadRevision($latest_revision_id);
+
+  // Get the user ID of the user who last changed the node.
+  $changed_uid = $latest_revision->getRevisionUser()->id();
+
+  // Load the user entity.
+  $changed_by_user = User::load($changed_uid);
+
+  // Get the username of the user who last changed the node.
+  return $changed_by_user->getAccountName();
+}
+
+function getUserProfileImage($uid) {
+  // Load the user entity.
+  $user = User::load($uid);
+
+  // Check if the user has a profile image.
+  if (!$user->hasField('user_picture') && $user->get('user_picture')->isEmpty()) {
+    return '';
+  }
+
+  return $user->get('user_picture')->entity->getFileUri();
+
 }

@@ -23,8 +23,11 @@
         "drupal/field_group": "^3.4",
         "drupal/pathauto": "^1.11",
         "drupal/redirect": "^1.9",
+        "drupal/search_api": "^1.30",
+        "drupal/search_api_solr": "^4.3",
         "drush/drush": "^12.1",
-        "everapi/ipbase-php": "^1.0"
+        "everapi/ipbase-php": "^1.0",
+        "solarium/solarium": "^6.3"
     },
     "require-dev": {
         "drupal/core-dev": "^10.0"

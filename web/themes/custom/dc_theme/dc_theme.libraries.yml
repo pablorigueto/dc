@@ -3,7 +3,10 @@ react_app_main:
   css:
     theme:
       css/theme.css: {}
+      js/slick/slick.css: {}
+      js/slick/slick-theme.css: {}
   js:
+    js/slick/slick.js: {}
     js/dist_dev/main.min.js: {minified: true}
     js/dist_dev/page.min.js: {minified: true}
     js/theme/theme.js: {}

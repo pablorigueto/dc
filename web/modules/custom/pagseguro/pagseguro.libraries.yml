@@ -3,9 +3,9 @@ pagseguro-bundle:
     theme:
       # css/lang_country.css: {}
   js:
-    js/lib/pagseguro.directpayment.js: {}
+    #js/lib/pagseguro.directpayment.js: {}
     #js/lib/pagseguro-sandbox.directpayment.js: {}
-    js/sendtoPagSeguro.js: {}
+    #js/sendtoPagSeguro.js: {}
   dependencies:
     - core/drupal
     - core/drupal.ajax

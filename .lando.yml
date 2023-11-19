@@ -13,6 +13,17 @@ services:
     run:
       - phpcs --config-set installed_paths ~/.composer/vendor/drupal/coder/coder_sniffer
 
+  solr:
+    type: solr:8.11
+    portforward: true
+    port: 8983
+    core: maincore
+    config:
+      dir: .solr/solr-conf
+
+  cache:
+    type: memcached
+
 tooling:
   xdebug-on:
     service: appserver

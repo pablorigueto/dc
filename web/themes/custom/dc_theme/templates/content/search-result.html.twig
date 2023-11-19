@@ -56,7 +56,7 @@
  */
 #}
 {{ attach_library('dc_theme/search-results') }}
-{% if info_split %}
+{# {% if info_split %}
   <div class="search-result__meta">
     {% if info_split.user  %}
       <span>
@@ -67,14 +67,49 @@
       <span  class="search-result__date">, {{ info_date }}</span>
     {% endif %}
   </div>
-{% endif %}
-{% if title %}
+{% endif %} #}
+{# {% if title %}
   {{ title_prefix }}
   <h3{{ title_attributes.addClass('search-result__title') }}>
     <a href="{{ url }}">{{ title }}</a>
   </h3>
   {{ title_suffix }}
-{% endif %}
-{% if snippet %}
+{% endif %} #}
+{# {% if snippet %}
   <div{{ content_attributes.addClass('search-result__snippet', layout, 'text-content') }}>{{ snippet }}</div>
+{% endif %} #}
+
+{% if thumbnail %}
+    <a class="search-results-img" href="{{ url }}">
+      
+      <div class="search-result-thumbnail">
+
+      <div class="search-label-main">
+        <div class="search-label {{ node_type }}">
+          {{ node_type|upper }}
+        </div>
+      </div>
+
+        <div class="search-title-display">
+
+          <div class="search-title">
+            {{ title_display }}
+          </div>
+          <div class="profile-search">
+
+            <div class="profile-img-name">
+              <img class="profile-search-img" src="{{ file_url(image_profile) }}" alt="User Profile Image">
+              <div class="owner-search">
+                {{ node_owner_or_changed }}
+              </div>
+            </div>
+    
+            {{ create_or_changed }}
+    
+          </div>
+
+        </div>
+        {{ thumbnail }}
+      </div>
+    </a>
 {% endif %}
