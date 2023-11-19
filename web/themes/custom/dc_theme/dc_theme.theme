@@ -57,13 +57,13 @@ function setInfosToTeasersAndResults($node, &$variables): void {
 
   $variables['title_display'] = $node->get('field_title_to_display')->getValue()[0]['value'];
 
-  $timestamp = $node->get('changed')->getValue()[0]['value'] ?? $node->get('created')->getValue()[0]['value'];
+  $timestamp = $node->get('created')->getValue()[0]['value']; //$node->get('changed')->getValue()[0]['value'] ?? 
   $datetime = DrupalDateTime::createFromTimestamp($timestamp);
   $formatted_date = $datetime->format('d M y');
   $variables['create_or_changed'] = $formatted_date;
 
   $variables['node_type'] = $node->bundle(); //ucfirst($node->bundle());
-  $variables['node_owner_or_changed'] = getLastChangedByFromNode($node) ?? getOwnerFromNode($node);
+  $variables['node_owner_or_changed'] = getOwnerFromNode($node); //getLastChangedByFromNode($node) ??
   $variables['image_profile'] = getUserProfileImage($node->getOwner()->id());
 }
 
