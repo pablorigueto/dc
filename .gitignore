@@ -92,3 +92,7 @@ web/sites/default/files/.htaccess
 web/update.php
 vendor/*
 /vendor/*
+-web.config
+ht.router.php
+htaccess
+web/sites/
