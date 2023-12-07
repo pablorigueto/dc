@@ -1,0 +1,155 @@
+@font-face {
+  font-family: Inter-ExtraLight;
+  src:
+    local('Inter'),
+    url("./fonts/Inter/Inter-ExtraLight.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter-Light;
+  src:
+    local('Inter'),
+    url("./fonts/Inter/Inter-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter-Regular;
+  src:
+    local('Inter'),
+    url("./fonts/Inter/Inter-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter-SemiBold;
+  src:
+    local('Inter'),
+    url("./fonts/Inter/Inter-SemiBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter-Medium;
+  src:
+    local('Inter'),
+    url("./fonts/Inter/Inter-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter-Bold;
+  src:
+    local('Inter'),
+    url("./fonts/Inter/Inter-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter-ExtraBold;
+  src:
+    local('Inter'),
+    url("./fonts/Inter/Inter-ExtraBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Switzer-Bold;
+  src:
+    local('Switzer Bold'),
+    url("./fonts/Switzer/Switzer-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Switzer-Light;
+  src:
+    local('Switzer Bold'),
+    url("./fonts/Switzer/Switzer-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: BrasiliaDelight-Regular;
+  src:
+    local('BrasiliaDelight-Regular'),
+    url("./fonts/brasilia-delight14/BrasiliaDelight-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  scroll-behavior: smooth;
+  --dark-blue: #0a121b;
+  --white-color: #fff;
+  --dark-color: #000;
+  --smooth-dark-color: #181818;
+}
+
+.layout-main-wrapper {
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin: 0 auto;
+}
+
+body {
+  font-family: Inter-Regular;
+  background-color: var(--white-color);
+  color: var(--smooth-dark-color);
+  margin: 0;
+}
+
+.header-banner {
+  background: url(../assets/bkgrd.jpg) no-repeat;
+  background-size: contain;
+}
+
+@media screen and (min-width: 2560px) {
+  .header-banner {
+    height: clamp(725px,29vw,832px);
+  }
+} 
+
+@media screen and (min-width: 1171px) and (max-width: 2559px) {
+  .header-banner {
+    height: clamp(290px, 28.33vw, 725px);
+  }
+} 
+
+@media screen and (min-width: 769px) and (max-width: 1170px) {
+  .header-banner {
+    background: url(../assets/bkgrd1170.jpg) no-repeat;
+    height: clamp(279px,36.3vw,725px);
+    background-size: contain;
+  }
+}
+
+@media screen and (min-width: 300px) and (max-width: 768px) {
+  .header-banner {
+    background: url(../assets/tablet.jpg) no-repeat;
+    height: clamp(120px,38.5vw,296px);
+    background-size: contain;
+  }
+}
+
+.header__inner {
+  height: 60px;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: 0 auto 20px 0;
+  display: flex;
+  align-items: center;
+  padding-top: 30px;
+}

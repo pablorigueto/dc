@@ -108,25 +108,25 @@ body {
   margin: 0;
 }
 
-.site-header__fixable {
+.header-banner {
   background: url(../assets/bkgrd.jpg) no-repeat;
   background-size: contain;
 }
 
 @media screen and (min-width: 2560px) {
-  .site-header__fixable {
+  .header-banner {
     height: clamp(725px,29vw,832px);
   }
 } 
 
 @media screen and (min-width: 1171px) and (max-width: 2559px) {
-  .site-header__fixable {
+  .header-banner {
     height: clamp(290px, 28.33vw, 725px);
   }
 } 
 
 @media screen and (min-width: 769px) and (max-width: 1170px) {
-  .site-header__fixable {
+  .header-banner {
     background: url(../assets/bkgrd1170.jpg) no-repeat;
     height: clamp(279px,36.3vw,725px);
     background-size: contain;
@@ -134,7 +134,7 @@ body {
 }
 
 @media screen and (min-width: 300px) and (max-width: 768px) {
-  .site-header__fixable {
+  .header-banner {
     background: url(../assets/tablet.jpg) no-repeat;
     height: clamp(120px,38.5vw,296px);
     background-size: contain;

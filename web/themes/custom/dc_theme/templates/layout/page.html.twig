@@ -52,23 +52,24 @@
     {% if page.header or page.primary_menu or page.secondary_menu %}
       <header id="header" class="site-header" data-drupal-selector="site-header" role="banner">
 
-        {# Gets fixed by JavaScript at wide widths. #}
-        <div class="site-header__fixable" data-drupal-selector="site-header-fixable">
-          {# Needs to extend full width so box shadow will also extend. #}
-          <div id="site-header__inner" class="site-header__inner" data-drupal-selector="site-header-inner">
-            <div class="container site-header__inner__container">
+        <div class="container site-header__inner__container">
 
-              {{ page.header }}
+          {{ page.header }}
 
-              {% if page.primary_menu or page.secondary_menu %}
-                <div id="header-nav" class="header-nav" data-drupal-selector="header-nav">
-                  {{ page.primary_menu }}
-                  {{ page.secondary_menu }}
-                </div>
-              {% endif %}
+          {% if page.primary_menu or page.secondary_menu %}
+            <div id="header-nav" class="header-nav" data-drupal-selector="header-nav">
+              {{ page.primary_menu }}
+              {{ page.secondary_menu }}
             </div>
-          </div>
+          {% endif %}
         </div>
+
+        <div class="header-banner" data-drupal-selector="header-banner">
+        </div>
+        <div id="header__inner" class="header__inner" data-drupal-selector="site-header-inner">
+        </div>
+
+
       </header>
     {% endif %}
 

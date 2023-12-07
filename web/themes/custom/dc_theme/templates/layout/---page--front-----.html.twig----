@@ -48,7 +48,7 @@
 
 <div id="page-wrapper" class="page-wrapper">
   <div id="page">
-
+  
     {% if page.header or page.primary_menu or page.secondary_menu %}
       <header id="header" class="site-header" data-drupal-selector="site-header" role="banner">
 

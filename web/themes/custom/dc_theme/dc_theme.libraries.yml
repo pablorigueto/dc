@@ -2,7 +2,8 @@ react_app_main:
   version: VERSION
   css:
     theme:
-      css/theme.css: {}
+      # css/theme.css: {}
+      css/homepage.css: {}
       js/slick/slick.css: {}
       js/slick/slick-theme.css: {}
   js:
