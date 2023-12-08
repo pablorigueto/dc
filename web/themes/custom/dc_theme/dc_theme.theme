@@ -13,6 +13,14 @@ function dc_theme_page_attachments_alter(array &$attachments) {
 }
 
 /**
+ * Implements hook_preprocess_page().
+ */
+function dc_theme_preprocess_page(&$variables) {
+  $variables['site_logo'] = theme_get_setting('logo.url');
+  $variables['site_name'] = \Drupal::config('system.site')->get('name');
+}
+
+/**
  * Implements hook_form_alter().
  */
 function dc_theme_form_alter(&$form, FormStateInterface $form_state, $form_id) {

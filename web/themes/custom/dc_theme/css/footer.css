@@ -1,0 +1,10 @@
+@import url('./definitions.css');
+
+.site-footer, html {
+  background-color: var(--light-dark-color);
+}
+
+.site-footer .site-footer__inner {
+  max-width: 95%;
+  margin: 0 auto;
+}

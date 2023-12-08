@@ -55,6 +55,14 @@
         {% if page.primary_menu or page.secondary_menu %}
           <div id="header-menu" class="header-menu" data-drupal-selector="header-menu">
             <div id="flex-header-menu" class="flex-header-menu" data-drupal-selector="flex-header-menu">
+
+              <a href="{{ path('<front>') }}" rel="home" class="site-branding__logo">
+                <div class="logo">
+                  <h2 class="regular__h2">DC</h2>
+                  <h2 class="inverted__h2">D</h2>
+                </div>
+              </a>
+
               <div class="primary_menu">
                 {{ page.primary_menu }}
               </div>
@@ -68,7 +76,17 @@
         <div class="header-banner" data-drupal-selector="header-banner">
         </div>
 
-        <div id="header__inner" class="header__inner" data-drupal-selector="site-header-inner">
+        <div id="homepage-highlight" class="homepage-highlight" data-drupal-selector="homepage-highlight">
+
+          <div class="img-highlight" data-drupal-selector="img-highlight">
+          </div>
+
+          <div class="text-highlight-container" data-drupal-selector="text-highlight-container">
+            <div class="text-highlight">
+              <p>TESTE</p>
+            </div>
+          </div>
+
         </div>
 
       </header>
@@ -114,7 +132,7 @@
       </div>
     </footer>
 
-    <div class="overlay" data-drupal-selector="overlay"></div>
+    {# <div class="overlay" data-drupal-selector="overlay"></div> #}
 
   </div>
 </div>

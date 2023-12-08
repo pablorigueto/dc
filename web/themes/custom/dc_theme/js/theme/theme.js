@@ -62,7 +62,7 @@
       if (!drupalSettings.contentRedirect) {
         $(document).ready(function () {
           // Add a click event handler to the Menu heading.
-          $(".path-frontpage .text_and_image").on('click', function () {
+          $(".path-frontpage .text_and_image", context).on('click', function () {
           // Get the href attribute from the anchor within the clicked element.
           var link = $(this).find('a').attr('href');
             // Redirect to the specified URL
@@ -78,12 +78,9 @@
     attach(context) {
       if (!drupalSettings.toggleSearch) {
         $(document).ready(function () {
-          // Hide all language options initially.
-          // Commented because set the default state hide on the theme of CSS.
-          //$(".search-block-form").hide();
-  
+ 
           // Add a click event handler to the Menu heading.
-          $(".menu--search-btn").click(function () {
+          $(".menu--search-btn", context).click(function () {
 
             // Find the related menu element within the same parent.
             const MENU = $(this).siblings(".search-block-form");
@@ -109,17 +106,6 @@
   Drupal.behaviors.closeSearchClickingOutsideOfit = {
     attach: function attach(context) {
       once('closeSearchClickingOutsideOfit', '.search-block-form', context).forEach(element => {
-      	element.addEventListener('click', e => {
-          const INPUT = $('input.form-search', context);
-          //const NODE_SEARCH = $('.path-node .search-block-form');
-          const SEARCH = $('body:not(:has(.path-frontpage)) .search-block-form');
-          if (!INPUT.is(e.target)) {
-            // If clicked outside, hide the search block form.
-            SEARCH.slideUp();
-            //NODE_SEARCH.slideUp();
-          }
-        });
-
         // Add a keydown event handler to close the menu when pressing ESC.
         $(document).on('keydown', function (event) {
           if (event.key === 'Escape' || event.keyCode === 27) {
@@ -132,31 +118,26 @@
     }
   };
 
-  /* Modal to copy text and show modal quickly */
-  // Drupal.behaviors.copyCode = {
+  // Drupal.behaviors.smoothPosition = {
   //   attach: function attach(context) {
-  //     once('copyCode', '.page-node-type-page pre', context).forEach(element => {
-  //       element.addEventListener('click', async e => {
-  //         // Assuming you want to copy the content of the <pre> element
-  //         let copyText = element.textContent;
-  //         try {
-  //           // Use the Clipboard API to copy the text
-  //           await navigator.clipboard.writeText(copyText);
 
-  //           $("#block-dc-theme-copycode").fadeIn();
- 
-  //           // Re-add the 'none' display style after a 1-second delay
-  //           setTimeout(function() {
-  //             // $("#block-dc-theme-copycode").slideDown();
-  //             $("#block-dc-theme-copycode").fadeOut();
-  //           }, 1000); // 1000 milliseconds = 1 second
-            
-  //         }
-  //         catch (err) {
-  //           console.error('Failed to copy text: ', err);
-  //         }
-  //       });
-  //     });
+  //     // Check if the behavior has already been applied
+  //     if (context !== document) {
+  //       return;
+  //     }
+    
+  //     const SEARCH_BLOCK = document.querySelector('.search-block-form');
+    
+  //     if (SEARCH_BLOCK && !SEARCH_BLOCK.classList.contains('show')) {
+  //       SEARCH_BLOCK.classList.add('show');
+  //     }
+  
+  //     const HIGHTLIGHT_CONTAINER = document.querySelector('.homepage-highlight-container');
+      
+  //     if (HIGHTLIGHT_CONTAINER && !HIGHTLIGHT_CONTAINER.classList.contains('show')) {
+  //       HIGHTLIGHT_CONTAINER.classList.add('show');
+  //     }
+
   //   }
   // };
 
@@ -174,29 +155,6 @@
   //     });
   //   }
   // };
-
-  Drupal.behaviors.smoothPosition = {
-    attach: function attach(context) {
-
-      // Check if the behavior has already been applied
-      if (context !== document) {
-        return;
-      }
-    
-      const SEARCH_BLOCK = document.querySelector('.search-block-form');
-    
-      if (SEARCH_BLOCK && !SEARCH_BLOCK.classList.contains('show')) {
-        SEARCH_BLOCK.classList.add('show');
-      }
-  
-      const HIGHTLIGHT_CONTAINER = document.querySelector('.homepage-highlight-container');
-      
-      if (HIGHTLIGHT_CONTAINER && !HIGHTLIGHT_CONTAINER.classList.contains('show')) {
-        HIGHTLIGHT_CONTAINER.classList.add('show');
-      }
-
-    }
-  };
 
   Drupal.behaviors.addCopyCodeBtn = {
     attach: function attach(context) {
@@ -252,34 +210,4 @@
   };
 
 
-
-
 })(jQuery, Drupal, once);
-
-
-// Drupal.behaviors.copyCode = {
-//   attach: function attach(context) {
-//     once('copyCode', '.page-node-type-page pre', context).forEach(element => {
-//       element.addEventListener('click', async e => {
-//         // Assuming you want to copy the content of the <pre> element
-//         let copyText = element.textContent;
-//         try {
-//           // Use the Clipboard API to copy the text
-//           await navigator.clipboard.writeText(copyText);
-
-//           $("#block-dc-theme-copycode").fadeIn();
-
-//           // Re-add the 'none' display style after a 1-second delay
-//           setTimeout(function() {
-//             // $("#block-dc-theme-copycode").slideDown();
-//             $("#block-dc-theme-copycode").fadeOut();
-//           }, 1000); // 1000 milliseconds = 1 second
-          
-//         }
-//         catch (err) {
-//           console.error('Failed to copy text: ', err);
-//         }
-//       });
-//     });
-//   }
-// };

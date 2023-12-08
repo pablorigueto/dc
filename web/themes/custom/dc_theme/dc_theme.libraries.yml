@@ -4,6 +4,9 @@ react_app_main:
     theme:
       # css/theme.css: {}
       css/header.css: {}
+      css/homepage_content.css: {}
+      css/homepage_highlight.css: {}
+      css/footer.css: {}
       js/slick/slick.css: {}
       js/slick/slick-theme.css: {}
   js:

@@ -1,0 +1,35 @@
+@import url('./definitions.css');
+
+.homepage-highlight {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  height: 220px;
+  border-radius: 12px;
+  box-shadow: 0 30px 30px #00000030;
+  background-color: var(--white-color);
+  margin: -3rem auto 0 auto;
+  max-width: 95%;
+}
+
+.text-highlight-container {
+  background: var(--white-color);
+  border-radius: 0 12px 12px 0;
+  width: 100%;
+}
+
+.text-highlight {
+  color: var(--dark-color);
+  padding: 20px;
+}
+
+.img-highlight {
+  background: url(../assets/highlight-one.jpg) no-repeat;
+  background-size: cover;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 12px 0 0 12px;
+  width: 100%;
+}
+

@@ -1,0 +1,27 @@
+@import url('definitions.css');
+
+#block-dc-theme-content [class^="js-view-dom-id-"],
+#block-dc-theme-content .contextual-region {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.feed-icon {
+  display: none;
+}
+
+.contextual, .contextual-region {
+  position: unset;
+}
+
+.path-frontpage .frontpage-result-thumbnail {
+  width: 300px;
+  height: 350px;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
