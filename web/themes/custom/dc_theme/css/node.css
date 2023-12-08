@@ -240,6 +240,10 @@ code {
   justify-content: end;
 }
 
+.text_parent {
+  color: var(--white-color);
+}
+
 .page-node-type-page .text_and_image .text_parent,
 .page-node-type-page .text_and_image .image_parent {
   display: flex;

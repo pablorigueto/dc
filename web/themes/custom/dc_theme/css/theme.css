@@ -556,15 +556,6 @@ body:not(.path-frontpage) .search-block-form .container-inline {
   display: flex;
 }
 
-.text_and_image .text-parent-label .field__item,
-.path-search .search-title-display,
-.path-frontpage .frontpage-title-display {
-  padding: 0 20px;
-  font-family: Inter-Regular;
-  font-size: 18px;
-  text-shadow: 1px 1px black;
-}
-
 #block-dc-theme-search-form-narrow {
   position: absolute;
   /* background-color: #000000f5; */
@@ -671,6 +662,15 @@ input.form-search {
 
 .contextual-region {
   position: unset;
+}
+
+.text_and_image .text-parent-label .field__item,
+.path-search .search-title-display,
+.path-frontpage .frontpage-title-display {
+  padding: 0 20px;
+  font-family: Inter-Regular;
+  font-size: 18px;
+  text-shadow: 1px 1px black;
 }
 
 .text_and_image .text-parent-label {
