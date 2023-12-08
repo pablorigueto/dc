@@ -54,11 +54,13 @@
 
         {% if page.primary_menu or page.secondary_menu %}
           <div id="header-menu" class="header-menu" data-drupal-selector="header-menu">
-            <div class="primary_menu">
-              {{ page.primary_menu }}
-            </div>
-            <div class="secondary_menu">
-              {{ page.secondary_menu }}
+            <div id="flex-header-menu" class="flex-header-menu" data-drupal-selector="flex-header-menu">
+              <div class="primary_menu">
+                {{ page.primary_menu }}
+              </div>
+              <div class="secondary_menu">
+                {{ page.secondary_menu }}
+              </div>
             </div>
           </div>
         {% endif %}

@@ -4,29 +4,55 @@
     attach(context) {
       if (!drupalSettings.toggleMenu) {
         $(document).ready(function () {
-          // Hide all language options initially.
-          // Commented because set the default state hide on the theme of CSS.
-          //$(".menu.menu--level-1").hide();
-  
           // Add a click event handler to the Menu heading.
-          $("h2.block__title").click(function () {
-            console.log('teste');
+          $(".primary_menu h2", context).click(function () {
+
+            // Find all open menus and close them.
+            $(".primary_menu ul:visible", context).not($(this).siblings("ul")).slideUp();
+
             // Find the related menu element within the same parent.
-            const MENU = $(this).siblings(".menu.menu--level-1");
+            const MENU = $(this).siblings("ul", context);
   
             // Check if this menu is already open.
             const isMenuOpen = MENU.is(":visible");
-  
-            // Hide all menus.
-            $(".menu.menu--level-1").slideUp();
-  
+    
             // If the menu was not open, then open it.
             if (!isMenuOpen) {
               MENU.slideDown();
             }
+            else {
+              MENU.slideUp();
+            }
           });
         });
         drupalSettings.toggleMenu = true;
+      }
+    }
+  }
+
+  Drupal.behaviors.openSearch = {
+    attach(context) {
+      if (!drupalSettings.openSearch) {
+        $(document).ready(function () {
+          // Add a click event handler to the Menu heading.
+          $("#block-dc-theme-searchbtn-2", context).click(function () {
+
+            // Search to open.
+            const MENU = $('.path-node .search-block-form', context);
+  
+            // Check if this menu is already open.
+            const isMenuOpen = MENU.is(":visible");
+    
+            // If the menu was not open, then open it.
+            if (!isMenuOpen) {
+              MENU.fadeIn();
+            }
+            else {
+              MENU.fadeOut();
+            }
+          });
+        });
+        drupalSettings.openSearch = true;
       }
     }
   }
