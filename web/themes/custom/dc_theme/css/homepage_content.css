@@ -1,19 +1,18 @@
 @import url('definitions.css');
 
-#block-dc-theme-content [class^="js-view-dom-id-"],
-#block-dc-theme-content .contextual-region {
+.path-frontpage #block-dc-theme-content [class^="js-view-dom-id-"],
+.path-frontpage #block-dc-theme-content .contextual-region {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
+  position: relative;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .feed-icon {
   display: none;
-}
-
-.contextual, .contextual-region {
-  position: unset;
 }
 
 .path-frontpage .frontpage-result-thumbnail {

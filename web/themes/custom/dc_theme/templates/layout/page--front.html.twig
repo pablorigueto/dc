@@ -48,31 +48,53 @@
 
 <div id="page-wrapper" class="page-wrapper">
   <div id="page">
-  
+
     {% if page.header or page.primary_menu or page.secondary_menu %}
       <header id="header" class="site-header" data-drupal-selector="site-header" role="banner">
 
-        {# Gets fixed by JavaScript at wide widths. #}
-        <div class="site-header__fixable" data-drupal-selector="site-header-fixable">
-          {# Needs to extend full width so box shadow will also extend. #}
-          <div id="site-header__inner" class="site-header__inner" data-drupal-selector="site-header-inner">
-            <div class="container site-header__inner__container">
+        {% if page.primary_menu or page.secondary_menu %}
+          <div id="header-menu" class="header-menu" data-drupal-selector="header-menu">
+            <div id="flex-header-menu" class="flex-header-menu" data-drupal-selector="flex-header-menu">
 
-              {{ page.header }}
-
-              {% if page.primary_menu or page.secondary_menu %}
-                <div id="header-nav" class="header-nav" data-drupal-selector="header-nav">
-                  {{ page.primary_menu }}
-                  {{ page.secondary_menu }}
+              <a href="{{ path('<front>') }}" rel="home" class="site-branding__logo">
+                <div class="logo">
+                  <h2 class="regular__h2">DC</h2>
+                  <h2 class="inverted__h2">D</h2>
                 </div>
-              {% endif %}
+              </a>
+
+              <div class="primary_menu">
+                {{ page.primary_menu }}
+              </div>
+              <div class="secondary_menu">
+                {{ page.secondary_menu }}
+              </div>
             </div>
           </div>
+        {% endif %}
+
+        <div class="header-banner" data-drupal-selector="header-banner">
         </div>
+
+        <div id="homepage-highlight" class="homepage-highlight" data-drupal-selector="homepage-highlight">
+
+          <div class="img-highlight" data-drupal-selector="img-highlight">
+          </div>
+
+          <div class="text-highlight-container" data-drupal-selector="text-highlight-container">
+            <div class="text-highlight">
+              <p>TESTE</p>
+            </div>
+          </div>
+
+        </div>
+
       </header>
     {% endif %}
 
     <div id="main-wrapper" class="layout-main-wrapper layout-container">
+      <h1> {{ 'Select an article'|t }} </h1>
+
       <div id="main" class="layout-main">
         <div class="main-content">
           <a id="main-content" tabindex="-1"></a>
@@ -80,54 +102,10 @@
           <div class="main-content__container container">
             {{ page.highlighted }}
             {{ page.breadcrumb }}
-
-            {% if page.sidebar %}
-              <div class="sidebar-grid grid-full">
-                <main role="main" class="site-main">
-                  {{ page.content_above }}
-                  {{ page.content }}
-                </main>
-                {{ page.sidebar }}
-              </div>
-            {% else %}
-
-              <div class="homepage-highlight-container slider">
-                <div class="homepage-highlight">
-
-                  <div class="img-highlight-container">
-                    <div class="img-highlight">
-                    </div>
-                  </div>
-
-                  <div class="text-highlight-container">
-                    <div class="text-highlight">
-                      <h1>Item 1 Welcome to our Homepage!</h1>
-                    </div>
-                  </div>
-
-                </div>
-
-              </div>
-
-              {# <main role="main">
+              <main role="main">
                 {{ page.content_above }}
                 {{ page.content }}
-              </main> #}
-
-              <main role="main">
-                  <div class="text-highlight">
-                    <h1>Welcome to Highlighted</h1>
-                  </div>
-                {{ page.content_above }}
-                {% if is_front %}
-                  {{ page.content|without('content_above') }}
-                {% else %}
-                  {{ page.content }}
-                {% endif %}
               </main>
-
-
-            {% endif %}
             {{ page.content_below }}
           </div>
         </div>
@@ -144,7 +122,7 @@
       </div>
     </footer>
 
-    <div class="overlay" data-drupal-selector="overlay"></div>
+    {# <div class="overlay" data-drupal-selector="overlay"></div> #}
 
   </div>
 </div>

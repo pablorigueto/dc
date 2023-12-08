@@ -6,6 +6,8 @@ react_app_main:
       css/header.css: {}
       css/homepage_content.css: {}
       css/homepage_highlight.css: {}
+      css/pager.css: {}
+      css/node.css: {}
       css/footer.css: {}
       js/slick/slick.css: {}
       js/slick/slick-theme.css: {}

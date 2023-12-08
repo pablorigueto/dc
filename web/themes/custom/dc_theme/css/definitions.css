@@ -95,6 +95,7 @@
   --dark-color: #000;
   --light-dark-color: #141414;
   --medium-dark-color: #181818;
+  --pager-fg-color: #55565b;
 }
 
 body {
@@ -102,6 +103,17 @@ body {
   background-color: var(--white-color);
   color: var(--medium-dark-color);
   margin: 0;
+}
+
+/* Admin edit btn */
+.contextual .trigger:hover,
+.contextual .trigger {
+  background-color: var(--dark-color);
+}
+
+::selection {
+  background-color: var(--dark-color);
+  color: var(--white-color);
 }
 
 h2 {
