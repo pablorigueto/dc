@@ -9,6 +9,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
 
 /**
  * Redirects to langcode if the path didn't have the / at the end.
@@ -53,18 +55,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
     $path = $event->getRequest()->getPathInfo();
     $cookie = $event->getRequest()->cookies->get('selectedLanguage');
-
     $defaultLanguage = $this->getDefaultLanguage();
-
-    // If path is default language on the first access.
-    if ($path === $defaultLanguage && empty($cookie)) {
-      if ($this->getCountryByGeolocationAPI() !== 'Portuguese') {
-        $cookie = 'en-us';
-      }
-      else {
-        $cookie = 'pt-br';
-      }
-    }
 
     if (empty($cookie)) {
       return;
@@ -93,11 +84,4 @@ class RedirectSubscriber implements EventSubscriberInterface {
     return '/' . $defaultLanguage->getId();
   }
 
-  public function getCountryByGeolocationAPI() {
-    // It's a free key to test, you can get one here: https://app.ipbase.com/
-    $ipBase = new \Ipbase\Ipbase\IpbaseClient('ipb_live_bv4Kl7uf7BCrCMrylyWgPFZnbFVsPGPokjWKXOAi');
-
-    return $ipBase->info()['data']['location']['country']['languages'][0]['name'] ?? NULL;
-
-  }
 }

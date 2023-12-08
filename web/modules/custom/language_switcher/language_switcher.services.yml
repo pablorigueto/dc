@@ -3,4 +3,4 @@ services:
     class: Drupal\language_switcher\EventSubscriber\RedirectSubscriber
     arguments: ['@language_manager']
     tags:
-      - { name: event_subscriber }
+      - { name: event_subscriber, event: kernel.response }

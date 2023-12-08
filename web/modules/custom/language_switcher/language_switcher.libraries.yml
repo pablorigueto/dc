@@ -1,7 +1,7 @@
 ls-bundle:
   css:
     theme:
-      css/lang_country.css: {}
+      # css/lang_country.css: {}
   js:
     js/lang_country.js: {}
   dependencies:

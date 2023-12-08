@@ -52,23 +52,22 @@
     {% if page.header or page.primary_menu or page.secondary_menu %}
       <header id="header" class="site-header" data-drupal-selector="site-header" role="banner">
 
-        <div class="container site-header__inner__container">
-
-          {{ page.header }}
-
-          {% if page.primary_menu or page.secondary_menu %}
-            <div id="header-nav" class="header-nav" data-drupal-selector="header-nav">
+        {% if page.primary_menu or page.secondary_menu %}
+          <div id="header-menu" class="header-menu" data-drupal-selector="header-menu">
+            <div class="primary_menu">
               {{ page.primary_menu }}
+            </div>
+            <div class="secondary_menu">
               {{ page.secondary_menu }}
             </div>
-          {% endif %}
-        </div>
+          </div>
+        {% endif %}
 
         <div class="header-banner" data-drupal-selector="header-banner">
         </div>
+
         <div id="header__inner" class="header__inner" data-drupal-selector="site-header-inner">
         </div>
-
 
       </header>
     {% endif %}

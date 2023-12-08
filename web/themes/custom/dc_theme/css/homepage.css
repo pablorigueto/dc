@@ -153,3 +153,21 @@ body {
   align-items: center;
   padding-top: 30px;
 }
+
+.header-menu {
+  position: absolute;
+  display: flex;
+  gap: 2rem;
+}
+
+.primary_menu div:first-child,
+.secondary_menu div:first-child {
+  display: flex;
+  gap: 2rem;
+}
+
+.primary_menu,
+.secondary_menu {
+  color: var(--white-color);
+}
+

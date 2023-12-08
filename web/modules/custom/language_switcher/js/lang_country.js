@@ -1,63 +1,45 @@
 (function ($, Drupal, once) {
 
-  Drupal.behaviors.langMenuCustomBehavior = {
-    attach: function (context, settings) {
+  // Update the langcode on Cookie.
+  Drupal.behaviors.updateLangOnCookie = {
+    attach: function (context) {
+      // Get the div element
+      const LANGUAGE_SWITCHER = document.getElementById('block-dc-theme-languageswitcher', context);
 
-      let urlLangCode = getLangCodeFromUrl();
-      
-      // Check if localStorage supports the selectedLanguage key.
-      if (typeof localStorage !== 'undefined' && localStorage.getItem('selectedLanguage')) {
-        // Retrieve the selectedLanguage value from localStorage.
-        let language = localStorage.getItem('selectedLanguage');
-
-        if (urlLangCode !== language) {
-          setLangIcon(urlLangCode, context);
-        }
-        else {
-          setLangIcon(language, context);
-        }
-      }
-      else {
-        $('#block-dc-theme-language-menu').each(function() {
-          setLangIcon(urlLangCode, context);
-        });
+      // Check if the element exists.
+      if (!LANGUAGE_SWITCHER) {
+        return;
       }
 
-      $(document).ready(function() {
-        // Loop through each anchor tag and change its href based on the title attribute.
-        $('#block-dc-theme-language ul.menu li a').each(function() {
-          let title = $(this).attr('title');
-          // Assuming you have some logic to determine the new href based on the title.
-          const NEWHREF = '/' + title;
-          $(this).attr('href', NEWHREF);
-        });
-      });
+      // Add click event listener to the div.
+      LANGUAGE_SWITCHER.addEventListener('click', function(event) {
+        // Check if the clicked element is a link.
+        if (event.target.tagName === 'A') {
 
-    }
-  };
+          // Get the lang attr.
+          const LINK_DESTINATION = event.target.getAttribute('hreflang');
 
-  function setLangIcon(langCode, context) {
-    $('#block-dc-theme-language-menu', context).addClass(langCode + '__ls');
-    $("h2#block-dc-theme-language-menu").text(langCode.toUpperCase());
-  }
+          const TRIMMED_SEGMENTS = getPathSegmentsDestination();
 
-  // Change the langcode on cookie when the user choose on menu.
-  Drupal.behaviors.storageLangCodeOnBrowser = {
-    attach: function (context, settings) {
-      once('storageLangCodeOnBrowser', '#block-dc-theme-language .menu__item--link', context).forEach(element => {
-        element.addEventListener('click', function (e) {
-          const LANGUAGE = $(this).find(".menu__link--link").prop('title');
+          // If the link destination and the current link are the same, just avpid the redirect.
+          if (TRIMMED_SEGMENTS[1] === LINK_DESTINATION) {
+            //Prevent the default link behavior.
+            event.preventDefault();
+          }
 
-          manageCookie(LANGUAGE);
+          // Delete the Cookie before to update him.
+          deleteCookie("selectedLanguage");
+          // Set the new value to cookie.
+          setCookie("selectedLanguage", '/' + LINK_DESTINATION, 365);
 
-        });
+        }
       });
     }
   };
 
   // Set langCode base on GeoIP or Default lang site.
   Drupal.behaviors.setDefaultLangOnCookie = {
-    attach: function (context, settings) {
+    attach: function () {
       $(document).ready(function() {
 
         manageCookie(getLangCodeFromUrl());
@@ -65,6 +47,52 @@
       });
     }
   };
+
+  // Default title of language switcher.
+  Drupal.behaviors.defaultLanguageTitleSwitcher = {
+    attach: function (context) {
+      let selectedLanguageCookie = getCookie("selectedLanguage");
+
+      if (selectedLanguageCookie) {
+        const TITLE = selectedLanguageCookie.split('/');
+        updateLanguageTitleSwitcher(TITLE[1].trim(), context);
+        return;
+      }
+
+      const DESTINATION = getPathSegmentsDestination();
+      if (DESTINATION) {
+        updateLanguageTitleSwitcher(DESTINATION[1].trim(), context);
+        return;
+      }
+
+    }
+  };
+
+  function updateLanguageTitleSwitcher(selectedLanguageCookie, context) {
+    // Update the title with the value of selectedLanguageCookie.
+    $(".language-switcher-language-url h2", context).text(selectedLanguageCookie);
+  }
+
+  function getPathSegmentsDestination() {
+
+    // Get the current URL.
+    const CURRENT_URL = window.location.href;
+
+    // Get the base URL.
+    const BASE_URL = window.location.origin;
+
+    // Get the relative path (current URL without the base URL).
+    const RELATIVE_PATH = CURRENT_URL.replace(BASE_URL, '');
+
+    // Split the relative path into segments.
+    const PATH_SEGMENTS = RELATIVE_PATH.split('/');
+
+    // Trim each segment.
+    return PATH_SEGMENTS.map(function(segment) {
+      return segment.trim();
+    });
+
+  }
 
   function getLangCodeFromUrl() {
     let currentUrl = window.location.href;
@@ -75,9 +103,7 @@
   }
 
   function manageCookie(LANGUAGE) {
-
     let selectedLanguageCookie = getCookie("selectedLanguage");
-
     // Remove the existing selectedLanguage cookie (if it exists)
     // and if they are the same, we don't need to change it.
     if (selectedLanguageCookie === '/' + LANGUAGE) {
@@ -86,8 +112,8 @@
 
     deleteCookie("selectedLanguage");
 
-    // Set the new value in both localStorage and as a new cookie
-    localStorage.setItem('selectedLanguage', LANGUAGE);
+    // Set the new value to cookie.
+    //localStorage.setItem('selectedLanguage', LANGUAGE);
     setCookie("selectedLanguage", '/' + LANGUAGE, 365);
   }
 
