@@ -42,6 +42,14 @@ function dc_theme_preprocess_node(&$variables) {
     $node = $variables['node'];
     setInfosToTeasersAndResults($node, $variables);
   }
+
+  if ($variables['view_mode'] == 'full' &&
+    ($variables['node']->getType() == 'page' || $variables['node']->getType() == 'article')
+  ) {
+    $node = $variables['node'];
+    setInfosToFullPage($node, $variables);
+  }
+
 }
 
 // Get the image uri to render on search results.
@@ -73,6 +81,28 @@ function setInfosToTeasersAndResults($node, &$variables): void {
   $variables['node_type'] = $node->bundle(); //ucfirst($node->bundle());
   $variables['node_owner_or_changed'] = getOwnerFromNode($node); //getLastChangedByFromNode($node) ??
   $variables['image_profile'] = getUserProfileImage($node->getOwner()->id());
+}
+
+function setInfosToFullPage($node, &$variables): void {
+  $thumbnail_uri = $node->get('field_image')->entity->getFileUri();
+
+  $variables['thumbnail'] = [
+    '#theme' => 'image',
+    '#uri' => $thumbnail_uri,
+    '#alt' => $node->get('field_image')->entity->alt,
+  ];
+
+  $variables['title_display'] = $node->get('field_title_to_display')->getValue()[0]['value'];
+
+  $timestamp = $node->get('created')->getValue()[0]['value']; //$node->get('changed')->getValue()[0]['value'] ?? 
+  $datetime = DrupalDateTime::createFromTimestamp($timestamp);
+  $formatted_date = $datetime->format('d M y');
+  $variables['create_or_changed'] = $formatted_date;
+
+  $variables['node_type'] = $node->bundle(); //ucfirst($node->bundle());
+  $variables['node_owner_or_changed'] = getOwnerFromNode($node); //getLastChangedByFromNode($node) ??
+  $variables['image_profile'] = getUserProfileImage($node->getOwner()->id());
+  $variables['img_title'] = $node->get('body')->getValue()[0]['value'];
 }
 
 function getOwnerFromNode($node) {

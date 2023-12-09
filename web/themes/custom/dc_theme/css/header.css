@@ -325,14 +325,6 @@ form#search-block-form .form-item {
   display: flex;
 }
 
-.text_and_image .text-parent-label .field__item,
-.path-search .search-title-display,
-.path-frontpage .frontpage-title-display {
-  padding: 0 20px;
-  font-size: 18px;
-  text-shadow: 1px 1px black;
-}
-
 .path-search .search-form {
   position: absolute;
   left: 0;
@@ -464,12 +456,17 @@ input:-webkit-autofill{
 *
 */
 
-.logo {
+.site-branding__logo {
   display: flex;
-  gap: 0.05rem;
+  align-items: center;
+  padding-top: 0.35rem;
 }
 
-.inverted__h2 {
+.logo img {
+  height: 32px;
+}
+
+/* .inverted__h2 {
   transform: rotateY(180deg);
 }
 
@@ -479,4 +476,4 @@ input:-webkit-autofill{
   color: var(--white-color);
   letter-spacing: 0.05rem;
   font-size: 21px;
-}
+} */

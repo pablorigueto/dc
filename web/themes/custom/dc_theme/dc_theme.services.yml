@@ -1,0 +1,6 @@
+services:
+  data_collector.twig.debug:
+    class: Symfony\Bridge\Twig\DataCollector\TwigDataCollector
+    arguments: ['@twig.profile', '@twig', '@request_stack']
+    tags:
+      - { name: 'data_collector', template: 'twig/layout.html.twig' }

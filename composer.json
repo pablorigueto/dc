@@ -20,6 +20,7 @@
         "drupal/core-composer-scaffold": "^10.0",
         "drupal/core-project-message": "^10.0",
         "drupal/core-recommended": "^10.0",
+        "drupal/devel": "^5.1",
         "drupal/field_group": "^3.4",
         "drupal/pathauto": "*",
         "drupal/redirect": "*",
@@ -27,6 +28,7 @@
         "drupal/search_api_solr": "*",
         "drush/drush": "^12.1",
         "everapi/ipbase-php": "^1.0",
+        "kint-php/kint": "^5.1",
         "solarium/solarium": "^6.3"
     },
     "require-dev": {
