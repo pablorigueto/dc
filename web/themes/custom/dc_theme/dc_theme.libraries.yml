@@ -2,7 +2,6 @@ react_app_main:
   version: VERSION
   css:
     theme:
-      # css/theme.css: {}
       css/header.css: {}
       css/homepage_content.css: {}
       css/homepage_highlight.css: {}

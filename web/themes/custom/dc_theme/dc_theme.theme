@@ -103,6 +103,7 @@ function setInfosToFullPage($node, &$variables): void {
   $variables['node_owner_or_changed'] = getOwnerFromNode($node); //getLastChangedByFromNode($node) ??
   $variables['image_profile'] = getUserProfileImage($node->getOwner()->id());
   $variables['img_title'] = $node->get('body')->getValue()[0]['value'];
+
 }
 
 function getOwnerFromNode($node) {

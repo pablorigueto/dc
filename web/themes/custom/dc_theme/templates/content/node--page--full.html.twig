@@ -1,25 +1,25 @@
 <basicpage>
  
-   <div class="basicpage_full_title">
-    {{ content.field_title_to_display['#items'].0.value }}
-  </div>
+ <div class="basicpage_header_container">
+    <div class="basicpage_header">
+      <div class="basicpage_full_title">
+        {{ img_title|raw }}
+      </div>
 
-  <div class="basicpage_full_title">
-    {{ img_title }}
-  </div>
-
-  <div class="basicpage_full_image">
-    {% set imageAlt = content.field_title_to_display['#items'].0.value %}
-     <img src="{{ file_url(thumbnail['#uri']) }}" alt="{{ imageAlt }}">
+      <div class="basicpage_full_image">
+        {% set imageAlt = content.field_title_to_display['#items'].0.value %}
+        <img src="{{ file_url(thumbnail['#uri']) }}" alt="{{ imageAlt }}">
+      </div>
+    </div>
   </div>
 
   <div class="basicpage_full_body">
     {{ content.field_content_body }}
   </div>
 
-  <div class="basicpage_full_node_owner_or_changed">
+  {# <div class="basicpage_full_node_owner_or_changed">
     {{ node_owner_or_changed }}
-  </div>
+  </div> #}
 
     {# <a class="frontpage-results-img" href="{{ url }}">
       
