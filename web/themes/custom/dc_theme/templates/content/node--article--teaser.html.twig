@@ -5,26 +5,29 @@
       <div class="frontpage-result-thumbnail">
 
       <div class="frontpage-label-main">
-        <div class="frontpage-label {{ node_type }}">
-          {{ node_type|upper }}
+        <div class="frontpage-label {{ node.bundle }}">
+          {{ node.bundle|upper }}
         </div>
       </div>
 
         <div class="frontpage-title-display">
 
           <div class="frontpage-title">
-            {{ title_display }}
+            {% if node.title.0.value %}
+              {# Display the node title #}
+              {{ node.title.0.value }}
+            {% endif %}
           </div>
           <div class="profile-frontpage">
 
             <div class="profile-img-name">
               <img class="profile-frontpage-img" src="{{ file_url(image_profile) }}" alt="User Profile Image">
               <div class="owner-frontpage">
-                {{ node_owner_or_changed }}
+                {{ node.uid.0.entity.name.value }}
               </div>
             </div>
     
-            {{ create_or_changed }}
+            {{ node.createdtime|format_date('custom', 'M j, Y') }}
     
           </div>
 

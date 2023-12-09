@@ -3,7 +3,7 @@
  <div class="basicpage_header_container">
     <div class="basicpage_header">
       <div class="basicpage_full_title">
-        {{ img_title|raw }}
+        {{ image_title|raw }}
       </div>
 
       <div class="basicpage_full_image">
@@ -12,6 +12,25 @@
       </div>
     </div>
   </div>
+
+{% if node.title.0.value %}
+  {# Display the node title #}
+  <h1>{{ node.title.0.value }}</h1>
+{% endif %}
+
+  <div class="node-author">
+    {# Display the author's user picture #}
+    <img class="profile-frontpage-img" src="{{ file_url(image_profile) }}" alt="User Profile Image">
+
+    {# Display the author's username #}
+    {{ 'By '|t }}{{ node.uid.0.entity.name.value }}
+    {# Display the creation date of the node #}
+    {{ 'on '|t }}{{ node.createdtime|format_date('custom', 'M j, Y') }}
+    {{ 'Last updated on '|t }}{{ node.changedtime|format_date('custom', 'M j, Y') }}
+    {{ ' by '|t }}{{ node.revision_uid.0.entity.name.value }}
+
+  </div>
+
 
   <div class="basicpage_full_body">
     {{ content.field_content_body }}

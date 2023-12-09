@@ -35,75 +35,49 @@ function dc_theme_form_alter(&$form, FormStateInterface $form_state, $form_id) {
  * Implements template_preprocess_node().
  */
 function dc_theme_preprocess_node(&$variables) {
-  // Check if it's a teaser view mode and the node type is "page".
-  if ($variables['view_mode'] == 'teaser' &&
-    ($variables['node']->getType() == 'page' || $variables['node']->getType() == 'article')
+  // Add some vars to get on twig."
+  if ($variables['node']->getType() == 'page' || $variables['node']->getType() == 'article'
   ) {
     $node = $variables['node'];
-    setInfosToTeasersAndResults($node, $variables);
+    setInfosToGetOnTwig($node, $variables);
   }
-
-  if ($variables['view_mode'] == 'full' &&
-    ($variables['node']->getType() == 'page' || $variables['node']->getType() == 'article')
-  ) {
-    $node = $variables['node'];
-    setInfosToFullPage($node, $variables);
-  }
-
 }
 
 // Get the image uri to render on search results.
 function dc_theme_preprocess_search_result(&$variables) {
   $result = $variables['result'];
   $node = $result['node'];
-  // Check if the node has an image attached
+  // Check if the node has an image attached.
   if ($node->bundle() === 'article' || $node->bundle() === 'page') {
-    setInfosToTeasersAndResults($node, $variables);
+    setInfosToSearchResultTwig($node, $variables);
   }
 }
 
-function setInfosToTeasersAndResults($node, &$variables): void {
+function setInfosToGetOnTwig($node, &$variables): void {
   $thumbnail_uri = $node->get('field_image')->entity->getFileUri();
-
   $variables['thumbnail'] = [
     '#theme' => 'image',
     '#uri' => $thumbnail_uri,
     '#alt' => $node->get('field_image')->entity->alt,
   ];
-
-  $variables['title_display'] = $node->get('field_title_to_display')->getValue()[0]['value'];
-
-  $timestamp = $node->get('created')->getValue()[0]['value']; //$node->get('changed')->getValue()[0]['value'] ?? 
-  $datetime = DrupalDateTime::createFromTimestamp($timestamp);
-  $formatted_date = $datetime->format('d M y');
-  $variables['create_or_changed'] = $formatted_date;
-
-  $variables['node_type'] = $node->bundle(); //ucfirst($node->bundle());
-  $variables['node_owner_or_changed'] = getOwnerFromNode($node); //getLastChangedByFromNode($node) ??
+  $variables['image_title'] = $node->get('body')[0]->getValue()['value'];
   $variables['image_profile'] = getUserProfileImage($node->getOwner()->id());
 }
 
-function setInfosToFullPage($node, &$variables): void {
+function setInfosToSearchResultTwig($node, &$variables): void {
   $thumbnail_uri = $node->get('field_image')->entity->getFileUri();
-
   $variables['thumbnail'] = [
     '#theme' => 'image',
     '#uri' => $thumbnail_uri,
     '#alt' => $node->get('field_image')->entity->alt,
   ];
-
-  $variables['title_display'] = $node->get('field_title_to_display')->getValue()[0]['value'];
-
   $timestamp = $node->get('created')->getValue()[0]['value']; //$node->get('changed')->getValue()[0]['value'] ?? 
   $datetime = DrupalDateTime::createFromTimestamp($timestamp);
   $formatted_date = $datetime->format('d M y');
   $variables['create_or_changed'] = $formatted_date;
-
   $variables['node_type'] = $node->bundle(); //ucfirst($node->bundle());
   $variables['node_owner_or_changed'] = getOwnerFromNode($node); //getLastChangedByFromNode($node) ??
   $variables['image_profile'] = getUserProfileImage($node->getOwner()->id());
-  $variables['img_title'] = $node->get('body')->getValue()[0]['value'];
-
 }
 
 function getOwnerFromNode($node) {

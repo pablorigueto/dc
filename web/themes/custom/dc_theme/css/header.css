@@ -1,5 +1,9 @@
 @import url('definitions.css');
 
+.path-node .layout-main-wrapper {
+  max-width: 1440px;
+}
+
 .layout-main-wrapper {
   padding-top: 50px;
   padding-bottom: 50px;
