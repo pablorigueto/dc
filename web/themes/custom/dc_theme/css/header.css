@@ -8,9 +8,11 @@
 }
 
 .header-banner {
-  /* background: url(../assets/bkgrd.jpg) no-repeat; */
+  /* background: url(../assets/bkgrd.jpg) no-repeat;
+    background-size: contain; */
   background-color: var(--light-dark-color);
-  background-size: contain;
+  min-height: 250px;
+
 }
 
 .path-frontpage #main-wrapper {
@@ -32,17 +34,17 @@
 
 @media screen and (min-width: 769px) and (max-width: 1170px) {
   .header-banner {
-    /* background: url(../assets/bkgrd1170.jpg) no-repeat; */
+    /* background: url(../assets/bkgrd1170.jpg) no-repeat; 
+    background-size: contain;*/
     height: clamp(279px,36.3vw,725px);
-    background-size: contain;
   }
 }
 
 @media screen and (min-width: 300px) and (max-width: 768px) {
   .header-banner {
-    /* background: url(../assets/tablet.jpg) no-repeat; */
+    /* background: url(../assets/tablet.jpg) no-repeat;
+    background-size: contain;*/
     height: clamp(120px,38.5vw,296px);
-    background-size: contain;
   }
 }
 
@@ -117,6 +119,11 @@ li {
 
 .primary_menu h2 {
   cursor: pointer;
+}
+
+.hidden {
+  display: none;
+  transition: all 0.5s ease;
 }
 
 /* 

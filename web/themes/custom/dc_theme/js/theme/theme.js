@@ -34,23 +34,24 @@
     attach(context) {
       if (!drupalSettings.openSearch) {
         $(document).ready(function () {
+          let BANNER = $('.path-node .basicpage_header_container');
           // Add a click event handler to the Menu heading.
           $("#block-dc-theme-searchbtn-2", context).click(function () {
 
             // Search to open.
             const MENU = $('.path-node .search-block-form', context);
-  
+            
             // Check if this menu is already open.
             const isMenuOpen = MENU.is(":visible");
     
             // If the menu was not open, then open it.
             if (!isMenuOpen) {
               MENU.fadeIn();
-              MENU.addClass('xablei');
+              BANNER.addClass('hidden');
             }
             else {
               MENU.fadeOut();
-              MENU.removeClass('xablei');
+              BANNER.removeClass('hidden');
             }
           });
         });
@@ -106,12 +107,13 @@
   
   Drupal.behaviors.pressEscToCloseIt = {
     attach: function attach(context) {
+      let BANNER = $('.path-node .basicpage_header_container');
       once('pressEscToCloseIt', '.search-block-form', context).forEach(element => {
-
         let searchForm = $("body:not(:has(.path-frontpage)) .search-block-form");
         // Add a keydown event handler to close the menu when pressing ESC.
         $(document).on('keydown', function (event) {
           if (event.key === 'Escape' || event.keyCode === 27) {
+            BANNER.removeClass('hidden');
             searchForm.slideUp();
           }
         });
