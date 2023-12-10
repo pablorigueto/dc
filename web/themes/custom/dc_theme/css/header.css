@@ -2,13 +2,9 @@
 
 .path-node .layout-main-wrapper {
   max-width: 1440px;
-}
-
-.layout-main-wrapper {
   padding-top: 50px;
   padding-bottom: 50px;
   margin: 0 auto;
-  max-width: 95%;
 }
 
 .header-banner {
@@ -272,6 +268,7 @@ form#search-block-form .form-item {
   align-items: center;
   background-image: linear-gradient(0deg,#000000b8 0.1%, transparent);
   border-radius: 12px;
+  padding: 20px 20px 0 20px;
 }
 
 .path-search .search-title,

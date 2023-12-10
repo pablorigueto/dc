@@ -6,6 +6,17 @@ use Drupal\node\NodeInterface;
 use Drupal\user\Entity\User;
 
 /**
+ * Implements hook_preprocess_HOOK() for HTML document templates.
+ *
+ * Adds body classes if certain regions have content.
+ */
+function dc_theme_preprocess_html(&$variables) {
+
+  // So fonts can be preloaded from base theme in the event Olivero is used as a subtheme.
+  $variables['dc_theme_path'] = \Drupal::request()->getBasePath() . '/' . \Drupal::service('extension.list.theme')->getPath('dc_theme');
+}
+
+/**
  * Implements hook_page_attachments_alter().
  */
 function dc_theme_page_attachments_alter(array &$attachments) {
@@ -54,30 +65,30 @@ function dc_theme_preprocess_search_result(&$variables) {
 }
 
 function setInfosToGetOnTwig($node, &$variables): void {
-  $thumbnail_uri = $node->get('field_image')->entity->getFileUri();
-  $variables['thumbnail'] = [
-    '#theme' => 'image',
-    '#uri' => $thumbnail_uri,
-    '#alt' => $node->get('field_image')->entity->alt,
-  ];
-  $variables['image_title'] = $node->get('body')[0]->getValue()['value'];
-  $variables['image_profile'] = getUserProfileImage($node->getOwner()->id());
+  setURI($node, $variables);
+  $variables['image_title'] = $node->get('body')[0]->getValue()['value'] ?? "";
+  $variables['revision_user_uri'] = getLastChangedByFromNode($node)['profile_picture_uri'];
+
 }
 
 function setInfosToSearchResultTwig($node, &$variables): void {
-  $thumbnail_uri = $node->get('field_image')->entity->getFileUri();
+  setURI($node, $variables);
+  $timestamp = $node->get('created')->getValue()[0]['value'];
+  $datetime = DrupalDateTime::createFromTimestamp($timestamp);
+  $formatted_date = $datetime->format('d M y');
+  $variables['create_or_changed'] = $formatted_date;
+  $variables['node_type'] = $node->bundle();
+  $variables['node_owner_or_changed'] = getOwnerFromNode($node) ?? "";
+}
+
+function setURI($node, &$variables) {
+  $thumbnail_uri = $node->get('field_image')->entity->getFileUri() ?? "";
   $variables['thumbnail'] = [
     '#theme' => 'image',
     '#uri' => $thumbnail_uri,
     '#alt' => $node->get('field_image')->entity->alt,
   ];
-  $timestamp = $node->get('created')->getValue()[0]['value']; //$node->get('changed')->getValue()[0]['value'] ?? 
-  $datetime = DrupalDateTime::createFromTimestamp($timestamp);
-  $formatted_date = $datetime->format('d M y');
-  $variables['create_or_changed'] = $formatted_date;
-  $variables['node_type'] = $node->bundle(); //ucfirst($node->bundle());
-  $variables['node_owner_or_changed'] = getOwnerFromNode($node); //getLastChangedByFromNode($node) ??
-  $variables['image_profile'] = getUserProfileImage($node->getOwner()->id());
+  $variables['image_profile'] = getUserProfileImage($node->getOwner()->id()) ?? "";
 }
 
 function getOwnerFromNode($node) {
@@ -100,9 +111,13 @@ function getLastChangedByFromNode(NodeInterface $node) {
 
   // Load the user entity.
   $changed_by_user = User::load($changed_uid);
+  $revision_user_profile = getUserProfileImage($changed_uid);
 
-  // Get the username of the user who last changed the node.
-  return $changed_by_user->getAccountName();
+  // Get the username and image uri of the user who last changed the node.
+  return [
+    'username' => $changed_by_user->getAccountName(),
+    'profile_picture_uri' => $revision_user_profile,
+  ];
 }
 
 function getUserProfileImage($uid) {
