@@ -67,15 +67,12 @@ function dc_theme_preprocess_search_result(&$variables) {
 function setInfosToGetOnTwig($node, &$variables): void {
   setURI($node, $variables);
   $variables['image_title'] = $node->get('body')[0]->getValue()['value'] ?? "";
-  $variables['revision_user_uri'] = getLastChangedByFromNode($node)['profile_picture_uri'];
-
+  $variables['revision_user_uri'] = getLastChangedByFromNode($node)['profile_picture_uri'] ?? "";
 }
 
 function setInfosToSearchResultTwig($node, &$variables): void {
   setURI($node, $variables);
-  $timestamp = $node->get('created')->getValue()[0]['value'];
-  $datetime = DrupalDateTime::createFromTimestamp($timestamp);
-  $formatted_date = $datetime->format('d M y');
+  $formatted_date = formateDate($timestamp);
   $variables['create_or_changed'] = $formatted_date;
   $variables['node_type'] = $node->bundle();
   $variables['node_owner_or_changed'] = getOwnerFromNode($node) ?? "";
@@ -108,17 +105,72 @@ function getLastChangedByFromNode(NodeInterface $node) {
 
   // Get the user ID of the user who last changed the node.
   $changed_uid = $latest_revision->getRevisionUser()->id();
-
   // Load the user entity.
-  $changed_by_user = User::load($changed_uid);
+  $changed_by_load = User::load($changed_uid);
+
+  $changed_by_user = $changed_by_load->getAccountName();
+
+  $node_owner = getOwnerFromNode($node);
+
   $revision_user_profile = getUserProfileImage($changed_uid);
 
-  // Get the username and image uri of the user who last changed the node.
-  return [
-    'username' => $changed_by_user->getAccountName(),
-    'profile_picture_uri' => $revision_user_profile,
-  ];
+  if ($changed_by_user !== $node_owner) {
+
+    return [
+      'username' => $changed_by_user,
+      'profile_picture_uri' => $revision_user_profile,
+    ];
+
+  }
+  // When the node created user is the same that the edit.
+  else {
+    $created_date = formateDate($node->get('created')->getValue()[0]['value']);
+    $last_revision_timestamp = $latest_revision->getChangedTime();
+    $revision_date = formateDate($last_revision_timestamp);
+
+    // When the node created date is the same that the edit.
+    if ($created_date === $revision_date) {
+
+      return '';
+
+    }
+    else {
+
+      return [
+        'username' => $changed_by_user,
+        'profile_picture_uri' => $revision_user_profile,
+      ];
+
+    }
+
+  }
 }
+
+function formateDate($timestamp) {
+  $datetime = DrupalDateTime::createFromTimestamp($timestamp);
+  return $datetime->format('d M y');
+}
+
+// function getLastRevision($node) {
+//    // Check if the node has revisions.
+//    if ($node instanceof NodeInterface && $node->isRevisionable()) {
+//     // Get the latest revision ID.
+//     $latest_revision_id = $node->get('revision_default')->value;
+
+//     // Load the latest revision.
+//     $latest_revision = \Drupal::entityTypeManager()
+//       ->getStorage('node')
+//       ->loadRevision($latest_revision_id);
+
+//     // Get the timestamp of the latest revision.
+//     $last_revision_timestamp = $latest_revision->getChangedTime();
+
+//     $datetime = DrupalDateTime::createFromTimestamp($last_revision_timestamp);
+//     $formatted_date = $datetime->format('d M y');
+//     // Add the last revision timestamp to the node preprocess variables.
+//     $formatted_date;
+//   }
+// }
 
 function getUserProfileImage($uid) {
   // Load the user entity.
