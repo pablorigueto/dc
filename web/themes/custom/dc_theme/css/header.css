@@ -1,15 +1,21 @@
 @import url('definitions.css');
 
 .path-node .layout-main-wrapper {
-  max-width: 1440px;
+  max-width: 1170px;
   padding-top: 50px;
   padding-bottom: 50px;
   margin: 0 auto;
 }
 
 .header-banner {
-  background: url(../assets/bkgrd.jpg) no-repeat;
+  /* background: url(../assets/bkgrd.jpg) no-repeat; */
+  background-color: var(--light-dark-color);
   background-size: contain;
+}
+
+.path-frontpage #main-wrapper {
+  max-width: 95%;
+  margin: 0 auto;
 }
 
 @media screen and (min-width: 2560px) {
@@ -26,7 +32,7 @@
 
 @media screen and (min-width: 769px) and (max-width: 1170px) {
   .header-banner {
-    background: url(../assets/bkgrd1170.jpg) no-repeat;
+    /* background: url(../assets/bkgrd1170.jpg) no-repeat; */
     height: clamp(279px,36.3vw,725px);
     background-size: contain;
   }
@@ -34,7 +40,7 @@
 
 @media screen and (min-width: 300px) and (max-width: 768px) {
   .header-banner {
-    background: url(../assets/tablet.jpg) no-repeat;
+    /* background: url(../assets/tablet.jpg) no-repeat; */
     height: clamp(120px,38.5vw,296px);
     background-size: contain;
   }
@@ -57,6 +63,7 @@
 
 .flex-header-menu {
   display: flex;
+  flex-wrap: wrap;
   gap: 3rem;
   width: 95%;
   margin: 0 auto;
@@ -65,6 +72,7 @@
 .primary_menu div:first-child:not([class]),
 .secondary_menu div:first-child:not([class]) {
   display: flex;
+  flex-wrap: wrap;
   gap: 3rem;
 }
 
@@ -79,13 +87,11 @@
   z-index: 2;
   margin-block-start: 0;
   margin-block-end: 0;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   background-color: var(--dark-color);
   padding-inline-start: 0;
   padding: 20px;
-  border-left-color: var(--white-color);
-  border-left-style: solid;
-  border-left-width: 2px;
+  border-bottom: 2px solid var(--white-color);
 }
 
 /* marker hidden */
@@ -239,7 +245,7 @@ form#search-block-form .form-item {
 .path-search .search-label,
 .path-frontpage .frontpage-label {
   background: var(--white-color);
-  border-radius: 15px;
+  border-radius: 2px;
   padding: 5px 10px;
   font-size: 12px;
   font-family: 'Inter-Bold';
@@ -267,7 +273,6 @@ form#search-block-form .form-item {
   justify-content: end;
   align-items: center;
   background-image: linear-gradient(0deg,#000000b8 0.1%, transparent);
-  border-radius: 12px;
   padding: 20px 20px 0 20px;
 }
 
@@ -289,7 +294,7 @@ form#search-block-form .form-item {
   object-fit: cover;
   width: 100%;
   height: 100%;
-  border-radius: 12px;
+  border-radius: 2px;
 }
 
 .path-search .search-result-thumbnail .profile-search-img,
@@ -361,7 +366,7 @@ form#search-block-form .form-item {
 .path-search input.form-submit {
   background-image: linear-gradient(90deg,var(--dark-color),var(--light-dark-color) 50%,var(--dark-color));
   border: unset;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   height: 40px;
   color: var(--white-color);
   padding: 0 20px;
@@ -385,7 +390,7 @@ form#search-block-form .form-item {
 input.form-search {
   width: 100%;
   height: 45px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   color: var(--dark-color);
   font-size: 16px;
   border: 1px solid #ffffff70;

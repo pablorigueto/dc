@@ -10,12 +10,12 @@
   box-shadow: 0 30px 30px #00000030;
   background-color: var(--white-color);
   margin: -3rem auto 0 auto;
-  max-width: 95%;
+  max-width: 1024px;
 }
 
 .text-highlight-container {
   background: var(--white-color);
-  border-radius: 9px 0 0 9px;
+  /* border-radius: 9px 0 0 9px; */
   width: 100%;
 }
 
@@ -29,7 +29,7 @@
   background-size: cover;
   height: 100%;
   object-fit: fill;
-  border-radius: 0 9px 9px 0;
+  /* border-radius: 0 9px 9px 0; */
   width: 100%;
 }
 

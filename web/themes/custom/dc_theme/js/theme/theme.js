@@ -46,9 +46,11 @@
             // If the menu was not open, then open it.
             if (!isMenuOpen) {
               MENU.fadeIn();
+              MENU.addClass('xablei');
             }
             else {
               MENU.fadeOut();
+              MENU.removeClass('xablei');
             }
           });
         });
@@ -93,7 +95,6 @@
   
             // If the menu was not open, then open it.
             if (!isMenuOpen) {
-              console.log('clicado');
               MENU.slideDown();
             }
           });
@@ -103,17 +104,17 @@
     }
   }
   
-  Drupal.behaviors.closeSearchClickingOutsideOfit = {
+  Drupal.behaviors.pressEscToCloseIt = {
     attach: function attach(context) {
-      once('closeSearchClickingOutsideOfit', '.search-block-form', context).forEach(element => {
+      once('pressEscToCloseIt', '.search-block-form', context).forEach(element => {
+
+        let searchForm = $("body:not(:has(.path-frontpage)) .search-block-form");
         // Add a keydown event handler to close the menu when pressing ESC.
         $(document).on('keydown', function (event) {
           if (event.key === 'Escape' || event.keyCode === 27) {
-            //$(".path-node .search-block-form").slideUp();
-            $("body:not(:has(.path-frontpage)) .search-block-form").slideUp();
+            searchForm.slideUp();
           }
         });
-
       });
     }
   };

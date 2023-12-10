@@ -4,7 +4,14 @@
   background-color: var(--light-dark-color);
 }
 
-.site-footer .site-footer__inner {
+.path-frontpage .site-footer .site-footer__inner {
   max-width: 95%;
   margin: 0 auto;
+}
+
+.path-node .site-footer .site-footer__inner {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
 }
