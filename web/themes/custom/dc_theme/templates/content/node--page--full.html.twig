@@ -17,28 +17,22 @@
   <div class="node-author">
     <div class="node-profile-img">
       <img class="full-node-user-profile-img" src="{{ file_url(image_profile) }}" alt="User Profile Image">
-
-      {% if revision_user_uri is not empty %}
-        <img class="full-node-user-profile-img" src="{{ file_url(revision_user_uri) }}" alt="User Last Revision Profile Image">
-      {% endif %}
-
-    </div>
-
-    <div class="node-date">
-
       <div class="node-creator">
-        <div>{{ 'created - '|t }}{{ node.createdtime|format_date('custom', 'M j, Y') }}</div>
-        <div>{{ 'by '|t }}{{ node.uid.0.entity.name.value }}</div>
+        <p>{{ 'created - '|t }}{{ node.createdtime|format_date('custom', 'M j, Y') }}</p>
+        <p>{{ 'by '|t }}{{ node.uid.0.entity.name.value }}</p>
       </div>
-
-      {% if revision_user_uri is not empty %}
-        <div class="node-last-revision">
-          <div>{{ 'updated - '|t }}{{ node.changedtime|format_date('custom', 'M j, Y') }}</div>
-          <div>{{ 'by '|t }}{{ node.revision_uid.0.entity.name.value }}</div>
-        </div>
-      {% endif %}
-
     </div>
+
+    {% if revision_user_uri is not empty %}
+      <div class="node-profile-img">
+        <img class="full-node-user-profile-img" src="{{ file_url(revision_user_uri) }}" alt="User Last Revision Profile Image">
+        <div class="node-last-revision">
+          <p>{{ 'updated - '|t }}{{ node.changedtime|format_date('custom', 'M j, Y') }}</p>
+          <p>{{ 'by '|t }}{{ node.revision_uid.0.entity.name.value }}</p>
+        </div>
+      </div>
+    {% endif %}
+
   </div>
 
   <div class="basicpage_full_body">

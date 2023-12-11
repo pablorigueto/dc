@@ -72,10 +72,13 @@ function setInfosToGetOnTwig($node, &$variables): void {
 
 function setInfosToSearchResultTwig($node, &$variables): void {
   setURI($node, $variables);
+  $timestamp = $node->created->getValue()[0]['value'];
   $formatted_date = formateDate($timestamp);
   $variables['create_or_changed'] = $formatted_date;
   $variables['node_type'] = $node->bundle();
+  $variables['title_display'] = $node->get('body')[0]->getValue()['value'] ?? "";
   $variables['node_owner_or_changed'] = getOwnerFromNode($node) ?? "";
+  $variables['image_profile'] = getUserProfileImage($node->getOwner()->id()) ?? "";
 }
 
 function setURI($node, &$variables) {
