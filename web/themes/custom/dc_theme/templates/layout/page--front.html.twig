@@ -75,18 +75,31 @@
         <div class="header-banner" data-drupal-selector="header-banner">
         </div>
 
-        <div id="homepage-highlight" class="homepage-highlight" data-drupal-selector="homepage-highlight">
+        {# Most recent node. #}
+        
+          <div id="homepage-highlight" class="homepage-highlight" data-drupal-selector="homepage-highlight">
 
-          <div class="text-highlight-container" data-drupal-selector="text-highlight-container">
-            <div class="text-highlight">
-              <p>TESTE</p>
+            <div class="text-highlight-container" data-drupal-selector="text-highlight-container">
+              <div class="text-highlight">
+                <a href={{path_alias}} class="highlight-link">
+                  <div class="title-highlight">
+                    {{ title_display|raw }}
+                  </div>
+                </a>
+                {# <div class="content-preview-highlight">
+                  {{ content_body|striptags }}
+                </div> #}
+              </div>
             </div>
-          </div>
 
-          <div class="img-highlight" data-drupal-selector="img-highlight">
-          </div>
+            <div class="img-highlight-main" data-drupal-selector="img-highlight">
+              <a href={{path_alias}} class="highlight-link">
+                <img class="img-highlight" src={{ file_url(thumbnail['#uri']) }}></img>
+              </a>
+            </div>
 
-        </div>
+          </div>
+        
 
       </header>
     {% endif %}

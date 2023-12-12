@@ -2,6 +2,8 @@
 
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\user\Entity\User;
 
@@ -11,7 +13,6 @@ use Drupal\user\Entity\User;
  * Adds body classes if certain regions have content.
  */
 function dc_theme_preprocess_html(&$variables) {
-
   // So fonts can be preloaded from base theme in the event Olivero is used as a subtheme.
   $variables['dc_theme_path'] = \Drupal::request()->getBasePath() . '/' . \Drupal::service('extension.list.theme')->getPath('dc_theme');
 }
@@ -29,6 +30,36 @@ function dc_theme_page_attachments_alter(array &$attachments) {
 function dc_theme_preprocess_page(&$variables) {
   $variables['site_logo'] = theme_get_setting('logo.url');
   $variables['site_name'] = \Drupal::config('system.site')->get('name');
+
+  // Check if the function has already been executed.
+  if (!isset($variables['hightlight_homepage_executed'])) {
+    _setHightlighHomepage($variables);
+    $variables['hightlight_homepage_executed'] = TRUE;
+  }
+}
+
+/**
+ * Implements items to hightligh homepage.
+ */
+function _setHightlighHomepage(&$variables) {
+  // Get the entity query service.
+  $entity_query = \Drupal::entityQuery('node');
+
+  // Get the most recently created node.
+  $nid = $entity_query->sort('created', 'DESC')
+    ->range(0, 1)
+    ->accessCheck(FALSE)
+    ->execute();
+
+  // Load the node with the obtained ID.
+  $node = Node::load(reset($nid));
+  // Set node image uri.
+  // Thumbnail image.
+  _setThumbnailURI($node, $variables);
+  $variables['title_display'] = $node->get('body')[0]->getValue()['value'] ?? "";
+  $variables['content_body'] = $node->get('field_content_body')[0]->getValue()['value'] ?? "";
+  $variables['path_alias'] = _getPathAlias($node->id()) ?? "";
+
 }
 
 /**
@@ -50,7 +81,7 @@ function dc_theme_preprocess_node(&$variables) {
   if ($variables['node']->getType() == 'page' || $variables['node']->getType() == 'article'
   ) {
     $node = $variables['node'];
-    setInfosToGetOnTwig($node, $variables);
+    _setInfosToGetOnTwig($node, $variables);
   }
 }
 
@@ -60,44 +91,44 @@ function dc_theme_preprocess_search_result(&$variables) {
   $node = $result['node'];
   // Check if the node has an image attached.
   if ($node->bundle() === 'article' || $node->bundle() === 'page') {
-    setInfosToSearchResultTwig($node, $variables);
+    _setInfosToSearchResultTwig($node, $variables);
   }
 }
 
-function setInfosToGetOnTwig($node, &$variables): void {
-  setURI($node, $variables);
+function _setInfosToGetOnTwig($node, &$variables): void {
+  _setThumbnailURI($node, $variables);
   $variables['image_title'] = $node->get('body')[0]->getValue()['value'] ?? "";
-  $variables['revision_user_uri'] = getLastChangedByFromNode($node)['profile_picture_uri'] ?? "";
+  $variables['revision_user_uri'] = _getLastChangedByFromNode($node)['profile_picture_uri'] ?? "";
+  $variables['image_profile'] = _getUserProfileImage($node->getOwner()->id()) ?? "";
 }
 
-function setInfosToSearchResultTwig($node, &$variables): void {
-  setURI($node, $variables);
+function _setInfosToSearchResultTwig($node, &$variables): void {
+  _setThumbnailURI($node, $variables);
   $timestamp = $node->created->getValue()[0]['value'];
-  $formatted_date = formateDate($timestamp);
+  $formatted_date = _formateDate($timestamp);
   $variables['create_or_changed'] = $formatted_date;
   $variables['node_type'] = $node->bundle();
   $variables['title_display'] = $node->get('body')[0]->getValue()['value'] ?? "";
-  $variables['node_owner_or_changed'] = getOwnerFromNode($node) ?? "";
-  $variables['image_profile'] = getUserProfileImage($node->getOwner()->id()) ?? "";
+  $variables['node_owner_or_changed'] = _getOwnerFromNode($node) ?? "";
+  $variables['image_profile'] = _getUserProfileImage($node->getOwner()->id()) ?? "";
 }
 
-function setURI($node, &$variables) {
+function _setThumbnailURI($node, &$variables) {
   $thumbnail_uri = $node->get('field_image')->entity->getFileUri() ?? "";
   $variables['thumbnail'] = [
     '#theme' => 'image',
     '#uri' => $thumbnail_uri,
     '#alt' => $node->get('field_image')->entity->alt,
   ];
-  $variables['image_profile'] = getUserProfileImage($node->getOwner()->id()) ?? "";
 }
 
-function getOwnerFromNode($node) {
+function _getOwnerFromNode($node) {
   $uid = $node->getOwner()->id();
   $owner = User::load($uid);
   return $owner->getAccountName();
 }
 
-function getLastChangedByFromNode(NodeInterface $node) {
+function _getLastChangedByFromNode(NodeInterface $node) {
   // Get the latest revision ID.
   $latest_revision_id = $node->getRevisionId();
 
@@ -113,9 +144,9 @@ function getLastChangedByFromNode(NodeInterface $node) {
 
   $changed_by_user = $changed_by_load->getAccountName();
 
-  $node_owner = getOwnerFromNode($node);
+  $node_owner = _getOwnerFromNode($node);
 
-  $revision_user_profile = getUserProfileImage($changed_uid);
+  $revision_user_profile = _getUserProfileImage($changed_uid);
 
   if ($changed_by_user !== $node_owner) {
 
@@ -127,9 +158,9 @@ function getLastChangedByFromNode(NodeInterface $node) {
   }
   // When the node created user is the same that the edit.
   else {
-    $created_date = formateDate($node->get('created')->getValue()[0]['value']);
+    $created_date = _formateDate($node->get('created')->getValue()[0]['value']);
     $last_revision_timestamp = $latest_revision->getChangedTime();
-    $revision_date = formateDate($last_revision_timestamp);
+    $revision_date = _formateDate($last_revision_timestamp);
 
     // When the node created date is the same that the edit.
     if ($created_date === $revision_date) {
@@ -149,7 +180,7 @@ function getLastChangedByFromNode(NodeInterface $node) {
   }
 }
 
-function formateDate($timestamp) {
+function _formateDate($timestamp) {
   $datetime = DrupalDateTime::createFromTimestamp($timestamp);
   return $datetime->format('d M y');
 }
@@ -175,7 +206,7 @@ function formateDate($timestamp) {
 //   }
 // }
 
-function getUserProfileImage($uid) {
+function _getUserProfileImage($uid) {
   // Load the user entity.
   $user = User::load($uid);
 
@@ -187,3 +218,13 @@ function getUserProfileImage($uid) {
   return $user->get('user_picture')->entity->getFileUri();
 
 }
+
+  /**
+   * Get the path alias through the node id.
+   */
+  function _getPathAlias(int $node_id): string {
+    // Get the URL object for the node using its ID.
+    $url = Url::fromRoute('entity.node.canonical', ['node' => $node_id]);
+    // Get the path alias from the URL object.
+    return $url->toString();
+  }
