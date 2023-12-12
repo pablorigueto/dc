@@ -240,7 +240,6 @@ form#search-block-form .form-item {
 
 .path-search .search-label,
 .path-frontpage .frontpage-label {
-  background: var(--white-color);
   border-radius: 2px;
   padding: 5px 10px;
   font-size: 12px;
@@ -249,12 +248,14 @@ form#search-block-form .form-item {
 
 .path-search .search-label.article,
 .path-frontpage .frontpage-label.article {
-  color: green;
+  color: var(--medium-dark-color);
+  background: var(--white-color);
 }
 
 .path-search .search-label.page,
 .path-frontpage .frontpage-label.page {
-  color: blue;
+  color: var(--white-color);
+  background: var(--medium-dark-color);
 }
 
 .path-search .search-title-display,
