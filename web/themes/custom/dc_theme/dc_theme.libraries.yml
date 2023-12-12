@@ -10,6 +10,7 @@ react_app_main:
       css/footer.css: {}
       js/slick/slick.css: {}
       js/slick/slick-theme.css: {}
+      https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200: { type: external }
   js:
     js/slick/slick.js: {}
     js/dist_dev/main.min.js: {minified: true}

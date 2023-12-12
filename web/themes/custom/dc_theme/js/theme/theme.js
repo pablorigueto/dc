@@ -121,6 +121,31 @@
     }
   };
 
+  Drupal.behaviors.mobileMenu = {
+    attach(context) {
+      if (!drupalSettings.mobileMenu) {
+        $(document).ready(function () {
+  
+          // Add a click event handler to the Menu heading.
+          $(".mobile", context).click(function () {
+  
+            // Find the related menu element within the same parent.
+            const MENU = $(this).siblings(".primary_menu");
+
+            // Check if the menu element exists.
+            if (MENU.length) {
+  
+              // Toggle the menu visibility.
+              MENU.slideToggle();
+            }
+          });
+        });
+        drupalSettings.mobileMenu = true;
+      }
+    }
+  };
+  
+  
   // Drupal.behaviors.smoothPosition = {
   //   attach: function attach(context) {
 

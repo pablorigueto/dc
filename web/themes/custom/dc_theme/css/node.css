@@ -196,7 +196,23 @@ code {
   margin-top: 5px;
 }
 
+.page-node-type-page .code_container {
+  background-color: var(--light-dark-color);
+  color: var(--white-color);
+  padding: 20px;
+  position: relative;
+  margin-top: 5px;
+}
+
+.page-node-type-page .code_container div,
+.page-node-type-page .code_container span {
+  text-wrap: wrap;
+  overflow-wrap: anywhere;
+  background-color: var(--light-dark-color);
+}
+
 @media screen and (max-width: 375px) {
+  .page-node-type-page .code_container,
   .page-node-type-page .basicpage_full_body pre {
     padding-right: 65px;
     padding-left: 10px;

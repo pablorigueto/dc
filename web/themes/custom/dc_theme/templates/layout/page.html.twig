@@ -55,7 +55,11 @@
         {% if page.primary_menu or page.secondary_menu %}
           <div id="header-menu" class="header-menu" data-drupal-selector="header-menu">
             <div id="flex-header-menu" class="flex-header-menu" data-drupal-selector="flex-header-menu">
-
+              <div class="mobile">
+                <span class="material-symbols-outlined">
+                  menu
+                </span>
+              </div>
               <a href="{{ path('<front>') }}" rel="home" class="site-branding__logo">
                 <div class="logo">
                   <img src={{ site_logo }}></img>
