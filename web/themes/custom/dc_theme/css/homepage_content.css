@@ -9,6 +9,8 @@
   position: relative;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .feed-icon {

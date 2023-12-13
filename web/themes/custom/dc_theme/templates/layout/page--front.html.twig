@@ -65,7 +65,8 @@
                   <img src={{ site_logo }}></img>
                 </div>
               </a>
-
+              <div id="search_mobile_icon">
+              </div>
               <div class="primary_menu">
                 {{ page.primary_menu }}
               </div>
@@ -85,7 +86,7 @@
 
             <div class="text-highlight-container" data-drupal-selector="text-highlight-container">
               <div class="text-highlight">
-                <a href={{path_alias}} class="highlight-link">
+                <a href={{ path_alias }} class="highlight-link">
                 <p class="most-recent-node"> {{ 'New Content'|t }} </p>
                   <div class="title-highlight">
                     {{ title_display|raw }}
@@ -98,19 +99,18 @@
             </div>
 
             <div class="img-highlight-main" data-drupal-selector="img-highlight">
-              <a href={{path_alias}} class="highlight-link">
+              <a href={{ path_alias }} class="highlight-link">
                 <img class="img-highlight" src={{ file_url(thumbnail['#uri']) }}></img>
               </a>
             </div>
 
           </div>
-        
 
       </header>
     {% endif %}
 
     <div id="main-wrapper" class="layout-main-wrapper layout-container">
-      <h1> {{ 'Select an article'|t }} </h1>
+      
 
       <div id="main" class="layout-main">
         <div class="main-content">
@@ -120,6 +120,9 @@
             {{ page.highlighted }}
             {{ page.breadcrumb }}
               <main role="main">
+                <div class="title-cards">
+                  <h1> {{ 'Select an article'|t }} </h1>
+                </div>
                 {{ page.content_above }}
                 {{ page.content }}
               </main>
@@ -134,8 +137,13 @@
 
     <footer class="site-footer">
       <div class="site-footer__inner container">
-        {{ page.footer_top }}
-        {{ page.footer_bottom }}
+        {# {{ page.footer_top }}
+        {{ page.footer_bottom }} #}
+        <p class="copyright">Copyright © 2023-{{'now'|date('Y')}} by Pablo Rigueto. All rights reserved. <a href="#page-top">Top of page</a>.</p>
+        <p class="policy">
+          <a href="/privacy-policy">Privacy Policy</a> | 
+          <a href="/terms-of-service">Terms of Service</a>
+        </p>
       </div>
     </footer>
 

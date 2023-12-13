@@ -34,12 +34,14 @@
     attach(context) {
       if (!drupalSettings.openSearch) {
         $(document).ready(function () {
-          let BANNER = $('.path-node .basicpage_header_container');
+          let BANNER = $('.basicpage_header_container');
           // Add a click event handler to the Menu heading.
-          $("#block-dc-theme-searchbtn-2", context).click(function () {
+          // $("#block-dc-theme-searchbtn-2", context).click(function () {
+          $("#block-dc-theme-searchbtn-2, #search_mobile_icon", context).click(function () {
+
 
             // Search to open.
-            const MENU = $('.path-node .search-block-form', context);
+            const MENU = $('.search-block-form', context);
             
             // Check if this menu is already open.
             const isMenuOpen = MENU.is(":visible");

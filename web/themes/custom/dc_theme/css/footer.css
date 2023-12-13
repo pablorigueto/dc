@@ -7,6 +7,7 @@
 .path-frontpage .site-footer .site-footer__inner {
   max-width: 95%;
   margin: 0 auto;
+  color: var(--white-color);
 }
 
 .path-node .site-footer .site-footer__inner {
@@ -15,3 +16,46 @@
   padding-left: 2.5%;
   padding-right: 2.5%;
 }
+
+.site-footer .copyright a,
+.site-footer .policy a {
+  text-decoration: none;
+  color: #009cde;
+  transition: all .2s ease;
+}
+
+.site-footer .copyright a:hover,
+.site-footer .policy a:hover {
+  color: var(--white-color);
+  transition: all .2s ease;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 30px 0;
+}
+
+.site-footer .copyright {
+  font-size: 14px;
+  color: var(--white-color);
+}
+
+.site-footer .policy a {
+  font-size: 12px;
+}
+
+/* 
+<footer class="site-footer">
+<div class="site-footer__inner container">
+  {# {{ page.footer_top }}
+  {{ page.footer_bottom }} #}
+  <p class="copyright">Copyright © 2023-{{'now'|date('Y')}} by Pablo Rigueto. All rights reserved. <a href="#page-top">Top of page</a>.</p>
+  <p class="policy">
+    <small>
+      <a href="/privacy-policy">Privacy Policy</a> | 
+      <a href="/terms-of-service">Terms of Service</a> |
+      <a href="/search">Search</a>
+    </small>
+  </p>
+</div>
+</footer> */
