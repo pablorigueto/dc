@@ -5,8 +5,9 @@
       <div class="frontpage-result-thumbnail">
 
       <div class="frontpage-label-main">
-        <div class="frontpage-label {{ node.bundle }}">
-          {{ node.bundle|upper }}
+        <div class="frontpage-label {{ node.bundle }} {{ field_tags|replace({ ' ': '' })|lower }}">
+          {# {{ node.bundle|upper }} #}
+          {{ field_tags }}
         </div>
       </div>
 

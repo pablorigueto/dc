@@ -100,6 +100,26 @@ function _setInfosToGetOnTwig($node, &$variables): void {
   $variables['image_title'] = $node->get('body')[0]->getValue()['value'] ?? "";
   $variables['revision_user_uri'] = _getLastChangedByFromNode($node)['profile_picture_uri'] ?? "";
   $variables['image_profile'] = _getUserProfileImage($node->getOwner()->id()) ?? "";
+  $variables['field_tags'] = _setTaxonomiTags($node) ?? "";
+}
+
+function _setTaxonomiTags($node) {
+  // Assuming $node is your node entity.
+  $tags = $node->get('field_tags')->getValue();
+
+  // Assuming there is at least one tag.
+  if (!empty($tags)) {
+    $firstTagId = $tags[0]['target_id'];
+
+    // Load the taxonomy term entity.
+    $term = \Drupal\taxonomy\Entity\Term::load($firstTagId);
+
+    // Check if the term is loaded successfully.
+    if ($term) {
+      // Get the term name.
+      return $term->getName();
+    }
+  }
 }
 
 function _setInfosToSearchResultTwig($node, &$variables): void {
@@ -111,6 +131,7 @@ function _setInfosToSearchResultTwig($node, &$variables): void {
   $variables['title_display'] = $node->get('body')[0]->getValue()['value'] ?? "";
   $variables['node_owner_or_changed'] = _getOwnerFromNode($node) ?? "";
   $variables['image_profile'] = _getUserProfileImage($node->getOwner()->id()) ?? "";
+  $variables['field_tags'] = _setTaxonomiTags($node) ?? "";
 }
 
 function _setThumbnailURI($node, &$variables) {

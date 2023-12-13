@@ -62,8 +62,9 @@
       <div class="search-result-thumbnail">
         <div class="result-item">
           <div class="search-label-main">
-            <div class="search-label {{ node_type }}">
-              {{ node_type|upper }}
+            <div class="search-label {{ node.bundle }} {{ field_tags|replace({ ' ': '' })|lower }}">
+              {# {{ node.bundle|upper }} #}
+              {{ field_tags }}
             </div>
           </div>
 
