@@ -28,17 +28,31 @@
               </div>
             </div>
 
+            <div class="views_node_count">
+              {{ view_node_count }}
+              <span class="material-symbols-outlined">
+                visibility
+              </span>
+            </div>
+
             <div class="comments_count">
               {{ comments_count }}
-              <i class="fa-regular fa-comment"></i>
+              {# <i class="fa-regular fa-comment"></i> #}
+              <span class="material-symbols-outlined">
+                chat_bubble
+              </span>
             </div>
 
             <div class="likes_count">
               {{ likes_count }}
-              <i class="fa-solid fa-thumbs-up"></i>
+              {# <i class="fa-solid fa-thumbs-up"></i> #}
+              <span class="material-symbols-outlined">
+                thumb_up
+              </span>
             </div>
 
-            {{ node.createdtime|format_date('custom', 'M j, Y') }}
+            {# {{ node.createdtime|format_date('custom', 'M j, Y') }} #}
+            {{ node.createdtime|format_date('custom', 'M, y') }}
     
           </div>
 

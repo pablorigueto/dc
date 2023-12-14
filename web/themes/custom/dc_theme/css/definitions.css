@@ -182,3 +182,34 @@ span[id^="like-"] {
   display: none;
   /* position: absolute; */
 }
+
+.views_node_count span,
+.likes_count span {
+  font-size: 15px;
+}
+
+.comments_count span {
+  font-size: 12px;
+}
+
+.views_node_count,
+.likes_count,
+.comments_count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.comments_count span {
+  padding-top: 1px;
+}
+
+.comments_count span {
+  padding-top: 1px;
+}
+
+.likes_count span {
+  padding-bottom: 2px;
+}
+

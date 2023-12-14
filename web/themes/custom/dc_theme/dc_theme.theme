@@ -121,15 +121,18 @@ function _setInfosToGetOnTwig($node, &$variables): void {
     $variables['comments_count'] = $node->get('comment')[0]->getValue()['comment_count'] ?? 0;
   }
 
-  // Get the view count directly from the history table.
-  $view_count = \Drupal::database()->select('history', 'h')
+  $viewCount = \Drupal::database()->select('node_counter', 'h')
     ->condition('h.nid', $node->id())
-    ->countQuery()
+    ->fields('h', ['totalcount'])
     ->execute()
     ->fetchField();
 
-  // Add the view count to the template variables.
-  $variables['view_count'] = $view_count;
+  $variables['view_node_count'] = 0;
+
+  if (!empty($viewCount)) {
+    // Add the view count to the template variables.
+    $variables['view_node_count'] = $viewCount;
+  }
 
 }
 
@@ -173,6 +176,19 @@ function _setInfosToSearchResultTwig($node, &$variables): void {
   $comments = $node->get('comment')->getValue();
   if (!empty($comments)) {
     $variables['comments_count'] = $node->get('comment')[0]->getValue()['comment_count'] ?? 0;
+  }
+
+  $viewCount = \Drupal::database()->select('node_counter', 'h')
+    ->condition('h.nid', $node->id())
+    ->fields('h', ['totalcount'])
+    ->execute()
+    ->fetchField();
+
+  $variables['view_node_count'] = 0;
+
+  if (!empty($viewCount)) {
+    // Add the view count to the template variables.
+    $variables['view_node_count'] = $viewCount;
   }
 
 }

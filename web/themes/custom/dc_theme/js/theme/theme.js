@@ -24,13 +24,40 @@
               MENU.slideUp();
             }
           });
+          // /* To mobile Accordion. */
+          // $(".primary_menu h2#block-dc-theme-planos-menu").click(function () {
+          //   // Toggle the 'rotate' class on click
+          //   $(this).addClass('rotate'); 
+          // });
         });
         drupalSettings.toggleMenu = true;
       }
     }
   }
 
+  // Drupal.behaviors.toggleMenu = {
+  //   attach(context) {
+  //     if (!drupalSettings.toggleMenu) {
+  //       $(document).ready(function () {
+  //         // Add a click event handler to the Menu headings.
+  //         $(".primary_menu h2", context).click(function () {
+  
+  //           // Find all open menus and close them.
+  //           $(".primary_menu ul:visible", context).not($(this).siblings("ul")).slideUp();
+  
+  //           // Find the related menu element within the same parent.
+  //           const MENU = $(this).siblings("ul", context);
+  
+  //           // Toggle the visibility of the menu.
+  //           MENU.slideToggle();
+  //         });
+  //       });
+  //       drupalSettings.toggleMenu = true;
+  //     }
+  //   }
+  // };
 
+ 
   Drupal.behaviors.addDefaultLike = {
     attach(context) {
       if (!drupalSettings.addDefaultLike) {
