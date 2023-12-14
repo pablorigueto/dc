@@ -24,6 +24,42 @@
   transition: all .2s ease;
 }
 
+.privacy,
+.terms {
+  flex: 1;
+}
+
+.terms {
+  text-align: start;
+}
+
+.privacy {
+  text-align: end;
+}
+
+.professional-contact,
+.policy {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.professional-contact a {
+  text-decoration: unset;
+  color: #fff;
+  transition: all 0.5s ease;
+}
+
+.professional-contact a .fa-brands {
+  font-size: 20px;
+}
+
+.professional-contact a:hover {
+  color: #009cde;
+  transition: all 0.5s ease;
+}
+
 .site-footer .copyright a:hover,
 .site-footer .policy a:hover {
   color: var(--white-color);

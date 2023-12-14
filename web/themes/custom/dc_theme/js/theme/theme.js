@@ -30,6 +30,24 @@
     }
   }
 
+
+  Drupal.behaviors.addDefaultLike = {
+    attach(context) {
+      if (!drupalSettings.addDefaultLike) {
+        $(document).ready(function () {
+          // Check if the span with id 'like-1' is empty
+          var like1Span = $('.like_dislike span[id^="like-"]', context);
+
+          if (like1Span.text().trim() === '') {
+            // If it's empty, add the value 0
+            like1Span.text('0');
+          }
+        });
+        drupalSettings.addDefaultLike = true;
+      }
+    }
+  }
+
   Drupal.behaviors.openSearch = {
     attach(context) {
       if (!drupalSettings.openSearch) {

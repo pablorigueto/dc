@@ -122,10 +122,20 @@
       <div class="site-footer__inner container">
         {# {{ page.footer_top }}
         {{ page.footer_bottom }} #}
-        <p class="copyright">Copyright © 2023-{{'now'|date('Y')}} by Pablo Rigueto. All rights reserved. <a href="#page-top">Top of page</a>.</p>
+        <p class="copyright">Copyright © 2023-{{'now'|date('Y')}} by Pablo Rigueto. All rights reserved.</p>
         <p class="policy">
-          <a href="/privacy-policy">Privacy Policy</a> | 
-          <a href="/terms-of-service">Terms of Service</a>
+          <a class="privacy" href="{{ url('entity.node.canonical', {'node': 1}) }}">Privacy Policy</a> |
+          <a class="terms" href="{{ url('entity.node.canonical', {'node': 2}) }}">Terms of Service</a>
+          {# <a class="privacy" href="{{ url('entity.node.canonical', {'node': 8}) }}">Privacy Policy</a> |
+          <a class="terms" href="{{ url('entity.node.canonical', {'node': 9}) }}">Terms of Service</a> #}
+        </p>
+        <p class="professional-contact">
+          <a href="https://linkedin.com/in/pablorigueto" target="_blank">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a href="https://github.com/pablorigueto" target="_blank">
+            <i class="fa-brands fa-github"></i>
+          </a>
         </p>
       </div>
     </footer>

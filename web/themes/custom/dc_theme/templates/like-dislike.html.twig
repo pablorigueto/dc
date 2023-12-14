@@ -1,0 +1,35 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a formatted like dislike field.
+ *
+ * Available variables:
+ * - like_url: like url.
+ * - dislike_url: dislike url.
+ * - likes: number of likes.
+ * - dislikes: number of dislikes.
+ * - disable: show or hide the like/dislike
+ * - entity_id: Id of entity(content).
+ *
+ * @ingroup themeable
+ */
+#}
+{# {% if disable == 0 %}
+  <div class="like_dislike">
+    <a class=" fa-solid fa-thumbs-up use-ajax" href={{ like_url }}></a>
+    <span id="like-{{ entity_id }}">{{ likes }}</span>
+  </div>
+  <div id="like_dislike_status-{{ entity_id }}"></div>
+{% endif %} #}
+
+
+{% if disable == 0 %}
+  <div class="like_dislike">
+    <a class="use-ajax" href={{ like_url }}>
+        <div id="like-animated"></div>
+    </a>
+    <span id="like-{{ entity_id }}">{{ likes }}</span>
+  </div>
+  <div id="like_dislike_status-{{ entity_id }}"></div>
+{% endif %}
+

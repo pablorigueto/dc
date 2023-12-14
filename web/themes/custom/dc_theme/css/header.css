@@ -307,13 +307,19 @@ body:not(.path-frontpage) .search-block-form,
 .path-search .search-label.drupal,
 .path-frontpage .frontpage-label.drupal {
   color: var(--white-color);
-  background: var(--medium-dark-color);
+  background: #107ca9;
 }
 
 .path-search .search-label.reactnative,
 .path-frontpage .frontpage-label.reactnative {
   color: var(--white-color);
   background: var(--medium-gray-color);
+}
+
+.path-search .search-label.environment,
+.path-frontpage .frontpage-label.environment {
+  color: var(--white-color);
+  background: var(--dark-color);
 }
 
 .path-frontpage .frontpage-title-display {
@@ -438,12 +444,17 @@ details.search-advanced .form-item-language-en {
 
 .path-search .search-result-thumbnail .owner-search,
 .path-frontpage .frontpage-result-thumbnail .owner-frontpage {
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
   padding-left: 5px;
   font-family: Inter-Light;
   font-size: 12px;
   color: var(--white-color);
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-top: 7.5px;
 }
 
 .path-search .search-result-thumbnail .profile-img-name,

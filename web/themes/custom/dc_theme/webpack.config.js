@@ -4,7 +4,8 @@ const isDevMode = process.env.NODE_ENV !== 'production';
 const config = {
   entry: {
     main: ["./js/src/home/index.jsx"],
-    page: ["./js/src/page/index.jsx"]
+    page: ["./js/src/page/index.jsx"],
+    like: ["./js/src/like/index.jsx"],
   },
   devtool: (isDevMode) ? 'source-map' : false,
   mode: (isDevMode) ? 'development' : 'production',

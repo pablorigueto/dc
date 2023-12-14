@@ -5,6 +5,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
+use Drupal\taxonomy\Entity\Term;
 use Drupal\user\Entity\User;
 
 /**
@@ -101,6 +102,19 @@ function _setInfosToGetOnTwig($node, &$variables): void {
   $variables['revision_user_uri'] = _getLastChangedByFromNode($node)['profile_picture_uri'] ?? "";
   $variables['image_profile'] = _getUserProfileImage($node->getOwner()->id()) ?? "";
   $variables['field_tags'] = _setTaxonomiTags($node) ?? "";
+
+  $variables['likes_count'] = 0;
+  $likes = $node->get('field_like')->getValue();
+  if (!empty($likes)) {
+    $variables['likes_count'] = $node->get('field_like')[0]->getValue()['likes'] ?? 0;
+  }
+
+  $variables['comments_count'] = 0;
+  $comments = $node->get('comment')->getValue();
+  if (!empty($comments)) {
+    $variables['comments_count'] = $node->get('comment')[0]->getValue()['comment_count'] ?? 0;
+  }
+
 }
 
 function _setTaxonomiTags($node) {
@@ -112,7 +126,7 @@ function _setTaxonomiTags($node) {
     $firstTagId = $tags[0]['target_id'];
 
     // Load the taxonomy term entity.
-    $term = \Drupal\taxonomy\Entity\Term::load($firstTagId);
+    $term = Term::load($firstTagId);
 
     // Check if the term is loaded successfully.
     if ($term) {
@@ -132,6 +146,19 @@ function _setInfosToSearchResultTwig($node, &$variables): void {
   $variables['node_owner_or_changed'] = _getOwnerFromNode($node) ?? "";
   $variables['image_profile'] = _getUserProfileImage($node->getOwner()->id()) ?? "";
   $variables['field_tags'] = _setTaxonomiTags($node) ?? "";
+
+  $variables['likes_count'] = 0;
+  $likes = $node->get('field_like')->getValue();
+  if (!empty($likes)) {
+    $variables['likes_count'] = $node->get('field_like')[0]->getValue()['likes'] ?? 0;
+  }
+
+  $variables['comments_count'] = 0;
+  $comments = $node->get('comment')->getValue();
+  if (!empty($comments)) {
+    $variables['comments_count'] = $node->get('comment')[0]->getValue()['comment_count'] ?? 0;
+  }
+
 }
 
 function _setThumbnailURI($node, &$variables) {

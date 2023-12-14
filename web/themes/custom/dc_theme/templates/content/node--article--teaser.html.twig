@@ -27,7 +27,17 @@
                 {{ node.uid.0.entity.name.value }}
               </div>
             </div>
-    
+
+            <div class="comments_count">
+              {{ comments_count }}
+              <i class="fa-regular fa-comment"></i>
+            </div>
+
+            <div class="likes_count">
+              {{ likes_count }}
+              <i class="fa-solid fa-thumbs-up"></i>
+            </div>
+
             {{ node.createdtime|format_date('custom', 'M j, Y') }}
     
           </div>
