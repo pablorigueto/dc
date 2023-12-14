@@ -133,18 +133,18 @@ h2 {
 
 .content-like {
   width: 100px;
-  background: #141414;
+  border: 1px solid #03a0cd;
   color: #fff;
   font-weight: bold;
   padding: 14px 25px 5px 0;
   border-radius: 2px;
   margin-top: 20px;
-  box-shadow: 0px 0px 2px 2px #38dfd3;
+  /* box-shadow: 0px 0px 2px 2px #38dfd3; */
   transition: all 0.5s ease;
 }
 
 .content-like:hover {
-  box-shadow: 0px 0px 3px 3px #009b90;
+  box-shadow: 0px 0px 1px 1px #03a0cd99;
   transition: all 0.5s ease;
 }
 
@@ -158,11 +158,13 @@ h2 {
 [id^="like_dislike_status"] {
   text-align: center;
   padding-top: 5px;
+  color: #03a0cd;
+  padding-left: 25px;
 }
 
-/* span[id^="like-"] {
-  margin-left: -10px;
-} */
+span[id^="like-"] {
+  color: #03a0cd;
+}
 
 .like-animation {
   width: 75px;

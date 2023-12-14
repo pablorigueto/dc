@@ -48,18 +48,24 @@ function _setHightlighHomepage(&$variables) {
 
   // Get the most recently created node.
   $nid = $entity_query->sort('created', 'DESC')
+    ->condition('type', ['page', 'article'], 'IN')
     ->range(0, 1)
     ->accessCheck(FALSE)
     ->execute();
 
   // Load the node with the obtained ID.
   $node = Node::load(reset($nid));
-  // Set node image uri.
-  // Thumbnail image.
-  _setThumbnailURI($node, $variables);
-  $variables['title_display'] = $node->get('body')[0]->getValue()['value'] ?? "";
-  $variables['content_body'] = $node->get('field_content_body')[0]->getValue()['value'] ?? "";
-  $variables['path_alias'] = _getPathAlias($node->id()) ?? "";
+
+  $nodeType = $node->getType();
+
+  if ($nodeType === 'page' || $nodeType === 'article') {
+    // Set node image uri.
+    // Thumbnail image.
+    _setThumbnailURI($node, $variables);
+    $variables['title_display'] = $node->get('body')[0]->getValue()['value'] ?? "";
+    $variables['content_body'] = $node->get('field_content_body')[0]->getValue()['value'] ?? "";
+    $variables['path_alias'] = _getPathAlias($node->id()) ?? "";
+  }
 
 }
 
@@ -114,6 +120,16 @@ function _setInfosToGetOnTwig($node, &$variables): void {
   if (!empty($comments)) {
     $variables['comments_count'] = $node->get('comment')[0]->getValue()['comment_count'] ?? 0;
   }
+
+  // Get the view count directly from the history table.
+  $view_count = \Drupal::database()->select('history', 'h')
+    ->condition('h.nid', $node->id())
+    ->countQuery()
+    ->execute()
+    ->fetchField();
+
+  // Add the view count to the template variables.
+  $variables['view_count'] = $view_count;
 
 }
 
