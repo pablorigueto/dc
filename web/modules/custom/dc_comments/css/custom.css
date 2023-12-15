@@ -1,0 +1,239 @@
+
+li.comment__links-item{
+  color: var(--font-color);
+}
+
+.field--name-comment-body  textarea:focus {
+  background: var(--background-textarea);
+  outline: none;
+  border-color: var(--font-color);
+}
+
+/* Hiden the subject of comments full view */
+.field--name-subject {
+  display: none;
+}
+
+/* Hiden the explanation about comments full view */
+.field--name-comment-body .js-filter-wrapper {
+  display: none;
+}
+
+/* Hiden the count comments. */
+.comments__count {
+  display: none;
+}
+
+/* Hiden the comment label */
+.js-form-type-textarea label {
+  display: none;
+}
+
+/* Defines font size of comments full view */
+.comment__time, .comment-edit {
+  font-size: var(--font-size-mini);
+}
+
+/* Style to put the submit button side of comment field */
+.comment-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* To align the comment with submit btn */
+.field--name-comment-body .js-text-full {
+  margin-top: 0.22rem;
+  border-radius: 2rem;
+  border-color: var(--border-light);
+  overflow: hidden;
+}
+
+/* When user try to post empty */
+.path-comment .field--name-comment-body .js-text-full {
+  margin-top: 0.26rem;
+}
+
+/* Defines the font-size inside the comments */
+.field--name-comment-body p {
+  margin-bottom: 0;
+  font-size: var(--font-size);
+}
+
+/* Add margin to distance the comment of links edit and etc */
+.comment__content ul.comment__links {
+  margin-top: 0.1rem;
+}
+
+/* To style the submit */
+.form-submit, #edit-cancel {
+  border: unset;
+  border-radius: 2rem;
+  background: unset;
+  /* box-shadow: var(--box-color-light) 0.1rem 0.1rem 0.3rem; */
+  min-height: 1.9rem;
+  min-width: 3rem;
+  font-size: var(--font-size-mini);
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.2rem;
+  border: 1px solid var(--border-light);
+  text-decoration: none;
+}
+
+/* Align comments and img full view */
+article.comment {
+  display: grid;
+  grid-template-columns: 6rem auto;
+  grid-gap: 0.5rem;
+  padding: 0.7rem 0;
+}
+
+/* Align edit/reply/delete full view */
+ul.comment__links {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  gap: 1rem;
+  flex-direction: row-reverse;
+  justify-content: start;
+}
+
+/* Remove marker from li full view */
+li {
+  list-style: none;
+  font-size: var(--font-size-mini);
+}
+
+/* Remove the underline from a full view */
+.comment__links a {
+  text-decoration: none;
+}
+
+/* Remove h3 and Replies word from comment full view */
+.comment__content h3,
+.show-hide-wrapper  {
+  display: none;
+}
+
+/* To picture full view */
+.comment__picture {
+  position: static;
+}
+
+/* To picture full view */
+.comment__picture img {
+  width: 100%;
+  height: 90px;
+}
+
+/* To reply comments */
+/* Add class only if the indented is not herself child. */
+.indented:not(.indented *),
+article + .parent-comment-info:not(.indented *) { /* To first reply */
+  /* add your styles here */
+  margin-inline-start: 1.5rem;
+}
+
+/* Remove the padding top from comment to keep the reply details close */
+.indented:not(.indented *) article {
+  padding-top: unset;
+}
+
+/* Padding to each new comments. */
+/* article.comment--level-1 {
+  padding-top: 1rem;
+} */
+
+/* Reply details styles */
+.parent-comment-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: var(--font-size-mini);
+}
+
+/* Set different style to user reply comment and limit the size */
+.username-info {
+  margin-left: 0.2rem;
+  font-weight: 600;
+  /* Hide any overflow beyond one line */
+  overflow: Hiden;
+  /* Ensure text doesn't wrap to a second line */
+  white-space: nowrap;
+  /* Add ellipsis to indicate truncated text */
+  text-overflow: ellipsis;
+  max-width: 50%;
+}
+
+/* Set top to comments section */
+.comments__title {
+  margin: 1.5rem 0;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+/* Set padding to commend to comments */
+.path-node .field__item p:first-of-type {
+  padding-top: 0.5rem;
+}
+
+.path-node .field__item p:last-of-type {
+  padding-bottom: 0.5rem;
+}
+
+.path-node .field__item p:only-of-type {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+
+/*
+*
+* Delete comments form styles
+*
+*/
+
+.path-comment #edit-actions {
+  display: flex;
+  gap: 0.6rem;
+  padding: 1.6rem 0;
+}
+
+.path-comment #edit-submit, .path-comment #edit-cancel {
+  width: 50%;
+}
+
+.path-comment .comment-comment-delete-form,
+.path-comment .breadcrumb__link,
+.path-comment .comment_edit {
+  font-size: var(--font-size);
+  text-decoration: none;
+}
+
+
+.path-comment .breadcrumb__list li:first-child,
+.path-comment #block-yes-pet-app-primary-local-tasks, .div-invisible {
+  display: none;
+}
+
+.path-comment #block-yes-pet-app-breadcrumbs nav.breadcrumb {
+  margin: 0;
+}
+
+.path-comment #block-yes-pet-app-breadcrumbs .breadcrumb__content ol {
+  padding: 0;
+}
+
+.comment__meta .comment__author,
+.comment__meta .comment__time {
+  display: block;
+}
+
+.comment__meta .comment__author {
+  margin-bottom: 0;
+}

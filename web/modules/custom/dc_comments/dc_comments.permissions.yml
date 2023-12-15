@@ -1,0 +1,4 @@
+delete own comments:
+  title: 'Delete own comments'
+  description: 'Allows users to delete their own comments.'
+  restrict access: true

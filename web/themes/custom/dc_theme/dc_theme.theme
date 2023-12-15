@@ -299,12 +299,12 @@ function _getUserProfileImage($uid) {
 
 }
 
-  /**
-   * Get the path alias through the node id.
-   */
-  function _getPathAlias(int $node_id): string {
-    // Get the URL object for the node using its ID.
-    $url = Url::fromRoute('entity.node.canonical', ['node' => $node_id]);
-    // Get the path alias from the URL object.
-    return $url->toString();
-  }
+/**
+ * Get the path alias through the node id.
+ */
+function _getPathAlias(int $node_id): string {
+  // Get the URL object for the node using its ID.
+  $url = Url::fromRoute('entity.node.canonical', ['node' => $node_id]);
+  // Get the path alias from the URL object.
+  return $url->toString();
+}

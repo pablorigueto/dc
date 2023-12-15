@@ -1,0 +1,8 @@
+name: DC Custom Comments
+type: module
+description: Provide custom comments
+package: Custom
+core_version_requirement: ^8 || ^9 || ^10
+
+version: '10.0.0'
+project: 'dc_init_form'

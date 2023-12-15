@@ -63,7 +63,9 @@
       if (!drupalSettings.addDefaultLike) {
         $(document).ready(function () {
           // Check if the span with id 'like-1' is empty
-          var like1Span = $('.like_dislike span[id^="like-"]', context);
+          // let like1Span = $('.path-frontpage .like_dislike span[id^="like-"], ' +
+          //  '.path-search .like_dislike span[id^="like-"]', context);
+          let like1Span = $('.like_dislike span[id^="like-"]', context);
 
           if (like1Span.text().trim() === '') {
             // If it's empty, add the value 0
