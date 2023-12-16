@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './searchAnimation'; // Import your App component from the appropriate path
+import App from './searchAnimation';
 
 document.addEventListener("DOMContentLoaded", function () {
   const root = document.getElementById('block-dc-theme-searchbtn-2');

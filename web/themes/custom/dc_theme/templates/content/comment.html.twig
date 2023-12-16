@@ -92,7 +92,7 @@
     <footer class="comment__meta">
       <p class="comment__author">{{ author }}</p>
       {# <p class="comment__time">{{ created }}</p> #}
-      <p class="comment__time">{{ formatted_date }}
+      
 
       {#
         Indicate the semantic relationship between parent and child comments
@@ -109,7 +109,13 @@
         <h3{{ title_attributes }}>{{ title }}</h3>
         {{ title_suffix }}
       {% endif %}
-      {{ content }}
+     
+      {{ content.comment_body }}
+       <p class="comment__time">{{ formatted_date }}
+      {{ content.links }}
+      
+      {{ content.field_comment_like }}
+      
     </div>
   </div>
 </article>

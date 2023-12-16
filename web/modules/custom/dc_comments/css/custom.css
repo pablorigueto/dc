@@ -1,8 +1,3 @@
-
-li.comment__links-item{
-  color: var(--font-color);
-}
-
 .field--name-comment-body  textarea:focus {
   background: var(--background-textarea);
   outline: none;
@@ -34,6 +29,23 @@ li.comment__links-item{
   font-size: var(--font-size-mini);
 }
 
+.comment__time {
+  margin-bottom: unset;
+  margin-block-start: unset;
+}
+
+/* Hidden the comment time if the comment edit is present */
+.comment__content .comment-edit + .comment__time {
+  display: none;
+}
+
+.comment__time,
+.comment-edit,
+.reply-text,
+.username-info {
+  font-size: 12px;
+}
+
 /* Style to put the submit button side of comment field */
 .comment-form {
   display: flex;
@@ -59,11 +71,6 @@ li.comment__links-item{
 .field--name-comment-body p {
   margin-bottom: 0;
   font-size: var(--font-size);
-}
-
-/* Add margin to distance the comment of links edit and etc */
-.comment__content ul.comment__links {
-  margin-top: 0.1rem;
 }
 
 /* To style the submit */
@@ -92,14 +99,18 @@ article.comment {
   padding: 0.7rem 0;
 }
 
+/* Add margin to distance the comment of links edit and etc */
 /* Align edit/reply/delete full view */
-ul.comment__links {
+.comment__content ul.links {
   display: flex;
   padding: 0;
   margin: 0;
-  gap: 1rem;
+  gap: 0.7rem;
   flex-direction: row-reverse;
   justify-content: start;
+  margin-top: 0.1rem;
+  font-size: 10px;
+  font-family: 'Inter-SemiBold';
 }
 
 /* Remove marker from li full view */
@@ -109,7 +120,7 @@ li {
 }
 
 /* Remove the underline from a full view */
-.comment__links a {
+.links a {
   text-decoration: none;
 }
 
@@ -126,8 +137,10 @@ li {
 
 /* To picture full view */
 .comment__picture img {
-  width: 100%;
-  height: 90px;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 /* To reply comments */
@@ -149,9 +162,9 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 } */
 
 /* Reply details styles */
-.parent-comment-wrapper {
+.parent-comment-info {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   text-align: center;
   font-size: var(--font-size-mini);

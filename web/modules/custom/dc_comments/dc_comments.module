@@ -45,6 +45,8 @@ function dc_comments_form_alter(&$form, &$form_state, $form_id) {
 
   // Change the comment field to plain text.
   if ($form_id == 'comment_comment_form') {
+    // Add a class to the submit button.
+    $form['actions']['submit']['#attributes']['id'] = 'postAnimation';
     $form['comment_body']['widget'][0]['#format'] = 'plain_text';
     $form['comment_body']['widget'][0]['#allowed_formats'] = ['plain_text'];
     $form['comment_body']['widget'][0]['#rows'] = 1;
@@ -61,11 +63,6 @@ function dc_comments_form_alter(&$form, &$form_state, $form_id) {
     $form['#validate'][] = '_dc_comments_form_validate';
   }
 
-  if ($form_id == 'vote') {
-    if (\Drupal::currentUser()->isAnonymous()) {
-      $form['#access'] = FALSE;
-    }
-  }
 
 }
 
@@ -93,7 +90,7 @@ function dc_comments_comment_view_alter(array &$build, EntityInterface $entity, 
 
   $comment = $build['#comment'];
 
-  if ($entity->getEntityTypeId() == 'comment' && isset($build['#comment'])) {
+  if ($entity->getEntityTypeId() === 'comment' && isset($build['#comment'])) {
     // Check if this is a reply comment.
     if ($comment->getParentComment()) {
       // Get the parent comment.
@@ -102,26 +99,28 @@ function dc_comments_comment_view_alter(array &$build, EntityInterface $entity, 
       // Load the author of the parent comment.
       $parent_author = User::load($parent_comment->getOwnerId());
 
+      // Build the reply information.
+      $buildReply = [
+        '#markup' => '<div class="parent-comment-info">' .
+                     '<div class="reply-text">' . t('reply: ') . '</div>' .
+                     '<div class="username-info">' . $parent_author->getDisplayName() . '</div>' .
+                     '</div>',
+      ];
+
       // Add author's name on reply.
-      $build['#prefix'] = '<div class="parent-comment-wrapper">' .
-      '<div class="parent-comment-info">' .
-      t('Reply to') .
-      '</div>' .
-      '<div class="username-info">' .
-        $parent_author->getDisplayName() .
-      '</div>' .
-      '</div>' .
-      $build['#prefix'];
+      array_unshift($build['comment_body'], $buildReply);
+
     }
   }
 
   // Check if the comment has been edited.
   if ($comment->getChangedTime() != $comment->getCreatedTime()) {
+
     // Create a DrupalDateTime object from the change timestamp of the comment.
     $formatted_time = _format_date($comment->getChangedTime());
-    $modifiedText = t('Modified');
+    $modifiedText = t('edited');
     // Add an "EDIT" message to the comment body.
-    $build['comment_body'][0]['#prefix'] = '<div class="comment-edit">' . $modifiedText . ': ' . $formatted_time . '</div>';
+    $build['comment_body']['#suffix'] = '<div class="comment-edit">' . $modifiedText . ': ' . $formatted_time . '</div>';
   }
 
 }
@@ -144,9 +143,35 @@ function dc_comments_preprocess_comment(&$variables) {
 *
 */
 function _format_date($timestamp) {
-  $change_time = DrupalDateTime::createFromTimestamp($timestamp);
-  // Format the change time into the desired pattern.
-  return $change_time->format('D, M/d/Y - H:i');
+  //$time = DrupalDateTime::createFromTimestamp($timestamp);
+  // Format the created and change time into the desired pattern.
+  //return $time->format('D, M/d/Y - H:i');
+
+  // Create a DrupalDateTime object for the provided timestamp.
+  $time = DrupalDateTime::createFromTimestamp($timestamp);
+  $current_time = new DrupalDateTime();
+
+  $interval = $current_time->diff($time);
+  $formatted_date = '';
+
+  // Calculate the total number of days and remaining hours.
+  $days = $interval->days;
+  $hours = $interval->h;
+
+  // Format the output.
+  if ($days > 0) {
+    $formatted_date .= $days . ' day' . ($days > 1 ? 's' : '');
+  }
+
+  if ($hours > 0) {
+    if ($formatted_date !== '') {
+      $formatted_date .= ' and ';
+    }
+    $formatted_date .= $hours . ' hour' . ($hours > 1 ? 's' : '');
+  }
+
+  return $formatted_date;
+
 }
 
 /*
