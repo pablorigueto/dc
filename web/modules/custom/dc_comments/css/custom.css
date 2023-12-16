@@ -34,11 +34,6 @@
   margin-block-start: unset;
 }
 
-/* Hidden the comment time if the comment edit is present */
-.comment__content .comment-edit + .comment__time {
-  display: none;
-}
-
 .comment__time,
 .comment-edit,
 .reply-text,
@@ -93,15 +88,15 @@
 
 /* Align comments and img full view */
 article.comment {
-  display: grid;
-  grid-template-columns: 6rem auto;
-  grid-gap: 0.5rem;
-  padding: 0.7rem 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 1rem 0;
 }
 
 /* Add margin to distance the comment of links edit and etc */
 /* Align edit/reply/delete full view */
-.comment__content ul.links {
+ul.links {
   display: flex;
   padding: 0;
   margin: 0;
@@ -116,7 +111,6 @@ article.comment {
 /* Remove marker from li full view */
 li {
   list-style: none;
-  font-size: var(--font-size-mini);
 }
 
 /* Remove the underline from a full view */
@@ -242,11 +236,30 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   padding: 0;
 }
 
-.comment__meta .comment__author,
-.comment__meta .comment__time {
+.comment__author,
+.comment__time {
   display: block;
 }
 
-.comment__meta .comment__author {
+.comment__author {
   margin-bottom: 0;
+}
+
+.comment__text-wrapper .comments_like > div:first-child > div:first-child {
+  display: none;
+} 
+
+.comment__text-wrapper .comments_like .like_dislike {
+  justify-content: start;
+  margin-top: 22px;
+  margin-left: -22px;
+}
+
+.comment__text-wrapper {
+  margin-top: -8px;
+}
+
+
+.comment_body > div p:first-child {
+  padding: 0.5rem 0;
 }

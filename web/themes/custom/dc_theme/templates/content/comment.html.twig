@@ -89,33 +89,38 @@
     </div>
   </div>
   <div class="comment__text-wrapper">
-    <footer class="comment__meta">
-      <p class="comment__author">{{ author }}</p>
-      {# <p class="comment__time">{{ created }}</p> #}
-      
+    <p class="comment__author">{{ author }}</p>
+    {#
+      Indicate the semantic relationship between parent and child comments
+      for accessibility. The list is difficult to navigate in a screen
+      reader without this information.
+      #}
+    {% if parent %}
+      <p class="visually-hidden">{{ parent }}</p>
+    {% endif %}
+  <div{{ content_attributes.addClass('comment__content') }}>
+    {% if title %}
+      {{ title_prefix }}
+      <h3{{ title_attributes }}>{{ title }}</h3>
+      {{ title_suffix }}
+    {% endif %}
+    
+    {# {{ dump(content.comment_body['#suffix'][0]) }} #}
+    
+    <div class="comment_body">{{ content.comment_body }}</div>
+    {% if content.comment_body['#suffix'] is not defined %}
+      <p class="comment__time">{{ 'created'|t }} {{ formatted_date }}
+    {% endif %}
 
-      {#
-        Indicate the semantic relationship between parent and child comments
-        for accessibility. The list is difficult to navigate in a screen
-        reader without this information.
-       #}
-      {% if parent %}
-        <p class="visually-hidden">{{ parent }}</p>
-      {% endif %}
-    </footer>
-    <div{{ content_attributes.addClass('comment__content') }}>
-      {% if title %}
-        {{ title_prefix }}
-        <h3{{ title_attributes }}>{{ title }}</h3>
-        {{ title_suffix }}
-      {% endif %}
-     
-      {{ content.comment_body }}
-       <p class="comment__time">{{ formatted_date }}
-      {{ content.links }}
-      
-      {{ content.field_comment_like }}
-      
-    </div>
+      {# <p class="comment__time">{{ 'created'|t }} {{ formatted_date }} #}
+  </div>
+
+  <footer>
+  {{ content.links }}
+  <div class="comments_like">
+    {{ content.field_comment_like }}
+  </div>
+  </footer>
+
   </div>
 </article>

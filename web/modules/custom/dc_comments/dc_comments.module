@@ -143,9 +143,9 @@ function dc_comments_preprocess_comment(&$variables) {
 *
 */
 function _format_date($timestamp) {
-  //$time = DrupalDateTime::createFromTimestamp($timestamp);
-  // Format the created and change time into the desired pattern.
-  //return $time->format('D, M/d/Y - H:i');
+  // $time = DrupalDateTime::createFromTimestamp($timestamp);
+  // // Format the created and change time into the desired pattern.
+  // return $time->format('D, M/d/Y - H:i');
 
   // Create a DrupalDateTime object for the provided timestamp.
   $time = DrupalDateTime::createFromTimestamp($timestamp);
@@ -157,6 +157,7 @@ function _format_date($timestamp) {
   // Calculate the total number of days and remaining hours.
   $days = $interval->days;
   $hours = $interval->h;
+  $minutes = $interval->i;
 
   // Format the output.
   if ($days > 0) {
@@ -168,6 +169,14 @@ function _format_date($timestamp) {
       $formatted_date .= ' and ';
     }
     $formatted_date .= $hours . ' hour' . ($hours > 1 ? 's' : '');
+  }
+
+  // If the time difference is less than 24 hours, use a different format.
+  if ($interval->days === 0 && $interval->h < 24) {
+    $formatted_date = $hours . ' hours';
+    if ($interval->h === 0) {
+      $formatted_date = $minutes . ' min';
+    }
   }
 
   return $formatted_date;
