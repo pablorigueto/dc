@@ -55,9 +55,8 @@
   //       drupalSettings.toggleMenu = true;
   //     }
   //   }
-  // };
+  // }; 
 
- 
   Drupal.behaviors.addDefaultLike = {
     attach(context) {
       if (!drupalSettings.addDefaultLike) {

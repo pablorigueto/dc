@@ -46,16 +46,18 @@ function dc_comments_form_alter(&$form, &$form_state, $form_id) {
   // Change the comment field to plain text.
   if ($form_id == 'comment_comment_form') {
     // Add a class to the submit button.
-    $form['actions']['submit']['#attributes']['id'] = 'postAnimation';
+    // $form['actions']['submit']['#prefix'] = '<i class="fa-regular fa-paper-plane"></i>';
+    // $form['actions']['submit']['#attributes']['class'][] = 'fa-regular fa-paper-plane';
+    $form['actions']['submit']['#attributes']['id'] = 'send-comment';
+    $form['actions']['submit']['#value'] = t('Send');
+
     $form['comment_body']['widget'][0]['#format'] = 'plain_text';
     $form['comment_body']['widget'][0]['#allowed_formats'] = ['plain_text'];
     $form['comment_body']['widget'][0]['#rows'] = 1;
-    $form['actions']['submit']['#value'] = t('Post');
     unset($form['actions']['preview']);
 
     // This line enables the Enter key to add a new line in the comment field.
     $form['comment_body']['widget'][0]['#input'] = TRUE;
-
     // Each time that the user hits Enter one line is add.
     $form['comment_body']['widget'][0]['#attributes']['onkeydown'] = 'if(event.keyCode==13){this.rows += 1;}';
 
@@ -63,13 +65,12 @@ function dc_comments_form_alter(&$form, &$form_state, $form_id) {
     $form['#validate'][] = '_dc_comments_form_validate';
   }
 
-
 }
 
 function _dc_comments_form_validate($form, &$form_state) {
   $comment_body = $form_state->getValue('comment_body')[0]['value'];
   if (empty($comment_body)) {
-    $form_state->setErrorByName('comment_body', t('Please enter a comment before to post.'));
+    $form_state->setErrorByName('comment_body', t('Please enter a comment before to send.'));
   }
 }
 
@@ -113,14 +114,15 @@ function dc_comments_comment_view_alter(array &$build, EntityInterface $entity, 
     }
   }
 
-  // Check if the comment has been edited.
+  // Check if the comment has been edited and add an element to indicated on twig.
   if ($comment->getChangedTime() != $comment->getCreatedTime()) {
 
     // Create a DrupalDateTime object from the change timestamp of the comment.
-    $formatted_time = _format_date($comment->getChangedTime());
-    $modifiedText = t('edited');
+    // $formatted_time = _format_date($comment->getChangedTime());
+    // $modifiedText = t('edited');
+    // $build['comment_body']['#suffix'] = '<div class="comment-edit">' . $modifiedText . ': ' . $formatted_time . '</div>';
     // Add an "EDIT" message to the comment body.
-    $build['comment_body']['#suffix'] = '<div class="comment-edit">' . $modifiedText . ': ' . $formatted_time . '</div>';
+    $build['comment_body']['#suffix'] = '';
   }
 
 }
@@ -130,8 +132,15 @@ function dc_comments_comment_view_alter(array &$build, EntityInterface $entity, 
  * Implements hook_preprocess_HOOK() for block templates.
  */
 function dc_comments_preprocess_comment(&$variables) {
-  // Get the timestamp of the comment creation.
-  $timestamp = $variables['comment']->getCreatedTime();
+
+  if ($variables['comment']->hasField('changed')) {
+    $timestamp = $variables['comment']->getChangedTime();
+  }
+  else {
+    // Get the timestamp of the comment creation.
+    $timestamp = $variables['comment']->getCreatedTime();
+  }
+
   // Format the change time into the desired pattern.
   $formatted_date = _format_date($timestamp);
 

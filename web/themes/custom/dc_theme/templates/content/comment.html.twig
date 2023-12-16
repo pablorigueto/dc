@@ -108,19 +108,21 @@
     {# {{ dump(content.comment_body['#suffix'][0]) }} #}
     
     <div class="comment_body">{{ content.comment_body }}</div>
+
+    <div class="comments_like">
+      {{ content.field_comment_like }}
+    </div>
+
     {% if content.comment_body['#suffix'] is not defined %}
-      <p class="comment__time">{{ 'created'|t }} {{ formatted_date }}
+      <p class="comment__time">{{ 'created'|t }} {{ formatted_date }}</p>
+    {% else %}
+     <p class="comment-edit">{{ 'edited'|t }} {{ formatted_date }}</p>
     {% endif %}
 
-      {# <p class="comment__time">{{ 'created'|t }} {{ formatted_date }} #}
   </div>
 
   <footer>
   {{ content.links }}
-  <div class="comments_like">
-    {{ content.field_comment_like }}
-  </div>
   </footer>
-
   </div>
 </article>
