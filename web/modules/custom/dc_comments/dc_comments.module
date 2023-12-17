@@ -127,7 +127,6 @@ function dc_comments_comment_view_alter(array &$build, EntityInterface $entity, 
 
 }
 
-
 /**
  * Implements hook_preprocess_HOOK() for block templates.
  */
