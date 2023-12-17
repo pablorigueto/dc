@@ -29,10 +29,6 @@
 .comment-edit {
   margin-bottom: unset;
   margin-top: unset;
-  padding-top: 12px;
-}
-
-.comment__time {
   margin-bottom: unset;
   margin-block-start: unset;
 }
@@ -42,6 +38,25 @@
 .reply-text,
 .username-info {
   font-size: 12px;
+}
+
+.comment-footer .comment-edit,
+.comment-footer .comment__time,
+.comments-manage-links {
+  display: none;
+}
+
+.comment__author,
+.comment__time {
+  display: block;
+}
+
+.comment-footer {
+  padding-top: 20px;
+}
+
+.comments-more {
+  cursor: pointer;
 }
 
 /* Style to put the submit button side of comment field */
@@ -105,7 +120,7 @@ form.comment-form .form-textarea {
   max-width: 100%;
   width: 100%;
   box-sizing: border-box;
-  padding: 0.79rem;
+  padding: 0.71rem;
   min-height: 40px;
   min-width: 320px;
   border: 1px solid #c9c9c9;
@@ -121,7 +136,7 @@ article.comment {
 
 /* Add margin to distance the comment of links edit and etc */
 /* Align edit/reply/delete full view */
-ul.links {
+.comment-field ul.links {
   display: flex;
   padding: 0;
   margin: 0;
@@ -134,12 +149,12 @@ ul.links {
 }
 
 /* Remove marker from li full view */
-li {
+.comment-field li {
   list-style: none;
 }
 
 /* Remove the underline from a full view */
-.links a {
+.comment-field .links a {
   text-decoration: none;
 }
 
@@ -156,10 +171,11 @@ li {
 
 /* To picture full view */
 .comment__picture img {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   object-fit: cover;
   border-radius: 50%;
+  box-shadow: 0 0 2px 2px #0000003d;
 }
 
 /* To reply comments */
@@ -265,11 +281,6 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   padding: 0;
 }
 
-.comment__author,
-.comment__time {
-  display: block;
-}
-
 .comment__author {
   margin-bottom: 0;
 }
@@ -285,7 +296,7 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 }
 
 .comment__text-wrapper {
-  margin-top: -6px;
+  margin-top: -1.5px;
 }
 
 
@@ -293,3 +304,4 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   padding-top: 0.5rem;
   margin-bottom: unset;
 }
+

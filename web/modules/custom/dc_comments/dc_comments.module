@@ -54,12 +54,15 @@ function dc_comments_form_alter(&$form, &$form_state, $form_id) {
     $form['comment_body']['widget'][0]['#format'] = 'plain_text';
     $form['comment_body']['widget'][0]['#allowed_formats'] = ['plain_text'];
     $form['comment_body']['widget'][0]['#rows'] = 1;
+
     unset($form['actions']['preview']);
 
     // This line enables the Enter key to add a new line in the comment field.
     $form['comment_body']['widget'][0]['#input'] = TRUE;
     // Each time that the user hits Enter one line is add.
     $form['comment_body']['widget'][0]['#attributes']['onkeydown'] = 'if(event.keyCode==13){this.rows += 1;}';
+
+    $form['comment_body']['#weight'] = -10;
 
     // Add a validation function to check if the textarea is empty.
     $form['#validate'][] = '_dc_comments_form_validate';
@@ -134,6 +137,12 @@ function dc_comments_preprocess_comment(&$variables) {
 
   if ($variables['comment']->hasField('changed')) {
     $timestamp = $variables['comment']->getChangedTime();
+
+    // // Get the comment entity.
+    // $test = $variables['comment']->get('comment_body')->value;
+    // $formatted_date = _format_date($timestamp);
+    // $test;
+
   }
   else {
     // Get the timestamp of the comment creation.

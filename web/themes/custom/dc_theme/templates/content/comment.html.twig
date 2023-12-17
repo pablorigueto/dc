@@ -104,25 +104,24 @@
       <h3{{ title_attributes }}>{{ title }}</h3>
       {{ title_suffix }}
     {% endif %}
-    
-    {# {{ dump(content.comment_body['#suffix'][0]) }} #}
-    
+
     <div class="comment_body">{{ content.comment_body }}</div>
 
-    <div class="comments_like">
-      {{ content.field_comment_like }}
-    </div>
+  </div>
 
+  <footer class="comment-footer">
+    <span class="comments-more material-symbols-outlined">
+      more_horiz
+    </span>
     {% if content.comment_body['#suffix'] is not defined %}
       <p class="comment__time">{{ 'created'|t }} {{ formatted_date }}</p>
     {% else %}
      <p class="comment-edit">{{ 'edited'|t }} {{ formatted_date }}</p>
     {% endif %}
 
-  </div>
-
-  <footer>
-  {{ content.links }}
+    <div class="comments-manage-links">
+      {{ content.links }}
+    </div>
   </footer>
   </div>
 </article>
