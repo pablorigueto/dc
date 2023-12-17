@@ -28,11 +28,12 @@
 #}
 <section{{ attributes }}>
 
-  {% if comment_form %}
-    <h2{{ content_attributes }}>{{ 'Add new comment'|t }}</h2>
-    {{ comment_form }}
-  {% endif %}
-
+  <div class="post-comments-section">
+    {% if comment_form %}
+      <h2{{ content_attributes }}>{{ 'Conversation'|t }}</h2>
+      {{ comment_form }}
+    {% endif %}
+  </div>
   {# {% if comments and not label_hidden %}
     {{ title_prefix }}
     <h2{{ title_attributes }}>{{ label }}</h2>

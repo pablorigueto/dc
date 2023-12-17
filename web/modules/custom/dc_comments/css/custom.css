@@ -60,12 +60,7 @@
 }
 
 /* Style to put the submit button side of comment field */
-.comment-form {
-  display: flex;
-  /* justify-content: center; */
-  align-items: center;
-  /* gap: 0.5rem; */
-}
+
 
 /* Defines the font-size inside the comments */
 .field--name-comment-body p {
@@ -117,11 +112,12 @@ form.comment-form textarea {
 
 /* Apply styles to all textareas inside your form */
 form.comment-form .form-textarea {
-  max-width: 100%;
+  max-width: 1111.5px;
+  max-height: 500px;
   width: 100%;
   box-sizing: border-box;
   padding: 0.71rem;
-  min-height: 40px;
+  min-height: 100px;
   min-width: 320px;
   border: 1px solid #c9c9c9;
 }
@@ -146,6 +142,19 @@ article.comment {
   margin-top: 0.1rem;
   font-size: 10px;
   font-family: 'Inter-SemiBold';
+}
+
+.post-comments-section {
+  padding-top: 3rem;
+  padding-bottom: 4rem;
+}
+
+.post-comments-section h2 {
+  text-align: center;
+}
+
+form.comment-form div.form-wrapper {
+  text-align: end;
 }
 
 /* Remove marker from li full view */
