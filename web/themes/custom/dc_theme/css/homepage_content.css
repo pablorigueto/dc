@@ -38,3 +38,11 @@
 .frontpage-result-thumbnail:hover {
   box-shadow: 4px 4px 4px #000000bf;
 }
+
+.teaser-tag-group {
+  display: flex;
+  gap: 0.3rem;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}

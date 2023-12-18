@@ -4,12 +4,21 @@
       
       <div class="frontpage-result-thumbnail">
 
-      <div class="frontpage-label-main">
-        <div class="frontpage-label {{ node.bundle }} {{ field_tags|replace({ ' ': '' })|lower }}">
-          {# {{ node.bundle|upper }} #}
-          {{ field_tags }}
+      {# <div class="frontpage-label-main">
+        <div class="frontpage-label {{ node.bundle }} {{ field_tags[0]|replace({ ' ': '' })|lower }}">
+          {{ field_tags[0] }}
         </div>
-      </div>
+      </div> #}
+
+        {% if field_tags is not empty %}
+          <div class="teaser-tag-group">
+            {% for tag in field_tags %}
+            <div class="frontpage-label {{ node.bundle }} {{ tag|replace({ ' ': '' })|lower }}">
+              {{ tag }}{% if not loop.last %}{% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        {% endif %}
 
         <div class="frontpage-title-display">
 

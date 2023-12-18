@@ -136,23 +136,48 @@ function _setInfosToGetOnTwig($node, &$variables): void {
 
 }
 
+// function _setTaxonomiTags($node) {
+//   // Assuming $node is your node entity.
+//   $tags = $node->get('field_tags')->getValue();
+
+//   // Assuming there is at least one tag.
+//   if (!empty($tags)) {
+//     $firstTagId = $tags[0]['target_id'];
+
+//     // Load the taxonomy term entity.
+//     $term = Term::load($firstTagId);
+
+//     // Check if the term is loaded successfully.
+//     if ($term) {
+//       // Get the term name.
+//       return $term->getName();
+//     }
+//   }
+// }
+
 function _setTaxonomiTags($node) {
   // Assuming $node is your node entity.
   $tags = $node->get('field_tags')->getValue();
 
+  $tagNames = [];
+
   // Assuming there is at least one tag.
   if (!empty($tags)) {
-    $firstTagId = $tags[0]['target_id'];
+    foreach ($tags as $tag) {
+      $tagId = $tag['target_id'];
 
-    // Load the taxonomy term entity.
-    $term = Term::load($firstTagId);
+      // Load the taxonomy term entity.
+      $term = Term::load($tagId);
 
-    // Check if the term is loaded successfully.
-    if ($term) {
-      // Get the term name.
-      return $term->getName();
+      // Check if the term is loaded successfully.
+      if ($term) {
+        // Get the term name and add it to the array.
+        $tagNames[] = $term->getName();
+      }
     }
   }
+
+  return $tagNames;
 }
 
 function _setInfosToSearchResultTwig($node, &$variables): void {

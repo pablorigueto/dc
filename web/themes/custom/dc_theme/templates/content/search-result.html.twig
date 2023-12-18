@@ -61,12 +61,21 @@
     <a class="search-results-img" href="{{ url }}">
       <div class="search-result-thumbnail">
         <div class="result-item">
-          <div class="search-label-main">
+          {# <div class="search-label-main">
             <div class="search-label {{ node.bundle }} {{ field_tags|replace({ ' ': '' })|lower }}">
-              {# {{ node.bundle|upper }} #}
               {{ field_tags }}
             </div>
-          </div>
+          </div> #}
+
+          {% if field_tags is not empty %}
+            <div class="teaser-tag-group">
+              {% for tag in field_tags %}
+              <div class="search-label {{ node.bundle }} {{ tag|replace({ ' ': '' })|lower }}">
+                {{ tag }}{% if not loop.last %}{% endif %}
+              </div>
+              {% endfor %}
+            </div>
+          {% endif %}
 
           <div class="search-title-display">
 
