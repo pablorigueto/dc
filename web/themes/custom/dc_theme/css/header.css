@@ -142,14 +142,14 @@
 .primary_menu h2#block-dc-theme-planos-menu:after {
   content: '\f0d7';
   margin-left: 10px;
-  font-family: 'Font Awesome 6 Free';
+  font-family: 'FontAwesome';
 }
 
 .primary_menu nav h2:after,
 .primary_menu #block-dc-theme-languageswitcher h2:after {
   content: '\f0d7';
   margin-left: 10px;
-  font-family: 'Font Awesome 6 Free';
+  font-family: 'FontAwesome';
 }
 
 .primary_menu ul {

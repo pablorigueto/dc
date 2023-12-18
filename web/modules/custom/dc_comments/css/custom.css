@@ -57,6 +57,19 @@
 
 .comments-more {
   cursor: pointer;
+  color: #1414149c;
+  transition: all 0.5s ease;
+}
+
+.comments-more:hover {
+  color: #141414;
+  transition: all 0.5s ease;
+}
+
+.comments-more:before {
+  content: '\f013';
+  font-family: 'FontAwesome';
+  font-size: 10px;
 }
 
 /* Style to put the submit button side of comment field */
@@ -118,7 +131,7 @@ form.comment-form .form-textarea {
   box-sizing: border-box;
   padding: 0.71rem;
   min-height: 100px;
-  min-width: 320px;
+  min-width: 100%;
   border: 1px solid #c9c9c9;
 }
 
@@ -147,10 +160,6 @@ article.comment {
 .post-comments-section {
   padding-top: 3rem;
   padding-bottom: 4rem;
-}
-
-.post-comments-section h2 {
-  text-align: center;
 }
 
 form.comment-form div.form-wrapper {
@@ -196,9 +205,9 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 }
 
 /* Remove the padding top from comment to keep the reply details close */
-.indented:not(.indented *) article {
+/* .indented:not(.indented *) article {
   padding-top: unset;
-}
+} */
 
 .indented > article:last-child {
   padding-bottom: 2rem;
@@ -276,6 +285,41 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   text-decoration: none;
 }
 
+#block-dc-theme-content {
+  max-width: 1170px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 320px) and (max-width: 1170px) {
+  #block-dc-theme-content {
+    max-width: 95%;
+  }
+}
+
+#block-dc-theme-content form.comment-comment-delete-form input.form-submit, 
+#block-dc-theme-content form.comment-comment-delete-form a.dialog-cancel {
+  background-image: linear-gradient(90deg,var(--dark-color),var(--light-dark-color) 50%,var(--dark-color));
+  border: unset;
+  height: 40px;
+  color: var(--white-color);
+  width: 150px;
+  cursor: pointer;
+  font-family: 'Inter-Regular';
+  font-size: 16px;
+  background-size: 200% auto;
+  transition: all 225ms ease-in-out;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: unset;
+  text-decoration: unset;
+}
+
+#block-dc-theme-content form.comment-comment-delete-form input.form-submit {
+  background-image: unset;
+  background-color: #db3250;
+}
 
 .path-comment .breadcrumb__list li:first-child,
 .path-comment #block-yes-pet-app-primary-local-tasks, .div-invisible {

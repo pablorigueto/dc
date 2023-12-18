@@ -36,14 +36,15 @@
   </div>
 
   <div class="basicpage-full-body">
-    {{ content.field_content_body }}
+    <div class="field-tags">
+      {{ content.field_tags }}
+    </div>
+    <div class="content-body">
+      {{ content.field_content_body }}
+    </div>
     <div class="content-like">
       {{ content.field_like }}
     </div>
-  </div>
-
-  <div class="field-tags">
-    {{ content.field_tags }}
   </div>
 
   <div class="comment-field">
