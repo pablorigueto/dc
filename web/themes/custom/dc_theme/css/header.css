@@ -449,6 +449,11 @@ details.search-advanced .form-item-language-en {
   display: none;
 }
 
+.swiper-wrapper {
+  gap: 10px;
+  padding: 10px 0px;
+}
+
 .path-search .search-result-thumbnail img,
 .path-frontpage .frontpage-result-thumbnail img {
   object-fit: cover;

@@ -5,6 +5,9 @@ namespace Drupal\dc_endpoints\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\File\FileUrlGeneratorInterface;
+use Drupal\Core\Language\LanguageManagerInterface;
+use Drupal\dc_endpoints\Traits\NodeTrait;
+use Drupal\node\Entity\Node;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -12,6 +15,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  * Controller for fetching all nodes.
  */
 class APIEndpoints extends ControllerBase {
+  use NodeTrait;
 
   /**
    * The entity type manager service.
@@ -28,16 +32,30 @@ class APIEndpoints extends ControllerBase {
   protected $fileUrlGenerator;
 
   /**
+   * The Language Manager Interface.
+   *
+   * @var Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
+  /**
    * Constructs a new CustomModuleController object.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager service.
    * @param \Drupal\Core\File\FileUrlGeneratorInterface $file_url_generator
    *   The file system service.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   *   The file system service.
    */
-  public function __construct(EntityTypeManagerInterface $entity_type_manager, FileUrlGeneratorInterface $file_url_generator) {
+  public function __construct(
+    EntityTypeManagerInterface $entity_type_manager,
+    FileUrlGeneratorInterface $file_url_generator,
+    LanguageManagerInterface $languageManager,
+    ) {
     $this->entityTypeManager = $entity_type_manager;
     $this->fileUrlGenerator = $file_url_generator;
+    $this->languageManager = $languageManager;
   }
 
   /**
@@ -46,7 +64,8 @@ class APIEndpoints extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('entity_type.manager'),
-      $container->get('file_url_generator')
+      $container->get('file_url_generator'),
+      $container->get('language_manager'),
     );
   }
 
@@ -70,6 +89,9 @@ class APIEndpoints extends ControllerBase {
       if ($node->bundle() != 'page' && $node->bundle() != 'article') {
         continue;
       }
+
+      $test = $this->getAllNodes($node->bundle(), 1);
+      $test;
 
       $image_base = $node->get('field_image');
 
