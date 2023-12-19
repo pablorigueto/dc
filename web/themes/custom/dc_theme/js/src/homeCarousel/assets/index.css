@@ -1,6 +1,11 @@
-
+/* 
 #carousel-content img {
   width: 250px;
   height: 300px;
   object-fit: cover;
+} */
+
+.swiper-wrapper {
+  gap: 10px;
+  padding: 10px 0px;
 }

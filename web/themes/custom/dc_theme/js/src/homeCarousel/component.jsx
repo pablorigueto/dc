@@ -42,12 +42,48 @@ const NodeList = () => {
 
         {nodes.map((node) => (
           <SwiperSlide key={node.id}>
-            <h3>
-              <strong>ID:</strong> {node.id},
-              <strong>Title:</strong> {node.title},
-            </h3>
-            <img src={node.url} alt={node.alt} />
-          </SwiperSlide>
+            <div className="frontpage-result-thumbnail">
+              <div className="teaser-tag-group">
+                <div className="frontpage-label page environment">Environment</div>
+                <div className="frontpage-label page drupal">Drupal</div>
+              </div>
+              <div className='frontpage-title-display'>
+                <div className="frontpage-title">{node.title}</div>
+                  <div className="profile-frontpage">
+
+                    <div className="profile-img-name">
+                      <img className="profile-frontpage-img" src="/sites/default/files/pictures/2023-11/cane-corso-p.jpg" alt="User Profile Image" />
+                      <div className="owner-frontpage">
+                        admin
+                      </div>
+                    </div>
+
+                    <div className="views_node_count">
+                      382
+                      <span className="material-symbols-outlined">
+                        visibility
+                      </span>
+                    </div>
+                    
+                    <div className="comments_count">
+                      13
+                      <span className="material-symbols-outlined">
+                        chat_bubble
+                      </span>
+                    </div>
+
+                    <div className="likes_count">
+                      9
+                      <span className="material-symbols-outlined">
+                        thumb_up
+                      </span>
+                    </div>
+                    Nov, 23
+                  </div>
+                </div>
+                <img src={node.url} alt={node.alt} />
+            </div>
+          </SwiperSlide>        
         ))}
       </Swiper>
     </>
