@@ -15,10 +15,10 @@ react_app_main:
       https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css: { type: external }
   js:
     js/slick/slick.js: {}
-    js/dist_dev/main.min.js: {minified: true}
-    js/dist_dev/page.min.js: {minified: true}
+    js/dist_dev/search.min.js: {minified: true}
     js/dist_dev/like.min.js: {minified: true}
     js/dist_dev/send.min.js: {minified: true}
+    js/dist_dev/homeCarousel.min.js: {minified: true}
     js/theme/theme.js: {}
   dependencies:
     - core/jquery

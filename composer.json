@@ -27,6 +27,7 @@
         "drupal/like_dislike": "^2.4",
         "drupal/pathauto": "*",
         "drupal/redirect": "*",
+        "drupal/restui": "^1.21",
         "drupal/search_api": "*",
         "drupal/search_api_solr": "*",
         "drush/drush": "^12.1",

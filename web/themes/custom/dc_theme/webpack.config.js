@@ -3,8 +3,8 @@ const isDevMode = process.env.NODE_ENV !== 'production';
 
 const config = {
   entry: {
-    main: ["./js/src/home/index.jsx"],
-    page: ["./js/src/page/index.jsx"],
+    homeCarousel: ["./js/src/homeCarousel/index.jsx"],
+    search: ["./js/src/search/index.jsx"],
     like: ["./js/src/like/index.jsx"],
     send: ["./js/src/send/index.jsx"],
   },
