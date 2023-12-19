@@ -23,7 +23,9 @@ const NodeList = () => {
       <ul>
         {nodes.map((node) => (
           <li key={node.id}>
-            <strong>ID:</strong> {node.id}, <strong>Title:</strong> {node.title}
+            <strong>ID:</strong> {node.id},
+            <strong>Title:</strong> {node.title},
+            <img src={node.url} alt={node.alt} />
           </li>
         ))}
       </ul>

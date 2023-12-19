@@ -1,7 +1,7 @@
-dc_endpoints.all_nodes:
+dc_endpoints.pages_article:
   path: '/api/an'
   defaults:
-    _controller: '\Drupal\dc_endpoints\Controller\APIEndpoints::getAllNodes'
-    _title: 'Get All Nodes'
+    _controller: '\Drupal\dc_endpoints\Controller\APIEndpoints::pageAndArticle'
+    _title: 'Get All Pages and Article'
   requirements:
     _permission: 'access content'
