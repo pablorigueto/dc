@@ -1,5 +1,6 @@
 
-.home-carousel img {
-  width: 300px;
+#carousel-content img {
+  width: 250px;
   height: 300px;
+  object-fit: cover;
 }
