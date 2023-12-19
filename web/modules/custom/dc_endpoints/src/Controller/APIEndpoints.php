@@ -23,11 +23,10 @@ class APIEndpoints extends ControllerBase {
   /**
    * The entity type manager service.
    *
-   * @var \Drupal\Core\File\FileUrlGeneratorInterface;
+   * @var \Drupal\Core\File\FileUrlGeneratorInterface
    */
   protected $fileUrlGenerator;
 
-  
   /**
    * Constructs a new CustomModuleController object.
    *
