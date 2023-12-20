@@ -27,17 +27,41 @@ const NodeList = () => {
     return <div>Error: {error.message}</div>;
   }
 
+  const breakpoints = {
+    // when window width is >= 320px
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 10,
+    },
+    // when window width is >= 480px
+    480: {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    },
+    // when window width is >= 640px
+    640: {
+      slidesPerView: 3,
+      spaceBetween: 30,
+    },
+    // when window width is >= 768px
+    768: {
+      slidesPerView: 4,
+      spaceBetween: 30,
+    },
+  };
+
   return (
     <>
       <Swiper
-        slidesPerView={3}
+        slidesPerView={4}
         spaceBetween={30}
-        centeredSlides={true}
+        centeredSlides={false}
         pagination={{
           type: 'progressbar',
         }}
         modules={[Pagination, Navigation]}
         className="homepage-carousel"
+        breakpoints={breakpoints}
       >
 
         {nodes.map((node) => (
