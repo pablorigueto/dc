@@ -356,6 +356,10 @@ body:not(.path-frontpage) .search-block-form,
   background: var(--dark-color);
 }
 
+.path-frontpage .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+  background-color:#009cde;
+}
+
 .path-frontpage .frontpage-title-display {
   position: absolute;
   top: 0;
