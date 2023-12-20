@@ -66,52 +66,56 @@ const NodeList = () => {
 
         {nodes.map((node) => (
           <SwiperSlide key={node.id}>
-            <div className="frontpage-result-thumbnail">
-              <div className="teaser-tag-group">
+            {console.log(node.node_path)}
+            <a className="node-path" href={node.node_path}>
 
-              {node.tags.map((tag) => (
-                <div key={tag.id} className={`frontpage-label page ${tag.alias.toLowerCase()}`}>
-                  {tag.alias}
+              <div className="frontpage-result-thumbnail">
+
+                <div className="teaser-tag-group">
+                  {node.tags.map((tag) => (
+                    <div key={tag.id} className={`frontpage-label page ${tag.alias.toLowerCase()}`}>
+                      {tag.alias}
+                    </div>
+                  ))}
                 </div>
-              ))}
 
-              </div>
-              <div className='frontpage-title-display'>
-                <div className="frontpage-title">{node.title}</div>
-                  <div className="profile-frontpage">
+                <div className='frontpage-title-display'>
+                  <div className="frontpage-title">{node.title}</div>
+                    <div className="profile-frontpage">
 
-                    <div className="profile-img-name">
-                      <img className="profile-frontpage-img" src="/sites/default/files/pictures/2023-11/cane-corso-p.jpg" alt="User Profile Image" />
-                      <div className="owner-frontpage">
-                        admin
+                      <div className="profile-img-name">
+                        <img className="profile-frontpage-img" src={node.node_owner_image_profile} alt="User Profile Image" />
+                        <div className="owner-frontpage">
+                          {node.node_owner_name}
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="views_node_count">
-                      382
-                      <span className="material-symbols-outlined">
-                        visibility
-                      </span>
-                    </div>
-                    
-                    <div className="comments_count">
-                      13
-                      <span className="material-symbols-outlined">
-                        chat_bubble
-                      </span>
-                    </div>
+                      <div className="views_node_count">
+                        {node.node_view_count}
+                        <span className="material-symbols-outlined">
+                          visibility
+                        </span>
+                      </div>
 
-                    <div className="likes_count">
-                      9
-                      <span className="material-symbols-outlined">
-                        thumb_up
-                      </span>
+                      <div className="comments_count">
+                        {node.comments_count}
+                        <span className="material-symbols-outlined">
+                          chat_bubble
+                        </span>
+                      </div>
+
+                      <div className="likes_count">
+                        {node.likes_count}
+                        <span className="material-symbols-outlined">
+                          thumb_up
+                        </span>
+                      </div>
+                      Nov, 23
                     </div>
-                    Nov, 23
                   </div>
-                </div>
-                <img src={node.url} alt={node.alt} />
-            </div>
+                  <img src={node.url} alt={node.alt} />
+              </div>
+            </a>
           </SwiperSlide>
         ))}
       </Swiper>
