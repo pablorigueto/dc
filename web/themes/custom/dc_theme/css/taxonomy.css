@@ -1,3 +1,5 @@
+@import url(./definitions.css);
+
 .path-taxonomy {
   /* Styles for the .path-taxonomy container */
 
@@ -54,22 +56,22 @@
     font-family: 'Inter-Bold';
   }
 
-  .frontpage-label.reactjs {
+  .reactjs {
     color: var(--medium-dark-color);
     background: var(--white-color);
   }
 
-  .frontpage-label.drupal {
+  .drupal {
     color: var(--white-color);
     background: #107ca9;
   }
 
-  .frontpage-label.reactnative {
+  .native {
     color: var(--white-color);
     background: var(--medium-gray-color);
   }
 
-  .frontpage-label.environment {
+  .environment {
     color: var(--white-color);
     background: var(--dark-color);
   }

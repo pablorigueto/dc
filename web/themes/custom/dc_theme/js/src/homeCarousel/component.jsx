@@ -30,7 +30,7 @@ const NodeList = () => {
   return (
     <>
       <Swiper
-        slidesPerView={4}
+        slidesPerView={3}
         spaceBetween={30}
         centeredSlides={true}
         pagination={{
@@ -44,8 +44,13 @@ const NodeList = () => {
           <SwiperSlide key={node.id}>
             <div className="frontpage-result-thumbnail">
               <div className="teaser-tag-group">
-                <div className="frontpage-label page environment">Environment</div>
-                <div className="frontpage-label page drupal">Drupal</div>
+
+              {node.tags.map((tag) => (
+                <div key={tag.id} className={`frontpage-label page ${tag.alias.toLowerCase()}`}>
+                  {tag.alias}
+                </div>
+              ))}
+
               </div>
               <div className='frontpage-title-display'>
                 <div className="frontpage-title">{node.title}</div>
@@ -83,7 +88,7 @@ const NodeList = () => {
                 </div>
                 <img src={node.url} alt={node.alt} />
             </div>
-          </SwiperSlide>        
+          </SwiperSlide>
         ))}
       </Swiper>
     </>

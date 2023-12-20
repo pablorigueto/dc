@@ -77,40 +77,60 @@ class APIEndpoints extends ControllerBase {
    */
   public function pageAndArticle() {
 
-    $node_storage = $this->entityTypeManager->getStorage('node');
-    $query = $node_storage->getQuery()
-      ->accessCheck(FALSE);
-    $nids = $query->execute();
+    $langcode = $this->currentLanguage();
+
+    $all_nodes = $this->getAllNodes('article', 'page', 1);
 
     $nodes = [];
-    foreach ($nids as $nid) {
-      $node = $node_storage->load($nid);
+    foreach ($all_nodes as $node) {
+      $node_storage = $this->entityTypeManager->getStorage('node');
+      $single_node = $node_storage->load($node->id());
 
-      if ($node->bundle() != 'page' && $node->bundle() != 'article') {
-        continue;
+      // If the node didn't have translation move to the next one.
+      $single_node = $this->getTranslationField($node, $langcode);
+      if ($single_node === FALSE) {
+        $single_node = $node;
       }
 
-      $test = $this->getAllNodes($node->bundle(), 1);
-      $test;
-
-      $image_base = $node->get('field_image');
-
+      $image_base = $single_node->get('field_image')[0];
       $file_path = $image_base->entity->getFileUri() ?? '';
-
       $url = $this->fileUrlGenerator->generate($file_path);
-
       $relative_url = $url->toString();
 
+      $tags = $this->tagsNode($single_node);
+
       $nodes[] = [
-        'id' => $node->id(),
-        'title' => $node->label(),
+        'id' => $single_node->id(),
+        'title' => $single_node->label(),
         'url' => $relative_url,
         'alt' => $image_base->alt,
+        'tags' => $tags,
       ];
     }
 
     return new JsonResponse($nodes);
 
+  }
+
+  /**
+   * Returns all tags from field.
+   *
+   */
+  protected function tagsNode($node) {
+    $field_items = $node->get('field_tags');
+
+    $tags = [];
+    foreach ($field_items as $item) {
+
+      $toxonomy_alias = $this->getTaxonomyTermAlias($item->target_id);
+
+      $tags[] = [
+        'id' => $item->target_id,
+        'alias' => $toxonomy_alias,
+      ];
+    }
+
+    return $tags;
   }
 
 }
