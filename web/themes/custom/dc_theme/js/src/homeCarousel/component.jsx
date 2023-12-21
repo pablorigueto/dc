@@ -64,7 +64,10 @@ const NodeList = () => {
         breakpoints={breakpoints}
       >
 
-        {nodes.map((node) => (
+        {nodes
+          .slice() // Create a shallow copy of the array to avoid mutating the original array
+          .sort((a, b) => b.node_view_count - a.node_view_count) // Sort by view count in descending order
+          .map((node) => (
           <SwiperSlide key={node.id}>
 
             <a className="node-path" href={node.node_path}>
