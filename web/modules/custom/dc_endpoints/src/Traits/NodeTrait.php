@@ -232,6 +232,14 @@ trait NodeTrait {
    * Returns all tags from field.
    *
    */
+  protected function nodeTimeStamp($node) {
+    return $node->created->getValue()[0]['value'];
+  }
+
+  /**
+   * Returns all tags from field.
+   *
+   */
   protected function formateDate($timestamp) {
     $datetime = DrupalDateTime::createFromTimestamp($timestamp);
     return $datetime->format('M y');

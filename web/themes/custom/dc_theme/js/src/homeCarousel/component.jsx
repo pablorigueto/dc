@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { fetchNodes } from './controller';
 import './assets/index.css';
@@ -14,14 +14,37 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
 
 const NodeList = () => {
+  
   const { data: nodes, isLoading, error } = useQuery('nodes', fetchNodes, {
     retry: 5,
     retryDelay: 1000,
   });
 
+  const [sortOption, setSortOption] = useState('mostViewed');
+
+  const handleSortChange = (option) => {
+    setSortOption(option);
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
+  const sortingOptions = {
+    mostViewed: (a, b) => b.node_view_count - a.node_view_count,
+    lessViewed: (a, b) => a.node_view_count - b.node_view_count,
+    mostLiked: (a, b) => b.likes_count - a.likes_count,
+    lessLiked: (a, b) => a.likes_count - b.likes_count,
+    mostCommented: (a, b) => b.comments_count - a.comments_count,
+    lessCommented: (a, b) => a.comments_count - b.comments_count,
+  };
+
+  const sortedNodes = nodes.slice().sort(sortingOptions[sortOption]);
+
+  {/* List node, more recent first. */}
+  const nodeTimeStamp = nodes
+  .slice()
+  .sort((a, b) => b.node_timestamp - a.node_timestamp);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -52,6 +75,20 @@ const NodeList = () => {
 
   return (
     <>
+      <div>
+        <label>
+          Sort by:
+          <select value={sortOption} onChange={(e) => handleSortChange(e.target.value)}>
+            <option value="mostViewed">Most Viewed</option>
+            <option value="lessViewed">Less Viewed</option>
+            <option value="mostLiked">Most Liked</option>
+            <option value="lessLiked">Less Liked</option>
+            <option value="mostCommented">Most Commented</option>
+            <option value="lessCommented">Less Commented</option>
+          </select>
+        </label>
+      </div>
+
       <Swiper
         slidesPerView={4}
         spaceBetween={30}
@@ -64,10 +101,7 @@ const NodeList = () => {
         breakpoints={breakpoints}
       >
 
-        {nodes
-          .slice() // Create a shallow copy of the array to avoid mutating the original array
-          .sort((a, b) => b.node_view_count - a.node_view_count) // Sort by view count in descending order
-          .map((node) => (
+        {sortedNodes.map((node) => (
           <SwiperSlide key={node.id}>
 
             <a className="node-path" href={node.node_path}>
@@ -76,7 +110,7 @@ const NodeList = () => {
 
                 <div className="teaser-tag-group">
                   {node.tags.map((tag) => (
-                    <div key={tag.id} className={`frontpage-label page ${tag.alias.toLowerCase()}`}>
+                    <div key={tag.id} className={`frontpage-label ${tag.alias.toLowerCase()}`}>
                       {tag.alias}
                     </div>
                   ))}
@@ -122,6 +156,66 @@ const NodeList = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      {/* List node, more recent first. */}
+      {nodeTimeStamp.map((node) => (
+        <a className="node-path" href={node.node_path} key={`mr-${node.id}`}>
+
+          <div className="node-list-main">
+
+            <div className="node-list-tags-main">
+              {node.tags.map((tag) => (
+                <div key={`tag-${tag.id}`} className={`node-list-tags ${tag.alias.toLowerCase()}`}>
+                  {tag.alias}
+                </div>
+              ))}
+            </div>
+
+            <div className="node-list-title-main">
+              <div className="node-list-title">
+                {node.title}
+              </div>
+
+              <div className="node-list-title">
+                {node.title}
+              </div>
+            </div>
+
+            <div className="node-list-details-main">
+              <div className="node-list-created">
+                {node.node_created}
+              </div>
+
+              <div className="node-list-views-count">
+                {node.node_view_count}
+                <span className="material-symbols-outlined">
+                  visibility
+                </span>
+              </div>
+
+              <div className="node-list-comments-count">
+                {node.comments_count}
+                <span className="material-symbols-outlined">
+                  chat_bubble
+                </span>
+              </div>
+
+              <div className="node-list-likes-count">
+                {node.likes_count}
+                <span className="material-symbols-outlined">
+                  thumb_up
+                </span>
+              </div>
+
+            </div>
+          </div>
+ 
+          <div className="node-list-image">
+            <img className="node-list-img" src={node.url} alt={node.alt} />
+          </div>
+
+        </a>
+      ))}
     </>
   );
 }

@@ -81,12 +81,13 @@
         </div>
 
         {# Most recent node. #}
-        <div id="slide-recent" class="slide-recent" data-drupal-selector="slide-recent">
-          {# <div id="homepage-highlight" class="homepage-highlight" data-drupal-selector="homepage-highlight">
+        {# <div id="slide-recent" class="slide-recent" data-drupal-selector="slide-recent"> #}
+          <div id="slide-recent" class="homepage-highlight" data-drupal-selector="homepage-highlight">
 
             <div class="text-highlight-container" data-drupal-selector="text-highlight-container">
               <div class="text-highlight">
                 <a href={{ path_alias }} class="highlight-link">
+                <p class="node_created_recent">{{ created_time }}</p>
                 <p class="most-recent-node"> {{ 'New Content'|t }} </p>
                   <div class="title-highlight">
                     {{ title_display|raw }}
@@ -95,7 +96,7 @@
                 {#<div class="content-preview-highlight">
                   {{ content_body|striptags }}
                 </div>#}
-              {#</div>
+              </div>
             </div>
 
             <div class="img-highlight-main" data-drupal-selector="img-highlight">
@@ -104,8 +105,8 @@
               </a>
             </div>
 
-          </div> #}
-        </div>
+          </div>
+        {# </div> #}
 
       </header>
     {% endif %}

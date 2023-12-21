@@ -123,13 +123,13 @@ class APIEndpoints extends ControllerBase {
         'comments_count' => $commentsCount,
         'likes_count' => $likesCount,
         'node_created' => $nodeCreated,
+        'node_timestamp' => $this->nodeTimeStamp($single_node),
       ];
     }
 
     return new JsonResponse($nodes);
 
   }
-
 
   /**
    * Returns JSON response with all nodes.

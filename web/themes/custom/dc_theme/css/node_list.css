@@ -1,0 +1,61 @@
+@import url('./definitions.css');
+
+.node-path {
+
+  display: flex;
+  justify-content: space-between;
+  text-decoration: unset;
+
+  .node-list-profile-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+
+  .node-list-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  .node-list-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .node-list-details-main {
+    display: flex;
+    gap: 1rem;
+    align-items: end;
+  }
+
+  .node-list-views-count,
+  .node-list-comments-count,
+  .node-list-likes-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .node-list-views-count,
+  .node-list-comments-count,
+  .node-list-likes-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .node-list-views-count span,
+  .node-list-likes-count span {
+    font-size: 15px;
+    text-decoration: unset;
+  }
+
+  .node-list-comments-count span {
+    font-size: 12px;
+    text-decoration: unset;
+  }
+
+}
+
+

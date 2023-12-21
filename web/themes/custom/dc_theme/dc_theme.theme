@@ -65,6 +65,8 @@ function _setHightlighHomepage(&$variables) {
     $variables['title_display'] = $node->get('body')[0]->getValue()['value'] ?? "";
     $variables['content_body'] = $node->get('field_content_body')[0]->getValue()['value'] ?? "";
     $variables['path_alias'] = _getPathAlias($node->id()) ?? "";
+    $timestamp = $node->created->getValue()[0]['value'];
+    $variables['created_time'] = _formateDate($timestamp);
   }
 
 }
@@ -293,7 +295,7 @@ function _getLastChangedByFromNode(NodeInterface $node) {
 
 function _formateDate($timestamp) {
   $datetime = DrupalDateTime::createFromTimestamp($timestamp);
-  return $datetime->format('d M y');
+  return $datetime->format('M y'); //('d M y');
 }
 
 // function getLastRevision($node) {

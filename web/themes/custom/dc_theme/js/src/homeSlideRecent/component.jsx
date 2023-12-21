@@ -46,7 +46,7 @@ const NodeList = () => {
       >
 
         {nodes.map((node) => (
-          <SwiperSlide key={node.id}>
+          <SwiperSlide key={`hs-${node.id}`}>
 
           <div id="homepage-highlight" className="homepage-highlight" data-drupal-selector="homepage-highlight">
 
