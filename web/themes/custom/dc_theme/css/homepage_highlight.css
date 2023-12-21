@@ -1,7 +1,8 @@
 @import url('./definitions.css');
 
-.homepage-highlight {
+#slide-recent {
   position: relative;
+  margin: -3rem auto 0 auto;
   display: flex;
   justify-content: center;
   width: 70%;
@@ -10,18 +11,31 @@
   /* border-radius: 12px; */
   box-shadow: 0 30px 30px #00000030;
   background-color: var(--white-color);
-  margin: -3rem auto 0 auto;
+  /* margin: -3rem auto 0 auto; */
   cursor: pointer;
 }
 
+#slide-recent .swiper-wrapper {
+  padding: unset;
+}
+
+.homepage-highlight {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: var(--white-color);
+  cursor: pointer;
+  height: 220px;
+}
+
 @media screen and (min-width: 765px) and (max-width: 1023px) {
-  .homepage-highlight {
+  #slide-recent {
     width: 85%;
   }
 }
 
 @media screen and (min-width: 320px) and (max-width: 765px) {
-  .homepage-highlight {
+  #slide-recent {
     width: 95%;
   }
 }
@@ -58,6 +72,12 @@
 .img-highlight-main, .text-highlight-container {
   flex: 1;
   max-width: 50%;
+}
+
+.text-highlight p.node_created_recent {
+  padding-top: 1.5rem;
+  font-size: 12px;
+  text-align: end;
 }
 
 .text-highlight-container {

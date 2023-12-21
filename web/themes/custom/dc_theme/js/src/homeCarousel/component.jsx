@@ -66,7 +66,7 @@ const NodeList = () => {
 
         {nodes.map((node) => (
           <SwiperSlide key={node.id}>
-            {console.log(node.node_path)}
+
             <a className="node-path" href={node.node_path}>
 
               <div className="frontpage-result-thumbnail">

@@ -79,7 +79,7 @@ class APIEndpoints extends ControllerBase {
 
     $langcode = $this->currentLanguage();
 
-    $all_nodes = $this->getAllNodes(1, 'article', 'page',);
+    $all_nodes = $this->getSpecificsNodes(1, 'article', 'page',);
 
     $nodes = [];
     foreach ($all_nodes as $node) {
@@ -111,6 +111,73 @@ class APIEndpoints extends ControllerBase {
       $nodeCreated = $this->nodeCreated($single_node);
 
       $nodes[] = [
+        'node_path' => $url_node_path,
+        'node_owner_name' => $ownerFromNodNameNImage['user_name'],
+        'node_owner_image_profile' => $ownerFromNodNameNImage['user_img_profile'],
+        'id' => $single_node->id(),
+        'title' => $single_node->label(),
+        'url' => $relative_url,
+        'alt' => $image_base->alt,
+        'tags' => $tags,
+        'node_view_count' => $node_view_count,
+        'comments_count' => $commentsCount,
+        'likes_count' => $likesCount,
+        'node_created' => $nodeCreated,
+      ];
+    }
+
+    return new JsonResponse($nodes);
+
+  }
+
+
+  /**
+   * Returns JSON response with all nodes.
+   *
+   * @return \Symfony\Component\HttpFoundation\JsonResponse
+   *   The JSON response.
+   */
+  public function newContentHighlight() {
+
+    $langcode = $this->currentLanguage();
+
+    $all_nodes = $this->getThreeRecentNodes();
+
+    $nodes = [];
+    foreach ($all_nodes as $node) {
+      $node_storage = $this->entityTypeManager->getStorage('node');
+      $single_node = $node_storage->load($node->id());
+      $url_node_path = $this->getPathAlias($node->id());
+
+      // If the node didn't have translation move to the next one.
+      $single_node = $this->getTranslationField($node, $langcode);
+      if ($single_node === FALSE) {
+        $single_node = $node;
+      }
+
+      $image_base = $single_node->get('field_image')[0];
+      $file_path = $image_base->entity->getFileUri() ?? '';
+      $url = $this->fileUrlGenerator->generate($file_path);
+      $relative_url = $url->toString();
+
+      $tags = $this->tagsNode($single_node);
+
+      $ownerFromNodNameNImage = $this->ownerNameNImageFromNode($single_node);
+
+      $node_view_count = $this->nodeViewCount($single_node);
+
+      $commentsCount = $this->commentsCount($single_node);
+
+      $likesCount = $this->likesCount($single_node);
+
+      $nodeCreated = $this->nodeCreated($single_node);
+
+      $titleNSubTitle = $this->strpTagAndSplitTitle($single_node);
+
+      $nodes[] = [
+        'button_new_content' => $this->t('New Content'),
+        'title' => $titleNSubTitle['title'],
+        'sub_title' => $titleNSubTitle['sub_title'],
         'node_path' => $url_node_path,
         'node_owner_name' => $ownerFromNodNameNImage['user_name'],
         'node_owner_image_profile' => $ownerFromNodNameNImage['user_img_profile'],

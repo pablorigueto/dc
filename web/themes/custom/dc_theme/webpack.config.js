@@ -4,6 +4,7 @@ const isDevMode = process.env.NODE_ENV !== 'production';
 const config = {
   entry: {
     homeCarousel: ["./js/src/homeCarousel/index.jsx"],
+    homeSlideRecent: ["./js/src/homeSlideRecent/index.jsx"],
     search: ["./js/src/search/index.jsx"],
     like: ["./js/src/like/index.jsx"],
     send: ["./js/src/send/index.jsx"],

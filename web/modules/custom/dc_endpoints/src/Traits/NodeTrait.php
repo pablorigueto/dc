@@ -40,7 +40,7 @@ trait NodeTrait {
   /**
    * {@inheritdoc}
    */
-  public function getAllNodes($status, $bundleFirst, $bundleSec = NULL): array {
+  public function getSpecificsNodes($status, $bundleFirst, $bundleSec = NULL): array {
     $query = $this->entityTypeManager->getStorage('node')->getQuery();
 
     $orCondition = $query->orConditionGroup()
@@ -59,6 +59,25 @@ trait NodeTrait {
     $nodes = $this->entityTypeManager->getStorage('node')->loadMultiple($result);
 
     return $nodes;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getThreeRecentNodes(): array {
+    $query = $this->entityTypeManager->getStorage('node')->getQuery();
+
+    $result = $query
+      ->condition('type', 'ckeditor', '<>')
+      ->condition('status', 1)
+      ->accessCheck(FALSE)
+      ->sort('created', 'DESC')
+      ->execute();
+
+    $nodes = $this->entityTypeManager->getStorage('node')->loadMultiple($result);
+
+    // Get the last three nodes more recent nodes.
+    return array_slice($nodes, 0, 3);
   }
 
   /**
@@ -216,6 +235,24 @@ trait NodeTrait {
   protected function formateDate($timestamp) {
     $datetime = DrupalDateTime::createFromTimestamp($timestamp);
     return $datetime->format('M y');
+  }
+
+  /**
+   * Returns all tags from field.
+   *
+   */
+  protected function strpTagAndSplitTitle($node) {
+
+    $titleNSubTitle = $node->get('body')[0]->getValue()['value'];
+
+    // Split into two parts.
+    $parts = explode('</h1>', $titleNSubTitle, 2);
+
+    // Remove HTML tags.
+    return [
+      'title' => strip_tags($parts[0]),
+      'sub_title' => strip_tags($parts[1]),
+    ];
   }
 
 }

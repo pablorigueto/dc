@@ -8,6 +8,14 @@
   transition: all 0.5s ease;
 }
 
+#header, #carousel-content {
+  padding-bottom: 5rem;
+}
+
+.empty_carousel {
+  height: 374px;
+}
+
 .header-banner {
   /* background: url(../assets/bkgrd.jpg) no-repeat;
     background-size: contain; */

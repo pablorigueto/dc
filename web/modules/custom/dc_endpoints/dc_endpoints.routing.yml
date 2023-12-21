@@ -5,3 +5,11 @@ dc_endpoints.pages_article:
     _title: 'Get All Pages and Article'
   requirements:
     _permission: 'access content'
+
+dc_endpoints.new_content:
+  path: '/api/nc'
+  defaults:
+    _controller: '\Drupal\dc_endpoints\Controller\APIEndpoints::newContentHighlight'
+    _title: 'Get most recent contents'
+  requirements:
+    _permission: 'access content'

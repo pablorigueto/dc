@@ -81,8 +81,8 @@
         </div>
 
         {# Most recent node. #}
-        
-          <div id="homepage-highlight" class="homepage-highlight" data-drupal-selector="homepage-highlight">
+        <div id="slide-recent" class="slide-recent" data-drupal-selector="slide-recent">
+          {# <div id="homepage-highlight" class="homepage-highlight" data-drupal-selector="homepage-highlight">
 
             <div class="text-highlight-container" data-drupal-selector="text-highlight-container">
               <div class="text-highlight">
@@ -92,10 +92,10 @@
                     {{ title_display|raw }}
                   </div>
                 </a>
-                {# <div class="content-preview-highlight">
+                {#<div class="content-preview-highlight">
                   {{ content_body|striptags }}
-                </div> #}
-              </div>
+                </div>#}
+              {#</div>
             </div>
 
             <div class="img-highlight-main" data-drupal-selector="img-highlight">
@@ -104,13 +104,13 @@
               </a>
             </div>
 
-          </div>
+          </div> #}
+        </div>
 
       </header>
     {% endif %}
 
     <div id="main-wrapper" class="layout-main-wrapper layout-container">
-      
 
       <div id="main" class="layout-main">
         <div class="main-content">
@@ -124,7 +124,19 @@
                   <h1> {{ 'Select an article'|t }} </h1>
                 </div>
                 {# {{ page.content }} #}
-                <div id="carousel-content"></div>
+                <div id="carousel-content">
+                  <div class="empty_carousel">
+                  </div>
+                </div>
+
+                <div class="title-cards">
+                  <h1> {{ 'Looking for something?'|t }} </h1>
+                </div>
+                <div id="looking-content">
+                  <div class="empty_content">
+                  </div>
+                </div>
+
               </main>
           </div>
         </div>
