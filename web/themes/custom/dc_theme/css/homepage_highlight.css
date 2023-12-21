@@ -28,6 +28,13 @@
   height: 220px;
 }
 
+.text-highlight p.node_created_recent {
+  font-size: 12px;
+  position: absolute;
+  right: 51.5%;
+  bottom: 8px;
+}
+
 @media screen and (min-width: 765px) and (max-width: 1023px) {
   #slide-recent {
     width: 85%;
@@ -47,6 +54,10 @@
   #homepage-highlight .text-highlight-container {
     max-width: 100%;
   }
+  .text-highlight p.node_created_recent {
+    right: 12px;
+  }
+
 }
 
 .text-highlight-container {
@@ -72,12 +83,6 @@
 .img-highlight-main, .text-highlight-container {
   flex: 1;
   max-width: 50%;
-}
-
-.text-highlight p.node_created_recent {
-  padding-top: 1.5rem;
-  font-size: 12px;
-  text-align: end;
 }
 
 .text-highlight-container {
