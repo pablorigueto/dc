@@ -110,7 +110,7 @@ const NodeList = () => {
                           thumb_up
                         </span>
                       </div>
-                      Nov, 23
+                      {node.node_created}
                     </div>
                   </div>
                   <img src={node.url} alt={node.alt} />

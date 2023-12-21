@@ -2,6 +2,7 @@
 
 namespace Drupal\dc_endpoints\Traits;
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
@@ -203,63 +204,10 @@ trait NodeTrait {
    * Returns all tags from field.
    *
    */
-  protected function nodeCreate($node) {
+  protected function nodeCreated($node) {
     $timestamp = $node->created->getValue()[0]['value'];
-    $formatted_date = $this->formateDate($timestamp);
+    return $this->formateDate($timestamp);
   }
-
-  protected function lastChangedByFromNode($node) {
-    // Get the latest revision ID.
-    $latest_revision_id = $node->getRevisionId();
-  
-    // Load the latest revision.
-    $latest_revision = \Drupal::entityTypeManager()
-      ->getStorage('node')
-      ->loadRevision($latest_revision_id);
-  
-    // Get the user ID of the user who last changed the node.
-    $changed_uid = $latest_revision->getRevisionUser()->id();
-    // Load the user entity.
-    $changed_by_load = User::load($changed_uid);
-  
-    $changed_by_user = $changed_by_load->getAccountName();
-  
-    $node_owner = _getOwnerFromNode($node);
-  
-    $revision_user_profile = _getUserProfileImage($changed_uid);
-  
-    if ($changed_by_user !== $node_owner) {
-  
-      return [
-        'username' => $changed_by_user,
-        'profile_picture_uri' => $revision_user_profile,
-      ];
-  
-    }
-    // When the node created user is the same that the edit.
-    else {
-      $created_date = _formateDate($node->get('created')->getValue()[0]['value']);
-      $last_revision_timestamp = $latest_revision->getChangedTime();
-      $revision_date = _formateDate($last_revision_timestamp);
-  
-      // When the node created date is the same that the edit.
-      if ($created_date === $revision_date) {
-  
-        return '';
-  
-      }
-      else {
-  
-        return [
-          'username' => $changed_by_user,
-          'profile_picture_uri' => $revision_user_profile,
-        ];
-  
-      }
-  
-    }
-  }
-
 
   /**
    * Returns all tags from field.
@@ -267,7 +215,7 @@ trait NodeTrait {
    */
   protected function formateDate($timestamp) {
     $datetime = DrupalDateTime::createFromTimestamp($timestamp);
-    return $datetime->format('d M y');
+    return $datetime->format('M y');
   }
 
 }

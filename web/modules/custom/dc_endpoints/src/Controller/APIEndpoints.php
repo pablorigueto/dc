@@ -108,6 +108,8 @@ class APIEndpoints extends ControllerBase {
 
       $likesCount = $this->likesCount($single_node);
 
+      $nodeCreated = $this->nodeCreated($single_node);
+
       $nodes[] = [
         'node_path' => $url_node_path,
         'node_owner_name' => $ownerFromNodNameNImage['user_name'],
@@ -120,6 +122,7 @@ class APIEndpoints extends ControllerBase {
         'node_view_count' => $node_view_count,
         'comments_count' => $commentsCount,
         'likes_count' => $likesCount,
+        'node_created' => $nodeCreated,
       ];
     }
 

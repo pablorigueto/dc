@@ -1,9 +1,23 @@
 @import url(./definitions.css);
 
+.user-logged-in {
+  #block-dc-theme-content .contextual-region {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+}
+
 .path-taxonomy {
   /* Styles for the .path-taxonomy container */
 
-  #block-dc-theme-content .contextual-region {
+  #block-dc-theme-content div[class^="js-view-dom-id-"] {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
@@ -74,6 +88,12 @@
   .environment {
     color: var(--white-color);
     background: var(--dark-color);
+  }
+
+  .reactnative,
+  .native {
+    color: var(--white-color);
+    background: var(--medium-gray-color);
   }
 
   .frontpage-title-display {
