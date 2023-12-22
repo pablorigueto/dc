@@ -20,7 +20,7 @@ const NodeList = () => {
     retryDelay: 1000,
   });
 
-  const [sortOption, setSortOption] = useState('mostViewed');
+  const [sortOption, setSortOption] = useState('Filter');
 
   const handleSortChange = (option) => {
     setSortOption(option);
@@ -31,6 +31,7 @@ const NodeList = () => {
   }
 
   const sortingOptions = {
+    default: (a, b) => b.node_view_count - a.node_view_count,
     mostViewed: (a, b) => b.node_view_count - a.node_view_count,
     lessViewed: (a, b) => a.node_view_count - b.node_view_count,
     mostLiked: (a, b) => b.likes_count - a.likes_count,
@@ -75,18 +76,31 @@ const NodeList = () => {
 
   return (
     <>
-      <div>
-        <label>
-          Sort by:
-          <select value={sortOption} onChange={(e) => handleSortChange(e.target.value)}>
-            <option value="mostViewed">Most Viewed</option>
-            <option value="lessViewed">Less Viewed</option>
-            <option value="mostLiked">Most Liked</option>
-            <option value="lessLiked">Less Liked</option>
-            <option value="mostCommented">Most Commented</option>
-            <option value="lessCommented">Less Commented</option>
-          </select>
-        </label>
+      {/* <div className="carousel-filter">
+        <select value={sortOption} onChange={(e) => handleSortChange(e.target.value)}>
+          <option disabled selected>Filter</option>
+          <option value="mostViewed">Most Viewed</option>
+          <option value="lessViewed">Less Viewed</option>
+          <option value="mostLiked">Most Liked</option>
+          <option value="lessLiked">Less Liked</option>
+          <option value="mostCommented">Most Commented</option>
+          <option value="lessCommented">Less Commented</option>
+        </select>
+      </div> */}
+
+      <div class="carousel-filter">
+        <div class="custom-dropdown">
+          <span class="selected-option">Select an option</span>
+          <ul class="options-list">
+            <li data-value="" class="option disabled">Select an option</li>
+            <li data-value="mostViewed" class="option disabled">Most Viewed</li>
+            <li data-value="lessViewed" class="option disabled">Less Viewed</li>
+            <li data-value="mostLiked" class="option">Most Liked</li>
+            <li data-value="lessLiked" class="option">Less Liked</li>
+            <li data-value="mostCommented" class="option">Most Commented</li>
+            <li data-value="lessCommented" class="option">Less Commented</li>
+          </ul>
+        </div>
       </div>
 
       <Swiper
@@ -157,65 +171,64 @@ const NodeList = () => {
         ))}
       </Swiper>
 
-      {/* List node, more recent first. */}
-      {nodeTimeStamp.map((node) => (
-        <a className="node-path" href={node.node_path} key={`mr-${node.id}`}>
+      <div className="node-list-container">             
+        {/* List node, more recent first. */}
+        {nodeTimeStamp.map((node) => (
+          <a className="node-list-path" href={node.node_path} key={`mr-${node.id}`}>
 
-          <div className="node-list-main">
+            <div className="node-list-main">
 
-            <div className="node-list-tags-main">
-              {node.tags.map((tag) => (
-                <div key={`tag-${tag.id}`} className={`node-list-tags ${tag.alias.toLowerCase()}`}>
-                  {tag.alias}
+              <div className="node-list-tags-main">
+                {node.tags.map((tag) => (
+                  <div key={`tag-${tag.id}`} className={`node-list-tags ${tag.alias.toLowerCase()}`}>
+                    {tag.alias}
+                  </div>
+                ))}
+              </div>
+
+              <div className="node-list-title-main">
+                <h2 className="node-list-title">
+                  {node.title}
+                </h2>
+              </div>
+
+              <div className="node-list-details-main">
+                <div className="node-list-created">
+                  {node.node_created}
                 </div>
-              ))}
-            </div>
 
-            <div className="node-list-title-main">
-              <div className="node-list-title">
-                {node.title}
-              </div>
+                <div className="node-list-views-count">
+                  {node.node_view_count}
+                  <span className="material-symbols-outlined">
+                    visibility
+                  </span>
+                </div>
 
-              <div className="node-list-title">
-                {node.title}
-              </div>
-            </div>
+                <div className="node-list-comments-count">
+                  {node.comments_count}
+                  <span className="material-symbols-outlined">
+                    chat_bubble
+                  </span>
+                </div>
 
-            <div className="node-list-details-main">
-              <div className="node-list-created">
-                {node.node_created}
-              </div>
+                <div className="node-list-likes-count">
+                  {node.likes_count}
+                  <span className="material-symbols-outlined">
+                    thumb_up
+                  </span>
+                </div>
 
-              <div className="node-list-views-count">
-                {node.node_view_count}
-                <span className="material-symbols-outlined">
-                  visibility
-                </span>
-              </div>
-
-              <div className="node-list-comments-count">
-                {node.comments_count}
-                <span className="material-symbols-outlined">
-                  chat_bubble
-                </span>
-              </div>
-
-              <div className="node-list-likes-count">
-                {node.likes_count}
-                <span className="material-symbols-outlined">
-                  thumb_up
-                </span>
               </div>
 
             </div>
-          </div>
- 
-          <div className="node-list-image">
-            <img className="node-list-img" src={node.url} alt={node.alt} />
-          </div>
+  
+            <div className="node-list-image">
+              <img className="node-list-img" src={node.url} alt={node.alt} />
+            </div>
 
-        </a>
-      ))}
+          </a>
+        ))}
+      </div>
     </>
   );
 }

@@ -1,10 +1,15 @@
 @import url('./definitions.css');
 
-.node-path {
+.node-list-path {
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
   text-decoration: unset;
+  border-top-style: solid;
+  border-top-color: #d1d0d0;
+  border-top-width: 1px;
+  padding: 10px 0;
 
   .node-list-profile-img {
     width: 30px;
@@ -12,7 +17,8 @@
     border-radius: 50%;
   }
 
-  .node-list-img {
+  .node-list-img,
+  .node-list-image {
     width: 100px;
     height: 100px;
     object-fit: cover;
@@ -21,12 +27,28 @@
   .node-list-main {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .node-list-tags-main {
+    display: flex;
+    gap: 0.3rem;
+  }
+
+  .node-list-tags {
+    border-radius: 2px;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: 'Inter-Bold';
   }
 
   .node-list-details-main {
     display: flex;
     gap: 1rem;
-    align-items: end;
+    align-items: center;
+    font-size: 12px;
+    color: #808080;
   }
 
   .node-list-views-count,
@@ -48,12 +70,30 @@
   .node-list-views-count span,
   .node-list-likes-count span {
     font-size: 15px;
-    text-decoration: unset;
   }
 
+  .node-list-likes-count span {
+    padding-bottom: 2px;
+  }
+  
   .node-list-comments-count span {
     font-size: 12px;
-    text-decoration: unset;
+    padding-top: 1px;
+  }
+
+  .node-list-title {
+    color: #141414;
+    font-family: 'Inter-Bold';
+    transition: all 0.5s ease;
+  }
+
+  .node-list-title:hover {
+    color: #0c449d;
+    transition: all 0.5s ease;
+  }
+
+  .node-list-title-main h2 {
+    margin: 0;
   }
 
 }

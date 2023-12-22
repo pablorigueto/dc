@@ -1,7 +1,76 @@
-/* 
-#carousel-content img {
-  width: 250px;
-  height: 300px;
-  object-fit: cover;
-} */
+.node-list-container {
+  padding-top: 6rem;
+  width: 70%;
+}
 
+.node-list-container a:last-child {
+  border-bottom-style: solid;
+  border-bottom-color: #d1d0d0;
+  border-bottom-width: 1px;
+}
+
+@media screen and (min-width: 320px) and (max-width: 565px) {
+  .node-list-container {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+
+.carousel-filter select {
+  height: 30px;
+  text-align: center;
+  border: 1px solid #d1d0d0;
+  background: unset;
+  cursor: pointer;
+}
+
+.carousel-filter select option:hover {
+  background-color: #e0e0e0; /* Change this to your desired background color */
+  /* You can add other styles as needed */
+}
+
+
+.carousel-filter {
+  display: flex;
+  justify-content: end;
+}
+
+.custom-dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+.selected-option {
+  display: block;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.options-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  z-index: 4;
+}
+
+.option {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: #e0e0e0; /* Change this to your desired background color */
+}
+
+/* Show options when the dropdown is hovered or focused */
+.custom-dropdown:hover .options-list,
+.custom-dropdown:focus-within .options-list {
+  display: block;
+}

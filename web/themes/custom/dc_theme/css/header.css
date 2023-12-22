@@ -26,6 +26,7 @@
 .path-frontpage #main-wrapper {
   max-width: 1170px;
   margin: 0 auto;
+  padding: 0 10px;
 }
 
 .header__inner {
@@ -340,26 +341,23 @@ body:not(.path-frontpage) .search-block-form,
   font-family: 'Inter-Bold';
 }
 
-.path-search .search-label.reactjs,
-.path-frontpage .frontpage-label.reactjs {
-  color: var(--medium-dark-color);
-  background: var(--white-color);
+.reactjs {
+  color: var(--white-color);
+  background: #de004a;
 }
 
-.path-search .search-label.drupal,
-.path-frontpage .frontpage-label.drupal {
+.drupal {
   color: var(--white-color);
   background: #107ca9;
 }
 
-.path-search .search-label.reactnative,
-.path-frontpage .frontpage-label.native {
+.reactnative,
+.native {
   color: var(--white-color);
   background: var(--medium-gray-color);
 }
 
-.path-search .search-label.environment,
-.path-frontpage .frontpage-label.environment {
+.environment {
   color: var(--white-color);
   background: var(--dark-color);
 }

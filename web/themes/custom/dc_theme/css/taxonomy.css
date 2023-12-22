@@ -1,7 +1,8 @@
 @import url(./definitions.css);
 
-.user-logged-in {
-  #block-dc-theme-content .contextual-region {
+.path-taxonomy {
+  /* Styles for the .path-taxonomy container */
+  #block-dc-theme-content div[class^="js-view-dom-id-"] {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
@@ -12,12 +13,8 @@
     max-width: 1440px;
     margin: 0 auto;
   }
-}
 
-.path-taxonomy {
-  /* Styles for the .path-taxonomy container */
-
-  #block-dc-theme-content div[class^="js-view-dom-id-"] {
+  #block-dc-theme-content .contextual-region {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
@@ -68,32 +65,6 @@
     padding: 5px 10px;
     font-size: 12px;
     font-family: 'Inter-Bold';
-  }
-
-  .reactjs {
-    color: var(--medium-dark-color);
-    background: var(--white-color);
-  }
-
-  .drupal {
-    color: var(--white-color);
-    background: #107ca9;
-  }
-
-  .native {
-    color: var(--white-color);
-    background: var(--medium-gray-color);
-  }
-
-  .environment {
-    color: var(--white-color);
-    background: var(--dark-color);
-  }
-
-  .reactnative,
-  .native {
-    color: var(--white-color);
-    background: var(--medium-gray-color);
   }
 
   .frontpage-title-display {
