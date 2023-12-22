@@ -42,11 +42,22 @@
 
 .selected-option {
   display: block;
-  padding: 10px;
+  padding: 3.5px 10px;
   border: 1px solid #ccc;
   background-color: #fff;
   width: 150px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+span.selected-option:after {
+  content: '\e5cf';
+  margin-left: 6px;
+  font-family: Material Symbols Outlined;
+  color: grey;
+  font-size: 20px;
+  padding-top: 4px;
 }
 
 .options-list {
@@ -63,7 +74,7 @@
 }
 
 .option {
-  padding: 10px 4px 10px 16px;
+  padding: 7px 4px 7px 16px;
   cursor: pointer;
   width: 150px;
   text-align: start;

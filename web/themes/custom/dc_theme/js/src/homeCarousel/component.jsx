@@ -20,11 +20,24 @@ const NodeList = () => {
     retryDelay: 1000,
   });
 
-  const [sortOption, setSortOption] = useState('Select an option');
+  const [selectedValue, setSelectedValue] = useState(''); // Actual value used for sorting
+  const [displayLabel, setDisplayLabel] = useState('Filter'); // Label displayed in the dropdown
 
   const handleSortChange = (option) => {
-    setSortOption(option);
+    const optionLabels = {
+      '': 'Filter',
+      mostViewed: 'Most Viewed',
+      lessViewed: 'Less Viewed',
+      mostLiked: 'Most Liked',
+      lessLiked: 'Less Liked',
+      mostCommented: 'Most Commented',
+      lessCommented: 'Less Commented',
+    };
+
+    setSelectedValue(option);
+    setDisplayLabel(optionLabels[option]);
   };
+
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -40,7 +53,7 @@ const NodeList = () => {
     lessCommented: (a, b) => a.comments_count - b.comments_count,
   };
 
-  const sortedNodes = nodes.slice().sort(sortingOptions[sortOption]);
+  const sortedNodes = nodes.slice().sort(sortingOptions[selectedValue]);
 
   {/* List node, more recent first. */}
   const nodeTimeStamp = nodes
@@ -62,24 +75,14 @@ const NodeList = () => {
     <>
       <div className="carousel-filter">
         <div className="custom-dropdown">
-          <span className="selected-option">{sortOption}</span>
+          <span className="selected-option">{displayLabel}</span>
           <ul className="options-list">
-            <li
-              onClick={() => handleSortChange('Select an option')}
-              className="option disabled"
-            >
-              Select an option
-            </li>
-            <li
-              onClick={() => handleSortChange('mostViewed')}
-              className="option disabled"
-            >
+            {/* <li onClick={() => handleSortChange('')} className="option">
+            </li> */}
+            <li onClick={() => handleSortChange('mostViewed')} className="option">
               Most Viewed
             </li>
-            <li
-              onClick={() => handleSortChange('lessViewed')}
-              className="option disabled"
-            >
+            <li onClick={() => handleSortChange('lessViewed')} className="option">
               Less Viewed
             </li>
             <li onClick={() => handleSortChange('mostLiked')} className="option">
@@ -88,16 +91,10 @@ const NodeList = () => {
             <li onClick={() => handleSortChange('lessLiked')} className="option">
               Less Liked
             </li>
-            <li
-              onClick={() => handleSortChange('mostCommented')}
-              className="option"
-            >
+            <li onClick={() => handleSortChange('mostCommented')} className="option">
               Most Commented
             </li>
-            <li
-              onClick={() => handleSortChange('lessCommented')}
-              className="option"
-            >
+            <li onClick={() => handleSortChange('lessCommented')} className="option">
               Less Commented
             </li>
           </ul>
@@ -172,7 +169,8 @@ const NodeList = () => {
         ))}
       </Swiper>
 
-      <div className="node-list-container">             
+      <div className="node-list-container">
+        <h1>Recent Section</h1>
         {/* List node, more recent first. */}
         {nodeTimeStamp.map((node) => (
           <a className="node-list-path" href={node.node_path} key={`mr-${node.id}`}>

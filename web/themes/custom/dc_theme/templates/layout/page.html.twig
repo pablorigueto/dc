@@ -105,7 +105,14 @@
               </div>
             {% else %}
               <main role="main">
-                {{ page.content_above }}
+
+                {# {{dump(page)}}
+                {% if 'path-taxonomy' in page %}
+                  <div class="taxonomy-page-title">
+                    <h2>Article based on the same stack</h2>
+                  </div>
+                {% endif %} #}
+
                 {{ page.content }}
               </main>
             {% endif %}

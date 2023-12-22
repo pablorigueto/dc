@@ -121,6 +121,12 @@ h2 {
   font-size: 20px;
 }
 
+.primary_menu nav h2,
+#block-dc-theme-languageswitcher h2 {
+  font-size: 18px;
+  display: flex;
+}
+
 .like_dislike .fa-thumbs-up {
   text-decoration: unset;
   font-size: 24px;
@@ -211,5 +217,15 @@ span[id^="like-"] {
 
 .likes_count span {
   padding-bottom: 2px;
+}
+
+h1,
+.path-search h2 {
+  font-size: 26px;
+}
+
+.text-highlight h1,
+.text-highlight h2 {
+  font-size: 22px;
 }
 

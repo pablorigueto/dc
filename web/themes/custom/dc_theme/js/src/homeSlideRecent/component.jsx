@@ -55,7 +55,7 @@ const NodeList = () => {
                 <a href={node.node_path} className="highlight-link">
                 <p className="most-recent-node">{node.button_new_content}</p>
                   <div className="title-highlight">
-                    <h1>{node.title}</h1><p>{node.sub_title}</p>
+                    <h2>{node.title}</h2><p>{node.sub_title}</p>
                   </div>
                 </a>
                 <p className="node_created_recent">{node.node_created}</p>
