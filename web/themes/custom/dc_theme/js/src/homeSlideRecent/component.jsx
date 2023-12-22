@@ -20,9 +20,9 @@ const NodeList = () => {
     retryDelay: 1000,
   });
 
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   if (error) {
     return <div>Error: {error.message}</div>;
