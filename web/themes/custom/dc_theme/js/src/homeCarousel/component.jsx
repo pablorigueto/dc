@@ -20,7 +20,7 @@ const NodeList = () => {
     retryDelay: 1000,
   });
 
-  const [sortOption, setSortOption] = useState('Filter');
+  const [sortOption, setSortOption] = useState('Select an option');
 
   const handleSortChange = (option) => {
     setSortOption(option);
@@ -52,53 +52,54 @@ const NodeList = () => {
   }
 
   const breakpoints = {
-    // when window width is >= 320px
-    320: {
-      slidesPerView: 1,
-      spaceBetween: 10,
-    },
-    // when window width is >= 480px
-    480: {
-      slidesPerView: 2,
-      spaceBetween: 20,
-    },
-    // when window width is >= 640px
-    640: {
-      slidesPerView: 3,
-      spaceBetween: 30,
-    },
-    // when window width is >= 768px
-    768: {
-      slidesPerView: 4,
-      spaceBetween: 30,
-    },
+    320: { slidesPerView: 1, spaceBetween: 10 },
+    480: { slidesPerView: 2, spaceBetween: 20 },
+    640: { slidesPerView: 3, spaceBetween: 30 },
+    768: { slidesPerView: 4, spaceBetween: 30 },
   };
 
   return (
     <>
-      {/* <div className="carousel-filter">
-        <select value={sortOption} onChange={(e) => handleSortChange(e.target.value)}>
-          <option disabled selected>Filter</option>
-          <option value="mostViewed">Most Viewed</option>
-          <option value="lessViewed">Less Viewed</option>
-          <option value="mostLiked">Most Liked</option>
-          <option value="lessLiked">Less Liked</option>
-          <option value="mostCommented">Most Commented</option>
-          <option value="lessCommented">Less Commented</option>
-        </select>
-      </div> */}
-
-      <div class="carousel-filter">
-        <div class="custom-dropdown">
-          <span class="selected-option">Select an option</span>
-          <ul class="options-list">
-            <li data-value="" class="option disabled">Select an option</li>
-            <li data-value="mostViewed" class="option disabled">Most Viewed</li>
-            <li data-value="lessViewed" class="option disabled">Less Viewed</li>
-            <li data-value="mostLiked" class="option">Most Liked</li>
-            <li data-value="lessLiked" class="option">Less Liked</li>
-            <li data-value="mostCommented" class="option">Most Commented</li>
-            <li data-value="lessCommented" class="option">Less Commented</li>
+      <div className="carousel-filter">
+        <div className="custom-dropdown">
+          <span className="selected-option">{sortOption}</span>
+          <ul className="options-list">
+            <li
+              onClick={() => handleSortChange('Select an option')}
+              className="option disabled"
+            >
+              Select an option
+            </li>
+            <li
+              onClick={() => handleSortChange('mostViewed')}
+              className="option disabled"
+            >
+              Most Viewed
+            </li>
+            <li
+              onClick={() => handleSortChange('lessViewed')}
+              className="option disabled"
+            >
+              Less Viewed
+            </li>
+            <li onClick={() => handleSortChange('mostLiked')} className="option">
+              Most Liked
+            </li>
+            <li onClick={() => handleSortChange('lessLiked')} className="option">
+              Less Liked
+            </li>
+            <li
+              onClick={() => handleSortChange('mostCommented')}
+              className="option"
+            >
+              Most Commented
+            </li>
+            <li
+              onClick={() => handleSortChange('lessCommented')}
+              className="option"
+            >
+              Less Commented
+            </li>
           </ul>
         </div>
       </div>
