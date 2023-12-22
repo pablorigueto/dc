@@ -73,6 +73,17 @@ span.selected-option:after {
   z-index: 4;
 }
 
+
+/* Show options when the dropdown is hovered or focused */
+/* .custom-dropdown:hover .options-list,
+.custom-dropdown:focus-within .options-list {
+  display: block;
+} */
+
+.custom-dropdown.open .options-list {
+  display: block;
+}
+
 .option {
   padding: 7px 4px 7px 16px;
   cursor: pointer;
@@ -82,10 +93,4 @@ span.selected-option:after {
 
 .option:hover {
   background-color: #e0e0e0; /* Change this to your desired background color */
-}
-
-/* Show options when the dropdown is hovered or focused */
-.custom-dropdown:hover .options-list,
-.custom-dropdown:focus-within .options-list {
-  display: block;
 }

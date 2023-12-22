@@ -23,7 +23,10 @@ const NodeList = () => {
   const [selectedValue, setSelectedValue] = useState(''); // Actual value used for sorting
   const [displayLabel, setDisplayLabel] = useState('Filter'); // Label displayed in the dropdown
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const handleSortChange = (option) => {
+    setIsMenuOpen(false);
     const optionLabels = {
       '': 'Filter',
       mostViewed: 'Most Viewed',
@@ -38,7 +41,10 @@ const NodeList = () => {
     setDisplayLabel(optionLabels[option]);
   };
 
-
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+  
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -74,8 +80,10 @@ const NodeList = () => {
   return (
     <>
       <div className="carousel-filter">
-        <div className="custom-dropdown">
-          <span className="selected-option">{displayLabel}</span>
+      <div className={`custom-dropdown ${isMenuOpen ? 'open' : ''}`}>
+          <span className="selected-option" onClick={toggleMenu}>
+            {displayLabel}
+          </span>
           <ul className="options-list">
             {/* <li onClick={() => handleSortChange('')} className="option">
             </li> */}

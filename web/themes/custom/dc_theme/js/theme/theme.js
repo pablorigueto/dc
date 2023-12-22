@@ -6,7 +6,7 @@
         $(document).ready(function () {
           // Add a click event handler to the Menu heading.
           $(".primary_menu h2", context).click(function () {
-
+            console.log('teste');
             // Find all open menus and close them.
             $(".primary_menu ul:visible", context).not($(this).siblings("ul")).slideUp();
 
