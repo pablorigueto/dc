@@ -77,15 +77,20 @@ class APIEndpoints extends ControllerBase {
    */
   public function pageAndArticle() {
 
-    $langcode = $this->currentLanguage();
+    $langcode = $this->langcode();
 
     $all_nodes = $this->getSpecificsNodes(1, 'article', 'page',);
 
     $nodes = [];
     foreach ($all_nodes as $node) {
+
+      $url_node_path = $this->getPathAlias($node->id(), $langcode);
+      if (!$url_node_path) {
+        continue;
+      }
+
       $node_storage = $this->entityTypeManager->getStorage('node');
       $single_node = $node_storage->load($node->id());
-      $url_node_path = $this->getPathAlias($node->id());
 
       // If the node didn't have translation move to the next one.
       $single_node = $this->getTranslationField($node, $langcode);
@@ -139,7 +144,7 @@ class APIEndpoints extends ControllerBase {
    */
   public function newContentHighlight() {
 
-    $langcode = $this->currentLanguage();
+    $langcode = $this->langcode();
 
     $all_nodes = $this->getThreeRecentNodes();
 
@@ -147,7 +152,11 @@ class APIEndpoints extends ControllerBase {
     foreach ($all_nodes as $node) {
       $node_storage = $this->entityTypeManager->getStorage('node');
       $single_node = $node_storage->load($node->id());
-      $url_node_path = $this->getPathAlias($node->id());
+
+      $url_node_path = $this->getPathAlias($node->id(), $langcode);
+      if (!$url_node_path) {
+        continue;
+      }
 
       // If the node didn't have translation move to the next one.
       $single_node = $this->getTranslationField($node, $langcode);
@@ -195,6 +204,20 @@ class APIEndpoints extends ControllerBase {
 
     return new JsonResponse($nodes);
 
+  }
+
+  /**
+   * Langcode from cookie or current.
+   */
+  public function langcode() {
+
+    $cookie_language = \Drupal::request()->cookies->get('selectedLanguage');
+
+    if ($cookie_language !== NULL) {
+      return str_replace('/', '', $cookie_language);
+    }
+
+    return $this->currentLanguage();
   }
 
 }

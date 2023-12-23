@@ -83,11 +83,35 @@ trait NodeTrait {
   /**
    * Get the path alias through the node id.
    */
-  public function getPathAlias(int $node_id): string {
-    // Get the URL object for the node using its ID.
-    $url = Url::fromRoute('entity.node.canonical', ['node' => $node_id]);
-    // Get the path alias from the URL object.
-    return $url->toString();
+  public function getPathAlias(int $node_id, string $langcode): string|bool {
+
+    // // This code doesn't worked. It always return the default language.
+    // $language = \Drupal::languageManager()->getCurrentLanguage();
+
+    // Get the language manager service.
+    $language_manager = \Drupal::languageManager();
+
+    // Get an array of all languages.
+    $languages = $language_manager->getLanguages();
+
+    // Generate the canonical URL for the node with the specified language.
+    $url = Url::fromRoute('entity.node.canonical', ['node' => $node_id], ['language' => $languages[$langcode]]);
+
+    // Retrieve the path from the URL object.
+    $path = $url->toString();
+    // If I wont the language on return .e.g en-us/alias.
+    // $path = '/' . $url->getInternalPath();
+
+    $pathAlias = \Drupal::service('path_alias.manager')->getAliasByPath($path);
+
+    if (strpos($pathAlias, '/node/') !== FALSE) {
+      return FALSE;
+    }
+
+    // Get the translated alias for the path.
+    //$translated_alias = \Drupal::service('path_alias.manager')->getPathAlias($path);
+    return \Drupal::service('path_alias.manager')->getAliasByPath($path);
+
   }
 
   /**
