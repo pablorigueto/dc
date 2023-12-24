@@ -81,6 +81,20 @@ trait NodeTrait {
   }
 
   /**
+   * Langcode from cookie or current.
+   */
+  public function langcode() {
+
+    $cookie_language = \Drupal::request()->cookies->get('selectedLanguage');
+
+    if ($cookie_language !== NULL) {
+      return str_replace('/', '', $cookie_language);
+    }
+
+    return $this->currentLanguage();
+  }
+
+  /**
    * Get the path alias through the node id.
    */
   public function getPathAlias(int $node_id, string $langcode): string|bool {
