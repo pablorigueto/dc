@@ -7,7 +7,6 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\File\FileUrlGeneratorInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\dc_endpoints\Traits\NodeTrait;
-use Drupal\node\Entity\Node;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -185,8 +184,8 @@ class APIEndpoints extends ControllerBase {
 
       $nodes[] = [
         'button_new_content' => $this->t('New Content'),
-        'title' => $titleNSubTitle['title'],
-        'sub_title' => $titleNSubTitle['sub_title'],
+        'title' => $titleNSubTitle['title'] ?? '',
+        'sub_title' => $titleNSubTitle['sub_title'] ?? '',
         'node_path' => $url_node_path,
         'node_owner_name' => $ownerFromNodNameNImage['user_name'],
         'node_owner_image_profile' => $ownerFromNodNameNImage['user_img_profile'],

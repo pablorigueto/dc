@@ -3,6 +3,7 @@
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\dc_endpoints\Traits\StaticNodeTrait;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\Entity\Term;
@@ -100,7 +101,17 @@ function dc_theme_preprocess_search_result(&$variables) {
   $node = $result['node'];
   // Check if the node has an image attached.
   if ($node->bundle() === 'article' || $node->bundle() === 'page') {
+
+    $user_langcode = StaticNodeTrait::langcode();
+
+    $url_node_path = StaticNodeTrait::getPathAlias($node->id(), $user_langcode);
+
+    if (!$url_node_path) {
+      return;
+    }
+
     _setInfosToSearchResultTwig($node, $variables);
+
   }
 }
 
@@ -189,6 +200,7 @@ function _setTaxonomiTags($node) {
 }
 
 function _setInfosToSearchResultTwig($node, &$variables): void {
+
   _setThumbnailURI($node, $variables);
   $timestamp = $node->created->getValue()[0]['value'];
   $formatted_date = _formateDate($timestamp);
