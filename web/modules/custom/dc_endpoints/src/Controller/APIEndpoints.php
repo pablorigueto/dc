@@ -51,7 +51,7 @@ class APIEndpoints extends ControllerBase {
   public function __construct(
     EntityTypeManagerInterface $entity_type_manager,
     FileUrlGeneratorInterface $file_url_generator,
-    LanguageManagerInterface $languageManager,
+    LanguageManagerInterface $languageManager
     ) {
     $this->entityTypeManager = $entity_type_manager;
     $this->fileUrlGenerator = $file_url_generator;
@@ -65,7 +65,7 @@ class APIEndpoints extends ControllerBase {
     return new static(
       $container->get('entity_type.manager'),
       $container->get('file_url_generator'),
-      $container->get('language_manager'),
+      $container->get('language_manager')
     );
   }
 
@@ -204,20 +204,6 @@ class APIEndpoints extends ControllerBase {
 
     return new JsonResponse($nodes);
 
-  }
-
-  /**
-   * Langcode from cookie or current.
-   */
-  public function langcode() {
-
-    $cookie_language = \Drupal::request()->cookies->get('selectedLanguage');
-
-    if ($cookie_language !== NULL) {
-      return str_replace('/', '', $cookie_language);
-    }
-
-    return $this->currentLanguage();
   }
 
 }
