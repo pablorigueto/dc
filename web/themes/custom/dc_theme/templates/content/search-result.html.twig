@@ -84,12 +84,19 @@
             </div>
             <div class="profile-search">
 
-              <div class="profile-img-name">
-                <img class="profile-search-img" src="{{ file_url(image_profile) }}" alt="User Profile Image">
-                <div class="owner-search">
-                  {{ node_owner_or_changed }}
-                </div>
+            <div class="profile-img-name">
+              <img class="profile-search-img" src="{{ file_url(image_profile) }}" alt="User Profile Image">
+              <div class="owner-search">
+                {{ node_owner_or_changed }}
               </div>
+            </div>
+
+            <div class="views_node_count">
+              {{ view_node_count }}
+              <span class="material-symbols-outlined">
+                visibility
+              </span>
+            </div>
 
             <div class="comments_count">
               {{ comments_count }}
