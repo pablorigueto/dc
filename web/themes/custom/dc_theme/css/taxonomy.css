@@ -14,6 +14,10 @@
     margin: 0 auto;
   }
 
+  #header {
+    padding-bottom: 5rem;
+  }
+
   #block-dc-theme-content .contextual-region {
     display: flex;
     gap: 1rem;

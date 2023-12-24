@@ -178,21 +178,21 @@ function _format_date($timestamp) {
 
   // Format the output.
   if ($days > 0) {
-    $formatted_date .= $days . ' day' . ($days > 1 ? 's' : '');
+    $formatted_date .= $days . ' day' . ($days > 1 ? 's' : '') . ' ago';
   }
 
-  if ($hours > 0) {
-    if ($formatted_date !== '') {
-      $formatted_date .= ' and ';
-    }
-    $formatted_date .= $hours . ' hour' . ($hours > 1 ? 's' : '');
-  }
+  // if ($hours > 0) {
+  //   if ($formatted_date !== '') {
+  //     $formatted_date .= ' and ';
+  //   }
+  //   $formatted_date .= $hours . ' hour' . ($hours > 1 ? 's' : '') . ' ago';
+  // }
 
   // If the time difference is less than 24 hours, use a different format.
   if ($interval->days === 0 && $interval->h < 24) {
-    $formatted_date = $hours . ' hours';
+    $formatted_date = $hours . ' hours ago';
     if ($interval->h === 0) {
-      $formatted_date = $minutes . ' min';
+      $formatted_date = $minutes . ' min ago';
     }
   }
 

@@ -89,7 +89,23 @@
     </div>
   </div>
   <div class="comment__text-wrapper">
-    <p class="comment__author">{{ author }}</p>
+    <div class="comment__author">
+      <p>{{ author }}</p>
+
+      {% if content.comment_body['#suffix'] is not defined %}
+        <span class="comment__time">{#{{ 'created'|t }}#} {{ formatted_date }}</span>
+      {% else %}
+      <span class="comment-edit">{{ 'edited'|t }} {{ formatted_date }}</span>
+      {% endif %}
+    
+      <div class="comments-more">
+      </div>
+      <div class="comments-manage-links">
+        {{ content.links }}
+      </div>
+
+    </div>
+
     {#
       Indicate the semantic relationship between parent and child comments
       for accessibility. The list is difficult to navigate in a screen
@@ -109,7 +125,7 @@
 
   </div>
 
-  <footer class="comment-footer">
+  {# <footer class="comment-footer">
     <span class="comments-more">
     </span>
     {% if content.comment_body['#suffix'] is not defined %}
@@ -121,6 +137,6 @@
     <div class="comments-manage-links">
       {{ content.links }}
     </div>
-  </footer>
+  </footer> #}
   </div>
 </article>

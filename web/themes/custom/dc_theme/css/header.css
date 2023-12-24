@@ -12,6 +12,10 @@
   padding-bottom: 8rem;
 }
 
+.path-node #header {
+  padding-bottom: 0rem;
+}
+
 .empty_carousel {
   height: 374px;
 }

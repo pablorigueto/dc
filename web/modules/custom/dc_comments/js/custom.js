@@ -7,7 +7,7 @@
           // Add a click event handler to the Menu heading.
           $(".comments-more", context).click(function () {
             // Find the related menu element within the same parent.
-            const MORE = $(this).siblings('.comment-edit, .comment__time, .comments-manage-links');
+            const MORE = $(this).siblings('.comments-manage-links');
   
             // Check if the more element exists.
             if (MORE.length) {
