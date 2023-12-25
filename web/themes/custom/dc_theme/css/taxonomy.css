@@ -8,14 +8,14 @@
     flex-wrap: wrap;
     justify-content: center;
     position: relative;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 3.5rem;
+    padding-bottom: 8rem;
     max-width: 1440px;
     margin: 0 auto;
   }
 
   #header {
-    padding-bottom: 5rem;
+    padding-bottom: 2rem;
   }
 
   #block-dc-theme-content .contextual-region {
@@ -24,8 +24,8 @@
     flex-wrap: wrap;
     justify-content: center;
     position: relative;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 4rem;
     max-width: 1440px;
     margin: 0 auto;
   }

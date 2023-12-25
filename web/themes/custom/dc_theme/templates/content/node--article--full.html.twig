@@ -13,6 +13,21 @@
     </div>
   </div>
 
+  <div class="basicpage-full-body">
+
+    <div class="content-body">
+      {{ content.field_content_body }}
+    </div>
+    <div class="node-full-footer">
+      <div class="content-like">
+        {{ content.field_like }}
+      </div>
+      <div class="field-tags">
+        {{ content.field_tags }}
+      </div>
+    </div>
+  </div>
+
   {# Display the author's user picture #}
   <div class="node-author">
     <div class="node-profile-img">
@@ -33,18 +48,6 @@
       </div>
     {% endif %}
 
-  </div>
-
-  <div class="basicpage-full-body">
-    <div class="field-tags">
-      {{ content.field_tags }}
-    </div>
-    <div class="content-body">
-      {{ content.field_content_body }}
-    </div>
-    <div class="content-like">
-      {{ content.field_like }}
-    </div>
   </div>
 
   <div class="comment-field">

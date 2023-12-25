@@ -91,6 +91,10 @@ code {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background: #141414;
+  padding: 20px;
+  color: #fff;
+  box-shadow: 2px 2px 2px #373737;
 }
 
 .basicpage_full_image img {
@@ -289,3 +293,15 @@ pre ::selection {
 .field--type-like-dislike {
   display: none;
 }
+
+.node-full-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+.field-tags {
+  margin-top: 20px;
+}
+

@@ -31,6 +31,8 @@
   margin-top: unset;
   margin-bottom: unset;
   margin-block-start: unset;
+  padding-left: 5px;
+  padding-top: 3.8px;
 }
 
 .comment__time,
@@ -49,11 +51,6 @@
 .comment__author,
 .comment__time {
   display: block;
-}
-
-.comment__time,
-.comment-edit {
-  padding-top: 3.8px;
 }
 
 .indented .comment__time,
@@ -358,6 +355,24 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   margin-block-start: 0;
 }
 
+.comment__author div:first-child {
+  padding-top: 2px;
+}
+
+.comment__author a {
+  text-decoration: unset;
+  font-family: 'Inter-Bold';
+  color: #141414;
+}
+
+.comment__author div span {
+  font-family: 'Inter-Bold';
+  color: #141414;
+}
+
+.user-logged-in .comment__author div:first-child {
+  padding-top: unset;
+}
 .comment__text-wrapper .comments_like > div:first-child > div:first-child {
   display: none;
 } 

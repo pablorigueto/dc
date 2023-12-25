@@ -13,6 +13,21 @@
     </div>
   </div>
 
+  <div class="basicpage-full-body">
+
+    <div class="content-body">
+      {{ content.field_content_body }}
+    </div>
+    <div class="node-full-footer">
+      <div class="content-like">
+        {{ content.field_like }}
+      </div>
+      <div class="field-tags">
+        {{ content.field_tags }}
+      </div>
+    </div>
+  </div>
+
   {# Display the author's user picture #}
   <div class="node-author">
     <div class="node-profile-img">
@@ -35,57 +50,8 @@
 
   </div>
 
-  <div class="basicpage-full-body">
-    <div class="field-tags">
-      {{ content.field_tags }}
-    </div>
-    <div class="content-body">
-      {{ content.field_content_body }}
-    </div>
-    <div class="content-like">
-      {{ content.field_like }}
-    </div>
-  </div>
-
   <div class="comment-field">
     {{ content.comment }}
-  </div>
+  </div>  
 
-  {# <div class="basicpage_full_node_owner_or_changed">
-    {{ node_owner_or_changed }}
-  </div> #}
-
-    {# <a class="frontpage-results-img" href="{{ url }}">
-      
-      <div class="frontpage-result-thumbnail">
-
-      <div class="frontpage-label-main">
-        <div class="frontpage-label {{ node_type }}">
-          {{ node_type|upper }}
-        </div>
-      </div>
-
-        <div class="frontpage-title-display">
-
-          <div class="frontpage-title">
-            {{ title_display }}
-          </div>
-          <div class="profile-frontpage">
-
-            <div class="profile-img-name">
-              <img class="profile-frontpage-img" src="{{ file_url(image_profile) }}" alt="User Profile Image">
-              <div class="owner-frontpage">
-                {{ node_owner_or_changed }}
-              </div>
-            </div>
-    
-            {{ create_or_changed }}
-    
-          </div>
-
-        </div>
-        {{ thumbnail }}
-      </div>
-    </a> #}
- 
 </basicpage>
