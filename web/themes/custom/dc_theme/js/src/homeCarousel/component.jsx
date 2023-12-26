@@ -74,7 +74,7 @@ const NodeList = () => {
     320: { slidesPerView: 1, spaceBetween: 10 },
     480: { slidesPerView: 2, spaceBetween: 20 },
     640: { slidesPerView: 3, spaceBetween: 30 },
-    768: { slidesPerView: 4, spaceBetween: 30 },
+    768: { slidesPerView: 4, spaceBetween: 10 },
   };
 
   return (
@@ -138,14 +138,7 @@ const NodeList = () => {
 
                 <div className='frontpage-title-display'>
                   <div className="frontpage-title">{node.title}</div>
-                    <div className="profile-frontpage">
-
-                      <div className="profile-img-name">
-                        <img className="profile-frontpage-img" src={node.node_owner_image_profile} alt="User Profile Image" />
-                        <div className="owner-frontpage">
-                          {node.node_owner_name}
-                        </div>
-                      </div>
+                    <div className="count-frontpage">
 
                       <div className="views_node_count">
                         {node.node_view_count}
@@ -167,8 +160,21 @@ const NodeList = () => {
                           thumb_up
                         </span>
                       </div>
+                    </div>
+
+                    <div className="profile-frontpage">
+
+                      <div className="profile-img-name">
+                        <img className="profile-frontpage-img" src={node.node_owner_image_profile} alt="User Profile Image" />
+                        <div className="owner-frontpage">
+                          {node.node_owner_name}
+                        </div>
+                      </div>
+
                       {node.node_created}
                     </div>
+
+
                   </div>
                   <img src={node.url} alt={node.alt} />
               </div>

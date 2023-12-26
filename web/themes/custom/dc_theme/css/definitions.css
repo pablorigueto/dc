@@ -224,6 +224,10 @@ h1,
   font-size: 26px;
 }
 
+.path-search h2 {
+  text-align: center;
+}
+
 .text-highlight h1,
 .text-highlight h2 {
   font-size: 22px;

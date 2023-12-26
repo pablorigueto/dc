@@ -263,7 +263,8 @@ trait NodeTrait {
    */
   protected function nodeCreated($node) {
     $timestamp = $node->created->getValue()[0]['value'];
-    return $this->formateDate($timestamp);
+    //return $this->formateDate($timestamp);
+    return $this->formatDateAgo($timestamp);
   }
 
   /**
@@ -280,7 +281,7 @@ trait NodeTrait {
    */
   protected function formateDate($timestamp) {
     $datetime = DrupalDateTime::createFromTimestamp($timestamp);
-    return $datetime->format('M y');
+    return $datetime->format('M d, Y');
   }
 
   /**
@@ -299,6 +300,48 @@ trait NodeTrait {
       'title' => strip_tags($parts[0]),
       'sub_title' => strip_tags($parts[1]),
     ];
+  }
+
+
+  public function formatDateAgo($timestamp) {
+    // $time = DrupalDateTime::createFromTimestamp($timestamp);
+    // // Format the created and change time into the desired pattern.
+    // return $time->format('D, M/d/Y - H:i');
+  
+    // Create a DrupalDateTime object for the provided timestamp.
+    $time = DrupalDateTime::createFromTimestamp($timestamp);
+    $current_time = new DrupalDateTime();
+  
+    $interval = $current_time->diff($time);
+    $formatted_date = '';
+  
+    // Calculate the total number of days and remaining hours.
+    $days = $interval->days;
+    $hours = $interval->h;
+    $minutes = $interval->i;
+  
+    // Format the output.
+    if ($days > 0) {
+      $formatted_date .= $days . ' day' . ($days > 1 ? 's' : '') . ' ago';
+    }
+  
+    // if ($hours > 0) {
+    //   if ($formatted_date !== '') {
+    //     $formatted_date .= ' and ';
+    //   }
+    //   $formatted_date .= $hours . ' hour' . ($hours > 1 ? 's' : '') . ' ago';
+    // }
+  
+    // If the time difference is less than 24 hours, use a different format.
+    if ($interval->days === 0 && $interval->h < 24) {
+      $formatted_date = $hours . ' hours ago';
+      if ($interval->h === 0) {
+        $formatted_date = $minutes . ' min ago';
+      }
+    }
+  
+    return $formatted_date;
+  
   }
 
 }

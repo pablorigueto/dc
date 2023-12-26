@@ -51,6 +51,13 @@
     color: #808080;
   }
 
+  .node-list-created::after {
+    content: "\f017";
+    font-family: 'FontAwesome';
+    font-size: 10px;
+    margin-left: 1px;
+  }
+
   .node-list-views-count,
   .node-list-comments-count,
   .node-list-likes-count {
