@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Contains Custom Login.
+ */
+
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_user_insert().
+ */
+function custom_login_user_insert(UserInterface $account) {
+ // Auto active the account.
+ // Set the user status to "active".
+ $account->activate();
+ // Save the user entity.
+ $account->save();
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function custom_login_form_user_register_form_alter(&$form, &$form_state, $form_id) {
+  // Add custom validation function to validate email.
+  $form['#validate'][] = '_custom_login_validate_email';
+}
+
+/**
+ * Custom validation function to check email on user registration.
+ */
+function _custom_login_validate_email(&$form, &$form_state) {
+  $email = $form_state->getValue('mail');
+
+  // Validate email format.
+  if (!\Drupal::service('email.validator')->isValid($email)) {
+    $form_state->setErrorByName('mail', t('The email address %mail is not valid.', ['%mail' => $email]));
+  }
+
+  // Check if email is already registered.
+  $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties(['mail' => $email]);
+  $account = reset($users);
+  if ($account) {
+    $form_state->setErrorByName('mail', t('The email address %mail is already registered.', ['%mail' => $email]));
+  }
+}

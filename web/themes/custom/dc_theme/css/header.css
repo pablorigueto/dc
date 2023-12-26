@@ -531,6 +531,10 @@ details.search-advanced .form-item-language-en {
   padding-top: 7.5px;
 }
 
+.path-frontpage .frontpage-result-thumbnail .owner-frontpage {
+  max-width: 90px;
+}
+
 .path-search .search-result-thumbnail .profile-img-name,
 .path-frontpage .frontpage-result-thumbnail .profile-img-name {
   display: flex;

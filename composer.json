@@ -34,6 +34,8 @@
         "drupal/restui": "^1.21",
         "drupal/search_api": "*",
         "drupal/search_api_solr": "*",
+        "drupal/social_api": "^4.0",
+        "drupal/social_auth": "^4.1",
         "drush/drush": "^12.1",
         "everapi/ipbase-php": "^1.0",
         "kint-php/kint": "^5.1",

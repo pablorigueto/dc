@@ -1,0 +1,5 @@
+name: Custom_Login
+description: Custom Drupal Login.
+core_version_requirement: ^8 || ^9 || ^10
+type: module
+core: 9.x
