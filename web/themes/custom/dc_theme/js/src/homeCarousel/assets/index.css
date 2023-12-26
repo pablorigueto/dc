@@ -3,6 +3,18 @@
   width: 70%;
 }
 
+.node-list-container h2 {
+  width: 149px;
+  border-top: 1px solid #d1d0d0;
+  border-left: 1px solid #d1d0d0;
+  border-right: 1px solid #d1d0d0;
+  padding: 8px;
+  border-radius: 2px;
+  font-size: 20px;
+  color: #141414;
+  font-family: 'Inter-Bold';
+}
+
 .node-list-container a:last-child {
   border-bottom-style: solid;
   border-bottom-color: #d1d0d0;

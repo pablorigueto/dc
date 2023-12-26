@@ -90,7 +90,7 @@
 
   .node-list-title {
     color: #141414;
-    font-family: 'Inter-Bold';
+    font-family: 'Inter-SemiBold';
     transition: all 0.5s ease;
   }
 
@@ -99,7 +99,7 @@
     transition: all 0.5s ease;
   }
 
-  .node-list-title-main h2 {
+  .node-list-title-main h3 {
     margin: 0;
   }
 

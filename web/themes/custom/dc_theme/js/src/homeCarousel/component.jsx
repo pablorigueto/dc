@@ -184,7 +184,7 @@ const NodeList = () => {
       </Swiper>
 
       <div className="node-list-container">
-        <h1>Recent Section</h1>
+        <h2>Recent Section</h2>
         {/* List node, more recent first. */}
         {nodeTimeStamp.map((node) => (
           <a className="node-list-path" href={node.node_path} key={`mr-${node.id}`}>
@@ -200,9 +200,9 @@ const NodeList = () => {
               </div>
 
               <div className="node-list-title-main">
-                <h2 className="node-list-title">
+                <h3 className="node-list-title">
                   {node.title}
-                </h2>
+                </h3>
               </div>
 
               <div className="node-list-details-main">
