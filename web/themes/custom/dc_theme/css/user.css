@@ -1,0 +1,271 @@
+.path-user {
+
+  #block-dc-theme-content div a img {
+    border-radius: 50%;
+  }
+
+  #header {
+    padding-bottom: 0;
+  }
+
+  .user-name-group,
+  .user-mail-group {
+    display: flex;
+    gap: 5px;
+
+  }
+
+  .user-name-group .user,
+  .user-mail-group .mail {
+    font-weight: 600;
+  }
+
+  .user-details {
+    padding-top: 1.2rem;
+    padding-bottom: 4rem;
+  }
+
+  #block-dc-theme-primary-local-tasks ul {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding-inline-start: 0;
+    padding-bottom: 2rem;
+    gap: 3px;
+    padding-top: 4rem;
+    justify-content: start;
+  }
+
+  #block-dc-theme-primary-local-tasks ul li:nth-child(3),
+  details#edit-contact,
+  details#edit-social-auth {
+    display: none;
+  }
+
+  #block-dc-theme-primary-local-tasks ul li a {
+    display: flex;
+    align-items: center;
+    text-decoration: unset;
+    /* border-top: 1px solid #d1d0d0;
+    border-left: 1px solid #d1d0d0;
+    border-right: 1px solid #d1d0d0; */
+    padding: 8px;
+    border-radius: 2px;
+    color: #141414;
+    transition: all 0.5s ease;
+    box-shadow: 1px 1px 1px 1px #0000000d;
+    padding: 15px;
+    border: 1px solid #dedfe4;
+  }
+
+  #block-dc-theme-primary-local-tasks ul li a:hover {
+    transition: all 0.5s ease;
+    box-shadow: 2px 2px 2px 2px #00000012;
+  }
+
+  #block-dc-theme-primary-local-tasks ul li a::after {
+    content: '\f013';
+    font-family: 'FontAwesome';
+    font-size: 12px;
+    margin-left: 3px;
+    color: #4f4b4b;
+  }
+
+  #block-dc-theme-primary-local-tasks ul li:first-child a::after {
+    content: '\f06e';
+    font-family: 'FontAwesome';
+    font-size: 12px;
+    margin-left: 3px;
+    color: #4f4b4b;
+  }
+
+  #block-dc-theme-primary-local-tasks ul, #user-form {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding-inline-start: 0;
+  }
+
+  #user-form {
+    padding-bottom: 4rem;
+  }
+
+  #user-form .form-item,
+  #user-form .image-widget {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .js-form-item-mail,
+  .password-parent,
+  .confirm-parent,
+  #edit-pass--description {
+    padding-top: 1rem;
+  }
+
+  .password-suggestions ul {
+    margin-block-end: unset;
+  }
+
+  #edit-user-picture-wrapper {
+    /* Your styles here */
+    padding: 2rem 0;
+  }
+
+  #edit-user-picture-wrapper .description {
+    padding-top: 0.2rem;
+  }
+
+  .form-submit {
+    background-image: linear-gradient(90deg,var(--dark-color),var(--light-dark-color) 50%,var(--dark-color));
+    border: unset;
+    height: 40px;
+    color: var(--white-color);
+    padding: 0 20px;
+    cursor: pointer;
+    font-family: 'Inter-Regular';
+    font-size: 16px;
+    background-size: 200% auto;
+    transition: all 225ms ease-in-out;
+    z-index: 1;
+    margin-right: 3px;
+    max-width: 320px;
+    width: 100%;
+  }
+
+  .form-actions .form-submit:hover {
+    background-position: 100%;
+    box-shadow: #ffffff26 0px 0px 8px 0px;
+    animation-timing-function: ease-out;
+    animation-duration: 200ms;
+  }
+
+  .image-widget .form-submit {
+    background-image: linear-gradient(90deg,#b74141,#d94b4b 50%,#fff);
+    transition: all 0.5s ease;
+  }
+
+  .image-widget .form-submit:hover {
+    background-image: linear-gradient(90deg,#ff2f2f,#ff2f2f 50%,#fff);;
+    transition: all 0.5s ease;
+  }
+
+  .form-text,
+  .form-email,
+  .form-select {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #b3b3b3;
+    /* background-color: #f9f9f9; */
+    max-width: 320px;
+    width: 100%;
+    height: 30px;
+    transition: all 0.5s ease;
+  }
+
+  .form-text:focus,
+  .form-email:focus,
+  .form-select:focus {
+    border-radius: unset;
+    border: 1px solid #141414;
+    transition: all 0.5s ease;
+    outline: none;
+  }
+
+  .password-suggestions ul {
+    padding: 0;
+  }
+
+  /* Visual styling for the Password strength indicator */
+  .password-strength__meter {
+    max-width: 320px;
+    width: 100%;
+    margin-top: 0.5em;
+    background-color: #ebeae4;
+  }
+  .password-strength__indicator {
+    -webkit-transition: width 0.5s ease-out;
+    transition: width 0.5s ease-out;
+    background-color: #77b259;
+  }
+  .password-strength__indicator.is-weak {
+    background-color: #e62600;
+  }
+  .password-strength__indicator.is-fair {
+    background-color: #e09600;
+  }
+  .password-strength__indicator.is-good {
+    background-color: #0074bd;
+  }
+  .password-strength__indicator.is-strong {
+    background-color: #77b259;
+  }
+
+  /* Styling for the status indicator of the passwords match test.  */
+  .password-confirm-message .ok {
+    color: #325e1c;
+    font-weight: bold;
+  }
+  .password-confirm-message .error {
+    color: #a51b00;
+    font-weight: bold;
+  }
+
+
+
+  #edit-timezone {
+    margin: 2rem 0;
+  }
+
+  .form-select option[value="en"] {
+    display: none;
+  }
+
+  .form-select {
+    cursor: pointer;
+    background: #fff;
+  }
+
+  #edit-language summary,
+  #edit-timezone summary {
+    cursor: pointer;
+  }
+
+  .description,
+  .password-strength__title,
+  .password-confirm-message,
+  .password-suggestions {
+    font-size: 12px;
+  }
+
+  .password-suggestions {
+    margin-top: 1rem;
+    padding: 20px;
+    border: 1px solid #b3b3b3;
+    max-width: 282px
+  }
+
+  #edit-user-picture-0--label {
+    padding-bottom: 0.5rem;
+  }
+
+  .image-widget img {
+    border-radius: 50%;
+  }
+
+  .file--image {
+    margin-top: 0.5rem;
+  }
+
+  #edit-account,
+  #ajax-wrapper .form-item,
+  #edit-language,
+  #edit-timezone {
+    box-shadow: 1px 1px 1px 1px #0000000d;
+    padding: 20px;
+    border: 1px solid #dedfe4;
+  }
+
+
+
+
+}
+

@@ -1,0 +1,40 @@
+/* Anonymous user - unlogedin user */
+body:not(.user-logged-in).path-user {
+
+  #block-dc-theme-primary-local-tasks ul li:nth-child(3) {
+    display: block;
+  }
+
+  .main-content #block-dc-theme-primary-local-tasks ul li a::after {
+    content: unset;
+  }
+
+  #edit-name--description, 
+  #edit-pass--description{
+    display: none;
+  }
+
+  .js-form-item-name,
+  .js-form-item-pass {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-bottom: 1rem;
+  }
+
+  #edit-pass {
+    margin-left: 2.73px;
+  }
+
+  #edit-name,
+  #edit-pass {
+    max-width: 233px;
+    width: 100%;
+  }
+
+  .social-bar {
+    max-width: 1170px;
+    margin: 0 auto;
+  }
+
+}

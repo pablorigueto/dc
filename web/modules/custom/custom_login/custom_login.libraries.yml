@@ -1,0 +1,12 @@
+custom-login-styling:
+  css:
+    theme:
+      css/custom-login-user.css: {}
+  # js:
+  #   js/custom.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupal.ajax
+    - core/drupalSettings
+    - core/jquery
+    - core/once

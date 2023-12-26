@@ -36,6 +36,7 @@
         "drupal/search_api_solr": "*",
         "drupal/social_api": "^4.0",
         "drupal/social_auth": "^4.1",
+        "drupal/social_auth_google": "^4.0",
         "drush/drush": "^12.1",
         "everapi/ipbase-php": "^1.0",
         "kint-php/kint": "^5.1",

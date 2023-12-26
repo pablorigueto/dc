@@ -8,14 +8,33 @@
 use Drupal\user\UserInterface;
 
 /**
+ * Allow the visitors to get auth without admin approval.
+ */
+function custom_login_update_10001() {
+  // Update the configuration value.
+  $config = \Drupal::configFactory()->getEditable('user.settings');
+  $config->set('register', 'visitor');
+  $config->save();
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function custom_login_page_attachments(array &$attachments) {
+  if (!\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $attachments['#attached']['library'][] = 'custom_login/custom-login-styling';
+  }
+}
+
+/**
  * Implements hook_user_insert().
  */
 function custom_login_user_insert(UserInterface $account) {
- // Auto active the account.
- // Set the user status to "active".
- $account->activate();
- // Save the user entity.
- $account->save();
+  // Auto active the account.
+  // Set the user status to "active".
+  $account->activate();
+  // Save the user entity.
+  $account->save();
 }
 
 /**

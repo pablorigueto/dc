@@ -35,6 +35,15 @@
   padding-top: 3.8px;
 }
 
+.user-logged-in .comment__time,
+.user-logged-in .comment-edit {
+  padding-top: 1.65px;
+}
+
+.comment__picture-wrapper .user-details {
+  display: none;
+}
+
 .comment__time,
 .comment-edit,
 .reply-text,
