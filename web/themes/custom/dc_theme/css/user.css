@@ -283,6 +283,8 @@
   body.path-user-register .title-user-register,
   body.path-user-password .title-user-password {
     display: block;
+    color: #fff;
+    background-color: #a51b00;
   }
 
   /* body:not(.path-user-password) .title-user-password {

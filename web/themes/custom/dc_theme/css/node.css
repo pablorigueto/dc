@@ -1,4 +1,4 @@
-@import url('./definitions.css');
+/* @import url('./definitions.css'); */
 
 .path-node #block-dc-theme-content {
   display: flex;
@@ -91,10 +91,10 @@ code {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  background: #141414;
+  background: #ffffff;
   padding: 20px;
-  color: #fff;
-  box-shadow: 2px 2px 2px #373737;
+  color: #181818;
+  box-shadow: 0 1px 1px 1px #37373721;
 }
 
 .basicpage_full_image img {

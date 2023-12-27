@@ -27,4 +27,18 @@
     }
   };
 
+  Drupal.behaviors.preventClickOnImage = {
+    attach(context) {
+      if (!drupalSettings.preventClickOnImage) {
+        $(document).ready(function () {
+          // Add a click event handler to avoid click on user profile img.
+          $(".comment__picture a", context).click(function (event) {
+            event.preventDefault();
+          });
+        });
+        drupalSettings.preventClickOnImage = true;
+      }
+    }
+  };
+
 })(jQuery, Drupal, once);

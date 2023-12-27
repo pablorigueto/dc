@@ -31,13 +31,12 @@
   margin-top: unset;
   margin-bottom: unset;
   margin-block-start: unset;
-  /* padding-left: 5px; */
-  padding-top: 3.8px;
+  /* padding-top: 3.8px; */
 }
 
 .user-logged-in .comment__time,
 .user-logged-in .comment-edit {
-  padding-top: 1.65px;
+  /* padding-top: 1.65px; */
 }
 
 .comment__picture-wrapper .user-details {
@@ -177,6 +176,10 @@ article.comment {
 .post-comments-section {
   padding-top: 5rem;
   padding-bottom: 0.5rem;
+}
+
+.post-comments-section h2 {
+  text-align: center;
 }
 
 form.comment-form div.form-wrapper {
@@ -354,7 +357,7 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 .comment__author {
   margin-bottom: 0;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 5px;
   margin-top: 12.5px;
 }

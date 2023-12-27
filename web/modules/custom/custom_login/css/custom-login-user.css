@@ -1,5 +1,7 @@
 /* Anonymous user - unlogedin user */
-body:not(.user-logged-in).path-user {
+body.path-user-login, 
+body.path-user-register,
+body.path-user-password {
 
   #block-dc-theme-primary-local-tasks ul li:nth-child(3) {
     display: block;
@@ -14,7 +16,7 @@ body:not(.user-logged-in).path-user {
   }
 
   #edit-name--description, 
-  #edit-pass--description{
+  #edit-pass--description {
     display: none;
   }
 
@@ -103,7 +105,6 @@ body:not(.user-logged-in).path-user {
     border: 1px solid #dedfe4;
   }
 
-
   #edit-account .js-form-item-mail,
   #edit-account .js-form-item-name {
     display: flex;
@@ -111,13 +112,11 @@ body:not(.user-logged-in).path-user {
     padding-bottom: 1rem;
   }
 
-  @media screen and (min-width: 320px) and (max-width: 1170px) {
+  /*This part it was added on the theme file custom-login.css to avoid issue on mobile*/
+  /* @media screen and (min-width: 320px) and (max-width: 1170px) {
     .social-bar {
       max-width: 95%;
     }
-  }
-
-  @media screen and (min-width: 320px) and (max-width: 1170px) {
     #block-dc-theme-primary-local-tasks ul {
       max-width: 95%;
     }
@@ -158,7 +157,7 @@ body:not(.user-logged-in).path-user {
     #block-dc-theme-socialauthlogin {
       width: unset;
     }
-  }
+  } */
 
 }
 
