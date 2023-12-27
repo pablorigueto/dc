@@ -59,10 +59,10 @@
 
   #block-dc-theme-primary-local-tasks ul li a:hover {
     transition: all 0.5s ease;
-    box-shadow: 2px 2px 2px 2px #00000012;
+    box-shadow: 1px 1px 1px 1px #00000040;
   }
 
-  #block-dc-theme-primary-local-tasks ul li a::after {
+  /* #block-dc-theme-primary-local-tasks ul li a::after {
     content: '\f013';
     font-family: 'FontAwesome';
     font-size: 12px;
@@ -76,7 +76,7 @@
     font-size: 12px;
     margin-left: 3px;
     color: #4f4b4b;
-  }
+  } */
 
   #block-dc-theme-primary-local-tasks ul, #user-form {
     max-width: 1170px;

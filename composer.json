@@ -26,7 +26,6 @@
         "drupal/extrafield_views_integration": "^2.1",
         "drupal/field_group": "^3.4",
         "drupal/google_api_client": "^4.3",
-        "drupal/googlelogin-googlelogin": "^9.2",
         "drupal/legal": "^3.0",
         "drupal/like_dislike": "^2.4",
         "drupal/pathauto": "*",
@@ -56,7 +55,8 @@
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
             "phpstan/extension-installer": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "php-http/discovery": true
         },
         "sort-packages": true
     },

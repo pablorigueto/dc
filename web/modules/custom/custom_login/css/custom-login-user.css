@@ -5,6 +5,10 @@ body:not(.user-logged-in).path-user {
     display: block;
   }
 
+  #block-dc-theme-primary-local-tasks ul {
+    flex-wrap: wrap;
+  }
+
   .main-content #block-dc-theme-primary-local-tasks ul li a::after {
     content: unset;
   }
@@ -17,24 +21,130 @@ body:not(.user-logged-in).path-user {
   .js-form-item-name,
   .js-form-item-pass {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: start;
     gap: 5px;
     padding-bottom: 1rem;
   }
 
-  #edit-pass {
-    margin-left: 2.73px;
-  }
-
   #edit-name,
-  #edit-pass {
-    max-width: 233px;
+  #edit-pass,
+  #edit-mail {
+    max-width: 409px;
     width: 100%;
   }
 
   .social-bar {
     max-width: 1170px;
     margin: 0 auto;
+    padding: 2rem 0 4rem 0;
+  }
+
+  #block-dc-theme-socialauthlogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 424.5px;
+    box-shadow: 1px 1px 1px 1px #0000000d;
+    padding: 15px;
+    border: 1px solid #dedfe4;
+  }
+
+  #user-register-form,
+  #user-register-form #edit-submit {
+    max-width: 459px;
+  }
+
+  #user-pass {
+    max-width: 417px;
+    box-shadow: 1px 1px 1px 1px #0000000d;
+    padding: 20px;
+    border: 1px solid #dedfe4;
+  }
+
+  #user-pass #edit-name {
+    max-width: 411px;
+  }
+
+  #user-pass #edit-submit {
+    max-width: 417px;
+  }
+
+  .auth-link {
+    padding-bottom: 0.8rem;
+  }
+
+  #user-login-form .form-required {
+    width: 130px;
+  }
+
+  #user-login-form .form-submit {
+    max-width: 414px;
+  }
+
+  #user-login-form {
+    max-width: 415px;
+    box-shadow: 1px 1px 1px 1px #0000000d;
+    padding: 20px 20px 25px 20px;
+    border: 1px solid #dedfe4;
+  }
+
+
+  #edit-account .js-form-item-mail,
+  #edit-account .js-form-item-name {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1rem;
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 1170px) {
+    .social-bar {
+      max-width: 95%;
+    }
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 1170px) {
+    #block-dc-theme-primary-local-tasks ul {
+      max-width: 95%;
+    }
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 409px) {
+
+    #edit-name,
+    #edit-mail {
+      max-width: calc(100% - 2%);
+    }
+
+    #edit-name,
+    #edit-pass,
+    #edit-mail {
+      margin: 0 auto;
+      width: unset;
+      max-width: 98.5%;
+    }
+
+    #user-pass #edit-name {
+      max-width: calc(100% - 1.8%);
+      width: 100%;
+    }
+
+  }
+
+  @media screen and (min-width: 410px) and (max-width: 494px) {
+    #edit-name,
+    #edit-pass,
+    #user-pass #edit-name,
+    #edit-mail {
+      max-width: calc(100% - 1.5%);
+    }
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 497px) {
+    #block-dc-theme-socialauthlogin {
+      width: unset;
+    }
   }
 
 }
