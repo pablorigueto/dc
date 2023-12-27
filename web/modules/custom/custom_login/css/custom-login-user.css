@@ -161,3 +161,8 @@ body:not(.user-logged-in).path-user {
   }
 
 }
+
+
+body.user-logged-in.path-user-password #block-dc-theme-content {
+  padding: 5rem 0;
+}

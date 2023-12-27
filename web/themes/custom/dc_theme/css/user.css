@@ -99,6 +99,10 @@
     flex-direction: column;
   }
 
+  .image-widget .js-hide {
+    display: none;
+  }
+
   .js-form-item-mail,
   .password-parent,
   .confirm-parent,
