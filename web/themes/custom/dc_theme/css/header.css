@@ -171,6 +171,13 @@
   font-family: Material Symbols Outlined;
 }
 
+#block-dc-theme-login ul li:first-child a {
+  background: linear-gradient(220deg,#4285F4,#34A853,#FBBC05,#EA4335);
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
 #block-dc-theme-login-menu:before {
   content: '\ea77';
   margin-right: 6px;

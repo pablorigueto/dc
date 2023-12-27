@@ -14,8 +14,24 @@ use Drupal\user\Entity\User;
  * Adds body classes if certain regions have content.
  */
 function dc_theme_preprocess_html(&$variables) {
-  // So fonts can be preloaded from base theme in the event Olivero is used as a subtheme.
+  // So fonts can be preloaded from base theme in the event dc theme is used as a subtheme.
   $variables['dc_theme_path'] = \Drupal::request()->getBasePath() . '/' . \Drupal::service('extension.list.theme')->getPath('dc_theme');
+
+  // Define some vars to add on TWIG templates.
+  $uri = \Drupal::request()->getRequestUri();
+
+  if (strpos($uri, '/user/login') !== FALSE) {
+    $variables['path_user_login'] = TRUE;
+  }
+
+  if (strpos($uri, '/user/register') !== FALSE) {
+    $variables['path_user_register'] = TRUE;
+  }
+
+  if (strpos($uri, '/user/password') !== FALSE) {
+    $variables['path_user_password'] = TRUE;
+  }
+
 }
 
 /**

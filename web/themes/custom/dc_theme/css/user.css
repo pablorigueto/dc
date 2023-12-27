@@ -264,8 +264,21 @@
     border: 1px solid #dedfe4;
   }
 
+  .user-login-title,
+  .title-user-register,
+  .title-user-password {
+    display: none;
+  }
 
+  body.path-user-login .user-login-title,
+  body.path-user-register .title-user-register,
+  body.path-user-password .title-user-password {
+    display: block;
+  }
 
+  /* body:not(.path-user-password) .title-user-password {
+    display: none;
+  } */
 
 }
 

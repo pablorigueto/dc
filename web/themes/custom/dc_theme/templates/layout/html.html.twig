@@ -17,6 +17,9 @@
  * - page_bottom: Closing rendered markup. This variable should be printed after
  *   'page'.
  * - db_offline: A flag indicating if the database is offline.
+ * - path_user_login: A flag indicating the page.
+ * - path_user_register: A flag indicating the page.
+ * - path_user_password: A flag indicating the page.
  * - placeholder_token: The token for generating head, css, js and js-bottom
  *   placeholders.
  * - dc_theme: Returns the path to an dc_theme theme.
@@ -31,6 +34,9 @@
     not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
     node_type ? 'page-node-type-' ~ node_type|clean_class,
     db_offline ? 'db-offline',
+    path_user_login ? 'path-user-login',
+    path_user_register ? 'path-user-register', 
+    path_user_password ? 'path-user-password',
   ]
 %}
 <!DOCTYPE html>
