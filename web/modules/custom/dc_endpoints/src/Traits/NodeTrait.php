@@ -296,12 +296,15 @@ trait NodeTrait {
     $parts = explode('</h1>', $titleNSubTitle, 2);
 
     // Remove HTML tags.
-    return [
-      'title' => strip_tags($parts[0]),
-      'sub_title' => strip_tags($parts[1]),
-    ];
-  }
+    $title = isset($parts[0]) ? strip_tags($parts[0]) : '';
+    $subTitle = isset($parts[1]) ? strip_tags($parts[1]) : '';
 
+    return [
+      'title' => $title,
+      'sub_title' => $subTitle,
+    ];
+
+  }
 
   public function formatDateAgo($timestamp) {
     // $time = DrupalDateTime::createFromTimestamp($timestamp);

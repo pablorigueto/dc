@@ -48,6 +48,25 @@
     }
   };
 
+  // Hidden the language en, using js, to avoid issues on user data.
+  Drupal.behaviors.languageEnHidden = {
+    attach(context) {
+      if (!drupalSettings.languageEnHidden) {
+        $(document).ready(function () {
+          // Find the list item with hreflang="en"
+          let listItem = document.querySelector('ul.links li[hreflang="en"]');
+          
+          // Check if the list item is found
+          if (listItem) {
+            // Set display to none
+            listItem.style.display = 'none';
+          }
+        });
+        drupalSettings.languageEnHidden = true;
+      }
+    }
+  };
+
   // Default title of language switcher.
   Drupal.behaviors.defaultLanguageTitleSwitcher = {
     attach: function (context) {

@@ -15,10 +15,6 @@
   display: none;
 }
 
-ul li[hreflang="en"] {
-  display: none;
-}
-
 /*
 .en-us__language a::before, #block-dc-theme-language-menu.en-us__ls::before {
   content: url('../assets/en-us.png');

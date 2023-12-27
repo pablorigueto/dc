@@ -22,25 +22,6 @@ function dc_comments_page_attachments(array &$attachments) {
   }
 }
 
-/**
- * Implements hook_node_access().
- */
-// function dc_comments_node_access(NodeInterface $node, $op, AccountInterface $account) {
-
-//   // $current_url = \Drupal::request()->getRequestUri();
-//   // $current_url;
-//   // // Block access if the user is not authenticated.
-//   // if (!$account->isAuthenticated()
-//   //   && $current_url != 'user/login'
-//   //   && $current_url != '/user/register'
-//   //   && $current_url != '/user/password'
-//   // ) {
-//   //   // Redirect the user to login.
-//   //   $response = new RedirectResponse('/user/login');
-//   //   $response->send();
-//   // }
-// }
-
 function dc_comments_form_alter(&$form, &$form_state, $form_id) {
 
   // Change the comment field to plain text.

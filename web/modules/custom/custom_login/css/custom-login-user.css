@@ -51,6 +51,13 @@ body:not(.user-logged-in).path-user {
     border: 1px solid #dedfe4;
   }
 
+  #block-dc-theme-socialauthlogin h2 {
+    background: linear-gradient(220deg, #4285F4, #34A853, #FBBC05, #EA4335);
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
+
   #user-register-form,
   #user-register-form #edit-submit {
     max-width: 459px;
@@ -73,6 +80,10 @@ body:not(.user-logged-in).path-user {
 
   .auth-link {
     padding-bottom: 0.8rem;
+  }
+
+  .auth-link .auth-icon {
+    margin: 0;
   }
 
   #user-login-form .form-required {
