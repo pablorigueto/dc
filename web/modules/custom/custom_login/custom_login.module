@@ -65,7 +65,6 @@ function custom_login_form_alter(&$form, &$form_state, $form_id) {
 
     // Add the file description message.
     $form['user_picture']['widget'][0]['#description']['#markup'] .= $file_description_message;
-    
 
   }
 }
