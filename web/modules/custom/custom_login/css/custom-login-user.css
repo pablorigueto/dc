@@ -38,6 +38,8 @@ body:not(.user-logged-in).path-user {
     max-width: 1170px;
     margin: 0 auto;
     padding: 2rem 0 4rem 0;
+    display: flex;
+    justify-content: center;
   }
 
   #block-dc-theme-socialauthlogin {

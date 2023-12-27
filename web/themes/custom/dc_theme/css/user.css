@@ -1,5 +1,10 @@
 .path-user {
 
+  #block-dc-theme-content {
+    display: flex;
+    justify-content: center;
+  }
+
   #block-dc-theme-content div a img {
     border-radius: 50%;
   }
@@ -32,7 +37,7 @@
     padding-bottom: 2rem;
     gap: 3px;
     padding-top: 4rem;
-    justify-content: start;
+    justify-content: center;
   }
 
   #block-dc-theme-primary-local-tasks ul li:nth-child(3),
