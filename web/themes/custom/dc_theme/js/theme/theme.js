@@ -234,7 +234,7 @@
 
   Drupal.behaviors.addCopyCodeBtn = {
     attach: function attach(context) {
-      once('addCopyCodeBtn', '.page-node-type-page pre', context).forEach(element => {
+      once('addCopyCodeBtn', '.path-node pre', context).forEach(element => {
         $(element).append("<div class='btnFromJs'><span>copy</span></div>");
       });
     }
@@ -242,7 +242,7 @@
 
   Drupal.behaviors.copyCode = {
     attach: function attach(context) {
-      once('copyCode', '.page-node-type-page pre .btnFromJs', context).forEach(element => {
+      once('copyCode', '.path-node pre .btnFromJs', context).forEach(element => {
         element.addEventListener('click', async e => {
   
           // Append the 'popFromJs' div to the parent <pre> element

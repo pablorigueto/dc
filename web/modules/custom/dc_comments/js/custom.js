@@ -21,6 +21,13 @@
               }
             }
           });
+
+          // Check if the .anonymous-login-redirect class is present.
+          if ($('.anonymous-login-redirect').length) {
+            // Remove all elements with the class .comments-more.
+            $('.comments-more').remove();
+          }
+
         });
         drupalSettings.commentsMore = true;
       }
@@ -32,9 +39,20 @@
       if (!drupalSettings.preventClickOnImage) {
         $(document).ready(function () {
           // Add a click event handler to avoid click on user profile img.
-          $(".comment__picture a", context).click(function (event) {
-            event.preventDefault();
-          });
+          let firstLinkPicture = $(".comment__picture a:first", context);
+          if (firstLinkPicture.length > 0) {
+            firstLinkPicture.click(function (event) {
+              event.preventDefault();
+            });
+          }
+
+          let firstLink = $(".comment__author div:first a:first", context);
+          if (firstLink.length > 0) {
+            firstLink.click(function (event) {
+              event.preventDefault();
+            });
+          }
+
         });
         drupalSettings.preventClickOnImage = true;
       }
