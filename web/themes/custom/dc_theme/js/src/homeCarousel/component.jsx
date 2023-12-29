@@ -14,15 +14,15 @@ import 'swiper/css/navigation';
 
 const NodeList = () => {
 
-  const swiperConfig = getSwiperConfig(sortedNodes);
+  const swiperConfig = getSwiperConfig();
 
   const { data: nodes, isLoading, error } = useQuery('nodes', fetchNodes, {
     retry: 5,
     retryDelay: 1000,
   });
 
-  const [selectedValue, setSelectedValue] = useState(''); // Actual value used for sorting
-  const [displayLabel, setDisplayLabel] = useState('Filter'); // Label displayed in the dropdown
+  const [selectedValue, setSelectedValue] = useState('');
+  const [displayLabel, setDisplayLabel] = useState('Filter');
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
