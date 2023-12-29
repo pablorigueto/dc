@@ -164,9 +164,9 @@ h2 {
 
 [id^="like_dislike_status"] {
   text-align: center;
-  padding-top: 5px;
+  padding-top: 12px;
   color: #03a0cd;
-  padding-left: 25px;
+  position: absolute;
 }
 
 span[id^="like-"] {
