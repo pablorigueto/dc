@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { fetchNodes } from './controller';
 import './assets/index.css';
-
+import Dropdown from './dropdown';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
@@ -141,33 +141,12 @@ const NodeList = () => {
   return (
     <>
       <div className="carousel-filter">
-      <div className={`custom-dropdown ${isMenuOpen ? 'open' : ''}`}>
-          <span className="selected-option" onClick={toggleMenu}>
-            {displayLabel}
-          </span>
-          <ul className="options-list">
-            {/* <li onClick={() => handleSortChange('')} className="option">
-            </li> */}
-            <li onClick={() => handleSortChange('mostViewed')} className="option">
-              Most Viewed
-            </li>
-            <li onClick={() => handleSortChange('lessViewed')} className="option">
-              Less Viewed
-            </li>
-            <li onClick={() => handleSortChange('mostLiked')} className="option">
-              Most Liked
-            </li>
-            <li onClick={() => handleSortChange('lessLiked')} className="option">
-              Less Liked
-            </li>
-            <li onClick={() => handleSortChange('mostCommented')} className="option">
-              Most Commented
-            </li>
-            <li onClick={() => handleSortChange('lessCommented')} className="option">
-              Less Commented
-            </li>
-          </ul>
-        </div>
+        <Dropdown
+          displayLabel={displayLabel}
+          isMenuOpen={isMenuOpen}
+          toggleMenu={toggleMenu}
+          handleSortChange={handleSortChange}
+        />
       </div>
         
       <Swiper {...swiperConfig}>
