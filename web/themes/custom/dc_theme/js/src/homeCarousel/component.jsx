@@ -18,7 +18,6 @@ const NodeList = () => {
 
   const [selectedValue, setSelectedValue] = useState('');
   const [displayLabel, setDisplayLabel] = useState('Filter');
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleSortChange = (option) => {

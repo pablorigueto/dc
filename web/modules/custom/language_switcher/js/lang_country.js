@@ -3,48 +3,52 @@
   // Update the langcode on Cookie.
   Drupal.behaviors.updateLangOnCookie = {
     attach: function (context) {
-      // Get the div element
-      const LANGUAGE_SWITCHER = document.getElementById('block-dc-theme-languageswitcher', context);
+      if (!drupalSettings.updateLangOnCookie) {
+          drupalSettings.updateLangOnCookie = true;
+        // Get the div element
+        const LANGUAGE_SWITCHER = document.getElementById('block-dc-theme-languageswitcher', context);
 
-      // Check if the element exists.
-      if (!LANGUAGE_SWITCHER) {
-        return;
-      }
-
-      // Add click event listener to the div.
-      LANGUAGE_SWITCHER.addEventListener('click', function(event) {
-        // Check if the clicked element is a link.
-        if (event.target.tagName === 'A') {
-
-          // Get the lang attr.
-          const LINK_DESTINATION = event.target.getAttribute('hreflang');
-
-          const TRIMMED_SEGMENTS = getPathSegmentsDestination();
-
-          // If the link destination and the current link are the same, just avpid the redirect.
-          if (TRIMMED_SEGMENTS[1] === LINK_DESTINATION) {
-            //Prevent the default link behavior.
-            event.preventDefault();
-          }
-
-          // Delete the Cookie before to update him.
-          deleteCookie("selectedLanguage");
-          // Set the new value to cookie.
-          setCookie("selectedLanguage", '/' + LINK_DESTINATION, 365);
-
+        // Check if the element exists.
+        if (!LANGUAGE_SWITCHER) {
+          return;
         }
-      });
+
+        // Add click event listener to the div.
+        LANGUAGE_SWITCHER.addEventListener('click', function(event) {
+          // Check if the clicked element is a link.
+          if (event.target.tagName === 'A') {
+
+            // Get the lang attr.
+            const LINK_DESTINATION = event.target.getAttribute('hreflang');
+
+            const TRIMMED_SEGMENTS = getPathSegmentsDestination();
+
+            // If the link destination and the current link are the same, just avpid the redirect.
+            if (TRIMMED_SEGMENTS[1] === LINK_DESTINATION) {
+              //Prevent the default link behavior.
+              event.preventDefault();
+            }
+
+            // Delete the Cookie before to update him.
+            deleteCookie("selectedLanguage");
+            // Set the new value to cookie.
+            setCookie("selectedLanguage", '/' + LINK_DESTINATION, 365);
+
+          }
+        });
+      }
     }
   };
 
   // Set langCode base on GeoIP or Default lang site.
   Drupal.behaviors.setDefaultLangOnCookie = {
     attach: function () {
-      $(document).ready(function() {
-
-        manageCookie(getLangCodeFromUrl());
-
-      });
+      if (!drupalSettings.setDefaultLangOnCookie) {
+        drupalSettings.setDefaultLangOnCookie = true;
+        $(document).ready(function() {
+          manageCookie(getLangCodeFromUrl());
+        });
+      }
     }
   };
 
@@ -70,20 +74,22 @@
   // Default title of language switcher.
   Drupal.behaviors.defaultLanguageTitleSwitcher = {
     attach: function (context) {
-      let selectedLanguageCookie = getCookie("selectedLanguage");
+      if (!drupalSettings.defaultLanguageTitleSwitcher) {
+        drupalSettings.defaultLanguageTitleSwitcher = true;
+        let selectedLanguageCookie = getCookie("selectedLanguage");
 
-      if (selectedLanguageCookie) {
-        const TITLE = selectedLanguageCookie.split('/');
-        updateLanguageTitleSwitcher(TITLE[1].trim(), context);
-        return;
+        if (selectedLanguageCookie) {
+          const TITLE = selectedLanguageCookie.split('/');
+          updateLanguageTitleSwitcher(TITLE[1].trim(), context);
+          return;
+        }
+
+        const DESTINATION = getPathSegmentsDestination();
+        if (DESTINATION) {
+          updateLanguageTitleSwitcher(DESTINATION[1].trim(), context);
+          return;
+        }
       }
-
-      const DESTINATION = getPathSegmentsDestination();
-      if (DESTINATION) {
-        updateLanguageTitleSwitcher(DESTINATION[1].trim(), context);
-        return;
-      }
-
     }
   };
 
