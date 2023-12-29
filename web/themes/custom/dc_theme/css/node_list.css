@@ -3,6 +3,7 @@
 .node-list-path {
 
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   text-decoration: unset;
@@ -101,6 +102,21 @@
 
   .node-list-title-main h3 {
     margin: 0;
+  }
+
+
+  @media screen and (min-width: 320px) and (max-width: 450px) {
+    .node-list-path {
+      flex-direction: column;
+    }
+    .node-list-image {
+      display: none;
+      /* padding-top: 10px;
+      padding-bottom: 20px;
+      width: 180px;
+      height: 140px; */
+    }
+
   }
 
 }

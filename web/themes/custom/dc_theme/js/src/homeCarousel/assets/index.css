@@ -28,6 +28,26 @@
   }
 }
 
+@media screen and (min-width: 320px) and (max-width: 450px) {
+  .node-list-container h2 {
+    text-align: start;
+    width: auto;
+  }
+}
+
+/* @media screen and (min-width: 200px) and (max-width: 510px) {
+  .node-path {
+    display: flex;
+    justify-content: center;
+  }
+} */
+
+@media screen and (min-width: 390px) and (max-width: 519px) {
+  .swiper-wrapper {
+    padding-left: clamp(0px, calc((100vw - 390px) / (519 - 390) * (90 - 0)), 90px);
+  }
+}
+
 .carousel-filter select {
   height: 30px;
   text-align: center;
@@ -43,8 +63,16 @@
 
 
 .carousel-filter {
+  text-align: end;
+  padding-bottom: 1rem;
   display: flex;
   justify-content: end;
+}
+
+@media screen and (min-width: 220px) and (max-width: 519px) {
+  .carousel-filter {
+    justify-content: center;
+  }
 }
 
 .custom-dropdown {

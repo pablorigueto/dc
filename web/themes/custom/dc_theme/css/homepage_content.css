@@ -22,9 +22,12 @@
   margin-bottom: -41.5px;
 }
 
-.carousel-filter {
-  text-align: end;
-  padding-bottom: 1rem;
+@media screen and (min-width: 220px) and (max-width: 519px) {
+  .title-cards h1 {
+    margin-bottom: unset;
+    text-align: center;
+    padding-bottom: 25px;
+  }
 }
 
 .path-frontpage .frontpage-result-thumbnail {

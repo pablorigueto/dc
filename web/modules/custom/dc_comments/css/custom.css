@@ -486,8 +486,8 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 .comment-field {
   display: flex;
   justify-content: center;
-  /* background: #141414; #efefef; #f5f5f5 */
   margin-top: 3rem;
+  border-top: 1px solid #d1d0d0;
 }
 
 .comment__text-wrapper::before {

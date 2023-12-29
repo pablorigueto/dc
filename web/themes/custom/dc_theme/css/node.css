@@ -61,7 +61,9 @@ code {
   }
   .basicpage_full_title {
     padding-top: 45px;
+    padding-right: 0;
   }
+
 }
 
 .full-node-user-profile-img {
@@ -93,6 +95,7 @@ code {
 
 .node-creator {
   display: flex;
+  flex-wrap: wrap;
   gap: 3px;
 }
 

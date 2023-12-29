@@ -15,7 +15,8 @@ use Drupal\user\Entity\User;
  */
 function dc_theme_preprocess_html(&$variables) {
   // So fonts can be preloaded from base theme in the event dc theme is used as a subtheme.
-  $variables['dc_theme_path'] = \Drupal::request()->getBasePath() . '/' . \Drupal::service('extension.list.theme')->getPath('dc_theme');
+  $variables['dc_theme_path'] = \Drupal::request()->getBasePath() .
+   '/' . \Drupal::service('extension.list.theme')->getPath('dc_theme');
 
   // Define some vars to add on TWIG templates.
   $uri = \Drupal::request()->getRequestUri();

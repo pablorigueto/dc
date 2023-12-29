@@ -39,14 +39,14 @@
       if (!drupalSettings.preventClickOnImage) {
         $(document).ready(function () {
           // Add a click event handler to avoid click on user profile img.
-          let firstLinkPicture = $(".comment__picture a:first", context);
+          let firstLinkPicture = $(".comment__picture a", context);
           if (firstLinkPicture.length > 0) {
             firstLinkPicture.click(function (event) {
               event.preventDefault();
             });
           }
 
-          let firstLink = $(".comment__author div:first a:first", context);
+          let firstLink = $(".comment__author div:first a", context);
           if (firstLink.length > 0) {
             firstLink.click(function (event) {
               event.preventDefault();

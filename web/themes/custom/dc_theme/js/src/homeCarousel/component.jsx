@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { fetchNodes } from './controller';
 import './assets/index.css';
@@ -11,7 +11,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 // import required modules
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation, EffectCreative } from 'swiper/modules';
 
 const NodeList = () => {
   
@@ -45,6 +45,27 @@ const NodeList = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Function to handle window resize
+    const handleResize = () => {
+      // Check the window width and set isMobile accordingly
+      setIsMobile(window.innerWidth <= 519);
+    };
+
+    // Add event listener for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Initial call to set isMobile based on the current window width
+    handleResize();
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Empty dependency array to ensure the effect runs only once on mount
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -71,11 +92,51 @@ const NodeList = () => {
   }
 
   const breakpoints = {
-    320: { slidesPerView: 1, spaceBetween: 10 },
-    480: { slidesPerView: 2, spaceBetween: 20 },
-    640: { slidesPerView: 3, spaceBetween: 30 },
-    768: { slidesPerView: 4, spaceBetween: 10 },
+    520: { slidesPerView: 2, spaceBetween: 0 },
+    677: { slidesPerView: 2.5, spaceBetween: 0 },
+    767: { slidesPerView: 3.5, spaceBetween: 0 },
+    768: { slidesPerView: 3, spaceBetween: 0 },
+    1024: { slidesPerView: 4, spaceBetween: 0 },
+    1171: { slidesPerView: 4.5, spaceBetween: 0 },
   };
+
+  const commonConfig = {
+    className: 'homepage-carousel',
+    // Add any other common settings here
+  };
+
+  // Configuration for mobile
+  const nonMobileConfig = {
+    spaceBetween: 0,
+    centeredSlides: false,
+    pagination: {
+      type: 'progressbar',
+    },
+    modules: [Pagination, Navigation],
+    breakpoints: breakpoints,
+  };
+
+  // Configuration for non-mobile
+  const mobileConfig = {
+    grabCursor: true,
+    effect: 'creative',
+    creativeEffect: {
+      prev: {
+        shadow: false,
+        translate: [0, 0, -400],
+      },
+      next: {
+        translate: ['100%', 0, 0],
+      },
+    },
+    modules: [EffectCreative],
+    initialSlide: sortedNodes.length - 1,
+  };
+
+    // Merge commonConfig with the specific configuration based on the isMobile condition
+    const swiperConfig = isMobile
+    ? { ...commonConfig, ...mobileConfig }
+    : { ...commonConfig, ...nonMobileConfig };
 
   return (
     <>
@@ -108,19 +169,8 @@ const NodeList = () => {
           </ul>
         </div>
       </div>
-
-      <Swiper
-        slidesPerView={4}
-        spaceBetween={30}
-        centeredSlides={false}
-        pagination={{
-          type: 'progressbar',
-        }}
-        modules={[Pagination, Navigation]}
-        className="homepage-carousel"
-        breakpoints={breakpoints}
-      >
-
+        
+      <Swiper {...swiperConfig}>
         {sortedNodes.map((node) => (
           <SwiperSlide key={node.id}>
 
