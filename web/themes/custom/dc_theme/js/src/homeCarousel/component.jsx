@@ -4,19 +4,17 @@ import { fetchNodes } from './controller';
 import './assets/index.css';
 import Dropdown from './dropdown';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import useWindowSize from './useWindowSize';
+
+import getSwiperConfig from './swiperBreakPoints';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-// import required modules
-import { Pagination, Navigation, EffectCreative } from 'swiper/modules';
-
 const NodeList = () => {
-  
-  const isMobile = useWindowSize();
+
+  const swiperConfig = getSwiperConfig(sortedNodes);
 
   const { data: nodes, isLoading, error } = useQuery('nodes', fetchNodes, {
     retry: 5,
@@ -72,53 +70,6 @@ const NodeList = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
-  const breakpoints = {
-    520: { slidesPerView: 2, spaceBetween: 0 },
-    677: { slidesPerView: 2.5, spaceBetween: 0 },
-    767: { slidesPerView: 3.5, spaceBetween: 0 },
-    768: { slidesPerView: 3, spaceBetween: 0 },
-    1024: { slidesPerView: 4, spaceBetween: 0 },
-    1171: { slidesPerView: 4.5, spaceBetween: 0 },
-  };
-
-  const commonConfig = {
-    className: 'homepage-carousel',
-    // Add any other common settings here
-  };
-
-  // Configuration for mobile
-  const nonMobileConfig = {
-    spaceBetween: 0,
-    centeredSlides: false,
-    pagination: {
-      type: 'progressbar',
-    },
-    modules: [Pagination, Navigation],
-    breakpoints: breakpoints,
-  };
-
-  // Configuration for non-mobile
-  const mobileConfig = {
-    grabCursor: true,
-    effect: 'creative',
-    creativeEffect: {
-      prev: {
-        shadow: false,
-        translate: [0, 0, -400],
-      },
-      next: {
-        translate: ['100%', 0, 0],
-      },
-    },
-    modules: [EffectCreative],
-    initialSlide: sortedNodes.length - 1,
-  };
-
-  // Merge commonConfig with the specific configuration based on the isMobile condition
-  const swiperConfig = isMobile
-  ? { ...commonConfig, ...mobileConfig }
-  : { ...commonConfig, ...nonMobileConfig };
 
   return (
     <>
