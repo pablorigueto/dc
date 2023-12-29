@@ -4,6 +4,7 @@ import { fetchNodes } from './controller';
 import './assets/index.css';
 import Dropdown from './dropdown';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import useWindowSize from './useWindowSize';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -15,6 +16,8 @@ import { Pagination, Navigation, EffectCreative } from 'swiper/modules';
 
 const NodeList = () => {
   
+  const isMobile = useWindowSize();
+
   const { data: nodes, isLoading, error } = useQuery('nodes', fetchNodes, {
     retry: 5,
     retryDelay: 1000,
@@ -45,27 +48,6 @@ const NodeList = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // Function to handle window resize
-    const handleResize = () => {
-      // Check the window width and set isMobile accordingly
-      setIsMobile(window.innerWidth <= 519);
-    };
-
-    // Add event listener for window resize
-    window.addEventListener('resize', handleResize);
-
-    // Initial call to set isMobile based on the current window width
-    handleResize();
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []); // Empty dependency array to ensure the effect runs only once on mount
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -133,10 +115,10 @@ const NodeList = () => {
     initialSlide: sortedNodes.length - 1,
   };
 
-    // Merge commonConfig with the specific configuration based on the isMobile condition
-    const swiperConfig = isMobile
-    ? { ...commonConfig, ...mobileConfig }
-    : { ...commonConfig, ...nonMobileConfig };
+  // Merge commonConfig with the specific configuration based on the isMobile condition
+  const swiperConfig = isMobile
+  ? { ...commonConfig, ...mobileConfig }
+  : { ...commonConfig, ...nonMobileConfig };
 
   return (
     <>
@@ -203,7 +185,6 @@ const NodeList = () => {
                       {node.node_created}
                     </div>
 
-
                   </div>
                   <img src={node.url} alt={node.alt} />
               </div>
@@ -213,7 +194,7 @@ const NodeList = () => {
       </Swiper>
 
       <div className="node-list-container">
-        <div class="recent-section">
+        <div className="recent-section">
           <h1>Recent Section</h1>
         </div>
         {/* List node, more recent first. */}
