@@ -234,7 +234,9 @@ const NodeList = () => {
       </Swiper>
 
       <div className="node-list-container">
-        <h2>Recent Section</h2>
+        <div class="recent-section">
+          <h1>Recent Section</h1>
+        </div>
         {/* List node, more recent first. */}
         {nodeTimeStamp.map((node) => (
           <a className="node-list-path" href={node.node_path} key={`mr-${node.id}`}>

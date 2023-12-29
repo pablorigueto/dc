@@ -3,16 +3,17 @@
   width: 70%;
 }
 
-.node-list-container h2 {
-  width: 149px;
+.node-list-container h1 {
+  /* width: 149px;
   border-top: 1px solid #d1d0d0;
   border-left: 1px solid #d1d0d0;
-  border-right: 1px solid #d1d0d0;
+  border-right: 1px solid #d1d0d0; */
   padding: 8px;
   border-radius: 2px;
-  font-size: 20px;
+  /* font-size: 20px; */
   color: #141414;
-  font-family: 'Inter-Bold';
+  text-align: center;
+  margin-block-end: 2rem;
 }
 
 .node-list-container a:last-child {
@@ -29,7 +30,7 @@
 }
 
 @media screen and (min-width: 320px) and (max-width: 450px) {
-  .node-list-container h2 {
+  .node-list-container h1 {
     text-align: start;
     width: auto;
   }
@@ -64,16 +65,16 @@
 
 .carousel-filter {
   text-align: end;
-  padding-bottom: 1rem;
+  padding-bottom: 5px;
   display: flex;
-  justify-content: end;
+  /* justify-content: end; */
 }
 
-@media screen and (min-width: 220px) and (max-width: 519px) {
+/* @media screen and (min-width: 220px) and (max-width: 519px) {
   .carousel-filter {
     justify-content: center;
   }
-}
+} */
 
 .custom-dropdown {
   position: relative;
@@ -83,22 +84,21 @@
 
 .selected-option {
   display: block;
-  padding: 3.5px 10px;
-  border: 1px solid #ccc;
+  padding: 3.5px 0;
+  /* border: 1px solid #ccc; */
+  /* border: 1px solid #03a0cd; */
   background-color: #fff;
   width: 175px;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
 }
 
 span.selected-option:after {
   content: '\e5cf';
-  margin-left: 6px;
   font-family: Material Symbols Outlined;
-  color: grey;
-  font-size: 20px;
-  padding-top: 4px;
+  color: #141414;
+  font-size: 22px;
 }
 
 .options-list {
@@ -110,7 +110,7 @@ span.selected-option:after {
   left: 0;
   display: none;
   background-color: #fff;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   z-index: 4;
   transition: all 0.5s ease;
 }
@@ -136,6 +136,8 @@ span.selected-option:after {
 }
 
 .option:hover {
-  background-color: #e0e0e0;
+  /* background-color: #e0e0e0; */
+  background-color: #141414;
+  color: #fff;
   transition: all 0.5s ease;
 }

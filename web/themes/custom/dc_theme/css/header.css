@@ -145,6 +145,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 3rem;
+  padding-top: 3px;
 }
 
 .primary_menu,
@@ -436,7 +437,8 @@ body:not(.path-frontpage) .search-block-form,
 }
 
 .path-frontpage .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
-  background-color:#009cde;
+  /* background-color:#009cde; */
+  background-color:#141414;
 }
 
 .path-frontpage .frontpage-title-display {
@@ -732,7 +734,8 @@ input:-webkit-autofill{
 }
 
 .logo img {
-  height: 32px;
+  height: 35px;
+  padding-bottom: 10px;
 }
 
 /* .inverted__h2 {

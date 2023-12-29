@@ -17,16 +17,18 @@
   display: none;
 }
 
+.title-cards {
+  text-align: center;
+}
+
 .title-cards h1 {
   margin: 0;
-  margin-bottom: -41.5px;
 }
 
 @media screen and (min-width: 220px) and (max-width: 519px) {
   .title-cards h1 {
     margin-bottom: unset;
-    text-align: center;
-    padding-bottom: 25px;
+    /* padding-bottom: 25px; */
   }
 }
 
