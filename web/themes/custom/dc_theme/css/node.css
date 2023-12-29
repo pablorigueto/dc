@@ -192,12 +192,13 @@ code {
   border: 1px solid #03a0cd;
   border-radius: 2px;
   font-size: 14px;
-  transition: all 0.5s easy;
+  transition: all 0.5s ease;
+  background: #181818;
 }
 
 .field-tags > div:first-child > div:last-child > div:hover {
   box-shadow: 0 0 1px 1px #03a0cd5e;
-  transition: all 0.5s easy;
+  transition: all 0.5s ease;
 }
 
 .field-tags a {
