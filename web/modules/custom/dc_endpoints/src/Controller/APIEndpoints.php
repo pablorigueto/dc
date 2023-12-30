@@ -102,6 +102,8 @@ class APIEndpoints extends ControllerBase {
       $url = $this->fileUrlGenerator->generate($file_path);
       $relative_url = $url->toString();
 
+      $thumbnail_url = $this->thumbnailUrl($single_node);
+
       $tags = $this->tagsNode($single_node);
 
       $ownerFromNodNameNImage = $this->ownerNameNImageFromNode($single_node);
@@ -121,6 +123,7 @@ class APIEndpoints extends ControllerBase {
         'id' => $single_node->id(),
         'title' => $single_node->label(),
         'url' => $relative_url,
+        'img_thumbnail' => $thumbnail_url,
         'alt' => $image_base->alt,
         'tags' => $tags,
         'node_view_count' => $node_view_count,

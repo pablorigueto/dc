@@ -201,6 +201,26 @@ trait NodeTrait {
 
   }
 
+  protected function thumbnailUrl($node) {
+
+    $image_file_id = $node->get('field_image')[0]->target_id;
+
+    $file = File::load($image_file_id);
+    if (!$file) {
+      return;
+    }
+
+    $style = ImageStyle::load('thumbnail');
+
+    $thumbnail_uri = $style->buildUrl($file->getFileUri());
+
+    // Convert the absolute URL to a relative URL.
+    $base_url = \Drupal::request()->getSchemeAndHttpHost();
+
+    return str_replace($base_url, '', $thumbnail_uri);
+
+  }
+
   /**
    * Returns all tags from field.
    *
@@ -283,7 +303,7 @@ trait NodeTrait {
    */
   protected function nodeCreated($node) {
     $timestamp = $node->created->getValue()[0]['value'];
-    //return $this->formateDate($timestamp);
+    // return $this->formateDate($timestamp);
     return $this->formatDateAgo($timestamp);
   }
 
@@ -330,31 +350,31 @@ trait NodeTrait {
     // $time = DrupalDateTime::createFromTimestamp($timestamp);
     // // Format the created and change time into the desired pattern.
     // return $time->format('D, M/d/Y - H:i');
-  
+
     // Create a DrupalDateTime object for the provided timestamp.
     $time = DrupalDateTime::createFromTimestamp($timestamp);
     $current_time = new DrupalDateTime();
-  
+
     $interval = $current_time->diff($time);
     $formatted_date = '';
-  
+
     // Calculate the total number of days and remaining hours.
     $days = $interval->days;
     $hours = $interval->h;
     $minutes = $interval->i;
-  
+
     // Format the output.
     if ($days > 0) {
       $formatted_date .= $days . ' day' . ($days > 1 ? 's' : '');
     }
-  
+
     // if ($hours > 0) {
     //   if ($formatted_date !== '') {
     //     $formatted_date .= ' and ';
     //   }
     //   $formatted_date .= $hours . ' hour' . ($hours > 1 ? 's' : '');
     // }
-  
+
     // If the time difference is less than 24 hours, use a different format.
     if ($interval->days === 0 && $interval->h < 24) {
       $formatted_date = $hours . ' h';
@@ -362,9 +382,9 @@ trait NodeTrait {
         $formatted_date = $minutes . ' min';
       }
     }
-  
+
     return $formatted_date;
-  
+
   }
 
 }

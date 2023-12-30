@@ -56,8 +56,12 @@ const NodeListContainer = ({ nodeTimeStamp }) => {
 
           </div>
 
-          <div className="node-list-image">
+          {/* <div className="node-list-image">
             <img className="node-list-img" src={node.url} alt={node.alt} />
+          </div> */}
+
+          <div className="node-list-image">
+            <img className="node-list-img" src={node.img_thumbnail} alt={node.alt} />
           </div>
 
         </a>
