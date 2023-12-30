@@ -52,10 +52,10 @@ function custom_login_form_alter(&$form, &$form_state, $form_id) {
   // Check if the form is the user registration form.
   if ($form_id === 'user_register_form') {
     // Modify the form element descriptions as needed.
-    $form['user_picture']['widget'][0]['#upload_validators']['FileSizeLimit']['fileLimit'] = 5000000; // half mega.
+    $form['user_picture']['widget'][0]['#upload_validators']['FileSizeLimit']['fileLimit'] = 1000000; // 100kb.
 
     // Modify the form element descriptions as needed.
-    $file_limit_message = '<div class="file-limit-message">' . t('500KB Limit') . '</div>';
+    $file_limit_message = '<div class="file-limit-message">' . t('100KB Limit') . '</div>';
     $file_description_message = '<div class="file-description-message">' . t('Your new virtual face or picture.') . '</div>';
 
     // Add the file size limit message.
