@@ -28,7 +28,6 @@
         "drupal/google_api_client": "^4.3",
         "drupal/legal": "^3.0",
         "drupal/like_dislike": "^2.4",
-        "drupal/minifyjs": "^3.0",
         "drupal/pathauto": "*",
         "drupal/redirect": "*",
         "drupal/restui": "^1.21",
