@@ -174,6 +174,8 @@ class APIEndpoints extends ControllerBase {
       $url = $this->fileUrlGenerator->generate($file_path);
       $relative_url = $url->toString();
 
+      $large_url = $this->styledImage($single_node, 'large');
+
       $tags = $this->tagsNode($single_node);
 
       $ownerFromNodNameNImage = $this->ownerNameNImageFromNode($single_node);
@@ -198,6 +200,7 @@ class APIEndpoints extends ControllerBase {
         'id' => $single_node->id(),
         'title' => $single_node->label(),
         'url' => $relative_url,
+        'large_url' => $large_url,
         'alt' => $image_base->alt,
         'tags' => $tags,
         'node_view_count' => $node_view_count,

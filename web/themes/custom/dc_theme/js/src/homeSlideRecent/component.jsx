@@ -64,7 +64,7 @@ const NodeList = () => {
 
             <div className="img-highlight-main" data-drupal-selector="img-highlight">
               <a href={node.node_path} className="highlight-link">
-                <img className="img-highlight" src={node.url} alt={node.alt}/>
+                <img className="img-highlight" src={node.large_url} alt={node.alt}/>
               </a>
             </div>
 
