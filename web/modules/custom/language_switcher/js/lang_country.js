@@ -74,22 +74,22 @@
   // Default title of language switcher.
   Drupal.behaviors.defaultLanguageTitleSwitcher = {
     attach: function (context) {
-      if (!drupalSettings.defaultLanguageTitleSwitcher) {
-        drupalSettings.defaultLanguageTitleSwitcher = true;
-        let selectedLanguageCookie = getCookie("selectedLanguage");
+      //if (!drupalSettings.defaultLanguageTitleSwitcher) {
+        // drupalSettings.defaultLanguageTitleSwitcher = true;
+      let selectedLanguageCookie = getCookie("selectedLanguage");
 
-        if (selectedLanguageCookie) {
-          const TITLE = selectedLanguageCookie.split('/');
-          updateLanguageTitleSwitcher(TITLE[1].trim(), context);
-          return;
-        }
-
-        const DESTINATION = getPathSegmentsDestination();
-        if (DESTINATION) {
-          updateLanguageTitleSwitcher(DESTINATION[1].trim(), context);
-          return;
-        }
+      if (selectedLanguageCookie) {
+        const TITLE = selectedLanguageCookie.split('/');
+        updateLanguageTitleSwitcher(TITLE[1].trim(), context);
+        return;
       }
+
+      const DESTINATION = getPathSegmentsDestination();
+      if (DESTINATION) {
+        updateLanguageTitleSwitcher(DESTINATION[1].trim(), context);
+        return;
+      }
+     //}
     }
   };
 
