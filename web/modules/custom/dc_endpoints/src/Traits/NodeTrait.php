@@ -4,6 +4,8 @@ namespace Drupal\dc_endpoints\Traits;
 
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
 use Drupal\node\Entity\Node;
 use Drupal\taxonomy\Entity\Term;
 
@@ -159,24 +161,42 @@ trait NodeTrait {
     $user = $user_storage->load($uid);
 
     // Check if the user exists
-    if ($user) {
-      // Get the user profile image field
-      $profile_image = $user->get('user_picture')->entity;
-
-      // Check if the profile image exists
-      if ($profile_image) {
-        // Get the URI of the profile image
-        $file_path = $profile_image->getFileUri();
-        $url = $this->fileUrlGenerator->generate($file_path);
-        $relative_url = $url->toString();
-      }
+    if (!$user) {
+      return;
     }
+    //   // Get the user profile image field
+    //   $profile_image = $user->get('user_picture')->entity;
+
+    //   // Check if the profile image exists
+    //   if ($profile_image) {
+    //     // Get the URI of the profile image
+    //     $file_path = $profile_image->getFileUri();
+    //     $url = $this->fileUrlGenerator->generate($file_path);
+    //     $relative_url = $url->toString();
+    //   }
+    // }
+
+    $picture_file_id = $user->get('user_picture')->target_id;
+
+    $file = File::load($picture_file_id);
+    if (!$file) {
+      return;
+    }
+
+    $style = ImageStyle::load('thumbnail');
+
+    $thumbnail_uri = $style->buildUrl($file->getFileUri());
+
+    // Convert the absolute URL to a relative URL.
+    $base_url = \Drupal::request()->getSchemeAndHttpHost();
+    // Calculate the relative path.
+    $relative_thumbnail_uri = str_replace($base_url, '', $thumbnail_uri);
 
     $user_name = $user_storage->load($uid)->getAccountName();
 
     return [
       'user_name' => $user_name,
-      'user_img_profile' => $relative_url,
+      'user_img_profile' => $relative_thumbnail_uri,
     ];
 
   }
