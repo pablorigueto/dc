@@ -62,7 +62,8 @@ const SwiperComponent = ({ sortedNodes, swiperConfig }) => {
                   </div>
 
                 </div>
-                <img src={node.url} alt={node.alt} />
+                {/* <img src={node.url} alt={node.alt} /> */}
+                <img src={node.medium_url} alt={node.alt} />
             </div>
           </a>
         </SwiperSlide>

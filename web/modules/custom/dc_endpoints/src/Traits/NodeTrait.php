@@ -201,7 +201,7 @@ trait NodeTrait {
 
   }
 
-  protected function thumbnailUrl($node) {
+  protected function styledImage($node, $style) {
 
     $image_file_id = $node->get('field_image')[0]->target_id;
 
@@ -210,14 +210,14 @@ trait NodeTrait {
       return;
     }
 
-    $style = ImageStyle::load('thumbnail');
+    $style = ImageStyle::load($style);
 
-    $thumbnail_uri = $style->buildUrl($file->getFileUri());
+    $styled_uri = $style->buildUrl($file->getFileUri());
 
     // Convert the absolute URL to a relative URL.
     $base_url = \Drupal::request()->getSchemeAndHttpHost();
 
-    return str_replace($base_url, '', $thumbnail_uri);
+    return str_replace($base_url, '', $styled_uri);
 
   }
 
