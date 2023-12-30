@@ -54,10 +54,22 @@
     color: #808080;
   }
 
-  .node-list-created::after {
+  /* .node-list-created::after {
     content: "\f017";
     font-family: 'FontAwesome';
     font-size: 10px;
+    margin-left: 1px;
+  } */
+
+  .node-list-created {
+    display: flex;
+    align-items: center;
+  }
+
+  .node-list-created::after {
+    content: "\e8b5";
+    font-family: 'Material Symbols Outlined';
+    font-size: 12.8px;
     margin-left: 1px;
   }
 
