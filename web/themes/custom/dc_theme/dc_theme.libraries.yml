@@ -22,7 +22,8 @@ react_app_main:
     js/dist_dev/send.min.js: {minified: true}
     js/dist_dev/homeCarousel.min.js: {minified: true}
     js/dist_dev/homeSlideRecent.min.js: {minified: true}
-    js/theme/theme.js: {}
+    js/dist_dev/theme.min.js: {minified: true}
+    # js/theme/theme.js: {}
   dependencies:
     - core/jquery
     - core/drupal
