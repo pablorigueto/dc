@@ -26,6 +26,7 @@
   .node-list-container {
     width: 95%;
     margin: 0 auto;
+    padding-top: 2rem;
   }
 }
 
@@ -34,6 +35,9 @@
     text-align: start;
     width: auto;
   }
+  /* .swiper-wrapper .swiper-slide:nth-child(6) {
+    padding-left: unset;
+  } */
 }
 
 /* @media screen and (min-width: 200px) and (max-width: 510px) {
@@ -43,11 +47,11 @@
   }
 } */
 
-@media screen and (min-width: 390px) and (max-width: 519px) {
+/* @media screen and (min-width: 390px) and (max-width: 519px) {
   .swiper-wrapper {
     padding-left: clamp(0px, calc((100vw - 390px) / (519 - 390) * (90 - 0)), 90px);
   }
-}
+} */
 
 .carousel-filter select {
   height: 30px;

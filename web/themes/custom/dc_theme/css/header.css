@@ -116,6 +116,9 @@
   .search-form details.search-advanced {
     width: 95%;
   }
+  #header {
+    padding-bottom: 4rem;
+  }
 }
 
 @media screen and (min-width: 451px) and (max-width: 765px) {
