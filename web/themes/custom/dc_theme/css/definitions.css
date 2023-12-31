@@ -7,33 +7,6 @@
   font-style: normal;
 } */
 
-@font-face {
-  font-family: Inter-Light;
-  src:
-    local('Inter'),
-    url("./fonts_files/Inter/Inter-Light.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Inter-Regular;
-  src:
-    local('Inter'),
-    url("./fonts_files/Inter/Inter-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Inter-SemiBold;
-  src:
-    local('Inter'),
-    url("./fonts_files/Inter/Inter-SemiBold.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* @font-face {
   font-family: Inter-Medium;
   src:
@@ -42,15 +15,6 @@
   font-weight: normal;
   font-style: normal;
 } */
-
-@font-face {
-  font-family: Inter-Bold;
-  src:
-    local('Inter'),
-    url("./fonts_files/Inter/Inter-Bold.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
 
 /* @font-face {
   font-family: Inter-ExtraBold;
@@ -87,6 +51,74 @@
   font-weight: normal;
   font-style: normal;
 } */
+
+
+
+/* @font-face {
+  font-family: Inter-Light;
+  src:
+    local('Inter'),
+    url("./fonts_files/Inter/Inter-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter-Regular;
+  src:
+    local('Inter'),
+    url("./fonts_files/Inter/Inter-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Inter-SemiBold;
+  src:
+    local('Inter'),
+    url("./fonts_files/Inter/Inter-SemiBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: Inter-Bold;
+  src:
+    local('Inter'),
+    url("./fonts_files/Inter/Inter-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+} */
+
+
+@font-face {
+  font-family: 'Inter-Light';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inter'), url('https://fonts.cdnfonts.com/s/19795/Inter-Light.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter-Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inter'), url('https://fonts.cdnfonts.com/s/19795/Inter-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter-SemiBold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inter'), url('https://fonts.cdnfonts.com/s/19795/Inter-SemiBold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter-Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inter'), url('https://fonts.cdnfonts.com/s/19795/Inter-Bold.woff') format('woff');
+}
 
 :root {
   scroll-behavior: smooth;
