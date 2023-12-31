@@ -25,6 +25,7 @@
         "drupal/devel": "^5.1",
         "drupal/extrafield_views_integration": "^2.1",
         "drupal/field_group": "^3.4",
+        "drupal/google_analytics": "^4.0",
         "drupal/google_api_client": "^4.3",
         "drupal/legal": "^3.0",
         "drupal/like_dislike": "^2.4",
