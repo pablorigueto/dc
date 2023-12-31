@@ -15,7 +15,10 @@ const SwiperComponent = ({ sortedNodes, swiperConfig }) => {
  
   return (
     <>
-    <Swiper {...swiperConfig}>
+      <Swiper 
+        onReachEnd={handleLoadMore}
+        {...swiperConfig}
+      >
       {/* {sortedNodes.map((node) => ( */}
       {sortedNodes.slice(0, itemsToShow).map((node) => (
         <SwiperSlide key={node.id}>
@@ -71,18 +74,12 @@ const SwiperComponent = ({ sortedNodes, swiperConfig }) => {
                   </div>
 
                 </div>
-                {/* <img src={node.url} alt={node.alt} /> */}
                 <img src={node.medium_url} alt={node.alt} />
             </div>
           </a>
         </SwiperSlide>
       ))}
     </Swiper>
-
-    {itemsToShow < sortedNodes.length && (
-      <button onClick={handleLoadMore}>Load More</button>
-    )}
-
   </>
   );
 };

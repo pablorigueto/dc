@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { fetchNodes } from './controller';
 import './assets/index.css';
@@ -19,6 +19,13 @@ const NodeList = () => {
     retry: 5,
     retryDelay: 1000,
   });
+
+  const [itemsToShow, setItemsToShow] = useState(1);
+
+  const handleLoadMore = () => {
+    // Increase the number of items to show by 5 each time the button is clicked.
+    setItemsToShow(itemsToShow + 1);
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -43,9 +50,10 @@ const NodeList = () => {
         }}
         modules={[Autoplay, EffectFade, Navigation, Pagination]}
         className="homepage-slide-recent"
+        onReachEnd={handleLoadMore}
       >
-
-        {nodes.map((node) => (
+        {nodes.slice(0, itemsToShow).map((node) => (
+        // {nodes.map((node) => (
           <SwiperSlide key={`hs-${node.id}`}>
 
           <div id="homepage-highlight" className="homepage-highlight" data-drupal-selector="homepage-highlight">

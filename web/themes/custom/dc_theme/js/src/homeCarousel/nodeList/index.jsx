@@ -72,12 +72,14 @@ const NodeListContainer = ({ nodeTimeStamp }) => {
 
         </a>
       ))}
+
+      {itemsToShow < nodeTimeStamp.length && (
+        <div className="border-top-load-more">
+          <button className="load-more-button" onClick={handleLoadMore}>-Load More-</button>
+        </div>
+      )}
+
     </div>
-
-    {itemsToShow < nodeTimeStamp.length && (
-      <button className="load-more-button" onClick={handleLoadMore}>Load More</button>
-    )}
-
     </>
   );
 };

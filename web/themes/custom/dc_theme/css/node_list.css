@@ -118,7 +118,6 @@
     margin: 0;
   }
 
-
   @media screen and (min-width: 320px) and (max-width: 450px) {
     .node-list-path {
       flex-direction: column;
@@ -135,4 +134,27 @@
 
 }
 
+.node-list-container {
+  .border-top-load-more {
+    border-top-style: solid;
+    border-top-color: #d1d0d0;
+    border-top-width: 1px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 
+  .load-more-button {
+    margin-top: 15px;
+    border: unset;
+    background: unset;
+    color: #141414;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+
+  .load-more-button:hover {
+    color: #009cde;
+    transition: all 0.5s ease;
+  }
+}
