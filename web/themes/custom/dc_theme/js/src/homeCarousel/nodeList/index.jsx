@@ -24,16 +24,16 @@ const NodeListContainer = ({ nodeTimeStamp }) => {
 
             <div className="node-list-tags-main">
               {node.tags.map((tag) => (
-                <div key={`tag-${tag.id}`} className={`node-list-tags ${tag.alias.toLowerCase()}`}>
+                <label key={`tag-${tag.id}`} className={`node-list-tags ${tag.alias.toLowerCase()}`}>
                   {tag.alias}
-                </div>
+                </label>
               ))}
             </div>
 
             <div className="node-list-title-main">
-              <h3 className="node-list-title">
+              <h2 className="node-list-title">
                 {node.title}
-              </h3>
+              </h2>
             </div>
 
             <div className="node-list-details-main">

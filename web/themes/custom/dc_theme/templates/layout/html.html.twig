@@ -46,6 +46,12 @@
     <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token }}">
     <js-placeholder token="{{ placeholder_token }}">
+
+    {# Check if the current page is the homepage/frontpage #}
+    {% if is_front %}
+      <meta name="description" content="{{ homepage_description|striptags|raw }}">
+    {% endif %}
+
     {% include '@dc_theme/includes/preload.twig' with { dc_theme: dc_theme } only %}
     {{ noscript_styles }}
   </head>

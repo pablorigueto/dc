@@ -430,8 +430,9 @@ body:not(.path-frontpage) .search-block-form,
 
 .reactnative,
 .native {
-  color: var(--white-color);
-  background: var(--medium-gray-color);
+  color: var(--light-dark-color);
+  background: var(--white-color);
+  border: 1px solid var(--light-dark-color);
 }
 
 .environment {
@@ -441,7 +442,7 @@ body:not(.path-frontpage) .search-block-form,
 
 .path-frontpage .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
   /* background-color:#009cde; */
-  background-color:#141414;
+  background-color:var(--light-dark-color);;
 }
 
 .path-frontpage .frontpage-title-display {

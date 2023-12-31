@@ -96,7 +96,7 @@
   font-family: 'Inter-Light';
   font-style: normal;
   font-weight: normal;
-  src: local('Inter'), url('https://fonts.cdnfonts.com/s/19795/Inter-Light.woff') format('woff');
+  src: local('Inter'), url('https://fonts.cdnfonts.com/s/19795/Inter-Light-BETA.woff') format('woff');
 }
 
 @font-face {
@@ -268,3 +268,18 @@ h1,
   font-size: 22px;
 }
 
+.eu-cookie-compliance-secondary-button {
+  font-family: 'Inter-SemiBold';
+}
+
+.eu-cookie-compliance-buttons {
+  margin: 1em 0 1.2em 0;
+}
+
+.eu-cookie-compliance-message h2 {
+  padding-top: 0.6em;
+}
+
+.eu-cookie-compliance-default-button {
+  border-radius: unset;
+}

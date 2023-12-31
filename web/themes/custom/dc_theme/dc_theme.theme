@@ -16,6 +16,15 @@ use Drupal\user\Entity\User;
  * Adds body classes if certain regions have content.
  */
 function dc_theme_preprocess_html(&$variables) {
+
+  // Check if the current page is the front page.
+  $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+
+  // Add a variable for the homepage description.
+  if ($variables['is_front']) {
+    $variables['homepage_description'] = t("Discover Drupal, ReactJS, and cutting-edge tech insights. Stay updated on web dev trends, best practices, and hands-on guides for robust web apps.");
+  }
+
   // So fonts can be preloaded from base theme in the event dc theme is used as a subtheme.
   $variables['dc_theme_path'] = \Drupal::request()->getBasePath() .
    '/' . \Drupal::service('extension.list.theme')->getPath('dc_theme');
