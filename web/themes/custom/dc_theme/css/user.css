@@ -50,38 +50,19 @@
     display: flex;
     align-items: center;
     text-decoration: unset;
-    /* border-top: 1px solid #d1d0d0;
-    border-left: 1px solid #d1d0d0;
-    border-right: 1px solid #d1d0d0; */
     padding: 8px;
     border-radius: 2px;
-    color: #141414;
+    color: var(--light-dark-color);
     transition: all 0.5s ease;
-    box-shadow: 1.5px 1.5px 1.5px #00000012;
+    box-shadow: 1.5px 1.5px 1.5px var(--deep-dark-box-shadow);
     padding: 15px;
-    border: 1px solid #dedfe4;
+    border: 1px solid var(--light-border);
   }
 
   #block-dc-theme-primary-local-tasks ul li a:hover {
     transition: all 0.5s ease;
-    box-shadow: 3px 3px 3px #0000004d;
+    box-shadow: 3px 3px 3px var(--deep-dark-box-shadow);
   }
-
-  /* #block-dc-theme-primary-local-tasks ul li a::after {
-    content: '\f013';
-    font-family: 'FontAwesome';
-    font-size: 12px;
-    margin-left: 3px;
-    color: #4f4b4b;
-  }
-
-  #block-dc-theme-primary-local-tasks ul li:first-child a::after {
-    content: '\f06e';
-    font-family: 'FontAwesome';
-    font-size: 12px;
-    margin-left: 3px;
-    color: #4f4b4b;
-  } */
 
   #block-dc-theme-primary-local-tasks ul, #user-form {
     max-width: 1170px;
@@ -142,18 +123,18 @@
 
   .form-actions .form-submit:hover {
     background-position: 100%;
-    box-shadow: #ffffff26 0px 0px 8px 0px;
+    box-shadow: var(--dark-box-shadow) 0px 0px 8px 0px;
     animation-timing-function: ease-out;
     animation-duration: 200ms;
   }
 
   .image-widget .form-submit {
-    background-image: linear-gradient(90deg,#b74141,#d94b4b 50%,#fff);
+    background-image: linear-gradient(90deg,#b74141,#d94b4b 50%,var(--white-color));
     transition: all 0.5s ease;
   }
 
   .image-widget .form-submit:hover {
-    background-image: linear-gradient(90deg,#ff2f2f,#ff2f2f 50%,#fff);;
+    background-image: linear-gradient(90deg,#ff2f2f,#ff2f2f 50%,var(--white-color));;
     transition: all 0.5s ease;
   }
 
@@ -162,8 +143,7 @@
   .form-select {
     border-width: 1px;
     border-style: solid;
-    border-color: #b3b3b3;
-    /* background-color: #f9f9f9; */
+    border-color: var(--light-border);
     max-width: 320px;
     width: 100%;
     height: 30px;
@@ -174,7 +154,7 @@
   .form-email:focus,
   .form-select:focus {
     border-radius: unset;
-    border: 1px solid #141414;
+    border: 1px solid var(--light-dark-color);
     transition: all 0.5s ease;
     outline: none;
   }
@@ -230,7 +210,7 @@
 
   .form-select {
     cursor: pointer;
-    background: #fff;
+    background: var(--white-color);
   }
 
   #edit-language summary,
@@ -248,7 +228,7 @@
   .password-suggestions {
     margin-top: 1rem;
     padding: 20px;
-    border: 1px solid #b3b3b3;
+    border: 1px solid var(--light-border);
     max-width: 282px
   }
 
@@ -268,9 +248,9 @@
   #ajax-wrapper .form-item,
   #edit-language,
   #edit-timezone {
-    box-shadow: 1px 1px 1px 1px #0000000d;
+    box-shadow: 1px 1px 1px 1px var(--light-box-shadow);
     padding: 20px;
-    border: 1px solid #dedfe4;
+    border: 1px solid var(--light-border);
   }
 
   .user-login-title,
@@ -283,13 +263,9 @@
   body.path-user-register .title-user-register,
   body.path-user-password .title-user-password {
     display: block;
-    color: #fff;
+    color: var(--white-color);
     background-color: #a51b00;
   }
-
-  /* body:not(.path-user-password) .title-user-password {
-    display: none;
-  } */
 
 }
 

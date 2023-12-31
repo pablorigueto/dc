@@ -45,7 +45,7 @@ const NodeList = () => {
         //   clickable: true,
         // }}
         autoplay={{
-          delay: 100000,
+          delay: 7000, // 7 segundos.
           disableOnInteraction: false,
         }}
         modules={[Autoplay, EffectFade, Navigation, Pagination]}

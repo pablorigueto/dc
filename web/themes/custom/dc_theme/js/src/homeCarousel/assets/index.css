@@ -4,21 +4,16 @@
 }
 
 .node-list-container h1 {
-  /* width: 149px;
-  border-top: 1px solid #d1d0d0;
-  border-left: 1px solid #d1d0d0;
-  border-right: 1px solid #d1d0d0; */
   padding: 8px;
   border-radius: 2px;
-  /* font-size: 20px; */
-  color: #141414;
+  color: var(--light-dark-color);
   text-align: center;
   margin-block-end: 2rem;
 }
 
 .node-list-container a:last-child {
   border-bottom-style: solid;
-  border-bottom-color: #d1d0d0;
+  border-bottom-color: var(--light-border);
   border-bottom-width: 1px;
 }
 
@@ -35,50 +30,25 @@
     text-align: start;
     width: auto;
   }
-  /* .swiper-wrapper .swiper-slide:nth-child(6) {
-    padding-left: unset;
-  } */
 }
-
-/* @media screen and (min-width: 200px) and (max-width: 510px) {
-  .node-path {
-    display: flex;
-    justify-content: center;
-  }
-} */
-
-/* @media screen and (min-width: 390px) and (max-width: 519px) {
-  .swiper-wrapper {
-    padding-left: clamp(0px, calc((100vw - 390px) / (519 - 390) * (90 - 0)), 90px);
-  }
-} */
 
 .carousel-filter select {
   height: 30px;
   text-align: center;
-  border: 1px solid #d1d0d0;
+  border: 1px solid var(--light-border);
   background: unset;
   cursor: pointer;
 }
 
 .carousel-filter select option:hover {
-  background-color: #e0e0e0; /* Change this to your desired background color */
-  /* You can add other styles as needed */
+  background-color: var(--light-border);
 }
-
 
 .carousel-filter {
   text-align: end;
   padding-bottom: 5px;
   display: flex;
-  /* justify-content: end; */
 }
-
-/* @media screen and (min-width: 220px) and (max-width: 519px) {
-  .carousel-filter {
-    justify-content: center;
-  }
-} */
 
 .custom-dropdown {
   position: relative;
@@ -89,9 +59,7 @@
 .selected-option {
   display: block;
   padding: 3.5px 0;
-  /* border: 1px solid #ccc; */
-  /* border: 1px solid #03a0cd; */
-  background-color: #fff;
+  background-color: var(--white-color);
   width: 175px;
   display: flex;
   justify-content: start;
@@ -101,7 +69,7 @@
 span.selected-option:after {
   content: '\e5cf';
   font-family: Material Symbols Outlined;
-  color: #141414;
+  color: var(--light-dark-color);
   font-size: 22px;
 }
 
@@ -113,18 +81,10 @@ span.selected-option:after {
   top: 100%;
   left: 0;
   display: none;
-  background-color: #fff;
-  /* border: 1px solid #ccc; */
+  background-color: var(--white-color);
   z-index: 4;
   transition: all 0.5s ease;
 }
-
-
-/* Show options when the dropdown is hovered or focused */
-/* .custom-dropdown:hover .options-list,
-.custom-dropdown:focus-within .options-list {
-  display: block;
-} */
 
 .custom-dropdown.open .options-list {
   display: block;
@@ -140,10 +100,7 @@ span.selected-option:after {
 }
 
 .option:hover {
-  /* background-color: #e0e0e0; */
-  background-color: #141414;
-  color: #fff;
+  background-color: var(--light-dark-color);
+  color: var(--white-color);
   transition: all 0.5s ease;
 }
-
-

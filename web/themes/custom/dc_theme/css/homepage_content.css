@@ -41,18 +41,18 @@
   bottom: 0;
   right: 0;
   left: 0;
-  box-shadow: 0.5px 0.5px 0.5px #000000bf;
+  box-shadow: 0.5px 0.5px 0.5px var(--deep-dark-box-shadow);
   transition: box-shadow 0.3s ease;
 }
 
 .path-search .search-result-thumbnail {
-  box-shadow: 0.5px 0.5px 0.5px #000000bf;
+  box-shadow: 0.5px 0.5px 0.5px var(--deep-dark-box-shadow);
   transition: box-shadow 0.3s ease;
 }
 
 .path-search .search-result-thumbnail:hover,
 .frontpage-result-thumbnail:hover {
-  box-shadow: 4px 4px 4px #000000bf;
+  box-shadow: 4px 4px 4px var(--deep-dark-box-shadow);
 }
 
 .teaser-tag-group {

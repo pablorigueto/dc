@@ -50,9 +50,9 @@ body.path-user-password {
     justify-content: start;
     align-items: center;
     width: 424.5px;
-    box-shadow: 1px 1px 1px 1px #0000000d;
+    box-shadow: 1px 1px 1px 1px var(--light-box-shadow);
     padding: 15px;
-    border: 1px solid #dedfe4;
+    border: 1px solid var(--light-border);
   }
 
   #block-dc-theme-socialauthlogin h2 {
@@ -69,9 +69,9 @@ body.path-user-password {
 
   #user-pass {
     max-width: 417px;
-    box-shadow: 1px 1px 1px 1px #0000000d;
+    box-shadow: 1px 1px 1px 1px var(--light-box-shadow);
     padding: 20px;
-    border: 1px solid #dedfe4;
+    border: 1px solid var(--light-border);
   }
 
   #user-pass #edit-name {
@@ -100,9 +100,9 @@ body.path-user-password {
 
   #user-login-form {
     max-width: 415px;
-    box-shadow: 1px 1px 1px 1px #0000000d;
+    box-shadow: 1px 1px 1px 1px var(--light-box-shadow);
     padding: 20px 20px 25px 20px;
-    border: 1px solid #dedfe4;
+    border: 1px solid var(--light-border);
   }
 
   #edit-account .js-form-item-mail,

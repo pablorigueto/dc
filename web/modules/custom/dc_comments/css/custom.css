@@ -72,25 +72,22 @@
 
 .comments-more {
   cursor: pointer;
-  /* color: #1414149c; */
-  color: #fff;
+  color: var(--white-color);
   transition: all 0.5s ease;
 }
 
 .comments-more:hover {
-  color: #f3f3f3;
+  color: var(--light-hover);
   transition: all 0.5s ease;
 }
 
 .comments-more:before {
-  content: '\f013';
-  font-family: 'FontAwesome';
-  font-size: 9px;
+  content: '\e5d3';
+  font-family: Material Symbols Outlined;
+  font-size: 18px;
 }
 
 /* Style to put the submit button side of comment field */
-
-
 /* Defines the font-size inside the comments */
 .field--name-comment-body p {
   margin-bottom: 0;
@@ -99,18 +96,6 @@
 
 /* To style the submit */
 .comment-form .form-submit, #edit-cancel {
-  /* border: unset;
-  background: unset;
-  min-height: 1.9rem;
-  min-width: 3rem;
-  font-size: var(--font-size-mini);
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  padding-top: 0.2rem;
-  text-decoration: none; */
-
   background-image: linear-gradient(90deg,var(--dark-color),var(--light-dark-color) 50%,var(--dark-color));
   border: unset;
   height: 40px;
@@ -127,7 +112,7 @@
 
 .comment-form .form-submit:hover, #edit-cancel:hover {
   background-position: 100%;
-  box-shadow: #ffffff26 0px 0px 8px 0px;
+  box-shadow: var(--submit-hover) 0px 0px 8px 0px;
   animation-timing-function: ease-out;
   animation-duration: 200ms;
 }
@@ -148,13 +133,13 @@ form.comment-form .form-textarea {
   padding: 0.71rem;
   min-height: 100px;
   min-width: 100%;
-  /* border: 1px solid #141414; */
+  /* border: 1px solid var(--light-dark-color); */
   margin-bottom: 0.3rem;
   /* border-radius: 5px; */
 }
 
 form.comment-form .form-textarea:focus {
-  background-color: #f5f5f5;
+  background-color: var(--light-hover);
 }
 
 .path-node .comment-comment-form .js-form-item-name {
@@ -173,7 +158,6 @@ form.comment-form .form-textarea:focus {
 
 .anonymous-login-redirect {
   background-image: linear-gradient(90deg,var(--dark-color),var(--light-dark-color) 50%,var(--dark-color));
-  /* linear-gradient(90deg,#135da7,#174667 50%,var(--dark-color)); */
   border: unset;
   height: 40px;
   color: var(--white-color);
@@ -187,19 +171,18 @@ form.comment-form .form-textarea:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border-radius: 5px; */
 }
 
 .anonymous-login-redirect:hover {
   background-position: 100%;
-  box-shadow: #ffffff26 0px 0px 8px 0px;
+  box-shadow: var(--submit-hover) 0px 0px 8px 0px;
   animation-timing-function: ease-out;
   animation-duration: 200ms;
 }
 
 .anonymous-login-redirect  a {
   text-decoration: unset;
-  color: #fff;
+  color: var(--white-color);
 }
 
 /* Align comments and img full view */
@@ -233,7 +216,7 @@ article.comment {
 .post-comments-section h2 {
   padding: 0.5rem 0 2rem 0;
   text-align: center;
-  color: #141414;
+  color: var(--light-dark-color);
 }
 
 form.comment-form div.form-wrapper {
@@ -267,7 +250,6 @@ form.comment-form div.form-wrapper {
   height: 50px;
   object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 0 2px 2px #0000003d;
 }
 
 /* To reply comments */
@@ -404,7 +386,7 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 
 #block-dc-theme-content form.comment-comment-delete-form input.form-submit {
   background-image: unset;
-  background-color: #db3250;
+  background-color: var(--cancel-delete);
 }
 
 .path-comment .breadcrumb__list li:first-child,
@@ -441,12 +423,12 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   font-size: 14px;
   text-decoration: unset;
   font-family: 'Inter-Bold';
-  color: #fff;
+  color: var(--white-color);
 }
 
 .comment__author div span {
   font-family: 'Inter-Bold';
-  color: #fff;
+  color: var(--white-color);
 }
 
 .user-logged-in .comment__author div:first-child {
@@ -463,8 +445,8 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 }
 
 .comment__text-wrapper {
-  background: #141414;
-  color: #fff;
+  background: var(--light-dark-color);
+  color: var(--white-color);
   padding: 0 20px 20px 20px;
   /* border-radius: 0 5px 5px 5px; */
   position: relative;
@@ -486,11 +468,11 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   display: flex;
   justify-content: center;
   margin-top: 3rem;
-  border-top: 1px solid #d1d0d0;
+  border-top: 1px solid var(--light-border);
 }
 
 .comment__text-wrapper::before {
-  background: #141414;
+  background: var(--light-dark-color);
   content: '';
   width: 12px;
   height: 12px;

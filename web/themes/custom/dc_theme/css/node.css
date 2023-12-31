@@ -71,7 +71,7 @@ code {
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 0 2px 2px #0000003d;
+  box-shadow: 0 0 2px 2px var(--deep-dark-box-shadow);
 }
 
 .node-profile-img,
@@ -99,16 +99,6 @@ code {
   gap: 3px;
 }
 
-/* .node-author {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  background: #ffffff;
-  padding: 20px;
-  color: #181818;
-  box-shadow: 0 1px 1px 1px #37373721;
-} */
-
 .basicpage_full_image img {
   border-radius: 2px;
   height: clamp( 150px, calc(150px + (200 - 150) * ((100vw - 766px) / (1440 - 766))), 200px );
@@ -127,7 +117,7 @@ code {
   left: 20px;
   right: 0;
   bottom: 0;
-  background: #ffffff1a;
+  background: var(--dark-box-shadow);
   height: 20px;
   width: 100%;
   z-index: 2;
@@ -141,7 +131,7 @@ code {
   left: clamp(150px,calc(150px + (200 - 150) * ((100vw - 766px) / (1440 - 766))),200px);
   right: 0;
   bottom: 0;
-  background: #ffffff1a;
+  background: var(--dark-box-shadow);
   height: 87%;
   width: 20px;
   z-index: 2;
@@ -188,26 +178,17 @@ code {
   display: flex;
   align-items: end;
   padding: 0 1rem;
-  /* box-shadow: 0 0 1px 1px #0000003d; */
-  /* border: 1px solid #03a0cd; */
   border-radius: 2px;
   font-size: 14px;
   transition: all 0.5s ease;
-  /* background: #181818; */
 }
-
-/* .field-tags > div:first-child > div:last-child > div:hover {
-  color: #077796;
-  font-weight: 600;
-  transition: all 0.5s ease;
-} */
 
 .field-tags > div:first-child > div:last-child > div::after {
   content: '|';
   width: 1px;
   height: 15px;
   font-size: 12px;
-  color: #03a0cd;
+  color: var(--drupal-color);
   margin-left: 44px;
 }
 
@@ -217,7 +198,7 @@ code {
 
 .field-tags a {
   text-decoration: unset;
-  color: #03a0cd;
+  color: var(--drupal-color);
 }
 
 figure {
@@ -243,11 +224,11 @@ figure img {
 
 pre ::selection {
   background-color: var(--white-color);
-  color: #060505;
+  color: var(--code-container);
 }
 
 .basicpage-full-body {
-  color: #060505;
+  color: var(--code-container);
   padding-top: 50px;
   padding-bottom: 50px;
   transition: all 0.5s ease;
@@ -258,7 +239,6 @@ pre ::selection {
   color: var(--white-color);
   padding: 20px 80px 20px 20px;
   position: relative;
-  /* border-radius: 10px; */
   margin-top: 5px;
 }
 
