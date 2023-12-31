@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const NodeListContainer = ({ nodeTimeStamp }) => {
+
+  const [itemsToShow, setItemsToShow] = useState(5);
+
+  const handleLoadMore = () => {
+    // Increase the number of items to show by 5 each time the button is clicked.
+    setItemsToShow(itemsToShow + 5);
+  };
+
   return (
+    <>
     <div className="node-list-container">
       <div className="recent-section">
         <h1>Recent Section</h1>
       </div>
       {/* List node, more recent first. */}
-      {nodeTimeStamp.map((node) => (
+      {/* {nodeTimeStamp.map((node) => ( */}
+      {nodeTimeStamp.slice(0, itemsToShow).map((node) => (
         <a className="node-list-path" href={node.node_path} key={`mr-${node.id}`}>
 
           <div className="node-list-main">
@@ -56,10 +66,6 @@ const NodeListContainer = ({ nodeTimeStamp }) => {
 
           </div>
 
-          {/* <div className="node-list-image">
-            <img className="node-list-img" src={node.url} alt={node.alt} />
-          </div> */}
-
           <div className="node-list-image">
             <img className="node-list-img" src={node.img_thumbnail} alt={node.alt} />
           </div>
@@ -67,6 +73,12 @@ const NodeListContainer = ({ nodeTimeStamp }) => {
         </a>
       ))}
     </div>
+
+    {itemsToShow < nodeTimeStamp.length && (
+      <button className="load-more-button" onClick={handleLoadMore}>Load More</button>
+    )}
+
+    </>
   );
 };
 

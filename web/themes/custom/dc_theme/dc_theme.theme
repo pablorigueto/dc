@@ -3,6 +3,8 @@
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
 use Drupal\node\Entity\Node;
 use Drupal\node\NodeInterface;
 use Drupal\taxonomy\Entity\Term;
@@ -298,7 +300,7 @@ function _setInfosToSearchResultTwig($node, &$variables): void {
   if (empty($variables['comments_count'])) {
     $variables['comments_count'] = 0;
   }
-  
+
   $viewCount = \Drupal::database()->select('node_counter', 'h')
     ->condition('h.nid', $node->id())
     ->fields('h', ['totalcount'])
@@ -315,12 +317,33 @@ function _setInfosToSearchResultTwig($node, &$variables): void {
 }
 
 function _setThumbnailURI($node, &$variables) {
-  $thumbnail_uri = $node->get('field_image')->entity->getFileUri() ?? "";
+  //$thumbnail_uri = $node->get('field_image')->entity->getFileUri() ?? "";
+  $thumbnail_uri = _styledImage($node, 'large');
   $variables['thumbnail'] = [
     '#theme' => 'image',
     '#uri' => $thumbnail_uri,
     '#alt' => $node->get('field_image')->entity->alt,
   ];
+}
+
+function _styledImage($node, $style) {
+
+  $image_file_id = $node->get('field_image')[0]->target_id;
+
+  $file = File::load($image_file_id);
+  if (!$file) {
+    return;
+  }
+
+  $style = ImageStyle::load($style);
+
+  $styled_uri = $style->buildUrl($file->getFileUri());
+
+  // Convert the absolute URL to a relative URL.
+  $base_url = \Drupal::request()->getSchemeAndHttpHost();
+
+  return str_replace($base_url, '', $styled_uri);
+
 }
 
 function _getOwnerFromNode($node) {

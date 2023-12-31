@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 const SwiperComponent = ({ sortedNodes, swiperConfig }) => {
+
+  const [itemsToShow, setItemsToShow] = useState(5);
+
+  const handleLoadMore = () => {
+    // Increase the number of items to show by 5 each time the button is clicked.
+    setItemsToShow(itemsToShow + 5);
+  };
+ 
   return (
+    <>
     <Swiper {...swiperConfig}>
-      {sortedNodes.map((node) => (
+      {/* {sortedNodes.map((node) => ( */}
+      {sortedNodes.slice(0, itemsToShow).map((node) => (
         <SwiperSlide key={node.id}>
 
           <a className="node-path" href={node.node_path}>
@@ -68,6 +78,12 @@ const SwiperComponent = ({ sortedNodes, swiperConfig }) => {
         </SwiperSlide>
       ))}
     </Swiper>
+
+    {itemsToShow < sortedNodes.length && (
+      <button onClick={handleLoadMore}>Load More</button>
+    )}
+
+  </>
   );
 };
 
