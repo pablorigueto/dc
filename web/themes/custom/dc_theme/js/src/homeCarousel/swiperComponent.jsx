@@ -3,7 +3,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Pagination, Navigation, EffectCreative } from 'swiper/modules';
 
 const SwiperComponent = ({ sortedNodes, swiperConfig }) => {
   return (
