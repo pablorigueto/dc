@@ -25,18 +25,27 @@
 }
 
 /* Defines font size of comments full view */
-.comment__time,
+/* .comment__time,
 .comment-edit {
-  margin-bottom: unset;
-  margin-top: unset;
-  margin-bottom: unset;
-  margin-block-start: unset;
-  /* padding-top: 3.8px; */
+
+} */
+
+.comment-edit,
+.comment__time {
+  padding-top: 4.95px;
 }
 
 .user-logged-in .comment__time,
 .user-logged-in .comment-edit {
-  /* padding-top: 1.65px; */
+  padding-top: 2.5px;
+}
+
+.comment-edit,
+.comment__time {
+  margin-bottom: unset;
+  margin-top: unset;
+  margin-bottom: unset;
+  margin-block-start: unset;
 }
 
 .comment__picture-wrapper .user-details {
@@ -50,42 +59,51 @@
   font-size: 12px;
 }
 
-.comment-footer .comment-edit,
+/* .comment-footer .comment-edit,
 .comment-footer .comment__time,
 .comments-manage-links {
   display: none;
+} */
+
+.comments-manage-links {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-right: 20px;
+  padding-bottom: 15px;
 }
 
-.comment__author,
-.comment__time {
+/* .comment_owner .comment__author,
+.comment_owner .comment__time {
   display: block;
-}
-
+} */
+/* 
 .indented .comment__time,
 .indented .comment-edit {
   padding-top: 2.8px;
-}
+} */
 
 .comment-footer {
   padding-top: 20px;
 }
-
+/* 
 .comments-more {
   cursor: pointer;
   color: var(--white-color);
   transition: all 0.5s ease;
+  margin-top: 2.5px;
 }
 
 .comments-more:hover {
   color: var(--light-hover);
   transition: all 0.5s ease;
-}
+} */
 
-.comments-more:before {
+/* .comments-more:before {
   content: '\e5d3';
   font-family: Material Symbols Outlined;
   font-size: 18px;
-}
+} */
 
 /* Style to put the submit button side of comment field */
 /* Defines the font-size inside the comments */
@@ -151,6 +169,10 @@ form.comment-form .form-textarea:focus {
   justify-content: end;
 }
 
+.comment-comment-form .js-form-item-name {
+  display: none;
+}
+
 #send-comment {
   width: 100%;
   /* border-radius: 5px; */
@@ -198,7 +220,7 @@ article.comment {
 .comment-field ul.links {
   display: flex;
   padding: 0;
-  padding-top: 4.5px;
+  padding-top: 3.5px;
   margin: 0;
   gap: 0.7rem;
   flex-direction: row-reverse;
@@ -281,6 +303,8 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   align-items: center;
   text-align: center;
   font-size: var(--font-size-mini);
+  margin-top: -3px;
+  padding-bottom: 3px;
 }
 
 /* Set different style to user reply comment and limit the size */
@@ -346,6 +370,11 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
   text-decoration: none;
 }
 
+.path-comment .comments-manage-links,
+.path-comment #block-dc-theme-primary-local-tasks ul {
+  display: none;
+}
+
 #block-dc-theme-content {
   max-width: 1170px;
   margin: 0 auto;
@@ -405,7 +434,7 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 .comment__author {
   margin-bottom: 0;
   display: flex;
-  align-items: baseline;
+  /* align-items: baseline; */
   gap: 5px;
   margin-top: 12.5px;
 }
@@ -420,10 +449,14 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 }
 
 .comment__author a {
-  font-size: 14px;
   text-decoration: unset;
   font-family: 'Inter-Bold';
   color: var(--white-color);
+}
+
+.comment_owner a,
+.comment_owner span {
+  font-size: 14px;
 }
 
 .comment__author div span {
@@ -447,7 +480,7 @@ article + .parent-comment-info:not(.indented *) { /* To first reply */
 .comment__text-wrapper {
   background: var(--light-dark-color);
   color: var(--white-color);
-  padding: 0 20px 20px 20px;
+  padding: 0 20px 50px 20px;
   /* border-radius: 0 5px 5px 5px; */
   position: relative;
   width: 100%;

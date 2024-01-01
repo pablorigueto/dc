@@ -90,7 +90,7 @@
   </div>
   <div class="comment__text-wrapper">
     <div class="comment__author">
-      <div>{{ author }}</div>
+      <div class="comment_owner">{{ author }}</div>
 
       {% if content.comment_body['#suffix'] is not defined %}
         <span class="comment__time">{#{{ 'created'|t }}#} {{ formatted_date }}</span>

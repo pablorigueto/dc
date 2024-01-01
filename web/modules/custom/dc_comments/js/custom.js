@@ -1,38 +1,38 @@
 (function ($, Drupal, once) {
 
-  Drupal.behaviors.commentsMore = {
-    attach(context) {
-      if (!drupalSettings.commentsMore) {
-        $(document).ready(function () {
-          // Add a click event handler to the Menu heading.
-          $(".comments-more", context).click(function () {
-            // Find the related menu element within the same parent.
-            const MORE = $(this).siblings('.comments-manage-links');
+  // Drupal.behaviors.commentsMore = {
+  //   attach(context) {
+  //     if (!drupalSettings.commentsMore) {
+  //       $(document).ready(function () {
+  //         // Add a click event handler to the Menu heading.
+  //         $(".comments-more", context).click(function () {
+  //           // Find the related menu element within the same parent.
+  //           const MORE = $(this).siblings('.comments-manage-links');
   
-            // Check if the more element exists.
-            if (MORE.length) {
-              // Check if the elements are visible.
-              if (MORE.is(":visible")) {
-                // Use fadeOut to hide both elements.
-                MORE.fadeOut();
-              } else {
-                // Use fadeIn to show both elements.
-                MORE.fadeIn();
-              }
-            }
-          });
+  //           // Check if the more element exists.
+  //           if (MORE.length) {
+  //             // Check if the elements are visible.
+  //             if (MORE.is(":visible")) {
+  //               // Use fadeOut to hide both elements.
+  //               MORE.fadeOut();
+  //             } else {
+  //               // Use fadeIn to show both elements.
+  //               MORE.fadeIn();
+  //             }
+  //           }
+  //         });
 
-          // Check if the .anonymous-login-redirect class is present.
-          if ($('.anonymous-login-redirect').length) {
-            // Remove all elements with the class .comments-more.
-            $('.comments-more').remove();
-          }
+  //         // Check if the .anonymous-login-redirect class is present.
+  //         if ($('.anonymous-login-redirect').length) {
+  //           // Remove all elements with the class .comments-more.
+  //           $('.comments-more').remove();
+  //         }
 
-        });
-        drupalSettings.commentsMore = true;
-      }
-    }
-  };
+  //       });
+  //       drupalSettings.commentsMore = true;
+  //     }
+  //   }
+  // };
 
   Drupal.behaviors.preventClickOnImage = {
     attach(context) {
