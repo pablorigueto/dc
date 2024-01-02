@@ -187,6 +187,28 @@ h1,
 
 .eu-cookie-compliance-secondary-button {
   font-family: 'Inter-SemiBold';
+  background: var(--white-color);
+  color: var(--light-dark-color);
+  padding: 5px 10px;
+}
+
+.eu-cookie-compliance-default-button {
+  border-radius: unset;
+  background: unset;
+  color: var(--white-color);
+  border: unset;
+  text-shadow: unset;
+  box-shadow: unset;
+  font-family: 'Inter-Light';
+}
+
+.eu-cookie-compliance-secondary-button:hover {
+  background-color: var(--light-border);
+}
+
+.eu-cookie-compliance-default-button:hover {
+  background-image: unset;
+  background-color: unset;
 }
 
 .eu-cookie-compliance-buttons {
