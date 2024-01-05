@@ -14,13 +14,13 @@ use Drupal\taxonomy\Entity\Term;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Drupal\pagseguro\CurlRequestTrait;
+use Drupal\pagseguro\PagSeguroTrait;
 
 class PaymentSubscribe extends ControllerBase {
   /**
-   * Trait to use the curl.
+   * Trait to use the methods/helpers.
    */
-  use CurlRequestTrait;
+  use PagSeguroTrait;
 
   /**
    * Create the plan specific to this order.
