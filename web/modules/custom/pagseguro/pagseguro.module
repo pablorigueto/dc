@@ -5,12 +5,85 @@
  * Module file for PagSeguro payments.
  */
 
+use Drupal\Core\Url;
+use Drupal\user\Entity\User;
+
 /**
  * Implements hook_page_attachments().
  */
 function pagseguro_page_attachments(array &$attachments) {
   $attachments['#attached']['library'][] = 'pagseguro/pagseguro-bundle';
 }
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+// function pagseguro_menu_local_tasks_alter(&$data, $route_name, &$cacheability) {
+//   // Check if the route is 'user.page' (the user account page).
+//   if ($route_name === 'entity.user.canonical') {
+//     // Add a new link to the 'My account' menu.
+//     //$data['tabs'][0]['output'][0]['#links']['custom_account_link'] = [
+//     $data['tabs'][0]['#link']['custom_account_link'] = [
+//       'route_name' => 'custom_account_link.content', // Replace with your custom route name
+//       'title' => t('Custom Account Link'),
+//       'weight' => 10,
+//     ];
+//   }
+//   $data;
+//  // die();
+
+// }
+
+/**
+ * Implements hook_preprocess_HOOK() for menu__account template.
+ */
+function pagseguro_preprocess_menu__account(&$variables) {
+  if ($variables['logged_in']) {
+    $user = $variables['user'];
+    $variables['items']['user.page']['title'] = t('Welcome, @name', ['@name' => $user->getDisplayName()]);
+    $variables['#cache']['contexts'][] = 'user';
+    $variables['#cache']['tags'][] = 'user:' . $user->id();
+  }
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+// function pagseguro_menu_local_tasks_alter(&$data, $route_name) {
+//   if ($route_name == 'entity.user.canonical') {
+//     $data['tabs'][0]['output'][0]['#links']['pagseguro.content'] = [
+//       'url' => 'entity.user.canonical',
+//       'title' => t('My Tab'),
+//       'route_name' => 'pagseguro.content',
+//     ];
+//   }
+// }
+
+
+// function pagseguro_menu_local_tasks_alter(&$data, $route_name) {
+//   if ($route_name == 'entity.user.canonical') {
+
+//     $tab = [
+//       '#theme' => 'menu_local_task',
+//       '#link' => [
+//         'title' => 'SureMan',
+//         'url' => [
+//           'routeName' => 'pagseguro.content',
+//         ],
+//       ],
+//       '#access' => [
+//         'Drupal\Core\Access\AccessResultAllowed',
+//         'cacheContexts' => ['user.permissions'],
+//         'cacheTags' => [],
+//         'cacheMaxAge' => -1,
+//       ],
+//     ];
+
+//     $data['tabs'][0][] = $tab;
+//   }
+
+// }
+
 
 /**
  * Implements hook_update_N().

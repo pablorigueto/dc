@@ -1,0 +1,4 @@
+pagseguro.content:
+  route_name: pagseguro.content
+  base_route: entity.user.canonical
+  title: 'Click mee'

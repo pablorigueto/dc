@@ -26,3 +26,19 @@ pagseguro.test:
     _controller: '\Drupal\pagseguro\Controller\Test::callPagSeguro'
   requirements:
     _role: 'authenticated'
+
+pagseguro.content:
+  path: '/user/{user}/custom-account-link'
+  defaults:
+    _controller: '\Drupal\pagseguro\Controller\CustomAccountLinkController::content'
+    _title: 'Custom Account Link'
+  requirements:
+    _permission: 'access content'
+
+# custom_profile_link.custom_page:
+#   path: '/user/{uid}/custom-page'
+#   defaults:
+#     _controller: '\Drupal\custom_profile_link\Controller\CustomProfileLinkController::customPage'
+#     _title: 'Custom Page'
+#   requirements:
+#     _permission: 'access content'
