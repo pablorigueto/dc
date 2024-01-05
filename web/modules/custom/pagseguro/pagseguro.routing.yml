@@ -1,8 +1,8 @@
 pagseguro.subscribe:
   path: '/assinar'
   defaults:
-    _form: '\Drupal\pagseguro\Form\SubscriberForm'
-    _title: 'Subscriber'
+    _form: '\Drupal\pagseguro\Form\UserDetailsForm'
+    _title: 'User Details Form'
   requirements:
     _role: 'authenticated'
 

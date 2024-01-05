@@ -20,12 +20,13 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\user\Entity\User;
+use Normalizer;
 use Psr\Log\LoggerInterface;
 
 /**
  * Provides a form to sendo offer to owner.
  */
-class SubscriberForm extends FormBase {
+class UserDetailsForm extends FormBase {
 
   /**
    * The messenger service.
@@ -126,7 +127,7 @@ class SubscriberForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId(): string {
-    return 'subscriber_form';
+    return 'user_details_form';
   }
 
   /**
@@ -140,54 +141,30 @@ class SubscriberForm extends FormBase {
 
     $userData = $this->getUserInfos();
 
-    $form['offer_to_car_wrapper'] = [
-      '#type' => 'container',
-      '#attributes' => ['class' => ['selected-car-wrapper-inside']],
-      'offer_to_car' => [
-        '#type' => 'textfield',
-        '#title' => $this->t('Proposta para o carro'),
-        '#prefix' => '<div class="car-details-to-offer">',
-        '#suffix' => '</div>',
-        '#ajax' => [
-          'callback' => [$this, 'updateAddressField'],
-          'event' => 'change',
-          'wrapper' => 'offer_to_car_image', // Use the ID of the textfield as the wrapper
-          'progress' => [
-            'type' => 'throbber',
-            'message' => NULL,
-          ],
-        ],
-      ],
-      'offer_to_car_image' => [
-        '#type' => 'textfield',
-        '#title' => $this->t('Offer to car image'),
-        '#prefix' => '<div class="new-offer-image">',
-        '#suffix' => '</div>',
-        '#attributes' => [
-          'id' => 'offer_to_car_image',
-        ],
-      ],
-      'offer_to_car_image2' => [
-        '#type' => 'textfield',
-        '#title' => $this->t('Offer to car image'),
-        '#prefix' => '<div class="new-offer-image">',
-        '#suffix' => '</div>',
-        '#attributes' => [
-          'id' => 'offer_to_car_image2',
-        ],
-      ],  
-      '#prefix' => '<div class="selected-car-wrapper">',
-      '#suffix' => '</div>',
+    $form['order_info_wrapper_parent'] = $this->orderForm($userData);
+
+    $form['contact_info_wrapper_parent'] = $this->contactForm($userData);
+
+    $form['address_info_wrapper_parent'] = $this->addressForm($userData);
+
+    $form['submit'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Enviar Proposta'),
     ];
-  
-    $form['contact_info_wrapper_parent'] = [
+
+    return $form;
+  }
+
+  protected function orderForm($userData): array {
+
+    return [
       '#type' => 'container',
-      '#attributes' => ['class' => ['contact-info-wrapper-inside']],
-    
-      'contact_info_wrapper' => [
+      '#attributes' => ['class' => ['order-info-wrapper-inside']],
+
+      'order_info_wrapper' => [
         '#type' => 'container',
-        '#attributes' => ['class' => ['contact-info-wrapper']],
-    
+        '#attributes' => ['class' => ['order-info-wrapper']],
+
         'full_name' => [
           '#type' => 'textfield',
           '#id' => 'name',
@@ -195,7 +172,87 @@ class SubscriberForm extends FormBase {
           '#required' => 'true',
           '#prefix' => '<div class="full-name">',
           '#suffix' => '</div>',
-          '#attributes' => ['class' => ['input-cadastro']],
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'full-name',
+          ],
+          '#default_value' => !empty($userData['full_name']) ? $userData['full_name'] : '',
+        ],
+        'birthday' => [
+          '#type' => 'textfield',
+          '#title' => $this->t('Birthday'),
+          '#required' => TRUE,
+          '#prefix' => '<div class="birthday">',
+          '#suffix' => '</div>',
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'birthday',
+          ],
+          '#default_value' => !empty($userData['birthday']) ? $userData['birthday'] : '',
+        ],
+        'phone' => [
+          '#type' => 'tel',
+          '#title' => $this->t('Phone number'),
+          '#required' => TRUE,
+          '#prefix' => '<div class="phone">',
+          '#suffix' => '</div>',
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'phone',
+          ],
+          '#default_value' => !empty($userData['phone']) ? $userData['phone'] : '',
+        ],
+        'id_personal' => [
+          '#type' => 'textfield',
+          '#title' => $this->t('ID or Passport'),
+          '#required' => TRUE,
+          '#prefix' => '<div class="id-personal">',
+          '#suffix' => '</div>',
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'id-personal',
+          ],
+          '#default_value' => !empty($userData['id_personal']) ? $userData['id_personal'] : '',
+        ],
+        'id_personal' => [
+          '#type' => 'textfield',
+          '#title' => $this->t('ID or Passport'),
+          '#required' => TRUE,
+          '#prefix' => '<div class="id-personal">',
+          '#suffix' => '</div>',
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'id-personal',
+          ],
+          '#default_value' => !empty($userData['id_personal']) ? $userData['id_personal'] : '',
+        ],
+
+        '#prefix' => '<div class="order-info-wrapper">',
+        '#suffix' => '</div>',
+      ],
+    ];
+  }
+
+  protected function contactForm(array $userData): array {
+    return [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['contact-info-wrapper-inside']],
+
+      'contact_info_wrapper' => [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['contact-info-wrapper']],
+
+        'full_name' => [
+          '#type' => 'textfield',
+          '#id' => 'name',
+          '#title' => $this->t('Full name'),
+          '#required' => 'true',
+          '#prefix' => '<div class="full-name">',
+          '#suffix' => '</div>',
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'full-name',
+          ],
           '#default_value' => !empty($userData['full_name']) ? $userData['full_name'] : '',
         ],
         'email' => [
@@ -209,18 +266,20 @@ class SubscriberForm extends FormBase {
           '#attributes' => [
             'class' => ['input-cadastro'],
             'readonly' => 'readonly', // Set the readonly attribute
+            'id' => 'email',
           ],
-          '#default_value' => !empty($userData['email']) ? $userData['email'] : ''
+          '#default_value' => !empty($userData['email']) ? $userData['email'] : '',
         ],
-
-        // Add the new fields here
         'birthday' => [
           '#type' => 'textfield',
           '#title' => $this->t('Birthday'),
           '#required' => TRUE,
           '#prefix' => '<div class="birthday">',
           '#suffix' => '</div>',
-          '#attributes' => ['class' => ['input-cadastro']],
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'birthday',
+          ],
           '#default_value' => !empty($userData['birthday']) ? $userData['birthday'] : '',
         ],
         'phone' => [
@@ -229,7 +288,10 @@ class SubscriberForm extends FormBase {
           '#required' => TRUE,
           '#prefix' => '<div class="phone">',
           '#suffix' => '</div>',
-          '#attributes' => ['class' => ['input-cadastro']],
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'phone',
+          ],
           '#default_value' => !empty($userData['phone']) ? $userData['phone'] : '',
         ],
         'id_personal' => [
@@ -238,16 +300,37 @@ class SubscriberForm extends FormBase {
           '#required' => TRUE,
           '#prefix' => '<div class="id-personal">',
           '#suffix' => '</div>',
-          '#attributes' => ['class' => ['input-cadastro']],
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'id-personal',
+          ],
           '#default_value' => !empty($userData['id_personal']) ? $userData['id_personal'] : '',
         ],
+
+        '#prefix' => '<div class="contact-info-wrapper">',
+        '#suffix' => '</div>',
+      ],
+    ];
+  }
+
+  protected function addressForm(array $userData): array {
+    return  [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['address-info-wrapper-inside']],
+
+      'address_info_wrapper' => [
+        '#type' => 'container',
+        '#attributes' => ['class' => ['address-info-wrapper']],
         'zip_code' => [
           '#type' => 'textfield',
           '#title' => $this->t('Zip code'),
           '#required' => TRUE,
           '#prefix' => '<div class="zip-code">',
           '#suffix' => '</div>',
-          '#attributes' => ['class' => ['input-cadastro']],
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'zip-code',
+          ],
           '#default_value' => !empty($userData['zip_code']) ? $userData['zip_code'] : '',
         ],
         'postcode_btn' => [
@@ -270,11 +353,11 @@ class SubscriberForm extends FormBase {
           '#required' => TRUE,
           '#prefix' => '<div class="address">',
           '#suffix' => '</div>',
-          '#attributes' => ['class' => ['input-cadastro']],
-          '#default_value' => !empty($userData['address']) ? $userData['address'] : '',
           '#attributes' => [
+            'class' => ['input-cadastro'],
             'id' => 'address',
           ],
+          '#default_value' => !empty($userData['address']) ? $userData['address'] : '',
         ],
         'number_address' => [
           '#type' => 'textfield',
@@ -282,8 +365,23 @@ class SubscriberForm extends FormBase {
           '#required' => TRUE,
           '#prefix' => '<div class="number-address">',
           '#suffix' => '</div>',
-          '#attributes' => ['class' => ['input-cadastro']],
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'number-address',
+          ],
           '#default_value' => !empty($userData['number_address']) ? $userData['number_address'] : '',
+        ],
+        'complement_address' => [
+          '#type' => 'textfield',
+          '#title' => $this->t('Complement address'),
+          '#required' => TRUE,
+          '#prefix' => '<div class="complement-address">',
+          '#suffix' => '</div>',
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'complement-address',
+          ],
+          '#default_value' => !empty($userData['complement_address']) ? $userData['complement_address'] : '',
         ],
         'district' => [
           '#type' => 'textfield',
@@ -291,7 +389,10 @@ class SubscriberForm extends FormBase {
           '#required' => TRUE,
           '#prefix' => '<div class="district">',
           '#suffix' => '</div>',
-          '#attributes' => ['class' => ['input-cadastro']],
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'district',
+          ],
           '#default_value' => !empty($userData['district']) ? $userData['district'] : '',
         ],
         'city' => [
@@ -300,7 +401,10 @@ class SubscriberForm extends FormBase {
           '#required' => TRUE,
           '#prefix' => '<div class="city">',
           '#suffix' => '</div>',
-          '#attributes' => ['class' => ['input-cadastro']],
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'city',
+          ],
           '#default_value' => !empty($userData['city']) ? $userData['city'] : '',
         ],
         'region' => [
@@ -309,7 +413,10 @@ class SubscriberForm extends FormBase {
           '#required' => TRUE,
           '#prefix' => '<div class="region">',
           '#suffix' => '</div>',
-          '#attributes' => ['class' => ['input-cadastro']],
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'region',
+          ],
           '#default_value' => !empty($userData['region']) ? $userData['region'] : '',
         ],
         'country' => [
@@ -318,21 +425,18 @@ class SubscriberForm extends FormBase {
           '#required' => TRUE,
           '#prefix' => '<div class="country">',
           '#suffix' => '</div>',
-          '#attributes' => ['class' => ['input-cadastro']],
+          '#attributes' => [
+            'class' => ['input-cadastro'],
+            'id' => 'country',
+          ],
           '#default_value' => !empty($userData['country']) ? $userData['country'] : '',
         ],
-    
-        '#prefix' => '<div class="contact-info-wrapper">',
+
+        '#prefix' => '<div class="address-info-wrapper">',
         '#suffix' => '</div>',
       ],
     ];
 
-    $form['submit'] = [
-      '#type' => 'submit',
-      '#value' => $this->t('Enviar Proposta'),
-    ];
-
-    return $form;
   }
 
   /**
@@ -343,42 +447,35 @@ class SubscriberForm extends FormBase {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    */
-  public function updateAddressField(array $form, FormStateInterface $form_state): AjaxResponse|bool {
+  protected function updateAddressField(array $form, FormStateInterface $form_state): AjaxResponse {
 
-    //$response->addCommand(new HtmlCommand('#updatedField', 'removeEntireStructure'));
+    $response = new AjaxResponse();
 
     $post_code = $form_state->getValue('zip_code');
 
-    // if (empty($post_code)) {
-    //   return FALSE;
-    //   //$form_state->setErrorByName('zip_code', $this->t('Please, fill with a valid postcode.'));
-    // }
-    $response = new AjaxResponse();
-    $url = 'https://viacep.com.br/ws/'.$post_code.'/json';
+    if (empty($post_code)) {
+      return $response;
+    }
+
+    $url = "https://viacep.com.br/ws/{$post_code}/json";
     $response_data = file_get_contents($url);
-    // Parse the JSON response
+    // Parse the JSON response.
     $data = json_decode($response_data);
 
-    // "cep": "13825-000",
-    // "logradouro": "",
-    // "complemento": "",
-    // "bairro": "",
-    // "localidade": "Holambra",
-    // "uf": "SP",
-    // "ibge": "3519055",
-    // "gia": "7470",
-    // "ddd": "19",
-    // "siafi": "2953"
+    if (!$data) {
+      return $response;
+    }
 
-    $response->addCommand(new InvokeCommand('#address', 'val', [$data->localidade]));
+    $response->addCommand(new InvokeCommand('#country', 'val', ['Brasil']));
+    $response->addCommand(new InvokeCommand('#address', 'val', [$data->logradouro]));
+    $response->addCommand(new InvokeCommand('#district', 'val', [$data->bairro]));
+    $response->addCommand(new InvokeCommand('#city', 'val', [$data->localidade]));
+    $response->addCommand(new InvokeCommand('#region', 'val', [$data->uf]));
 
-    $response->addCommand(new InvokeCommand('#offer_to_car_image', 'val', [$data->cep]));
-
-  
     return $response;
+
   }
 
-  
   /**
    * {@inheritdoc}
    */
@@ -457,20 +554,20 @@ class SubscriberForm extends FormBase {
    */
   protected function updateFieldsOnDB($form_state) {
     $user = \Drupal::currentUser();
-  
-    // Get the values entered in the form fields.
-    $full_name = $form_state->getValue('full_name');
-    $birthday = $form_state->getValue('birthday');
-    $phone = $form_state->getValue('phone');
-    $id_personal = $form_state->getValue('id_personal');
-    $email = $form_state->getValue('email');
-    $address = $form_state->getValue('address');
-    $number_address = $form_state->getValue('number_address');
-    $zip_code = $form_state->getValue('zip_code');
-    $district = $form_state->getValue('district');
-    $city = $form_state->getValue('city');
-    $region = $form_state->getValue('region');
-    $country = $form_state->getValue('country');
+
+    $full_name = $this->encondingAccent($form_state->getValue('full_name'));
+    $birthday = $this->encondingAccent($form_state->getValue('birthday'));
+    $phone = $this->encondingAccent($form_state->getValue('phone'));
+    $id_personal = $this->encondingAccent($form_state->getValue('id_personal'));
+    $email = $this->encondingAccent($form_state->getValue('email'));
+    $address = $this->encondingAccent($form_state->getValue('address'));
+    $number_address = $this->encondingAccent($form_state->getValue('number_address'));
+    $complement_address = $this->encondingAccent($form_state->getValue('complement_address'));
+    $zip_code = $this->encondingAccent($form_state->getValue('zip_code'));
+    $district = $this->encondingAccent($form_state->getValue('district'));
+    $city = $this->encondingAccent($form_state->getValue('city'));
+    $region = $this->encondingAccent($form_state->getValue('region'));
+    $country = $this->encondingAccent($form_state->getValue('country'));
 
     // Create a database connection.
     $connection = $this->database;
@@ -494,6 +591,7 @@ class SubscriberForm extends FormBase {
           'email' => $email,
           'address' => $address,
           'number_address' => $number_address,
+          'complement_address' => $complement_address,
           'zip_code' => $zip_code,
           'district' => $district,
           'city' => $city,
@@ -517,6 +615,7 @@ class SubscriberForm extends FormBase {
         'email' => $email,
         'address' => $address,
         'number_address' => $number_address,
+        'complement_address' => $complement_address,
         'zip_code' => $zip_code,
         'district' => $district,
         'city' => $city,
@@ -526,13 +625,24 @@ class SubscriberForm extends FormBase {
       $query->execute();
 
       return TRUE;
- 
-    } catch (\Exception $e) {
+
+    }
+    catch (\Exception $e) {
       // Handle the exception.
       $this->logger->error('Error updating/inserting record: @error', ['@error' => $e->getMessage()]);
       // You can also display an error message to the user if needed.
       return FALSE;
     }
+  }
+
+  /**
+   * Function to remove accents from a string.
+   */
+  protected function encondingAccent($str) {
+    // Normalize the string to remove accents.
+    $normalizedStr = Normalizer::normalize($str, Normalizer::FORM_KD);
+
+    return preg_replace('/[^\x20-\x7E]/u', '', $normalizedStr);
   }
 
   /**
@@ -599,8 +709,8 @@ class SubscriberForm extends FormBase {
   protected function getUserInfoFromPagSeguroTable($connection, $userId): mixed {
     // Fetch the user's data from the database.
     $query = $connection->select('pagseguro_users_data', 'p')
-    ->fields('p')
-    ->condition('p.user_id', $userId);
+      ->fields('p')
+      ->condition('p.user_id', $userId);
     $result = $query->execute();
     return $result->fetchAssoc();
   }
