@@ -1,0 +1,59 @@
+<basicpage>
+ 
+ <div class="basicpage_header_container">
+    <div class="basicpage_header">
+      <div class="basicpage_full_title">
+        {{ image_title|raw }}
+      </div>
+
+      <div class="basicpage_full_image">
+        {% set imageAlt = content.field_title_to_display['#items'].0.value %}
+        <img src="{{ file_url(thumbnail['#uri']) }}" alt="{{ imageAlt }}">
+      </div>
+    </div>
+  </div>
+
+  {# Display the author's user picture #}
+  <div class="node-author">
+    <div class="node-profile-img">
+      {# <img class="full-node-user-profile-img" src="{{ file_url(image_profile) }}" alt="User Profile Image"> #}
+      <div class="node-creator">
+        {# <p>{{ 'Article created - '|t }}{{ node.createdtime|format_date('custom', 'M j, Y') }}</p> #}
+        <p>{{ 'By '|t }}</p>
+        <p class="author-name">{{ node.uid.0.entity.name.value }}</p>
+        <p>{{ ' created on '|t }}{{ node.createdtime|date('l, F j, Y - h:iA - T') }}</p>
+      </div>
+    </div>
+
+    {# {% if revision_user_uri is not empty %}
+      <div class="node-profile-img">
+        <img class="full-node-user-profile-img" src="{{ file_url(revision_user_uri) }}" alt="User Last Revision Profile Image">
+        <div class="node-last-revision">
+          <p>{{ 'Article updated - '|t }}{{ node.changedtime|format_date('custom', 'M j, Y') }}</p>
+          <p>{{ 'by '|t }}{{ node.revision_uid.0.entity.name.value }}</p>
+        </div>
+      </div>
+    {% endif %} #}
+
+  </div>
+  
+  <div class="basicpage-full-body">
+
+    <div class="content-body">
+      {{ content.field_content_body }}
+    </div>
+    <div class="node-full-footer">
+      <div class="content-like">
+        {{ content.field_like }}
+      </div>
+      <div class="field-tags">
+        {{ content.field_tags }}
+      </div>
+    </div>
+  </div>
+
+  <div class="comment-field">
+    {{ content.comment }}
+  </div>  
+
+</basicpage>

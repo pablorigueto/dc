@@ -1,0 +1,4 @@
+# Schema for the configuration files of the dc theme.
+darkgpt.settings:
+  type: theme_settings
+  label: 'darkgpt settings'

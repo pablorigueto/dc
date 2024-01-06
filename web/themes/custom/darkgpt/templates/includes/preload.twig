@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * Preload the non-bold & non-italic fonts for the headings and the body copy.
+ *
+ * Available variables:
+ * - darkgpt_path: Returns the path to the darkgpt theme.
+ */
+#}
+
+{# {% set darkgpt_path = base_path %}
+<link rel="preload" href="{{ darkgpt_path }}themes/custom/darkgpt/css/fonts_files/Inter/Inter-Regular.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="preload" href="{{ darkgpt_path }}themes/custom/darkgpt/css/fonts_files/Switzer/Switzer-Bold.ttf" as="font" type="font/ttf" crossorigin> #}
+
+{# {% set darkgpt_path = file_url('themes/custom/darkgpt/css/fonts_files/Inter/Inter-ExtraLight.ttf') %}
+<link rel="preload" href="{{ darkgpt_path }}" as="font" type="font/ttf" crossorigin> #}
+
+{# {% set darkgpt_path = file_url('themes/custom/darkgpt/css/fonts_files/Inter/Inter-Medium.ttf') %}
+<link rel="preload" href="{{ darkgpt_path }}" as="font" type="font/ttf" crossorigin> #}
+
+{# {% set darkgpt_path = file_url('themes/custom/darkgpt/css/fonts_files/Inter/Inter-ExtraBold.ttf') %}
+<link rel="preload" href="{{ darkgpt_path }}" as="font" type="font/ttf" crossorigin> #}
+{# 
+{% set darkgpt_path_bold = file_url('themes/custom/darkgpt/css/fonts_files/Switzer/Switzer-Bold.ttf') %}
+<link rel="preload" href="{{ darkgpt_path_bold }}" as="font" type="font/ttf" crossorigin>
+
+{% set darkgpt_path_light = file_url('themes/custom/darkgpt/css/fonts_files/Switzer/Switzer-Light.ttf') %}
+<link rel="preload" href="{{ darkgpt_path_light }}" as="font" type="font/ttf" crossorigin> #}
+
+{% set font_cdn_path_light = 'https://fonts.cdnfonts.com/s/19795/Inter-Light-BETA.woff' %}
+<link rel="preload" href="{{ font_cdn_path_light }}" as="font" type="font/woff" crossorigin>
+
+{% set font_cdn_path_regular = 'https://fonts.cdnfonts.com/s/19795/Inter-Regular.woff' %}
+<link rel="preload" href="{{ font_cdn_path_regular }}" as="font" type="font/woff" crossorigin>
+
+{% set font_cdn_path_semibold = 'https://fonts.cdnfonts.com/s/19795/Inter-SemiBold.woff' %}
+<link rel="preload" href="{{ font_cdn_path_semibold }}" as="font" type="font/woff" crossorigin>
+
+{% set font_cdn_path_bold = 'https://fonts.cdnfonts.com/s/19795/Inter-Bold.woff' %}
+<link rel="preload" href="{{ font_cdn_path_bold }}" as="font" type="font/woff" crossorigin>

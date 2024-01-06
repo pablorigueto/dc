@@ -1,0 +1,228 @@
+@font-face {
+  font-family: 'Inter-Light';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inter'), url('https://fonts.cdnfonts.com/s/19795/Inter-Light-BETA.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter-Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inter'), url('https://fonts.cdnfonts.com/s/19795/Inter-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter-SemiBold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inter'), url('https://fonts.cdnfonts.com/s/19795/Inter-SemiBold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Inter-Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inter'), url('https://fonts.cdnfonts.com/s/19795/Inter-Bold.woff') format('woff');
+}
+
+:root {
+  scroll-behavior: smooth;
+  --dark-blue: #0a121b;
+  --white-color: #fff;
+  --dark-color: #000;
+  --dark-gradient: #00000021;
+  --light-dark-color: #181818;
+  --medium-dark-color: #141414;
+  --almost-dark-color: #121212;
+  --medium-gray-color: #7f7c7c;
+  --pager-fg-color: #55565b;
+  --light-border: #d1d0d0;
+  --light-box-shadow: #0000000d;
+  --dark-box-shadow: #ffffff26;
+  --deep-dark-box-shadow: #000000bf;
+  --light-hover: #f3f3f3;
+  --tiny-border: #ffffff6e;
+  --cancel-delete: #db3250;
+  --drupal-color: #009cde;
+  --label-react: #de004a;
+  --label-drupal: #107ca9;
+  --code-container: #060505;
+  --light-gray: #ababab;
+}
+
+body {
+  font-family: Inter-Regular;
+  background-color: var(--white-color);
+  color: var(--medium-dark-color);
+  margin: 0;
+}
+
+/* Admin edit btn */
+.contextual .trigger:hover,
+.contextual .trigger {
+  background-color: var(--dark-color);
+}
+
+::selection {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+}
+
+h2 {
+  font-size: 20px;
+}
+
+.primary_menu nav h2,
+#block-darkgpt-languageswitcher h2 {
+  font-size: 16px;
+  display: flex;
+  color: var(--light-gray);
+  font-family: 'Inter-Light';
+}
+
+
+
+.like_dislike .fa-thumbs-up {
+  text-decoration: unset;
+  font-size: 24px;
+  color: var(--white-color);
+}
+
+.content-like > div:first-child > :first-child {
+  display: none;
+}
+
+.content-like {
+  width: 100px;
+  border: 2px solid var(--drupal-color);
+  color: var(--white-color);
+  font-weight: bold;
+  padding: 14px 25px 5px 0;
+  margin-top: 20px;
+  transition: all 0.5s ease;
+  background-color: var(--medium-dark-color);
+}
+
+.content-like:hover {
+  box-shadow: 1.5px 1.5px 0px var(--light-dark-color);
+  transition: all 0.5s ease;
+}
+
+.like_dislike {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 34px;
+  padding-bottom: 4.5px;
+}
+
+[id^="like_dislike_status"] {
+  text-align: center;
+  padding-top: 12px;
+  color: var(--drupal-color);
+  position: absolute;
+}
+
+span[id^="like-"] {
+  font-family: 'Inter-Bold';
+  color: var(--drupal-color);
+}
+
+.like-animation {
+  width: 75px;
+}
+
+.like-animated {
+  padding-top: 10px;
+}
+
+.like_dislike .use-ajax {
+  padding-top: 4px;
+}
+
+.content-like .ajax-progress {
+  display: none;
+}
+
+.views_node_count span,
+.likes_count span {
+  font-size: 15px;
+}
+
+.comments_count span {
+  font-size: 12px;
+}
+
+.views_node_count,
+.likes_count,
+.comments_count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.comments_count span {
+  padding-top: 1px;
+}
+
+.comments_count span {
+  padding-top: 1px;
+}
+
+.likes_count span {
+  padding-bottom: 2px;
+}
+
+h1,
+.path-search h2 {
+  font-size: 26px;
+}
+
+.path-search h2 {
+  text-align: center;
+}
+
+.text-highlight h1,
+.text-highlight h2 {
+  font-size: 22px;
+}
+
+.eu-cookie-compliance-secondary-button {
+  font-family: 'Inter-SemiBold';
+  background: var(--white-color);
+  color: var(--light-dark-color);
+  padding: 5px 10px;
+}
+
+.eu-cookie-compliance-default-button {
+  border-radius: unset;
+  background: unset;
+  color: var(--white-color);
+  border: unset;
+  text-shadow: unset;
+  box-shadow: unset;
+  font-family: 'Inter-Light';
+}
+
+.eu-cookie-compliance-secondary-button:hover {
+  background-color: var(--light-border);
+}
+
+.eu-cookie-compliance-default-button:hover {
+  background-image: unset;
+  background-color: unset;
+}
+
+.eu-cookie-compliance-buttons {
+  margin: 1em 0 1.2em 0;
+}
+
+.eu-cookie-compliance-message h2 {
+  padding-top: 0.6em;
+}
+
+.eu-cookie-compliance-default-button {
+  border-radius: unset;
+}

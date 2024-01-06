@@ -23,7 +23,6 @@ react_app_main:
     js/dist_dev/search.min.js: {minified: true}
     js/dist_dev/like.min.js: {minified: true}
     js/dist_dev/homeCarousel.min.js: {minified: true}
-    js/dist_dev/homeSlideRecent.min.js: {minified: true}
     js/dist_dev/theme.min.js: {minified: true}
     # js/theme/theme.js: {}
   dependencies:

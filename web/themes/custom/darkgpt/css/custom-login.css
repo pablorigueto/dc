@@ -1,0 +1,50 @@
+body.path-user-login, 
+body.path-user-register,
+body.path-user-password {
+    
+  @media screen and (min-width: 320px) and (max-width: 1170px) {
+    .social-bar {
+      max-width: 95%;
+    }
+    #block-darkgpt-primary-local-tasks ul {
+      max-width: 95%;
+    }
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 409px) {
+
+    #edit-name,
+    #edit-mail {
+      max-width: calc(100% - 2%);
+    }
+
+    #edit-name,
+    #edit-pass,
+    #edit-mail {
+      margin: 0 auto;
+      width: unset;
+      max-width: 98.5%;
+    }
+
+    #user-pass #edit-name {
+      max-width: calc(100% - 1.8%);
+      width: 100%;
+    }
+
+  }
+
+  @media screen and (min-width: 410px) and (max-width: 494px) {
+    #edit-name,
+    #edit-pass,
+    #user-pass #edit-name,
+    #edit-mail {
+      max-width: calc(100% - 1.5%);
+    }
+  }
+
+  @media screen and (min-width: 320px) and (max-width: 497px) {
+    #block-darkgpt-socialauthlogin {
+      width: unset;
+    }
+  }
+}
