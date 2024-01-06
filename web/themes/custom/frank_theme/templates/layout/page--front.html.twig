@@ -1,0 +1,173 @@
+{#
+/**
+ * @file
+ * dc_theme's theme implementation to display a single page.
+ *
+ * The doctype, html, head and body tags are not in this template. Instead they
+ * can be found in the html.html.twig template normally located in the
+ * core/modules/system directory.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ *
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - page.header: Items for the header region.
+ * - page.highlighted: Items for the highlighted region.
+ * - page.primary_menu: Items for the primary menu region.
+ * - page.secondary_menu: Items for the secondary menu region.
+ * - page.content: The main content of the current page.
+ * - page.sidebar: Items for the first sidebar.
+ * - page.featured_bottom_first: Items for the first featured bottom region.
+ * - page.featured_bottom_second: Items for the second featured bottom region.
+ * - page.footer_first: Items for the first footer column.
+ * - page.footer_second: Items for the second footer column.
+ * - page.breadcrumb: Items for the breadcrumb region.
+ * - page.social: Items for the social region.
+ *
+ * @see template_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+
+<div id="page-wrapper" class="page-wrapper">
+  <div id="page">
+
+    {% if page.header or page.primary_menu or page.secondary_menu %}
+      <header id="header" class="site-header" data-drupal-selector="site-header" role="banner">
+
+        {% if page.primary_menu or page.secondary_menu %}
+          <div id="header-menu" class="header-menu" data-drupal-selector="header-menu">
+            <div id="flex-header-menu" class="flex-header-menu" data-drupal-selector="flex-header-menu">
+              <div class="mobile">
+                <span class="material-symbols-outlined">
+                  menu
+                </span>
+              </div>
+              <a href="{{ path('<front>') }}" rel="home" class="site-branding__logo" alt={{'site_logo'|t}}>
+                <div class="logo">
+                  <img src={{ site_logo }} alt={{'site_logo'|t}}></img>
+                </div>
+              </a>
+              <div id="search_mobile_icon">
+              </div>
+              <div class="primary_menu">
+                {{ page.primary_menu }}
+              </div>
+              <div class="secondary_menu">
+                {{ page.secondary_menu }}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="header-banner" data-drupal-selector="header-banner">
+        </div>
+
+        {# Most recent node. #}
+        {# <div id="slide-recent" class="slide-recent" data-drupal-selector="slide-recent"> #}
+          <div id="slide-recent" class="homepage-highlight" data-drupal-selector="homepage-highlight">
+
+            <div class="text-highlight-container" data-drupal-selector="text-highlight-container">
+              <div class="text-highlight">
+                <a href={{ path_alias }} class="highlight-link">
+                <p class="node_created_recent">{{ created_time }}</p>
+                <p class="most-recent-node"> {{ 'New Content'|t }} </p>
+                  <div class="title-highlight">
+                    {{ title_display|raw }}
+                  </div>
+                </a>
+                {#<div class="content-preview-highlight">
+                  {{ content_body|striptags }}
+                </div>#}
+              </div>
+            </div>
+
+            <div class="img-highlight-main" data-drupal-selector="img-highlight">
+              <a href={{ path_alias }} class="highlight-link">
+                <img class="img-highlight" src={{ file_url(thumbnail['#uri']) }}></img>
+              </a>
+            </div>
+
+          </div>
+        {# </div> #}
+
+      </header>
+    {% endif %}
+
+    <div id="main-wrapper" class="layout-main-wrapper layout-container">
+
+      <div id="main" class="layout-main">
+        <div class="main-content">
+          <a id="main-content" tabindex="-1"></a>
+          {{ page.hero }}
+          <div class="main-content__container container">
+            {{ page.highlighted }}
+            {{ page.breadcrumb }}
+              <main role="main">
+                <div class="title-cards">
+                  <h1> {{ 'Articles'|t }} </h1>
+                </div>
+                {# {{ page.content }} #}
+                <div id="carousel-content">
+                  <div class="empty_carousel">
+                  </div>
+                </div>
+
+                <div id="looking-content">
+                  <div class="empty_content">
+                  </div>
+                </div>
+
+              </main>
+          </div>
+        </div>
+        <div class="social-bar">
+          {{ page.social }}
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner container">
+        {# {{ page.footer_top }}
+        {{ page.footer_bottom }} #}
+        <p class="copyright">Copyright © 2023-{{'now'|date('Y')}} by Pablo Rigueto. All rights reserved.</p>
+        <p class="policy">
+          {# <a class="privacy" href="/privacy-policy">Privacy Policy</a> | 
+          <a class="terms" href="/terms-of-service">Terms of Service</a> #}
+          <a class="privacy" href="{{ url('entity.node.canonical', {'node': 10}) }}">Privacy Policy</a> |
+          <a class="terms" href="{{ url('entity.node.canonical', {'node': 11}) }}">Terms of Service</a>
+
+        </p>
+        <p class="professional-contact">
+          <a href="https://linkedin.com/in/pablorigueto" target="_blank" title="LinkedIn profile of Pablo Rigueto">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a href="https://github.com/pablorigueto" target="_blank" title="GitHub profile of Pablo Rigueto">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </p>
+      </div>
+    </footer>
+
+    {# <div class="overlay" data-drupal-selector="overlay"></div> #}
+
+  </div>
+</div>

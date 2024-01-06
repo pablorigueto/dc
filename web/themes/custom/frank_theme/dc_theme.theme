@@ -1,0 +1,453 @@
+<?php
+
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\node\Entity\Node;
+use Drupal\node\NodeInterface;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_preprocess_HOOK() for HTML document templates.
+ *
+ * Adds body classes if certain regions have content.
+ */
+function dc_theme_preprocess_html(&$variables) {
+
+  // Check if the current page is the front page.
+  $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+
+  // Add a variable for the homepage description.
+  if ($variables['is_front']) {
+    $variables['homepage_description'] = t("Discover Drupal, ReactJS, and cutting-edge tech insights. Stay updated on web dev trends, best practices, and hands-on guides for robust web apps.");
+  }
+
+  // So fonts can be preloaded from base theme in the event dc theme is used as a subtheme.
+  $variables['dc_theme_path'] = \Drupal::request()->getBasePath() .
+   '/' . \Drupal::service('extension.list.theme')->getPath('dc_theme');
+
+  // Define some vars to add on TWIG templates.
+  $uri = \Drupal::request()->getRequestUri();
+
+  if (strpos($uri, '/user/login') !== FALSE) {
+    $variables['path_user_login'] = TRUE;
+  }
+
+  if (strpos($uri, '/user/register') !== FALSE) {
+    $variables['path_user_register'] = TRUE;
+  }
+
+  if (strpos($uri, '/user/password') !== FALSE) {
+    $variables['path_user_password'] = TRUE;
+  }
+
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function dc_theme_page_attachments_alter(array &$attachments) {
+  $attachments['#attached']['library'][] = 'dc_theme/react_app_main';
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function dc_theme_preprocess_page(&$variables) {
+  $variables['site_logo'] = theme_get_setting('logo.url');
+  $variables['site_name'] = \Drupal::config('system.site')->get('name');
+
+  // Check if the function has already been executed.
+  if (!isset($variables['hightlight_homepage_executed'])) {
+    _setHightlighHomepage($variables);
+    $variables['hightlight_homepage_executed'] = TRUE;
+  }
+}
+
+/**
+ * Implements items to hightligh homepage.
+ */
+function _setHightlighHomepage(&$variables) {
+
+  $user_langcode = _cookieOrDefaultLangcode();
+  // Get the entity query service.
+  $entity_query = \Drupal::entityQuery('node');
+
+  // Get the most recently created node.
+  $nid = $entity_query->sort('created', 'DESC')
+    ->condition('type', ['page', 'article'], 'IN')
+    ->range(0, 1)
+    ->accessCheck(FALSE)
+    ->execute();
+
+  // Load the node with the obtained ID.
+  $node = Node::load(reset($nid));
+
+  $nodeType = $node->getType();
+
+  if ($nodeType === 'page' || $nodeType === 'article') {
+    // Set node image uri.
+    // Thumbnail image.
+    _setThumbnailURI($node, $variables);
+    $variables['title_display'] = $node->get('body')[0]->getValue()['value'] ?? "";
+    $variables['content_body'] = $node->get('field_content_body')[0]->getValue()['value'] ?? "";
+    $variables['path_alias'] = _getPathAlias($node->id(), $user_langcode) ?? "";
+    $timestamp = $node->created->getValue()[0]['value'];
+    $variables['created_time'] = _formateDate($timestamp);
+  }
+
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function dc_theme_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Add placeholder to search form.
+  if ($form_id === 'search_block_form') {
+    // Add a placeholder to the search input field.
+    $form['keys']['#attributes']['placeholder'] = t('Enter the terms you wish to search for.');
+  }
+}
+
+/**
+ * Implements template_preprocess_node().
+ */
+function dc_theme_preprocess_node(&$variables) {
+  // Add some vars to get on twig."
+  if ($variables['node']->getType() == 'page' || $variables['node']->getType() == 'article'
+  ) {
+    $node = $variables['node'];
+    _setInfosToGetOnTwig($node, $variables);
+  }
+}
+
+// Get the image uri to render on search results.
+function dc_theme_preprocess_search_result(&$variables) {
+  $result = $variables['result'];
+  $node = $result['node'];
+  // Check if the node has an image attached.
+  if ($node->bundle() === 'article' || $node->bundle() === 'page') {
+
+    $user_langcode = _cookieOrDefaultLangcode();
+
+    if ($user_langcode !== $variables['result']['langcode']) {
+      return;
+    }
+
+    $url_node_path = _getPathAlias($node->id(), $user_langcode);
+
+    if (!$url_node_path) {
+      return;
+    }
+
+    _setInfosToSearchResultTwig($node, $variables);
+
+  }
+
+}
+
+/**
+ * Get the path alias through the node id.
+ */
+function _getPathAlias(int $node_id, string $langcode): string|bool {
+
+  // // This code doesn't worked. It always return the default language.
+  // $language = \Drupal::languageManager()->getCurrentLanguage();
+
+  // Get the language manager service.
+  $language_manager = \Drupal::languageManager();
+
+  // Get an array of all languages.
+  $languages = $language_manager->getLanguages();
+
+  // Generate the canonical URL for the node with the specified language.
+  $url = Url::fromRoute('entity.node.canonical', ['node' => $node_id], ['language' => $languages[$langcode]]);
+
+  // Retrieve the path from the URL object.
+  $path = $url->toString();
+  // If I wont the language on return .e.g en-us/alias.
+  // $path = '/' . $url->getInternalPath();
+
+  $pathAlias = \Drupal::service('path_alias.manager')->getAliasByPath($path);
+
+  if (strpos($pathAlias, '/node/') !== FALSE) {
+    return FALSE;
+  }
+
+  // Get the translated alias for the path.
+  //$translated_alias = \Drupal::service('path_alias.manager')->getPathAlias($path);
+  return \Drupal::service('path_alias.manager')->getAliasByPath($path);
+
+}
+
+function _cookieOrDefaultLangcode() {
+  $cookie_language = \Drupal::request()->cookies->get('selectedLanguage');
+
+  if ($cookie_language !== NULL) {
+    return str_replace('/', '', $cookie_language);
+  }
+  else {
+    $language_manager = \Drupal::languageManager();
+    return $language_manager->getCurrentLanguage()->getId();
+  }
+
+}
+
+function _setInfosToGetOnTwig($node, &$variables): void {
+  _setThumbnailURI($node, $variables);
+  $variables['image_title'] = $node->get('body')[0]->getValue()['value'] ?? "";
+  $variables['revision_user_uri'] = _getLastChangedByFromNode($node)['profile_picture_uri'] ?? "";
+  $variables['image_profile'] = _getUserProfileImage($node->getOwner()->id()) ?? "";
+  $variables['field_tags'] = _setTaxonomiTags($node) ?? "";
+
+  $likes = $node->get('field_like')->getValue();
+  if (!empty($likes)) {
+    $variables['likes_count'] = $node->get('field_like')[0]->getValue()['likes'];
+  }
+
+  if (empty($variables['likes_count'])) {
+    $variables['likes_count'] = 0;
+  }
+
+  $likes = $node->get('comment')->getValue();
+  if (!empty($likes)) {
+    $variables['comments_count'] = $node->get('comment')[0]->getValue()['comment_count'];
+  }
+
+  if (empty($variables['comments_count'])) {
+    $variables['comments_count'] = 0;
+  }
+
+  $viewCount = \Drupal::database()->select('node_counter', 'h')
+    ->condition('h.nid', $node->id())
+    ->fields('h', ['totalcount'])
+    ->execute()
+    ->fetchField();
+
+  $variables['view_node_count'] = 0;
+
+  if (!empty($viewCount)) {
+    // Add the view count to the template variables.
+    $variables['view_node_count'] = $viewCount;
+  }
+
+}
+
+// function _setTaxonomiTags($node) {
+//   // Assuming $node is your node entity.
+//   $tags = $node->get('field_tags')->getValue();
+
+//   // Assuming there is at least one tag.
+//   if (!empty($tags)) {
+//     $firstTagId = $tags[0]['target_id'];
+
+//     // Load the taxonomy term entity.
+//     $term = Term::load($firstTagId);
+
+//     // Check if the term is loaded successfully.
+//     if ($term) {
+//       // Get the term name.
+//       return $term->getName();
+//     }
+//   }
+// }
+
+function _setTaxonomiTags($node) {
+  // Assuming $node is your node entity.
+  $tags = $node->get('field_tags')->getValue();
+
+  $tagNames = [];
+
+  // Assuming there is at least one tag.
+  if (!empty($tags)) {
+    foreach ($tags as $tag) {
+      $tagId = $tag['target_id'];
+
+      // Load the taxonomy term entity.
+      $term = Term::load($tagId);
+
+      // Check if the term is loaded successfully.
+      if ($term) {
+        // Get the term name and add it to the array.
+        $tagNames[] = $term->getName();
+      }
+    }
+  }
+
+  return $tagNames;
+}
+
+function _setInfosToSearchResultTwig($node, &$variables): void {
+
+  _setThumbnailURI($node, $variables);
+  $timestamp = $node->created->getValue()[0]['value'];
+  $formatted_date = _formateDate($timestamp);
+  $variables['create_or_changed'] = $formatted_date;
+  $variables['node_type'] = $node->bundle();
+  $variables['title_display'] = $node->get('body')[0]->getValue()['value'] ?? "";
+  $variables['node_owner_or_changed'] = _getOwnerFromNode($node) ?? "";
+  $variables['image_profile'] = _getUserProfileImage($node->getOwner()->id()) ?? "";
+  $variables['field_tags'] = _setTaxonomiTags($node) ?? "";
+
+  $likes = $node->get('field_like')->getValue();
+  if (!empty($likes)) {
+    $variables['likes_count'] = $node->get('field_like')[0]->getValue()['likes'];
+  }
+
+  if (empty($variables['likes_count'])) {
+    $variables['likes_count'] = 0;
+  }
+
+  $likes = $node->get('comment')->getValue();
+  if (!empty($likes)) {
+    $variables['comments_count'] = $node->get('comment')[0]->getValue()['comment_count'];
+  }
+
+  if (empty($variables['comments_count'])) {
+    $variables['comments_count'] = 0;
+  }
+
+  $viewCount = \Drupal::database()->select('node_counter', 'h')
+    ->condition('h.nid', $node->id())
+    ->fields('h', ['totalcount'])
+    ->execute()
+    ->fetchField();
+
+  $variables['view_node_count'] = 0;
+
+  if (!empty($viewCount)) {
+    // Add the view count to the template variables.
+    $variables['view_node_count'] = $viewCount;
+  }
+
+}
+
+function _setThumbnailURI($node, &$variables) {
+  //$thumbnail_uri = $node->get('field_image')->entity->getFileUri() ?? "";
+  $thumbnail_uri = _styledImage($node, 'large');
+  $variables['thumbnail'] = [
+    '#theme' => 'image',
+    '#uri' => $thumbnail_uri,
+    '#alt' => $node->get('field_image')->entity->alt,
+  ];
+}
+
+function _styledImage($node, $style) {
+
+  $image_file_id = $node->get('field_image')[0]->target_id;
+
+  $file = File::load($image_file_id);
+  if (!$file) {
+    return;
+  }
+
+  $style = ImageStyle::load($style);
+
+  $styled_uri = $style->buildUrl($file->getFileUri());
+
+  // Convert the absolute URL to a relative URL.
+  $base_url = \Drupal::request()->getSchemeAndHttpHost();
+
+  return str_replace($base_url, '', $styled_uri);
+
+}
+
+function _getOwnerFromNode($node) {
+  $uid = $node->getOwner()->id();
+  $owner = User::load($uid);
+  return $owner->getAccountName();
+}
+
+function _getLastChangedByFromNode(NodeInterface $node) {
+  // Get the latest revision ID.
+  $latest_revision_id = $node->getRevisionId();
+
+  // Load the latest revision.
+  $latest_revision = \Drupal::entityTypeManager()
+    ->getStorage('node')
+    ->loadRevision($latest_revision_id);
+
+  // Get the user ID of the user who last changed the node.
+  $changed_uid = $latest_revision->getRevisionUser()->id();
+  // Load the user entity.
+  $changed_by_load = User::load($changed_uid);
+
+  $changed_by_user = $changed_by_load->getAccountName();
+
+  $node_owner = _getOwnerFromNode($node);
+
+  $revision_user_profile = _getUserProfileImage($changed_uid);
+
+  if ($changed_by_user !== $node_owner) {
+
+    return [
+      'username' => $changed_by_user,
+      'profile_picture_uri' => $revision_user_profile,
+    ];
+
+  }
+  // When the node created user is the same that the edit.
+  else {
+    $created_date = _formateDate($node->get('created')->getValue()[0]['value']);
+    $last_revision_timestamp = $latest_revision->getChangedTime();
+    $revision_date = _formateDate($last_revision_timestamp);
+
+    // When the node created date is the same that the edit.
+    if ($created_date === $revision_date) {
+
+      return '';
+
+    }
+    else {
+
+      return [
+        'username' => $changed_by_user,
+        'profile_picture_uri' => $revision_user_profile,
+      ];
+
+    }
+
+  }
+}
+
+function _formateDate($timestamp) {
+  $datetime = DrupalDateTime::createFromTimestamp($timestamp);
+  return $datetime->format('M y'); //('d M y');
+}
+
+// function getLastRevision($node) {
+//    // Check if the node has revisions.
+//    if ($node instanceof NodeInterface && $node->isRevisionable()) {
+//     // Get the latest revision ID.
+//     $latest_revision_id = $node->get('revision_default')->value;
+
+//     // Load the latest revision.
+//     $latest_revision = \Drupal::entityTypeManager()
+//       ->getStorage('node')
+//       ->loadRevision($latest_revision_id);
+
+//     // Get the timestamp of the latest revision.
+//     $last_revision_timestamp = $latest_revision->getChangedTime();
+
+//     $datetime = DrupalDateTime::createFromTimestamp($last_revision_timestamp);
+//     $formatted_date = $datetime->format('d M y');
+//     // Add the last revision timestamp to the node preprocess variables.
+//     $formatted_date;
+//   }
+// }
+
+function _getUserProfileImage($uid) {
+  // Load the user entity.
+  $user = User::load($uid);
+
+  // Check if the user has a profile image.
+  if (!$user->hasField('user_picture') && $user->get('user_picture')->isEmpty()) {
+    return '';
+  }
+
+  return $user->get('user_picture')->entity->getFileUri();
+
+}

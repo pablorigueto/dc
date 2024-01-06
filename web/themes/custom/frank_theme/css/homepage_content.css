@@ -1,0 +1,64 @@
+/* @import url('definitions.css'); */
+
+.path-frontpage #block-dc-theme-content [class^="js-view-dom-id-"],
+.path-frontpage #block-dc-theme-content .contextual-region {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.feed-icon {
+  display: none;
+}
+
+.title-cards {
+  text-align: center;
+}
+
+.title-cards h1 {
+  margin: 0;
+}
+
+@media screen and (min-width: 220px) and (max-width: 519px) {
+  .title-cards h1 {
+    margin-bottom: unset;
+    text-align: start;
+    padding-bottom: 0.7rem;
+  }
+}
+
+.path-frontpage .frontpage-result-thumbnail {
+  width: 250px;
+  height: 300px;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  box-shadow: 0.5px 0.5px 0.5px var(--deep-dark-box-shadow);
+  transition: box-shadow 0.3s ease;
+}
+
+.path-search .search-result-thumbnail {
+  box-shadow: 0.5px 0.5px 0.5px var(--deep-dark-box-shadow);
+  transition: box-shadow 0.3s ease;
+}
+
+.path-search .search-result-thumbnail:hover,
+.frontpage-result-thumbnail:hover {
+  box-shadow: 4px 4px 4px var(--deep-dark-box-shadow);
+}
+
+.teaser-tag-group {
+  display: flex;
+  gap: 0.3rem;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
