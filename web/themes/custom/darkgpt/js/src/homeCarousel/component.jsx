@@ -76,9 +76,9 @@ const NodeList = () => {
         />
       </div>
 
-      <SwiperComponent sortedNodes={sortedNodes} swiperConfig={swiperConfig} />
+      {/* <SwiperComponent sortedNodes={sortedNodes} swiperConfig={swiperConfig} /> */}
 
-      {/* <NodeListContainer nodeTimeStamp={nodeTimeStamp} /> */}
+      <NodeListContainer nodeTimeStamp={nodeTimeStamp} />
 
     </>
   );

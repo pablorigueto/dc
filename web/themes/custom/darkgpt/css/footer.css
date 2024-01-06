@@ -20,7 +20,7 @@
 .site-footer .copyright a,
 .site-footer .policy a {
   text-decoration: none;
-  color: var(--drupal-color);
+  color: #e7b80a;
   transition: all .2s ease;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .professional-contact a:hover {
-  color: var(--drupal-color);
+  color: #e7b80a;
   transition: all 0.5s ease;
 }
 

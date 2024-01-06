@@ -68,6 +68,37 @@ function darkgpt_preprocess_page(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for block templates.
+ */
+function darkgpt_preprocess_block__darkgpt_account_menu(&$variables) {
+
+  // Get the current user.
+  $current_user = \Drupal::currentUser();
+
+  // Get the current user.
+  $picture_url = _getUserProfileImage($current_user->id());
+
+  $style = ImageStyle::load('thumbnail');
+
+  $styled_uri = $style->buildUrl($picture_url);
+
+  // Convert the absolute URL to a relative URL.
+  $base_url = \Drupal::request()->getSchemeAndHttpHost();
+
+  $final_url = str_replace($base_url, '', $styled_uri);
+
+  // Create an image element for the label.
+  $image_markup = '<img src="' . $final_url . '" alt="User Picture" />';
+
+  // Replace the 'account' menu link title with the user picture.
+  $variables['label'] = [
+    '#markup' => $image_markup,
+  ];
+
+}
+
+
+/**
  * Implements items to hightligh homepage.
  */
 function _setHightlighHomepage(&$variables) {
@@ -198,7 +229,7 @@ function _cookieOrDefaultLangcode() {
 
 function _setInfosToGetOnTwig($node, &$variables): void {
   _setThumbnailURI($node, $variables);
-  $variables['image_title'] = $node->get('body')[0]->getValue()['value'] ?? "";
+  $variables['title_subtitle'] = $node->get('body')[0]->getValue()['value'] ?? "";
   $variables['revision_user_uri'] = _getLastChangedByFromNode($node)['profile_picture_uri'] ?? "";
   $variables['image_profile'] = _getUserProfileImage($node->getOwner()->id()) ?? "";
   $variables['field_tags'] = _setTaxonomiTags($node) ?? "";
@@ -331,7 +362,7 @@ function _setThumbnailURI($node, &$variables) {
   $variables['thumbnail'] = [
     '#theme' => 'image',
     '#uri' => $thumbnail_uri,
-    '#alt' => $node->get('field_image')->entity->alt,
+    '#alt' => $node->get('field_image')->alt,
   ];
 }
 

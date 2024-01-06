@@ -37,6 +37,7 @@ code {
 
 .basicpage_header_container {
   position: absolute;
+  margin-top: 80px;
   top: 0;
   right: 0;
   left: 0;
@@ -228,14 +229,14 @@ pre ::selection {
 }
 
 .basicpage-full-body {
-  color: var(--code-container);
+  color: var(--white-color);
   padding-top: 50px;
   padding-bottom: 50px;
   transition: all 0.5s ease;
 }
 
 .basicpage-full-body pre {
-  background-color:  var(--light-dark-color);
+  background-color:  var(--almost-dark-color);
   color: var(--white-color);
   padding: 20px 80px 20px 20px;
   position: relative;
@@ -243,7 +244,7 @@ pre ::selection {
 }
 
 .code_container {
-  background-color: var(--light-dark-color);
+  background-color: var(--almost-dark-color);
   color: var(--white-color);
   padding: 20px;
   position: relative;
@@ -254,7 +255,7 @@ pre ::selection {
 .code_container span {
   text-wrap: wrap;
   overflow-wrap: anywhere;
-  background-color: var(--light-dark-color);
+  background-color: var(--almost-dark-color);
 }
 
 @media screen and (max-width: 375px) {

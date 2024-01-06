@@ -1,72 +1,75 @@
 <article>
 {% if thumbnail %}
-    <a class="frontpage-results-img" href="{{ url }}">
+    <a class="frontpage-content-ahref" href="{{ url }}">
       
       <div class="frontpage-result-thumbnail">
 
-      {# <div class="frontpage-label-main">
-        <div class="frontpage-label {{ node.bundle }} {{ field_tags[0]|replace({ ' ': '' })|lower }}">
-          {{ field_tags[0] }}
-        </div>
-      </div> #}
-
-        {% if field_tags is not empty %}
-          <div class="teaser-tag-group">
-            {% for tag in field_tags %}
-            <div class="frontpage-label {{ node.bundle }} {{ tag|replace({ ' ': '' })|lower }}">
-              {{ tag }}{% if not loop.last %}{% endif %}
-            </div>
-            {% endfor %}
-          </div>
-        {% endif %}
-
         <div class="frontpage-title-display">
-
-          <div class="frontpage-title">
-            {% if node.title.0.value %}
-              {# Display the node title #}
-              {{ node.title.0.value }}
-            {% endif %}
+          <div class="content-image">
+            {{ thumbnail }}
           </div>
-          <div class="profile-frontpage">
 
-            <div class="profile-img-name">
-              <img class="profile-frontpage-img" src="{{ file_url(image_profile) }}" alt="User Profile Image">
-              <div class="owner-frontpage">
-                {{ node.uid.0.entity.name.value }}
+          <div class="front-content-footer">
+
+            {% if field_tags is not empty %}
+              <div class="teaser-tag-group">
+                {# {% for tag in field_tags %}
+                <div class="frontpage-label {{ node.bundle }} {{ tag|replace({ ' ': '' })|lower }}">
+                  {{ tag }}{% if not loop.last %}{% endif %}
+                </div>
+                {% endfor %} #}
+
+                <div class="profile-img-name">
+                  <img class="profile-frontpage-img" src="{{ file_url(image_profile) }}" alt="User Profile Image">
+                  <div class="owner-frontpage">
+                    {{ node.uid.0.entity.name.value }}
+                  </div>
+                </div>
+  
+                <div class="node-created">
+                  {# {{ node.createdtime|format_date('custom', 'M, y') }} #}
+                  {{ node.createdtime|format_date('custom', 'F, j, Y') }}
+
+                </div>
               </div>
+            {% endif %}
+
+            <div class="frontpage-title">
+              {{ title_subtitle |raw }}
             </div>
 
-            <div class="views_node_count">
-              {{ view_node_count }}
-              <span class="material-symbols-outlined">
-                visibility
-              </span>
+            <div class="profile-frontpage">
+
+              <div class="views_node_count">
+                {{ view_node_count }}
+                <span class="material-symbols-outlined">
+                  visibility
+                </span>
+              </div>
+
+              <div class="comments_count">
+                {{ comments_count }}
+                <span class="material-symbols-outlined">
+                  chat_bubble
+                </span>
+              </div>
+
+              <div class="likes_count">
+                {{ likes_count }}
+                <span class="material-symbols-outlined">
+                  thumb_up
+                </span>
+              </div>
+
             </div>
 
-            <div class="comments_count">
-              {{ comments_count }}
-              {# <i class="fa-regular fa-comment"></i> #}
-              <span class="material-symbols-outlined">
-                chat_bubble
-              </span>
+            <div class="read-more">
+              {{ 'Read More ->'|t }}
             </div>
 
-            <div class="likes_count">
-              {{ likes_count }}
-              {# <i class="fa-solid fa-thumbs-up"></i> #}
-              <span class="material-symbols-outlined">
-                thumb_up
-              </span>
-            </div>
-
-            {# {{ node.createdtime|format_date('custom', 'M j, Y') }} #}
-            {{ node.createdtime|format_date('custom', 'M, y') }}
-    
           </div>
-
         </div>
-        {{ thumbnail }}
+
       </div>
     </a>
 {% endif %}
