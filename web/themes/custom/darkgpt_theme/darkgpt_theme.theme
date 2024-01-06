@@ -15,7 +15,7 @@ use Drupal\user\Entity\User;
  *
  * Adds body classes if certain regions have content.
  */
-function dc_theme_preprocess_html(&$variables) {
+function darkgpt_preprocess_html(&$variables) {
 
   // Check if the current page is the front page.
   $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
@@ -26,8 +26,8 @@ function dc_theme_preprocess_html(&$variables) {
   }
 
   // So fonts can be preloaded from base theme in the event dc theme is used as a subtheme.
-  $variables['dc_theme_path'] = \Drupal::request()->getBasePath() .
-   '/' . \Drupal::service('extension.list.theme')->getPath('dc_theme');
+  $variables['darkgpt_path'] = \Drupal::request()->getBasePath() .
+   '/' . \Drupal::service('extension.list.theme')->getPath('darkgpt');
 
   // Define some vars to add on TWIG templates.
   $uri = \Drupal::request()->getRequestUri();
@@ -49,14 +49,14 @@ function dc_theme_preprocess_html(&$variables) {
 /**
  * Implements hook_page_attachments_alter().
  */
-function dc_theme_page_attachments_alter(array &$attachments) {
-  $attachments['#attached']['library'][] = 'dc_theme/react_app_main';
+function darkgpt_page_attachments_alter(array &$attachments) {
+  $attachments['#attached']['library'][] = 'darkgpt/react_app_main';
 }
 
 /**
  * Implements hook_preprocess_page().
  */
-function dc_theme_preprocess_page(&$variables) {
+function darkgpt_preprocess_page(&$variables) {
   $variables['site_logo'] = theme_get_setting('logo.url');
   $variables['site_name'] = \Drupal::config('system.site')->get('name');
 
@@ -104,7 +104,7 @@ function _setHightlighHomepage(&$variables) {
 /**
  * Implements hook_form_alter().
  */
-function dc_theme_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function darkgpt_form_alter(&$form, FormStateInterface $form_state, $form_id) {
   // Add placeholder to search form.
   if ($form_id === 'search_block_form') {
     // Add a placeholder to the search input field.
@@ -115,7 +115,7 @@ function dc_theme_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 /**
  * Implements template_preprocess_node().
  */
-function dc_theme_preprocess_node(&$variables) {
+function darkgpt_preprocess_node(&$variables) {
   // Add some vars to get on twig."
   if ($variables['node']->getType() == 'page' || $variables['node']->getType() == 'article'
   ) {
@@ -125,7 +125,7 @@ function dc_theme_preprocess_node(&$variables) {
 }
 
 // Get the image uri to render on search results.
-function dc_theme_preprocess_search_result(&$variables) {
+function darkgpt_preprocess_search_result(&$variables) {
   $result = $variables['result'];
   $node = $result['node'];
   // Check if the node has an image attached.
