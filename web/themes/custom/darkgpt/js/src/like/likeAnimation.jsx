@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../css/homeStyles.css';
 import Lottie from "lottie-react";
-import like_animation from "../assets/like/likeAnimation.json";
+import like_animation from "../assets/like/likeAnimation4.json";
 
 const App = () => {
   const [isAnimationPlaying, setAnimationPlaying] = useState(false);

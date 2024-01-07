@@ -34,6 +34,7 @@
   justify-content: center;
   padding: 0 2.5%;
   height: 250px;
+  padding-bottom: 0.7rem;
 }
 
 .path-frontpage #main-wrapper {
@@ -65,6 +66,10 @@
   display: flex;
   align-items: center;
   position: relative;
+}
+
+.path-node .header-menu {
+  border-bottom: unset;
 }
 
 .mobile {
@@ -245,8 +250,11 @@
   padding: 20px;
   border-bottom: 1px solid var(--tiny-border);
   width: auto;
-  margin-top: 17px;
 }
+
+/* .path-node .primary_menu ul { 
+  margin-top: unset;
+} */
 
 .primary_menu ul li {
   padding: 5px 0;
@@ -831,6 +839,7 @@ input:-webkit-autofill{
 .site-branding__logo {
   display: flex;
   align-items: center;
+  text-decoration: unset;
 }
 
 .logo {
