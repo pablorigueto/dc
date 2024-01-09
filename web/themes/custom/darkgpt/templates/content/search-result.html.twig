@@ -58,63 +58,76 @@
 {{ attach_library('darkgpt/search-results') }}
 
 {% if thumbnail %}
-    <a class="search-results-img" href="{{ url }}">
-      <div class="search-result-thumbnail">
-        <div class="result-item">
-          {# <div class="search-label-main">
-            <div class="search-label {{ node.bundle }} {{ field_tags|replace({ ' ': '' })|lower }}">
-              {{ field_tags }}
-            </div>
-          </div> #}
+    <a class="frontpage-content-ahref" href="{{ url }}">
+      
+      <div class="frontpage-result-thumbnail">
 
-          {% if field_tags is not empty %}
-            <div class="teaser-tag-group">
-              {% for tag in field_tags %}
-              <div class="search-label {{ node.bundle }} {{ tag|replace({ ' ': '' })|lower }}">
-                {{ tag }}{% if not loop.last %}{% endif %}
+        <div class="frontpage-title-display">
+          <div class="content-image">
+            {{ thumbnail }}
+          </div>
+
+          <div class="front-content-footer">
+
+            {% if field_tags is not empty %}
+              <div class="teaser-tag-group">
+                {# {% for tag in field_tags %}
+                <div class="frontpage-label {{ node.bundle }} {{ tag|replace({ ' ': '' })|lower }}">
+                  {{ tag }}{% if not loop.last %}{% endif %}
+                </div>
+                {% endfor %} #}
+
+                <div class="profile-img-name">
+                  <img class="profile-frontpage-img" src="{{ file_url(image_profile) }}" alt="User Profile Image">
+                  <div class="owner-frontpage">
+                    {{ node_owner_or_changed }}
+                  </div>
+                </div>
+  
+                <div class="node-created">
+                  {# {{ node.createdtime|format_date('custom', 'M, y') }} #}
+                  {{ create_or_changed }}
+
+                </div>
               </div>
-              {% endfor %}
+            {% endif %}
+
+            <div class="frontpage-title">
+              {{ title_subtitle |raw }}
             </div>
-          {% endif %}
 
-          <div class="search-title-display">
+            <div class="profile-frontpage">
 
-            <div class="search-title">
-              {{ title_display|raw }}
-            </div>
-            <div class="profile-search">
-
-            <div class="profile-img-name">
-              <img class="profile-search-img" src="{{ file_url(image_profile) }}" alt="User Profile Image">
-              <div class="owner-search">
-                {{ node_owner_or_changed }}
+              <div class="views_node_count">
+                {{ view_node_count }}
+                <span class="material-symbols-outlined">
+                  visibility
+                </span>
               </div>
+
+              <div class="comments_count">
+                {{ comments_count }}
+                <span class="material-symbols-outlined">
+                  chat_bubble
+                </span>
+              </div>
+
+              <div class="likes_count">
+                {{ likes_count }}
+                <span class="material-symbols-outlined">
+                  thumb_up
+                </span>
+              </div>
+
             </div>
 
-            <div class="views_node_count">
-              {{ view_node_count }}
-              <span class="material-symbols-outlined">
-                visibility
-              </span>
-            </div>
-
-            <div class="comments_count">
-              {{ comments_count }}
-              <i class="fa-regular fa-comment"></i>
-            </div>
-
-            <div class="likes_count">
-              {{ likes_count }}
-              <i class="fa-solid fa-thumbs-up"></i>
-            </div>
-
-            {{ create_or_changed }}
-
+            <div class="read-more">
+              {{ 'Read More ->'|t }}
             </div>
 
           </div>
-          {{ thumbnail }}
         </div>
+
       </div>
     </a>
 {% endif %}

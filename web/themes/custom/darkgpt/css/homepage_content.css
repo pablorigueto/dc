@@ -33,7 +33,7 @@
   }
 }
 
-.path-frontpage .frontpage-result-thumbnail {
+.frontpage-result-thumbnail {
   width: 250px;
   background-color: var(--light-dark-color);
   position: relative;
@@ -51,7 +51,6 @@
   transition: box-shadow 0.3s ease;
 }
 
-.path-search .search-result-thumbnail:hover,
 .frontpage-result-thumbnail:hover {
   box-shadow: 4px 4px 4px var(--deep-dark-box-shadow);
 }

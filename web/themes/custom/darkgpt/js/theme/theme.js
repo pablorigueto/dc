@@ -80,11 +80,10 @@
     attach(context) {
       if (!drupalSettings.openSearch) {
         $(document).ready(function () {
-          let BANNER = $('.basicpage_header_container');
+          // let BANNER = $('.basicpage_header_container');
           // Add a click event handler to the Menu heading.
           // $("#block-darkgpt-searchbtn-2", context).click(function () {
           $("#block-darkgpt-searchbtn-2, #search_mobile_icon", context).click(function () {
-
 
             // Search to open.
             const MENU = $('.search-block-form', context);
@@ -94,12 +93,12 @@
     
             // If the menu was not open, then open it.
             if (!isMenuOpen) {
-              MENU.fadeIn();
-              BANNER.addClass('hidden');
+              MENU.slideDown();
+              // BANNER.addClass('hidden');
             }
             else {
               MENU.fadeOut();
-              BANNER.removeClass('hidden');
+              // BANNER.removeClass('hidden');
             }
           });
         });
@@ -153,24 +152,24 @@
     }
   }
 
-  // Drupal.behaviors.pressEscToCloseIt = {
-  //   attach: function attach(context) {
-  //     if (!drupalSettings.pressEscToCloseIt) {
-  //       drupalSettings.pressEscToCloseIt = true;
-  //       let BANNER = $('.path-node .basicpage_header_container');
-  //       once('pressEscToCloseIt', '.search-block-form', context).forEach(element => {
-  //         let searchForm = $("body:not(:has(.path-frontpage)) .search-block-form");
-  //         // Add a keydown event handler to close the menu when pressing ESC.
-  //         $(document).on('keydown', function (event) {
-  //           if (event.key === 'Escape' || event.keyCode === 27) {
-  //             BANNER.removeClass('hidden');
-  //             searchForm.slideUp();
-  //           }
-  //         });
-  //       });
-  //     }
-  //   }
-  // };
+  Drupal.behaviors.pressEscToCloseIt = {
+    attach: function attach(context) {
+      if (!drupalSettings.pressEscToCloseIt) {
+        drupalSettings.pressEscToCloseIt = true;
+        // let BANNER = $('.path-node .basicpage_header_container');
+        once('pressEscToCloseIt', '.search-block-form', context).forEach(element => {
+          let searchForm = $("body:not(.path-frontpage) .search-block-form");
+          // Add a keydown event handler to close the menu when pressing ESC.
+          $(document).on('keydown', function (event) {
+            if (event.key === 'Escape' || event.keyCode === 27) {
+              // BANNER.removeClass('hidden');
+              searchForm.slideUp();
+            }
+          });
+        });
+      }
+    }
+  };  
 
   Drupal.behaviors.mobileMenu = {
     attach(context) {

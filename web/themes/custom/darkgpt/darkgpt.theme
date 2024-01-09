@@ -314,6 +314,7 @@ function _setTaxonomiTags($node) {
 function _setInfosToSearchResultTwig($node, &$variables): void {
 
   _setThumbnailURI($node, $variables);
+  $variables['title_subtitle'] = $node->get('body')[0]->getValue()['value'] ?? "";
   $timestamp = $node->created->getValue()[0]['value'];
   $formatted_date = _formateDate($timestamp);
   $variables['create_or_changed'] = $formatted_date;

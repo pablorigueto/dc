@@ -1,2 +1,0 @@
-
-ABOUT this Theme

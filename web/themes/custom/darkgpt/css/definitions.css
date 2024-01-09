@@ -51,6 +51,7 @@
   --label-drupal: #107ca9;
   --code-container: #060505;
   --light-gray: #ababab;
+  --shadow-search: #060505e6;
 }
 
 body {
@@ -81,9 +82,14 @@ h2 {
   display: flex;
   color: var(--light-gray);
   font-family: 'Inter-Light';
+  transition: all 0.5s ease;
 }
 
-
+.primary_menu nav h2:hover,
+#block-darkgpt-languageswitcher h2:hover {
+  color: var(--white-color);
+  transition: all 0.5s ease;
+}
 
 .like_dislike .fa-thumbs-up {
   text-decoration: unset;
@@ -179,13 +185,17 @@ span[id^="like-"] {
 }
 
 h1,
-.path-search h2 {
+#block-darkgpt-content .path-search h2 {
   font-size: 26px;
 }
 
-.path-search h2 {
-  text-align: center;
+.path-search #block-darkgpt-content h2 {
+  font-size: 26px;
+  text-align: start;
+  margin: -5.1rem 0 6.5rem 0;
+  color: var(--white-color);
 }
+
 
 .text-highlight h1,
 .text-highlight h2 {
