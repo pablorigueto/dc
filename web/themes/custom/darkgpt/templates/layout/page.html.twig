@@ -123,22 +123,39 @@
       </div>
     </div>
 
-    <footer class="site-footer">
+  <footer class="site-footer">
       <div class="site-footer__inner container">
-        <p class="copyright">Copyright © 2023-{{'now'|date('Y')}} by Pablo Rigueto. All rights reserved.</p>
-        <p class="policy">
-          <a class="privacy" href="{{ url('entity.node.canonical', {'node': 10}) }}">Privacy Policy</a> |
-          <a class="terms" href="{{ url('entity.node.canonical', {'node': 11}) }}">Terms of Service</a>
 
+        <p class="policy">
+          <a class="privacy" href="{{ url('entity.node.canonical', {'node': 10}) }}">Privacy Policy</a>
+          <a class="terms" href="{{ url('entity.node.canonical', {'node': 11}) }}">Terms of Service</a>
+        {# </p> #}
+
+        {# <p class="professional-contact"> #}
         </p>
-        <p class="professional-contact">
-          <a href="https://linkedin.com/in/pablorigueto" target="_blank" title="LinkedIn profile of Pablo Rigueto">
-            <i class="fa-brands fa-linkedin"></i>
+
+        <div class="footer-logo">
+          <a href="{{ path('<front>') }}" rel="home" class="site-branding__logo" alt={{'site_logo'|t}}>
+            <div class="logo">
+              <img src={{ site_logo }} alt={{'site_logo'|t}}><h2>{{ 'CoddeCoffee'|t }}</h2></img>
+            </div>
           </a>
-          <a href="https://github.com/pablorigueto" target="_blank" title="GitHub profile of Pablo Rigueto">
-            <i class="fa-brands fa-github"></i>
-          </a>
-        </p>
+          <div class="social-media">
+            <a href="https://linkedin.com/in/pablorigueto" target="_blank" title="LinkedIn profile of Pablo Rigueto">
+              <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/pablorigueto" target="_blank" title="GitHub profile of Pablo Rigueto">
+              <i class="fa-brands fa-github"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="copyright">
+          <p class="copy-paragraph">
+            Copyright © 2023-{{'now'|date('Y')}} All rights reserved.
+          </p>
+        </div>
+
       </div>
     </footer>
 

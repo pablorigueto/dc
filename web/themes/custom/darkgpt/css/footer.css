@@ -4,7 +4,7 @@
   background-color: var(--light-dark-color);
 }
 
-.path-frontpage .site-footer .site-footer__inner {
+.site-footer .site-footer__inner {
   max-width: 95%;
   margin: 0 auto;
   color: var(--white-color);
@@ -14,12 +14,12 @@
   align-items: center;
 }
 
-.path-node .site-footer .site-footer__inner {
+/* .path-node .site-footer .site-footer__inner {
   max-width: 1170px;
   margin: 0 auto;
   padding-left: 2.5%;
   padding-right: 2.5%;
-}
+} */
 
 .site-footer .policy a {
   text-decoration: none;
@@ -103,6 +103,10 @@
 .site-footer .copyright p {
   font-size: 12px;
   color: var(--white-color);
+}
+
+.path-node .site-footer {
+  background-color: var(--extralight-dark-color);
 }
 
 .footer-logo {

@@ -104,7 +104,6 @@ code {
 }
 
 .basicpage_full_image img {
-  border-radius: 2px;
   height: clamp( 150px, calc(150px + (200 - 150) * ((100vw - 766px) / (1440 - 766))), 200px );
   width: clamp( 150px, calc(150px + (200 - 150) * ((100vw - 766px) / (1440 - 766))), 200px );
   object-fit: contain;
@@ -125,7 +124,7 @@ code {
   height: 20px;
   width: 100%;
   z-index: 2;
-  border-radius: 0 2px 0 0;
+  /* border-radius: 0 2px 0 0; */
 }
 
 .basicpage_full_image::after {
@@ -203,6 +202,13 @@ code {
 .field-tags a {
   text-decoration: unset;
   color: #e7b80a;
+  transition: all 0.5 ease;
+}
+
+.field-tags a:hover {
+  text-decoration: unset;
+  color: var(--white-color);
+  transition: all 0.5 ease;
 }
 
 figure {
@@ -274,12 +280,12 @@ pre ::selection {
 }
 
 .basicpage-full-body .btnFromJs {
-  background: var(--white-color);
+  background: var(--extralight-dark-color);
   padding: 10px;
   position: absolute;
   top: 13px;
   right: 13px;
-  color: var(--dark-color);
+  color: var(--white-color);
   /* border-radius: 5px; */
   cursor: pointer;
 }

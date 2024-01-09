@@ -32,9 +32,11 @@
   --white-color: #fff;
   --dark-color: #000;
   --dark-gradient: #00000021;
+  --extralight-dark-color: #202020;
   --light-dark-color: #181818;
   --medium-dark-color: #141414;
   --almost-dark-color: #121212;
+  --more-dark-color: #101010;
   --medium-gray-color: #7f7c7c;
   --pager-fg-color: #55565b;
   --light-border: #d1d0d0;
@@ -95,18 +97,19 @@ h2 {
 
 .content-like {
   width: 100px;
-  border: 1px solid #00dec64f;
+  /* border: 3px solid var(--light-dark-color); */
   font-weight: bold;
   padding: 14px 25px 5px 0;
   margin-top: 20px;
   transition: all 0.5s ease;
-  background-color: var(--medium-dark-color);
+  background-color: #e7b80a;
   box-shadow: 2px 2px 2px #fff6f600;
 }
 
 .content-like:hover {
   transition: all 0.5s ease;
-  border: 1px solid #00dec6;
+  box-shadow: 2px 2px #e7b80a2b;
+  /* border: 3px solid var(--white-color); */
 }
 
 .like_dislike {
@@ -120,13 +123,13 @@ h2 {
 [id^="like_dislike_status"] {
   text-align: center;
   padding-top: 12px;
-  color: #00dec6;
+  color: var(--white-color);
   position: absolute;
 }
 
 span[id^="like-"] {
   font-family: 'Inter-Bold';
-  color: #00dec6;
+  color: var(--white-color);
 }
 
 .like-animation {
